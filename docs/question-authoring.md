@@ -1,98 +1,67 @@
 # Kysymysten kirjoittajan opas
 
-Mylvisa on suomenkielinen yleistietovisa. Kirjoita yksi yksiselitteinen kysymys kerrallaan. Kysymyksen pitää ratketa tiedolla, ei sillä, arvaako pelaaja kirjoittajan ajatuksen. Muotoile kysymys ja selitys itse; älä kopioi tietovisoja tai pitkiä lähdetekstejä.
+Mylvisa-kysymys pyytää nimeämään yhden jäsenen objektiivisesti määritellystä joukosta. Kysymys, johon useimmat eivät keksi yhtäkään vastausta, on yleensä huono Mylvisa-kysymys. Vaikean osan pitää olla harvinaisemman hyväksytyn vastauksen löytäminen, ei minkään vastauksen löytäminen.
 
 ## Tietue
 
 ```json
 {
-  "id": "suomi-kekkonen",
-  "question": "Kuka oli Suomen presidentti vuosina 1956–1982?",
-  "category": "suomi",
-  "subcategory": "presidentit",
-  "difficulty": "helppo",
+  "id": "maantiede-itämeri",
+  "prompt": "Nimeä Itämereen rannikkonsa ulottava valtio.",
+  "category": "maantiede",
+  "universeId": "maantiede-itameri",
+  "referenceDefinition": "Suljettu lista Itämeren rannikkovaltioista, jäädytetty 1.1.2024.",
   "answers": [
     {
-      "canonical": "Urho Kekkonen",
-      "points": 30,
-      "aliases": ["Kekkonen", "Urho Kaleva Kekkonen"]
+      "canonical": "Suomi",
+      "aliases": ["Finland"],
+      "points": 10,
+      "tier": "Ilmeinen valinta",
+      "editorialTier": "10",
+      "effectiveTier": "10",
+      "provenance": "Lähteen nimi"
+    },
+    {
+      "canonical": "Liettua",
+      "aliases": [],
+      "points": 85,
+      "tier": "Syvä tieto",
+      "editorialTier": "85",
+      "effectiveTier": "85",
+      "provenance": "Lähteen nimi"
     }
   ],
-  "canonicalAnswer": "Urho Kekkonen",
-  "explanation": "Urho Kekkonen toimi presidenttinä yli 25 vuotta. Hänen kautensa päättyi vuonna 1982.",
-  "sources": [
-    { "title": "Tasavallan presidentin kanslia: Suomen presidentit" }
-  ],
-  "tags": ["suomi", "presidentit"],
+  "explanation": "Vastaus kuuluu rajattuun rannikkovaltioiden joukkoon.",
+  "source": { "title": "Julkinen lähde", "url": "https://example.org/source" },
+  "tags": ["maantiede", "rarity"],
   "evergreen": true,
   "status": "active",
-  "version": 1,
-  "author": "Mylvisa"
+  "version": 2,
+  "rarityReview": "editorial",
+  "frequency": { "status": "pending" }
 }
 ```
 
-`id` säilyy samana saman kysymyksen uusissa versioissa. Käytä pieniä ASCII-kirjaimia, numeroita ja yhdysmerkkejä. `category` on yksi tiedoston `src/lib/quiz/catalog.ts` avaimista. Vaikeusaste on `helppo`, `keskitaso` tai `vaikea`. Älä muuta historiallisia tunnisteita vain otsikon parantamiseksi.
+`id` on pieniä ASCII-merkkejä sisältävä pysyvä tunniste. `universeId` kertoo valitsimelle, ettei samasta vastausmaailmasta oteta kahta kysymystä samaan päivään. `referenceDefinition` kertoo täsmälleen, mikä lista on hyväksytty: käytä virallista luetteloa, standardia tai jäädytettyä tilastopäivää. Vältä sanoja kuten “kuuluisa”, “paras” ja “suosittu”, ellei niitä ole sidottu nimettyyn objektiiviseen listaan.
 
-`answers` sisältää yhden tai useita vaihtoehtoja. Jokaisella on oma pistemääränsä, näyttönimensä ja haluttaessa aliasluettelonsa. Yhden vastauksen rinnakkaismuodot kuuluvat samaan vastausobjektiin. Vaihtoehtoiset oikeat vastaukset kuuluvat eri objekteihin, vaikka niiden pistemäärä olisi sama.
+## Vastaukset ja rarity
 
-`canonicalAnswer` on palautteessa näytettävä oikea vastaus, kun pelaaja ei vastaa oikein. Monivastauskysymyksessä sen tulee kertoa kaikki hyväksyttävät vaihtoehdot selkeästi. Oikein vastannut näkee oman vastauksensa kanonisen muodon. Koko vastauslistaa tai pistetaulukkoa ei lähetetä ennen vastaamista.
+Lisää yleensä 8–30 kanonista vastausta. Vähintään viisi on rakennevaatimus; poikkeus vaatii erillisen toimituksellisen perustelun. Jokaisella vastauksella on pisteet 10, 15, 30, 60, 85 tai 100. Järjestä vastaukset karkeasti sen mukaan, mitä suomalainen pelaaja kirjoittaisi spontaanisti 25 sekunnissa: 10 ja 15 ovat ilmeisiä, 60–100 harvinaisempia. Älä anna lisäpisteitä siksi, että itse fakta olisi vaikeampi.
 
-## Monen oikean vastauksen kysymys
+Jokaisessa tavallisessa kysymyksessä pitää olla vähintään yksi 10/15 pisteen ja yksi 60/85/100 pisteen vastaus sekä vähintään kolme eri tieriä. `editorialTier` ja `effectiveTier` ovat nyt samat. Myöhemmin `effectiveTier` voidaan laskea havaituista vastausmääristä ilman että kysymyksen muoto muuttuu.
 
-Rajaa joukko täsmällisesti: esimerkiksi "Nimeä yksi Aurinkokunnan neljästä jättiläisplaneetasta." Kaikki neljä vaihtoehtoa on hyväksyttävä. Älä kirjoita "Nimeä jokin kuuluisa säveltäjä", jos kaikkia päteviä vastauksia ei voi määritellä.
+Aliakset osoittavat täsmälleen yhteen kanoniseen vastaukseen. Lisää vain viralliset rinnakkaisnimet, yksiselitteiset lyhenteet ja yleinen nimi, kun se ei törmää toiseen vastaukseen. Kirjainkoko, välilyönnit ja turvalliset välimerkit normalisoituvat jo. Yleisiä kirjoitusvirheitä ei lisätä; moottori sallii yhden vierekkäisen merkin vaihtumisen vain yksiselitteisessä tapauksessa.
 
-```json
-"answers": [
-  { "canonical": "Jupiter", "points": 20, "aliases": [] },
-  { "canonical": "Saturnus", "points": 30, "aliases": [] },
-  { "canonical": "Uranus", "points": 70, "aliases": [] },
-  { "canonical": "Neptunus", "points": 100, "aliases": [] }
-]
-```
+## Lähde, elinkaari ja tarkistus
 
-Kysymyksen enimmäispistemäärä on suurin yksittäinen pistemäärä. Pisteet ovat toimituksen arvio vastauksen vaikeudesta, eivät tutkimustulos vastausten suosiosta. Yksittäinen vastaus voi tarvittaessa sisältää oman `explanation`-kentän; muuten käytetään kysymyksen yhteistä selitystä.
+Lähde, URL ja vastauskohtainen provenienssi ovat pakollisia. Evergreen-kysymyksissä faktan pitää säilyä vakaana. Muuttuva lista saa `evergreen: false` ja sekä `validFrom` että `validUntil`. Käytä `review`-tilaa, jos jäsenyys tai suomenkielinen muoto vaatii vielä ihmisen tarkistuksen. `retired` säilyttää historian mutta ei pääse valintaan.
 
-## Aliakset ja rajatapaukset
+Ennen julkaisua:
 
-- Lisää tunnetut sukunimet, rinnakkaisnimet, numeromuodot ja tarpeelliset taivutusmuodot erikseen.
-- Älä lisää kirjainkokovariantteja, ylimääräisiä välilyöntejä tai välimerkkivariantteja, jotka normalisoituvat jo samaksi.
-- Älä hyväksy toista mahdollista henkilöä pelkän etunimen perusteella.
-- Ä, ö ja å eivät muutu a:ksi tai o:ksi. Harkittu kirjoitusasu ilman diakriittejä voidaan lisätä erikseen.
-- Lyhenteet hyväksytään vain silloin, kun ne yksilöivät kysytyn vastauksen.
-- Älä lisää kirjoitusvirheitä summittaisesti. Lähellä oleva väärä vastaus ei saa muuttua oikeaksi.
-- Kirjoita kysymykseen yksikkö. Jos kysyt kilometrejä, merkitse selkeästi, hyväksytäänkö myös metreinä kirjoitettu vastaus.
-- Vastauksen normalisointi säilyttää numeroiden etumerkin ja desimaalipisteen. Testaa uudet lukumuodot aina.
+1. Tarkista listan jäsenyys ensisijaisesta julkisesta lähteestä.
+2. Kysy itseltäsi, tietääkö tavallinen pelaaja ainakin yhden vastauksen.
+3. Merkitse ilmeinen, keskitasoinen ja harvinainen vastaus tietoisesti; älä käytä aakkosjärjestystä tai väkilukua ainoana proxy-arvona.
+4. Aja `npm run validate:bank` ja korjaa kaikki virheet sekä arvioi varoitukset.
+5. Muodosta uusi snapshot `npm run generate:bank`, lisää release aikajärjestyksessä ja aja typecheck, testit, build ja client-leak-scan.
 
-Lisää uusi rajatapaus tiedostoon `tests/engine.test.ts`, kun muutat normalisointisääntöä. Älä heikennä kaikkien kysymysten tarkistusta yhden puuttuvan aliaksen vuoksi.
-
-## Lähteet ja elinkaari
-
-Suosi museoita, arkistoja, tiedeyhteisöjä, sanakirjoja ja muita asian ensisijaisia lähteitä. `sources`-kentän `title` on pakollinen; lisää myös tarkka HTTPS-osoite `url`-kenttään ja tarvittaessa selventävä `note`. Lähdemerkintä ei yksin tarkoita, että joku muu on tarkistanut faktan. Alkuperäinen siemenpankki sisältää sekä lähdeviitteitä että erikseen tarkistettuja suoria linkkejä; koko pankin riippumaton auditointi on seuraava sisältötyö.
-
-Vältä nykyisiä viranhaltijoita, vaihtuvia mestareita, väkilukuja, hintoja ja epämääräisiä maailmanennätyksiä. Historiallinen, vuoteen sidottu kysymys voi olla ajaton.
-
-- `evergreen: true`: fakta on tarkoitettu pysyväksi. Silti lähde ja sanamuoto on tarkistettava.
-- `evergreen: false`: **sekä `validFrom` että `validUntil` vaaditaan** muodossa `YYYY-MM-DD`.
-- Voimassaolorajat ovat Suomen kalenteripäiviä ja molemmat rajapäivät sisältyvät jaksoon.
-- `active`: mukaan valintaan, jos päivämäärä sallii.
-- `review`: odottaa toimituksellista tarkistusta; ei koskaan peliin.
-- `retired`: poistettu tulevasta käytöstä; säilyy historiassa.
-
-## Turvallinen julkaisu sadoille tai tuhansille kysymyksille
-
-1. Työstä kysymykset ensin tarkistuslistana tai tulevan julkaisun JSON-tiedostossa. Käytä statusarvoa `review`, kun vastaus tai rajaus on epävarma.
-2. Tarkista faktat, suomen kieli, kaikki mahdolliset oikeat vastaukset ja aliasristiriidat. Vältä saman faktan kysymistä eri sanamuodoin.
-3. Tasapainota aiheita myös Suomen ulkopuolelta. Pidä vaikeita kysymyksiä riittävästi koko valintakierrokselle; 1/7 on toimiva lähtökohta.
-4. Kopioi hyväksytty pankki uuteen `src/data/releases/YYYY-MM-DD.json`-tilannekuvaan. Saman kysymyksen korjauksessa kasvata sen `version`-arvoa.
-5. Lisää uusi julkaisu `src/data/releases.ts`-tiedostoon aikajärjestyksessä. Anna uusi `id`, **tuleva** `effectiveFrom` ja `length` (oletus 7). Julkaisupäivän on oltava myöhempi kuin Suomen tämänhetkinen päivä.
-6. Älä muokkaa jo voimaan tullutta tilannekuvaa. Sama sääntö koskee valinta-algoritmia: säilytä vanha toteutus vanhoille julkaisuille, jos algoritmi muuttuu. MVP sisältää yhden algoritmiversion `deck-v1`.
-7. Aja `npm run validate:bank`, `npm test`, `npm run typecheck`, `npm run lint`, `npm run build` ja `npm run check:client`.
-8. Tarkista varoitukset. Samankaltainen teksti on vihje, ei automaattinen tuomio. Normalisoitu alias kahdessa eri vastausobjektissa on estävä virhe.
-9. Katso muutama tuleva päivä ja kierroksen raja kehitysympäristössä. Pelaa visa loppuun. Tarkista myös väärä ja tyhjä vastaus.
-10. Commitoi lähde, pankki ja testit yhdessä; tarkista GitHubin CI. Julkaise ajoissa ennen uuden pankin voimaantuloa.
-
-Valitsin ei tarvitse muutoksia kysymysmäärän kasvaessa. Hyvin suurelle pankille voidaan lisätä build-vaiheessa muodostetut, versionhallintaan tallennetut päiväkohtaiset aikataulut. Ne säilyttävät saman julkisen API-sopimuksen ja vähentävät palvelimen laskentaa.
-
-## Validoinnin rajat
-
-Automaattinen tarkistus löytää rakennevirheet, tunniste- ja tekstikaksoiskappaleet, sanajoukkojen suuren samankaltaisuuden, puuttuvat vastaukset, virheelliset pisteet, aliasristiriidat ja päivämääräongelmat. Se ei todista faktoja, ymmärrä kaikkia merkitykseltään samoja kysymyksiä eikä tiedä kaikkia suomenkielisiä taivutusmuotoja. Ihmisen toimituksellinen arvio on edelleen tarpeen.
+Validointi löytää rakenteen, aliastörmäykset, puuttuvat tierit, tasaisen jakauman, päällekkäisen tekstin, vanhentuneet päivät, puuttuvan provenienssin ja kaikki kategoriavajeet. Se ei todista lähteen sisältöä tai kaikkia taivutusmuotoja; toimituksellinen faktantarkistus jää aina ihmiselle.

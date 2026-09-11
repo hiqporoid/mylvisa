@@ -1,62 +1,40 @@
-# Architecture and integrity boundaries
+# Arkkitehtuuri
 
-## Data flow
+Mylvisa pitää pelin säännöt React-esityksestä erillään:
 
 ```mermaid
 flowchart LR
-  Bank[Versioned JSON release] --> Guard[Server-only bank loader]
-  Guard --> Engine[Pure daily selector]
-  Request[Date + ordered answer transcript] --> Service[Server game service]
-  Engine --> Service
-  Service --> Match[Normalize and match]
-  Match --> Score[Score submitted positions]
-  Score --> DTO[Feedback + current public question]
-  DTO --> Client[Client state hook]
-  Client --> UI[Presentation components]
-  Client --> Local[Versioned local storage]
+  JSON[Immutable JSON release] --> Bank[server-only bank]
+  Bank --> Select[Deterministinen valitsin]
+  Request[Transcript + kierrosaikaleima] --> Game[server-only pelipalvelu]
+  Select --> Game
+  Game --> Match[Normalisointi ja vastausmatch]
+  Match --> DTO[Public prompt + feedback]
+  DTO --> Hook[useQuiz]
+  Hook --> UI[QuizApp]
+  Hook --> Local[Paikallinen tallennus]
 ```
 
-The client never imports a bank or the matcher. Shared client modules contain only dates, labels, public types and persistence/sharing utilities. Server-only guards make accidental runtime imports fail a Next.js build. Tests importing the service replace only the guard with an empty test module; the production build retains it.
+## Luottamusraja
 
-## Attempt protocol
+`src/data/releases.ts`, `src/lib/server/bank.ts` ja `src/lib/server/game.ts` ovat server-only-koodia. Ennen vastausta DTO:ssa on vain `id`, `prompt`, `category`, `universeId` ja kierrosnumero. Vastauksen jälkeen palautetaan pelaajan oma syöte, hyväksytty kanoninen nimi ja tier tai yhdellä esimerkkivastauksella varustettu hylkäyspalaute. Koko hyväksyttyjen vastausten lista, aliakset, pistekartta, lähteet ja kaikki korkean arvon vastaukset eivät ylitä rajaa.
 
-The MVP has a stateless server. Every request includes the answer transcript in question order. The server independently chooses the applicable immutable release and question set, checks payload sizes and validity, and computes the result. Unknown score fields and arbitrary IDs are rejected. The response includes only the current prompt/category/number/ID and feedback for submitted questions. It never includes aliases or per-answer scoring tables. Source metadata and difficulty remain server-side.
+Tuotantobuildin `scripts/check-client-bundle.ts` tarkistaa promptit, selitykset ja riittävän pitkät kanoniset vastaukset JavaScript- ja source map -tiedostoista. Repositoryn lukija näkee JSON:n GitHubissa; tämä suojaa pelaamista selaimen ennakkolataukselta, ei julkista lähdekoodia vastaan.
 
-The transcript design supports retry after transport failure without duplicate server-side writes. Local storage records start state, submitted answers, feedback position, and the completed response under `mylvisa:v1:YYYY-MM-DD`. Restoration recomputes the result on the server instead of trusting stored points. Storage failures produce a visible warning and do not prevent play. Web Locks serialize daily submissions across cooperating tabs where supported, and storage events synchronize progress.
+## Pyyntöprotokolla
 
-**This is not a tamper-proof attempt ledger.** Requests can be replayed with different answers, local state can be deleted, and the server has no identity or durable attempt counter. Keeping the answers out of pre-submit responses protects ordinary play, not malicious scraping. A public repository also exposes the source bank to anyone who visits GitHub. Do not add competitive rewards on top of local state.
+`GET /api/quiz` palauttaa päivän ensimmäisen promptin sekä palvelimen aikaleimat. `POST /api/quiz` ottaa `{ date, mode, answers, releaseId?, roundStartedAt? }`. `answers` on järjestyksessä lähetetty transcript; palvelin laskee tulokset uudelleen jokaisella pyynnöllä. Zod hylkää ylimääräiset kentät, 160 merkkiä pidemmät syötteet ja liian pitkät transcriptit.
 
-## State and rollover
+`roundStartedAt` on preview-vaiheen alku. Palvelin käsittelee koko 3 + 25 sekunnin ikkunan absoluuttisena deadlinena ja korvaa viimeisen myöhästyneen syötteen tyhjällä vastauksella. Asiakas käyttää samaa deadlinea, tarkistaa ajan näkyviin palatessa ja lukitsee kierroksen heti. Web Locks ja v2-paikallistallennus estävät tavalliset tuplalähetykset yhteistyössä toimivissa välilehdissä.
 
-Client phases are `home → question → feedback → question … → feedback → complete`. Network errors leave the current answer editable and retryable. Loading/restoration uses a generation counter to ignore superseded responses. The API's server timestamp anchors the next-midnight timer; foreground/visibility checks catch a sleeping device. Late daily submissions return HTTP 409 (`DAY_CHANGED`). The client restores a completed result for today's date or starts the new day. At midnight an unfinished daily attempt closes; the former date can then be practised without points.
+## Päivävalinta
 
-Practice is limited to dates strictly earlier than today, at most 30 days old, and no earlier than the first release. Practice does not read or overwrite daily storage and returns zero points/maximums. Its state is intentionally temporary.
+Valitsin käyttää Helsinki-päivää, release-snapshotia ja versionoitua FNV-1a-hajautusta. Yksi sykli on `floor(activeCount / length)` päivää. Sykli replayataan pyydettyyn päivään asti, ja jokaisella slotilla suositaan käyttämätöntä kysymystä, uutta universumia ja uutta kategoriaa. Syötearrayta ei muuteta, eikä `Math.random()` ole mukana. Saman päivän järjestys on sama kaikille prosesseille.
 
-## Release stability and selection
+Kysymysten `validFrom` ja `validUntil` ovat kalenteripäiviä. Vanhentunut tai tulevaisuuden kysymys ei pääse valintaan. Muuttunut algoritmi julkaistaan uutena valitsinversiona; jo voimaan tulleen releasen JSON:ia ei muokata.
 
-Content snapshots are immutable after their effective date. A later snapshot changes only later dates. The current single selection engine is explicitly named `deck-v1`; changing its behavior for existing snapshots would change historical quizzes, so introduce a version dispatch and retain `deck-v1` before future algorithm changes.
+## Tila ja tulevaisuus
 
-Cycles are based on the release's active record count, not a user's input or the current eligible count. This keeps boundaries fixed when validity periods open/close. Each requested cycle is replayed deterministically, with no mutable global schedule or runtime randomness. Draws prefer unused IDs, remaining difficulty quotas, and unique categories. All filtering and selection operate on new arrays/sets.
+`useQuiz`-tilat ovat `home → preview → question → feedback → … → complete`. Paikallinen tallennus palauttaa keskeneräisen kierroksen aikaleiman ja valmistuneen tuloksen. Tallennuksen puuttuminen näyttää ilmoituksen, mutta ei estä pelaamista.
 
-Within a full evergreen seed cycle, all 112 questions are used once. Scarce difficulty quotas use largest remainders, giving this bank three easy, three medium and one hard question each day. In a depleted deck, repeated categories may be necessary; near a cycle reset, questions may recur sooner. Validity filtering takes priority over repetition avoidance. A bank with fewer eligible questions than the configured length fails safely instead of sending partial quizzes.
-
-## HTTP and rendering
-
-Only `GET`/`POST` are implemented on `/api/quiz`. Input is parsed through strict Zod objects. The body is limited to 24 KB by counting streamed bytes; individual answers to 160 characters and transcripts to 30 positions (and then to the release's actual length). Cross-origin browser requests are rejected; no permissive CORS header is set. Quiz data is served with `private, no-store` headers. There is no shared response cache containing user answers.
-
-Headers prevent framing, MIME sniffing and object embedding, restrict browser capabilities and set a conservative referrer policy. The CSP deliberately covers framing/objects/base/form destinations, but is not a full nonce-based script policy. No raw HTML rendering, dynamic code execution, external content fetch, tracking script or secret is used by the app. A future richer content renderer needs a separate XSS review.
-
-Vercel provides the managed Node runtime and network perimeter. Distributed rate limiting is deliberately outside this infrastructure-free MVP; implement it alongside durable attempts before enabling competitive features or handling abuse at scale.
-
-## Verification
-
-- Unit/property-style examples: Finnish calendar/DST, deterministic order, cycle boundaries, no duplicates or mutation, category/difficulty distribution, validity periods, normalization, score tiers, invalid bank data and alias collisions.
-- Service/HTTP tests: exact pre-submit DTO, progressive disclosure, complete score, strict payload, origin/body/type checks, stale dates and practice restrictions.
-- Browser tests: complete mixed-score play, saved progress/completion, clipboard fallback, archive isolation, keyboard focus, storage failure, request retry, server-clock rollover and axe accessibility scans at mobile/desktop sizes.
-- Production build plus client-asset scan: no question-bank text or explanations in public JavaScript/source maps.
-
-## Future accounts, database and leaderboards
-
-Keep `Question`, `selectDailyQuestions`, normalization and scoring pure. Add a repository interface around server-owned attempts, then replace the transcript submission with `{ attemptId, questionPosition, answer, idempotencyKey }`. Store the release/engine version and chosen question IDs when the attempt starts. Atomically reject already-answered positions and enforce one daily attempt per authenticated user or anonymous signed session. Return the same presentation DTO.
-
-Only server-computed, durable completed attempts should enter a leaderboard. Add explicit retention/privacy rules, abuse controls, account deletion, and verified score provenance. Local persistence can remain a fast UI cache. A bank editor or CMS should export reviewed, immutable snapshots into the existing validation pipeline.
+Stateless transcript on MVP:n tietoinen rajoitus. Tilin, globaalin tulostaulun ja yhden yrityksen palvelineston lisäämiseksi luodaan palvelinpuolen `attempt`-tietue, jossa säilytetään release-, valitsin- ja kysymys-ID:t sekä idempotenssiavain. Pure functions (`selectDailyQuestions`, `matchAnswer`, `evaluateAnswer`) säilyvät samoina.

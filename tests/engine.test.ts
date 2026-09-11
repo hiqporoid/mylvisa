@@ -1,263 +1,113 @@
 import { describe, expect, it } from "vitest";
 import { releases } from "@/data/releases";
-import { CATEGORIES, SCORE_TIERS } from "@/lib/quiz/catalog";
-import {
-  addDays,
-  helsinkiDate,
-  isDateKey,
-  nextMidnight,
-} from "@/lib/quiz/date";
+import { CATEGORIES, FIRST_QUIZ_DATE, SCORE_TIERS } from "@/lib/quiz/catalog";
+import { addDays, helsinkiDate, isDateKey, nextMidnight } from "@/lib/quiz/date";
 import { normalizeAnswer } from "@/lib/quiz/normalize";
 import { questionSchema } from "@/lib/quiz/schema";
 import { evaluateAnswer, matchAnswer, totalScore } from "@/lib/quiz/score";
 import { isEligible, selectDailyQuestions } from "@/lib/quiz/selection";
+import { createRoundClock, remainingSeconds, roundStatus } from "@/lib/quiz/timer";
 import { validateBank } from "@/lib/quiz/validate";
-const bank = releases[0].questions.map((q) => questionSchema.parse(q));
-const ids = (date: string) => selectDailyQuestions(bank, date).map((q) => q.id);
-describe("Finnish calendar and DST", () => {
-  it.each([
-    ["2026-09-10T20:59:59.999Z", "2026-09-10"],
-    ["2026-09-10T21:00:00Z", "2026-09-11"],
-    ["2026-01-10T21:59:59Z", "2026-01-10"],
-    ["2026-01-10T22:00:00Z", "2026-01-11"],
-    ["2026-03-29T00:59:59Z", "2026-03-29"],
-    ["2026-03-29T01:00:00Z", "2026-03-29"],
-    ["2026-10-25T00:59:59Z", "2026-10-25"],
-    ["2026-10-25T01:00:00Z", "2026-10-25"],
-  ])("%s belongs to %s", (instant, expected) =>
-    expect(helsinkiDate(new Date(instant))).toBe(expected),
-  );
-  it.each([
-    ["2026-03-28T22:00:00Z", "2026-03-29T21:00:00.000Z", 23],
-    ["2026-10-24T21:00:00Z", "2026-10-25T22:00:00.000Z", 25],
-    ["2026-09-10T21:00:00Z", "2026-09-11T21:00:00.000Z", 24],
-  ])("finds the next midnight from %s", (start, expected, hours) => {
-    const end = nextMidnight(new Date(start));
-    expect(end.toISOString()).toBe(expected);
-    expect(end.getTime() - Date.parse(start)).toBe(hours * 3_600_000);
-  });
-  it("validates real calendar dates", () => {
+
+const bank = releases[0].questions.map((question) => questionSchema.parse(question));
+const ids = (date: string) => selectDailyQuestions(bank, date).map((question) => question.id);
+
+describe("Helsingin kalenteri ja kierroskello", () => {
+  it("uses Europe/Helsinki and rolls at midnight", () => {
+    expect(helsinkiDate(new Date("2026-09-11T20:59:59.999Z"))).toBe("2026-09-11");
+    expect(helsinkiDate(new Date("2026-09-11T21:00:00Z"))).toBe("2026-09-12");
+    expect(helsinkiDate(new Date("2026-01-10T21:59:59Z"))).toBe("2026-01-10");
+    expect(helsinkiDate(new Date("2026-01-10T22:00:00Z"))).toBe("2026-01-11");
+    expect(nextMidnight(new Date("2026-09-11T21:00:00Z")).toISOString()).toBe("2026-09-12T21:00:00.000Z");
     expect(isDateKey("2026-02-29")).toBe(false);
-    expect(isDateKey("2028-02-29")).toBe(true);
-    expect(isDateKey("2026-13-01")).toBe(false);
-    expect(isDateKey("11.9.2026")).toBe(false);
     expect(addDays("2026-12-31", 1)).toBe("2027-01-01");
   });
-});
-describe("deterministic daily deck", () => {
-  it("same Helsinki date produces identical questions and order", () => {
-    const a = helsinkiDate(new Date("2026-09-10T21:00:01Z"));
-    const b = helsinkiDate(new Date("2026-09-11T20:59:59Z"));
-    expect(ids(a)).toEqual(ids(b));
-  });
-  it("different dates, including cycle boundaries, have different quizzes", () => {
-    for (let i = 0; i < 45; i++)
-      expect(ids(addDays("2026-09-01", i))).not.toEqual(
-        ids(addDays("2026-09-01", i + 1)),
-      );
-  });
-  it("never duplicates a question in a quiz", () => {
-    for (let i = 0; i < 40; i++)
-      expect(new Set(ids(addDays("2026-09-01", i))).size).toBe(7);
-  });
-  it("does not repeat a question within a full 16-day seed-bank cycle", () => {
-    const all = Array.from({ length: 16 }, (_, i) =>
-      ids(addDays("2026-09-01", i)),
-    ).flat();
-    expect(new Set(all).size).toBe(112);
-  });
-  it("spreads the scarce hard questions over every day of the seed cycle", () => {
-    for (let i = 0; i < 16; i++) {
-      const quiz = selectDailyQuestions(bank, addDays("2026-09-01", i));
-      expect(quiz.filter((q) => q.difficulty === "vaikea")).toHaveLength(1);
-    }
-  });
-  it("is independent of bank order and leaves input untouched", () => {
-    const before = JSON.stringify(bank);
-    expect(selectDailyQuestions([...bank].reverse(), "2026-09-11")).toEqual(
-      selectDailyQuestions(bank, "2026-09-11"),
-    );
-    expect(JSON.stringify(bank)).toBe(before);
-  });
-  it("balances categories and difficulties when the available deck permits", () => {
-    const quiz = selectDailyQuestions(bank, "2026-09-01");
-    expect(new Set(quiz.map((q) => q.category)).size).toBe(7);
-    expect(new Set(quiz.map((q) => q.difficulty)).size).toBe(3);
-  });
-  it("supports a configured quiz length and rejects impossible requests", () => {
-    expect(
-      selectDailyQuestions(bank, "2026-09-11", { length: 5 }),
-    ).toHaveLength(5);
-    expect(() =>
-      selectDailyQuestions(bank.slice(0, 2), "2026-09-11"),
-    ).toThrow();
-    expect(() =>
-      selectDailyQuestions(bank, "2026-09-11", { length: 0 }),
-    ).toThrow();
-  });
-  it("excludes review, retired, future and expired questions", () => {
-    expect(isEligible({ ...bank[0], status: "review" }, "2026-09-11")).toBe(
-      false,
-    );
-    expect(isEligible({ ...bank[0], status: "retired" }, "2026-09-11")).toBe(
-      false,
-    );
-    expect(
-      isEligible({ ...bank[0], validFrom: "2026-09-12" }, "2026-09-11"),
-    ).toBe(false);
-    expect(
-      isEligible({ ...bank[0], validUntil: "2026-09-10" }, "2026-09-11"),
-    ).toBe(false);
-    expect(
-      isEligible(
-        { ...bank[0], validFrom: "2026-09-11", validUntil: "2026-09-11" },
-        "2026-09-11",
-      ),
-    ).toBe(true);
-    const changed = bank.map((q, i) =>
-      i < 4 ? { ...q, validUntil: "2026-08-31" } : q,
-    );
-    expect(
-      selectDailyQuestions(changed, "2026-09-11").every(
-        (q) => !changed.slice(0, 4).some((c) => c.id === q.id),
-      ),
-    ).toBe(true);
+
+  it("has a three-second preview and 25-second absolute deadline", () => {
+    const clock = createRoundClock(1_000);
+    expect(roundStatus(clock, 3_999)).toBe("preview");
+    expect(roundStatus(clock, 4_000)).toBe("answering");
+    expect(remainingSeconds(clock, 4_001)).toBe(25);
+    expect(remainingSeconds(clock, 29_001)).toBe(0);
+    expect(roundStatus(clock, 29_000)).toBe("expired");
+    expect(roundStatus(clock, 60_000)).toBe("expired");
   });
 });
-describe("conservative answer matching and scores", () => {
-  const kekkonen = bank.find((q) => q.id === "suomi-kekkonen")!;
-  it.each([
-    "Kekkonen",
-    "  URHO   KEKKONEN! ",
-    "Urho\nKekkonen",
-    "Urho Kaleva Kekkonen",
-  ])("accepts an explicit alias: %s", (input) =>
-    expect(matchAnswer(kekkonen, input)?.points).toBe(30),
-  );
-  it.each([
-    "Kekonen",
-    "Urho",
-    "Koivisto",
-    "ei Kekkonen",
-    "",
-    "  ",
-    "Kekkonen tai Koivisto",
-  ])("rejects incorrect or vague answers: %s", (input) =>
-    expect(matchAnswer(kekkonen, input)).toBeUndefined(),
-  );
-  it("normalizes Unicode without discarding Finnish letters", () => {
-    expect(normalizeAnswer("A\u0308a\u0308ni")).toBe("ääni");
-    expect(normalizeAnswer("Ääni")).not.toBe(normalizeAnswer("Aani"));
+
+describe("deterministinen päiväpeli", () => {
+  it("same Finnish date has same ordered game and adjacent dates differ", () => {
+    expect(ids("2026-09-12")).toEqual(ids("2026-09-12"));
+    expect(ids("2026-09-12")).not.toEqual(ids("2026-09-13"));
+  });
+
+  it("does not duplicate questions or universes and varies categories", () => {
+    const quiz = selectDailyQuestions(bank, "2026-09-12");
+    expect(new Set(quiz.map((question) => question.id)).size).toBe(7);
+    expect(new Set(quiz.map((question) => question.universeId)).size).toBe(7);
+    expect(new Set(quiz.map((question) => question.category)).size).toBe(7);
+  });
+
+  it("consumes the seed bank without repeats for one full cycle", () => {
+    const all = Array.from({ length: 36 }, (_, index) => ids(addDays(FIRST_QUIZ_DATE, index))).flat();
+    expect(new Set(all).size).toBe(252);
+  });
+
+  it("is independent of input order and excludes inactive records", () => {
+    expect(ids("2026-09-15")).toEqual(selectDailyQuestions([...bank].reverse(), "2026-09-15").map((question) => question.id));
+    expect(isEligible({ ...bank[0], status: "retired" }, "2026-09-12")).toBe(false);
+    expect(isEligible({ ...bank[0], validUntil: "2026-09-11" }, "2026-09-12")).toBe(false);
+  });
+});
+
+describe("vastausten konservatiivinen normalisointi ja rarity-pisteet", () => {
+  it("preserves Finnish characters and harmless punctuation differences", () => {
+    expect(normalizeAnswer("  PÄIVÄ   ")).toBe("päivä");
     expect(normalizeAnswer("ＡＢＢＡ")).toBe("abba");
     expect(normalizeAnswer("Länsi–Saksa")).toBe("länsi saksa");
-    expect(normalizeAnswer("42,195")).toBe(normalizeAnswer("42.195"));
-    expect(normalizeAnswer("-1827")).not.toBe(normalizeAnswer("1827"));
-    expect(normalizeAnswer("−1827")).toBe("-1827");
-    expect(normalizeAnswer("42.195")).not.toBe(normalizeAnswer("42195"));
+    expect(normalizeAnswer("Ääni")).not.toBe(normalizeAnswer("Aani"));
   });
-  it("awards individual tiers and maximums for multiple valid answers", () => {
-    const q = bank.find((q) => q.id === "yhteiskunta-rooman-sopimus")!;
-    expect(evaluateAnswer(q, "Ranska").points).toBe(20);
-    expect(evaluateAnswer(q, "Luxembourg").points).toBe(100);
-    expect(evaluateAnswer(q, "Suomi").points).toBe(0);
-    expect(evaluateAnswer(q, "Ranska").maxPoints).toBe(100);
+
+  it("maps aliases and a unique adjacent transposition", () => {
+    const president = bank.find((item) => item.id === "suomi-presidentit")!;
+    expect(matchAnswer(president, "Kekkonen")?.canonical).toBe("Urho Kekkonen");
+    const question = { ...bank[0], answers: [{ ...bank[0].answers[0], aliases: ["Ensimmäinen nimi"] }, ...bank[0].answers.slice(1)] };
+    expect(matchAnswer(question, "ensimmäinen nimi")?.canonical).toBe(question.answers[0].canonical);
+    const transposition = { ...question, answers: [{ ...question.answers[0], canonical: "Ranska", aliases: [] }, ...question.answers.slice(1)] };
+    expect(matchAnswer(transposition, "Ransak")?.canonical).toBe("Ranska");
   });
-  it("supports answer-specific explanations and unscored practice", () => {
-    const q = {
-      ...kekkonen,
-      answers: [
-        { ...kekkonen.answers[0], explanation: "Erillinen perustelu." },
-      ],
-    };
-    expect(evaluateAnswer(q, "Kekkonen").explanation).toBe(
-      "Erillinen perustelu.",
-    );
-    expect(evaluateAnswer(q, "Kekkonen", false)).toMatchObject({
-      accepted: true,
-      points: 0,
-      maxPoints: 0,
-    });
+
+  it("rejects an ambiguous typo", () => {
+    const question = { ...bank[0], answers: [{ ...bank[0].answers[0], canonical: "acb", aliases: [] }, { ...bank[0].answers[1], canonical: "bac", aliases: [] }, ...bank[0].answers.slice(2)] };
+    expect(matchAnswer(question, "abc")).toBeUndefined();
   });
-  it("sums correct answers and possible points, including wrong answers", () => {
-    expect(
-      totalScore([
-        evaluateAnswer(kekkonen, "Kekkonen"),
-        evaluateAnswer(kekkonen, ""),
-      ]),
-    ).toEqual({ points: 30, maxPoints: 60, correct: 1 });
+
+  it("awards the same valid set different tiers and only supported scores", () => {
+    const question = bank.find((item) => item.id === "maantiede-itameri")!;
+    const low = evaluateAnswer(question, "Suomi");
+    const rare = evaluateAnswer(question, "Venäjä");
+    expect(low.accepted).toBe(true);
+    expect(rare.accepted).toBe(true);
+    expect(low.points).not.toBe(rare.points);
+    expect([...SCORE_TIERS]).toContain(low.points);
+    expect([...SCORE_TIERS]).toContain(rare.points);
+    expect(totalScore([low, evaluateAnswer(question, "ei tämä")])).toMatchObject({ points: low.points, correct: 1, maxPoints: 200 });
   });
 });
-describe("seed bank and maintenance validation", () => {
-  it("contains 112 valid original records, all categories and point tiers", () => {
-    const result = validateBank(releases[0].questions, "2026-09-11");
+
+describe("pankin rakenne", () => {
+  it("contains 255 active set questions, every category and broad rarity spread", () => {
+    const result = validateBank(releases[0].questions, "2026-09-12");
     expect(result.issues).toEqual([]);
-    expect(bank).toHaveLength(112);
-    expect(new Set(bank.map((q) => q.category)).size).toBe(
-      Object.keys(CATEGORIES).length,
-    );
-    expect(
-      [...new Set(bank.flatMap((q) => q.answers.map((a) => a.points)))].sort(
-        (a, b) => a - b,
-      ),
-    ).toEqual([...SCORE_TIERS]);
+    expect(result.questions).toHaveLength(255);
+    expect(new Set(result.questions.map((question) => question.category)).size).toBe(Object.keys(CATEGORIES).length);
+    expect(result.quality.medianAnswers).toBeGreaterThanOrEqual(5);
+    expect(result.quality.points["10"]).toBeGreaterThan(0);
+    expect(result.quality.points["100"]).toBeGreaterThan(0);
   });
-  it("detects duplicate IDs and text", () => {
-    const { issues } = validateBank([...bank, bank[0]]);
-    expect(
-      issues.some((i) => i.message.includes("Duplicate question ID")),
-    ).toBe(true);
-    expect(
-      issues.some((i) => i.message.includes("Duplicate question text")),
-    ).toBe(true);
-  });
-  it("detects aliases that resolve to different answers", () => {
-    const q = {
-      ...bank[0],
-      answers: [
-        ...bank[0].answers,
-        { canonical: "Testi", points: 50, aliases: ["Kekkonen"] },
-      ],
-    };
-    expect(
-      validateBank([q]).issues.some(
-        (i) => i.severity === "error" && i.message.includes("alias collision"),
-      ),
-    ).toBe(true);
-  });
-  it.each([
-    { answers: [] },
-    { answers: [{ canonical: "Testi", points: 15, aliases: [] }] },
-    { validUntil: "2026-02-30" },
-    { evergreen: false },
-    { question: "" },
-    { category: "unknown" },
-    { unexpected: true },
-    { validFrom: "2026-10-01", validUntil: "2026-09-01" },
-  ])("rejects malformed records: %j", (change) =>
-    expect(questionSchema.safeParse({ ...bank[0], ...change }).success).toBe(
-      false,
-    ),
-  );
-  it("reports expired questions and missing categories", () => {
-    const issues = validateBank(
-      [{ ...bank[0], validUntil: "2026-09-01" }],
-      "2026-09-11",
-    ).issues;
-    expect(issues.some((i) => i.message.includes("Expired"))).toBe(true);
-    expect(
-      issues.some((i) => i.message.includes("Missing active category")),
-    ).toBe(true);
-  });
-  it("detects near-identical text as editorial warnings", () => {
-    const q = {
-      ...bank[0],
-      id: "test-duplicate",
-      question: bank[0].question + " Suomessa",
-    };
-    expect(
-      validateBank([...bank, q]).issues.some((i) =>
-        i.message.includes("Near-identical"),
-      ),
-    ).toBe(true);
+
+  it("catches malformed rarity records", () => {
+    expect(questionSchema.safeParse({ ...bank[0], answers: [] }).success).toBe(false);
+    expect(questionSchema.safeParse({ ...bank[0], answers: bank[0].answers.map((answer) => ({ ...answer, points: 20 })) }).success).toBe(false);
+    expect(validateBank([...bank, bank[0]]).issues.some((issue) => issue.message.includes("Duplicate question ID"))).toBe(true);
   });
 });

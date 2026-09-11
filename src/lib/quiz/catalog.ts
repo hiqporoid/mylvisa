@@ -1,12 +1,13 @@
 export const CATEGORIES = {
   suomi: "Suomi",
-  historia: "Historia",
+  "suomen-historia": "Suomen historia",
+  maailmanhistoria: "Maailmanhistoria",
   maantiede: "Maantiede",
   yhteiskunta: "Yhteiskunta",
   tiede: "Tiede",
   luonto: "Luonto",
   kirjallisuus: "Kirjallisuus",
-  kieli: "Kieli",
+  "suomen-kieli": "Suomen kieli",
   taide: "Taide",
   musiikki: "Musiikki",
   "elokuvat-ja-televisio": "Elokuvat ja televisio",
@@ -17,8 +18,19 @@ export const CATEGORIES = {
   maailma: "Maailma",
 } as const;
 export type Category = keyof typeof CATEGORIES;
-export const DIFFICULTIES = ["helppo", "keskitaso", "vaikea"] as const;
-export const SCORE_TIERS = [10, 20, 30, 40, 50, 70, 100] as const;
+export const SCORE_TIERS = [10, 15, 30, 60, 85, 100] as const;
+export const RARITY_TIERS = {
+  10: "Ilmeinen valinta",
+  15: "Ensimmäinen mieleen",
+  30: "Hyvä oivallus",
+  60: "Harvinainen löytö",
+  85: "Syvä tieto",
+  100: "Täysosuma",
+} as const;
+export type RarityTier = keyof typeof RARITY_TIERS;
 export const DEFAULT_QUIZ_LENGTH = 7;
 export const MAX_ANSWER_LENGTH = 160;
+export const PREVIEW_SECONDS = 3;
+export const ROUND_SECONDS = 25;
+export const MAX_GAME_SCORE = 700;
 export const FIRST_QUIZ_DATE = "2026-09-01";

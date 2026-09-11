@@ -1,524 +1,111 @@
 "use client";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import {
-  CATEGORIES,
-  FIRST_QUIZ_DATE,
-  MAX_ANSWER_LENGTH,
-} from "@/lib/quiz/catalog";
-import { addDays, formatDate } from "@/lib/quiz/date";
+import { CATEGORIES, MAX_ANSWER_LENGTH, MAX_GAME_SCORE, ROUND_SECONDS } from "@/lib/quiz/catalog";
+import { formatDate } from "@/lib/quiz/date";
+import { remainingSeconds } from "@/lib/quiz/timer";
 import { useQuiz } from "@/lib/client/use-quiz";
 import { ShareResult } from "./share-result";
-import { Arrow, Spark } from "./brand";
-export function QuizApp({
-  initialDate,
-  length,
-}: {
-  initialDate: string;
-  length: number;
-}) {
-  const {
-    game,
-    phase,
-    busy,
-    error,
-    notice,
-    storageAvailable,
-    start,
-    submit,
-    next,
-    loadToday,
-  } = useQuiz();
+
+export function QuizApp({ initialDate, length }: { initialDate: string; length: number }) {
+  const { game, phase, busy, error, notice, storageAvailable, roundClock, clockNow, start, submit, next, loadToday } = useQuiz();
   const [answer, setAnswer] = useState("");
-  const [archiveDate, setArchiveDate] = useState("");
   const heading = useRef<HTMLHeadingElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const date = game?.today ?? initialDate;
   const count = game?.length ?? length;
-  const playing = phase === "question" || phase === "feedback";
-  const feedback = phase === "feedback" ? game?.results.at(-1) : null;
-  const number = feedback ? game!.results.length : (game?.current?.number ?? 1);
-  const earliest =
-    addDays(date, -30) < FIRST_QUIZ_DATE ? FIRST_QUIZ_DATE : addDays(date, -30);
+  const result = phase === "feedback" ? game?.results.at(-1) : undefined;
+  const current = game?.current;
+  const roundNumber = result ? game!.results.length : current?.number ?? 1;
+  const remaining = roundClock ? remainingSeconds(roundClock, clockNow) : ROUND_SECONDS;
+  const previewLeft = roundClock ? Math.max(0, Math.ceil((roundClock.previewUntil - clockNow) / 1000)) : 3;
+
   useEffect(() => {
-    if (phase !== "home") heading.current?.focus();
-  }, [phase, game?.current?.id]);
-  async function onSubmit(event: React.SubmitEvent<HTMLFormElement>) {
+    if (phase === "question") input.current?.focus();
+    if (phase === "feedback" || phase === "complete") heading.current?.focus();
+  }, [phase, current?.id]);
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     await submit(answer);
   }
+
   function advance() {
     setAnswer("");
     next();
   }
+
   return (
-    <>
-      <header className="site-header">
-        <Link
-          className="brand"
-          href="/"
-          onClick={() => {
-            setAnswer("");
-            void loadToday();
-          }}
-          aria-label="Mylvisa, etusivu"
-        >
-          <Spark />
-          mylvisa<span className="brand-dot">.</span>
-        </Link>
-        <nav aria-label="Päänavigaatio">
-          <a href="#rules">Näin pelataan</a>
-          <a href="#archive">
-            Harjoittele <span aria-hidden="true">↗</span>
-          </a>
-        </nav>
+    <div className="app-shell">
+      <header className="game-header">
+        <Link className="wordmark" href="/" onClick={() => void loadToday()} aria-label="Mylvisa, etusivu">MYLVISA<span aria-hidden="true">·</span></Link>
+        <div className="header-date"><time dateTime={date}>{formatDate(date, true)}</time></div>
       </header>
-      <main id="main">
-        <div className="daily-line">
-          <span>
-            <span className="live-dot" /> JOKA PÄIVÄ JOTAIN UUTTA
-          </span>
-          <time dateTime={date}>{formatDate(date, true)}</time>
-        </div>
-        {notice && (
-          <p className="notice" role="status">
-            {notice}
-          </p>
-        )}
-        {!storageAvailable && (
-          <p className="notice" role="status">
-            Selain ei salli tallentamista. Voit pelata, mutta tulos ja
-            eteneminen katoavat, kun suljet tai päivität sivun.
-          </p>
-        )}
-        {error && (
-          <div className="error-notice" role="alert">
-            <p>{error}</p>
-            {!game && (
-              <button
-                className="button button-small"
-                onClick={() => void loadToday()}
-                disabled={busy}
-              >
-                Yritä uudelleen
-              </button>
-            )}
-          </div>
-        )}
+      <main id="main" className="game-main">
+        {notice && <p className="notice" role="status">{notice}</p>}
+        {!storageAvailable && <p className="notice" role="status">Selain ei salli tallentamista. Tulos säilyy vain tämän istunnon ajan.</p>}
+        {error && <div className="error-notice" role="alert"><p>{error}</p><button className="button button-ghost" onClick={() => void loadToday()} disabled={busy}>Yritä uudelleen</button></div>}
+
         {phase === "home" && (
-          <>
-            <section className="hero" aria-labelledby="hero-title">
-              <div className="hero-copy">
-                <p className="eyebrow">PÄIVÄN VISA</p>
-                <h1 id="hero-title">
-                  Pieni visa.
-                  <br />
-                  <span>Avara maailma.</span>
-                </h1>
-                <p className="hero-description">
-                  Seitsemän kysymystä. Tuttuja juttuja ja uusia oivalluksia.
-                  Kuinka pitkälle uteliaisuutesi vie tänään?
-                </p>
-                <div className="hero-actions">
-                  <button
-                    className="button button-primary"
-                    onClick={() => {
-                      setAnswer("");
-                      void start();
-                    }}
-                    disabled={busy || !game}
-                  >
-                    {busy ? "Ladataan visaa…" : "Aloita päivän visa"} <Arrow />
-                  </button>
-                  <span className="small muted">
-                    Noin 5 minuuttia. Ei kiirettä.
-                  </span>
-                </div>
-              </div>
-              <div className="hero-art" aria-hidden="true">
-                <div className="orbit-label">UTELIAISUUDELLE EI OLE RAJOJA</div>
-                <div className="seven-disc">
-                  <span className="disc-spark">✳</span>
-                  <span className="seven">{count}</span>
-                  <span className="disc-label">
-                    KYSYMYSTÄ
-                    <br />
-                    KOKO MAAILMASTA
-                  </span>
-                </div>
-                <span className="art-foot">
-                  OMA PÄÄ RIITTÄÄ. <span>↗</span>
-                </span>
-              </div>
-            </section>
-            <div className="quick-facts">
-              <span>
-                <b>01</b> Sama visa kaikille
-              </span>
-              <span>
-                <b>02</b> Vastaa omin sanoin
-              </span>
-              <span>
-                <b>03</b> Oivalla joka vastauksella
-              </span>
-            </div>
-          </>
+          <section className="home-screen" aria-labelledby="home-title">
+            <p className="kicker">PÄIVÄN VISA</p>
+            <h1 id="home-title">Nimeä oikea.<br /><em>Löydä harvinainen.</em></h1>
+            <p className="home-lead">Oikeita vastauksia on monta. Mitä harvinaisemman keksit, sitä enemmän pisteitä saat.</p>
+            <div className="home-meta"><span>7 kysymystä</span><span>25 sekuntia / kysymys</span><span>Sama visa kaikille</span></div>
+            <button className="button button-primary button-large" onClick={() => void start()} disabled={busy || !game}>Aloita <span aria-hidden="true">→</span></button>
+            <p className="home-foot">Seuraava visa avautuu keskiyöllä Suomen aikaa.</p>
+          </section>
         )}
-        {playing && game && (
-          <section className="game-wrap" aria-labelledby="question-heading">
-            <div className="game-topline">
-              <span className="eyebrow">
-                {game.mode === "daily"
-                  ? "PÄIVÄN VISA"
-                  : `HARJOITUS · ${formatDate(game.date)}`}
-              </span>
-              <span className="question-count">
-                {number} <span>/ {count}</span>
-              </span>
-            </div>
-            <ol
-              className="progress"
-              aria-label={`Kysymys ${number} / ${count}`}
-            >
-              {Array.from({ length: count }, (_, i) => (
-                <li
-                  key={i}
-                  className={
-                    i < game.results.length
-                      ? "done"
-                      : i === number - 1
-                        ? "current"
-                        : ""
-                  }
-                  aria-current={i === number - 1 ? "step" : undefined}
-                >
-                  <span className="sr-only">
-                    Kysymys {i + 1}
-                    {i < game.results.length ? ", vastattu" : ""}
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <div className="question-panel">
-              <p className="category">
-                <span aria-hidden="true">✳</span>{" "}
-                {CATEGORIES[(feedback ?? game.current)!.category]}
-              </p>
-              <h1 ref={heading} tabIndex={-1} id="question-heading">
-                {(feedback ?? game.current)!.question}
-              </h1>
-              {!feedback && (
-                <form onSubmit={onSubmit} className="answer-form">
+
+        {(phase === "preview" || phase === "question") && game && current && (
+          <section className="round-screen" aria-labelledby="question-heading">
+            <div className="round-bar"><span>{String(roundNumber).padStart(2, "0")} / {count}</span><span>{game.results.reduce((sum, item) => sum + item.points, 0)} p</span></div>
+            <div className="round-progress" aria-hidden="true"><span style={{ width: `${(game.results.length / count) * 100}%` }} /></div>
+            <div className="question-content">
+              <p className="category-label">{CATEGORIES[current.category]}</p>
+              <h1 ref={heading} tabIndex={-1} id="question-heading">{current.prompt}</h1>
+              {phase === "preview" ? (
+                <div className="preview-message" role="status"><span className="preview-number">{previewLeft}</span><span>Lue kysymys rauhassa</span></div>
+              ) : (
+                <form className="answer-form" onSubmit={onSubmit}>
+                  <div className={`timer ${remaining <= 5 ? "timer-warning" : ""}`} role="timer" aria-live="polite" aria-label={`${remaining} sekuntia jäljellä`}><span>{remaining}</span><small>s</small></div>
                   <label htmlFor="answer">Vastauksesi</label>
-                  <input
-                    ref={input}
-                    id="answer"
-                    name="answer"
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    maxLength={MAX_ANSWER_LENGTH}
-                    autoComplete="off"
-                    autoCapitalize="sentences"
-                    spellCheck={false}
-                    placeholder="Kirjoita tähän…"
-                    disabled={busy}
-                    aria-describedby="answer-help"
-                  />
-                  <p id="answer-help" className="muted small">
-                    Yksi vastaus riittää. Kirjainkoolla ei ole väliä.
-                  </p>
-                  <div className="answer-actions">
-                    <button
-                      className="button button-primary"
-                      disabled={busy || !answer.trim()}
-                    >
-                      {busy ? "Tarkistetaan…" : "Lukitse vastaus"} <Arrow />
-                    </button>
-                    <button
-                      type="button"
-                      className="text-button"
-                      disabled={busy}
-                      onClick={() => void submit("")}
-                    >
-                      En tiedä — ohita
-                    </button>
-                  </div>
+                  <input ref={input} id="answer" value={answer} onChange={(event) => setAnswer(event.target.value)} maxLength={MAX_ANSWER_LENGTH} autoComplete="off" autoCapitalize="sentences" spellCheck={false} placeholder="Kirjoita yksi vastaus" disabled={busy} />
+                  <p className="input-note">Yksi hyväksytty vastaus riittää. Kirjainkoolla ei ole väliä.</p>
+                  <div className="answer-actions"><button className="button button-primary" disabled={busy || !answer.trim()}>Lukitse <span aria-hidden="true">→</span></button><button type="button" className="button button-ghost" onClick={() => void submit("")} disabled={busy}>Ohita</button></div>
                 </form>
               )}
-              {feedback && (
-                <div
-                  className={`feedback ${feedback.accepted ? "correct" : "incorrect"}`}
-                >
-                  <div className="feedback-header">
-                    <span>
-                      {feedback.accepted
-                        ? "✦ Hyvin tiedetty!"
-                        : feedback.answer
-                          ? "Tällä kertaa ei osunut."
-                          : "Tämä jäi väliin."}
-                    </span>
-                    {game.mode === "daily" && (
-                      <strong>
-                        +{feedback.points} <small>p</small>
-                      </strong>
-                    )}
-                  </div>
-                  <p className="your-answer">
-                    Vastauksesi: {feedback.answer || "—"}
-                  </p>
-                  <p className="eyebrow">
-                    {feedback.accepted ? "HYVÄKSYTTY VASTAUS" : "OIKEA VASTAUS"}
-                  </p>
-                  <p className="canonical">{feedback.canonicalAnswer}</p>
-                  <p className="explanation">{feedback.explanation}</p>
-                  <button
-                    className="button button-primary"
-                    onClick={advance}
-                    disabled={busy}
-                  >
-                    {game.summary ? "Katso tuloksesi" : "Seuraava kysymys"}{" "}
-                    <Arrow />
-                  </button>
-                </div>
-              )}
             </div>
-            <p className="game-note">
-              {game.mode === "daily"
-                ? "Yksi yritys. Uusi mahdollisuus joka päivä."
-                : "Harjoittelua ilman pisteitä. Päivän tuloksesi säilyy ennallaan."}
-            </p>
           </section>
         )}
+
+        {phase === "feedback" && game && result && (
+          <section className={`feedback-screen ${result.accepted ? "is-accepted" : "is-missed"}`} aria-labelledby="feedback-heading">
+            <p className="feedback-status" id="feedback-heading">{result.accepted ? "HYVÄKSYTTY" : result.answer ? "EI TÄLLÄ KERTAA" : "AIKA LOPPUI"}</p>
+            <p className="feedback-answer">{result.accepted ? result.canonicalAnswer : result.answer || "Ei vastausta"}</p>
+            <div className="feedback-score"><strong>{result.points}</strong><span>pistettä</span></div>
+            {result.accepted && <p className="feedback-tier">{result.tier}</p>}
+            {!result.accepted && result.exampleAnswer && <p className="feedback-example">Yksi mahdollinen vastaus: {result.exampleAnswer}</p>}
+            <p className="feedback-explanation">{result.explanation}</p>
+            <button className="button button-primary button-large" onClick={advance}>{roundNumber === count ? "Katso tulos" : "Seuraava kysymys"} <span aria-hidden="true">→</span></button>
+          </section>
+        )}
+
         {phase === "complete" && game?.summary && (
-          <section className="results" aria-labelledby="result-heading">
-            <div className="result-hero">
-              <div>
-                <p className="eyebrow">
-                  {game.mode === "daily"
-                    ? "PÄIVÄN VISA PELATTU"
-                    : "HARJOITUS VALMIS"}{" "}
-                  · {formatDate(game.date)}
-                </p>
-                <h1 ref={heading} tabIndex={-1} id="result-heading">
-                  {game.summary.correct === count
-                    ? "Kaikki kohdallaan!"
-                    : game.summary.correct >= 4
-                      ? "Hyvin oivallettu."
-                      : "Aina oppii uutta."}
-                </h1>
-                <p>
-                  {game.summary.correct} / {count} oikein.{" "}
-                  {game.mode === "daily"
-                    ? "Huomenna taas uusi näkökulma maailmaan."
-                    : "Uteliaisuus kasvaa harjoittelemalla."}
-                </p>
-                {game.mode === "daily" ? (
-                  <ShareResult game={game} />
-                ) : (
-                  <button
-                    className="button button-primary"
-                    onClick={() => void loadToday()}
-                    disabled={busy}
-                  >
-                    Takaisin päivän visaan <Arrow />
-                  </button>
-                )}
-              </div>
-              <div
-                className="score-disc"
-                aria-label={
-                  game.mode === "daily"
-                    ? `${game.summary.points} pistettä, enintään ${game.summary.maxPoints}`
-                    : `${game.summary.correct} oikein`
-                }
-              >
-                <Spark />
-                <strong>
-                  {game.mode === "daily"
-                    ? game.summary.points
-                    : game.summary.correct}
-                </strong>
-                <span>
-                  {game.mode === "daily"
-                    ? `/ ${game.summary.maxPoints} pistettä`
-                    : `/ ${count} oikein`}
-                </span>
-              </div>
-            </div>
-            <div className="breakdown-heading">
-              <h2>Visasi kysymys kysymykseltä</h2>
-              <span className="muted small">{count} pientä oivallusta</span>
-            </div>
-            <ol className="breakdown">
-              {game.results.map((result, i) => (
-                <li key={result.id}>
-                  <details>
-                    <summary>
-                      <span className="result-number">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="result-question">
-                        <span className="small muted">
-                          {CATEGORIES[result.category]}
-                        </span>
-                        {result.question}
-                      </span>
-                      <span
-                        className={`result-points ${result.accepted ? "accepted" : ""}`}
-                      >
-                        {game.mode === "daily"
-                          ? `${result.points} p`
-                          : result.accepted
-                            ? "✓"
-                            : "—"}
-                        <span className="sr-only">
-                          {result.accepted ? ", oikein" : ", väärin"}
-                        </span>
-                      </span>
-                      <span aria-hidden="true" className="expand-icon">
-                        +
-                      </span>
-                    </summary>
-                    <div className="result-detail">
-                      <p>
-                        Vastauksesi:{" "}
-                        <strong>{result.answer || "Ei vastausta"}</strong>
-                      </p>
-                      <p>
-                        Oikea vastaus: <strong>{result.canonicalAnswer}</strong>
-                      </p>
-                      <p>{result.explanation}</p>
-                      {game.mode === "daily" && (
-                        <p className="small muted">
-                          Kysymyksen enimmäispisteet: {result.maxPoints}
-                        </p>
-                      )}
-                    </div>
-                  </details>
-                </li>
-              ))}
-            </ol>
-            {game.mode === "daily" && (
-              <p className="next-day">
-                <Spark />
-                <span>
-                  <strong>Seuraava visa keskiyöllä.</strong>
-                  <br />
-                  Uusi päivä, seitsemän uutta kysymystä. Suomen aikaa.
-                </span>
-              </p>
-            )}
+          <section className="result-screen" aria-labelledby="result-heading">
+            <p className="kicker">MYLVISA · {formatDate(game.date)}</p>
+            <h1 ref={heading} tabIndex={-1} id="result-heading">Päivän tulos</h1>
+            <div className="total-score"><strong>{game.summary.points}</strong><span>/ {game.summary.maxPoints || MAX_GAME_SCORE}</span></div>
+            <p className="result-count">{game.summary.correct} / {game.length} vastausta hyväksyttiin</p>
+            <ol className="result-list">{game.results.map((item, index) => <li key={`${item.id}-${index}`}><span>{String(index + 1).padStart(2, "0")}</span><span className={item.accepted ? "result-tier" : "result-muted"}>{item.accepted ? item.tier : "Ei osumaa"}</span><strong>{item.points} p</strong></li>)}</ol>
+            <ShareResult game={game} />
+            <p className="result-next">Huomenna uusi joukko. Sama lähtöviiva kaikille.</p>
           </section>
         )}
-        <section
-          className="more-section"
-          aria-label="Tietoa pelistä ja harjoittelu"
-        >
-          <div id="rules" className="rules">
-            <p className="eyebrow">TUTTU RUTIINI, UUTTA TIETOA</p>
-            <h2>
-              Vähän tietoa.
-              <br />
-              Paljon oivalluksia.
-            </h2>
-            <details>
-              <summary>
-                Näin Mylvisa toimii <span aria-hidden="true">+</span>
-              </summary>
-              <p>
-                Joka päivä {length} yhteistä yleistietokysymystä. Kirjoita
-                vastauksesi omin sanoin ja lukitse se. Vastauksen jälkeen näet
-                pisteesi ja opit jotain lisää.
-              </p>
-              <p>
-                Joihinkin kysymyksiin on monta oikeaa vastausta. Harvinaisempi
-                vastaus voi tuoda enemmän pisteitä. Väärä tai tyhjä vastaus
-                antaa 0 pistettä.
-              </p>
-              <p>
-                Päivän visan voi pelata kerran tällä selaimella. Eteneminen ja
-                tulos tallentuvat laitteellesi. Uusi visa aukeaa keskiyöllä
-                Suomen aikaa, myös kesä- ja talviaikaan siirryttäessä.
-              </p>
-            </details>
-            <details>
-              <summary>
-                Vastausten hyväksyminen <span aria-hidden="true">+</span>
-              </summary>
-              <p>
-                Isot ja pienet kirjaimet, ylimääräiset välilyönnit ja tavalliset
-                välimerkit eivät ratkaise. Tunnetut rinnakkaisnimet hyväksytään
-                erikseen. Ä ja a ovat eri kirjaimia, eikä peli arvaa
-                kirjoitusvirheitä.
-              </p>
-              <p>
-                Monen oikean vastauksen kysymykseen annetaan vain yksi vastaus.
-                Pisteet on määritelty toimituksessa, eivätkä ne perustu
-                pelaajien vastausten yleisyyteen.
-              </p>
-            </details>
-          </div>
-          <div id="archive" className="archive">
-            <div className="archive-top">
-              <Spark />
-              <span className="eyebrow">LISÄÄ OIVALLETTAVAA</span>
-            </div>
-            <h2>Jäikö jokin päivä väliin?</h2>
-            <p>
-              Kokeile aiempia visoja kaikessa rauhassa. Harjoittelu ei kerrytä
-              pisteitä.
-            </p>
-            {date > FIRST_QUIZ_DATE ? (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setAnswer("");
-                  void start("practice", archiveDate || addDays(date, -1));
-                }}
-              >
-                <label htmlFor="archive-date">Valitse päivä</label>
-                <input
-                  type="date"
-                  id="archive-date"
-                  value={archiveDate || addDays(date, -1)}
-                  onChange={(e) => setArchiveDate(e.target.value)}
-                  min={earliest}
-                  max={addDays(date, -1)}
-                  required
-                  disabled={busy}
-                />
-                <button
-                  className="button button-secondary"
-                  disabled={busy || !game}
-                >
-                  Avaa harjoitus <Arrow />
-                </button>
-                <p className="small muted">
-                  Edelliset 30 päivää, alkaen {formatDate(FIRST_QUIZ_DATE)}.
-                </p>
-              </form>
-            ) : (
-              <p>Ensimmäinen harjoitus avautuu huomenna.</p>
-            )}
-          </div>
-        </section>
+
+        <p className="privacy-note">Vastaukset tarkistetaan palvelimella. Hyväksyttyjen vastausten listaa ei lähetetä selaimeen.</p>
       </main>
-      <footer className="site-footer">
-        <Link
-          href="/"
-          className="footer-brand"
-          onClick={() => {
-            setAnswer("");
-            void loadToday();
-          }}
-        >
-          mylvisa.
-        </Link>
-        <p>Uteliaisuus kuuluu kaikille.</p>
-        <span>
-          Tehty tiedon ilosta <span aria-hidden="true">✳</span>
-        </span>
-      </footer>
-    </>
+    </div>
   );
 }

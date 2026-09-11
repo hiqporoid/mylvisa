@@ -2,7 +2,7 @@
 import initial from "./releases/2026-09-01.json" with { type: "json" };
 export const releases = [
   {
-    id: "2026-09-01-v1",
+    id: "2026-09-01-rarity-v2",
     effectiveFrom: "2026-09-01",
     length: 7,
     questions: initial,

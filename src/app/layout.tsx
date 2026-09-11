@@ -10,17 +10,17 @@ const manrope = localFont({
 export const metadata: Metadata = {
   title: "Mylvisa – Päivän visa",
   description:
-    "Seitsemän kysymystä. Avara maailma. Pelaa suomalainen päivän yleistietovisa, opi uutta ja jaa tuloksesi.",
+    "Seitsemän kysymystä, monta oikeaa vastausta. Löydä päivän harvinaisin oivallus.",
   applicationName: "Mylvisa",
   openGraph: {
-    title: "Mylvisa – Pieni visa. Avara maailma.",
+    title: "Mylvisa – Löydä harvinainen vastaus",
     description:
-      "Seitsemän kysymystä joka päivä. Kuinka pitkälle uteliaisuutesi vie?",
+      "Sama päiväpeli kaikille. Harvinaisemmasta oikeasta vastauksesta saat enemmän pisteitä.",
     locale: "fi_FI",
     type: "website",
   },
 };
-export const viewport: Viewport = { themeColor: "#f5f3eb" };
+export const viewport: Viewport = { themeColor: "#101113" };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

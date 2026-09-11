@@ -2,19 +2,23 @@ import type { Category } from "./catalog";
 export type Mode = "daily" | "practice";
 export type PublicQuestion = {
   id: string;
-  question: string;
+  prompt: string;
   category: Category;
   number: number;
+  universeId: string;
 };
 export type AnswerResult = {
   id: string;
-  question: string;
+  prompt: string;
   category: Category;
   answer: string;
   accepted: boolean;
-  canonicalAnswer: string;
+  canonicalAnswer?: string;
+  exampleAnswer?: string;
   points: number;
   maxPoints: number;
+  tier?: string;
+  rarityRank: number;
   explanation: string;
 };
 export type QuizResponse = {
@@ -34,4 +38,5 @@ export type QuizRequest = {
   mode: Mode;
   answers: string[];
   releaseId?: string;
+  roundStartedAt?: string;
 };

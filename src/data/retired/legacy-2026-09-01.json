@@ -1,0 +1,2896 @@
+[
+  {
+    "id": "suomi-kekkonen",
+    "question": "Kuka oli Suomen presidentti vuosina 1956–1982?",
+    "category": "suomi",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Urho Kekkonen",
+        "points": 30,
+        "aliases": ["Kekkonen", "Urho Kaleva Kekkonen"]
+      }
+    ],
+    "canonicalAnswer": "Urho Kekkonen",
+    "explanation": "Urho Kekkonen toimi presidenttinä yli 25 vuotta. Hänen kautensa päättyi vuonna 1982.",
+    "sources": [
+      {
+        "title": "Tasavallan presidentin kanslia: Suomen presidentit"
+      }
+    ],
+    "tags": ["suomi", "kekkonen"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "suomi-saimaa",
+    "question": "Mikä on Suomen pinta-alaltaan suurin järvi?",
+    "category": "suomi",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Saimaa",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Saimaa",
+    "explanation": "Saimaa koostuu lukuisista salmien yhdistämistä järvenselistä. Sitä käsitellään yhtenä järvenä.",
+    "sources": [
+      {
+        "title": "Suomen ympäristökeskus: Järviwiki, Saimaa"
+      }
+    ],
+    "tags": ["suomi", "saimaa"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "suomi-kansallislintu",
+    "question": "Mikä lintu on Suomen kansallislintu?",
+    "category": "suomi",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Laulujoutsen",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Laulujoutsen",
+    "explanation": "Laulujoutsenen tunnistaa muun muassa kelta-mustasta nokasta. Se valittiin Suomen kansallislinnuksi vuonna 1981.",
+    "sources": [
+      {
+        "title": "ThisisFINLAND: Iconic Finnish nature symbols stand out",
+        "url": "https://finland.fi/life-society/iconic-finnish-nature-symbols-stand-out/"
+      }
+    ],
+    "tags": ["suomi", "kansallislintu"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "suomi-turun-palo",
+    "question": "Minä vuonna Turun suuri palo tuhosi valtaosan kaupungista?",
+    "category": "suomi",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "1827",
+        "points": 50,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "1827",
+    "explanation": "Turun palo syyskuussa 1827 oli Pohjoismaiden tuhoisimpia kaupunkipaloja. Sen jälkeen kaupunki kaavoitettiin uudelleen.",
+    "sources": [
+      {
+        "title": "Turun kaupunki: Turun palo 1827"
+      }
+    ],
+    "tags": ["suomi", "turun-palo"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "suomi-virtanen",
+    "question": "Kuka suomalainen sai kemian Nobelin palkinnon vuonna 1945?",
+    "category": "suomi",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Artturi Ilmari Virtanen",
+        "points": 50,
+        "aliases": ["A. I. Virtanen", "Artturi Virtanen", "Virtanen"]
+      }
+    ],
+    "canonicalAnswer": "Artturi Ilmari Virtanen",
+    "explanation": "Virtanen palkittiin maatalous- ja ravitsemuskemian tutkimuksistaan, erityisesti rehunsäilöntämenetelmästään.",
+    "sources": [
+      {
+        "title": "NobelPrize.org: Artturi Virtanen, Facts",
+        "url": "https://www.nobelprize.org/prizes/chemistry/1945/virtanen/facts/"
+      }
+    ],
+    "tags": ["suomi", "virtanen"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "suomi-suomenlinna",
+    "question": "Mikä oli Suomenlinnan suomenkielinen nimi ennen vuotta 1918?",
+    "category": "suomi",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Viapori",
+        "points": 40,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Viapori",
+    "explanation": "Ruotsiksi linnoitus on yhä Sveaborg. Suomenkielinen nimi muutettiin Viaporista Suomenlinnaksi vuonna 1918.",
+    "sources": [
+      {
+        "title": "Suomenlinnan hoitokunta: Linnoituksen historia"
+      }
+    ],
+    "tags": ["suomi", "suomenlinna"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "suomi-kolme-seppaa",
+    "question": "Kuka veisti Helsingin Kolmen sepän patsaan?",
+    "category": "suomi",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Felix Nylund",
+        "points": 70,
+        "aliases": ["Nylund"]
+      }
+    ],
+    "canonicalAnswer": "Felix Nylund",
+    "explanation": "Felix Nylundin veistos paljastettiin vuonna 1932. Se sijaitsee Aleksanterinkadun ja Mannerheimintien kulmassa.",
+    "sources": [
+      {
+        "title": "HAM Helsingin taidemuseo: Kolme seppää",
+        "url": "https://www.hamhelsinki.fi/veistos/kolme-seppaa/"
+      }
+    ],
+    "tags": ["suomi", "kolme-seppaa"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-berliinin-muuri",
+    "question": "Minä vuonna Berliinin muuri avattiin?",
+    "category": "historia",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "1989",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "1989",
+    "explanation": "Rajanylityspaikat avattiin 9. marraskuuta 1989. Saksan yhdistyminen seurasi vuonna 1990.",
+    "sources": [
+      {
+        "title": "Stiftung Berliner Mauer: 9 November 1989"
+      }
+    ],
+    "tags": ["historia", "berliinin-muuri"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-egyptin-kirjoitus",
+    "question": "Millä nimellä tunnetaan muinaisen Egyptin kuvamerkkeihin perustuva kirjoitusjärjestelmä?",
+    "category": "historia",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Hieroglyfit",
+        "points": 20,
+        "aliases": ["Hieroglyfi", "Hieroglyfikirjoitus"]
+      }
+    ],
+    "canonicalAnswer": "Hieroglyfit",
+    "explanation": "Hieroglyfeissä merkeillä voitiin kuvata äänteitä, sanoja tai merkitysluokkia. Ne eivät siis olleet pelkkiä kuvia.",
+    "sources": [
+      {
+        "title": "British Museum: Egyptian hieroglyphs"
+      }
+    ],
+    "tags": ["historia", "egyptin-kirjoitus"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-kolumbus",
+    "question": "Kuka johti vuonna 1492 Atlantin ylittänyttä retkikuntaa, jonka laivat olivat Niña, Pinta ja Santa María?",
+    "category": "historia",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Kristoffer Kolumbus",
+        "points": 30,
+        "aliases": ["Kolumbus", "Christopher Columbus", "Cristóbal Colón"]
+      }
+    ],
+    "canonicalAnswer": "Kristoffer Kolumbus",
+    "explanation": "Kolumbuksen retkikunta saapui Karibialle. Amerikan mantereilla oli jo tuolloin lukuisia alkuperäiskansoja.",
+    "sources": [
+      {
+        "title": "Library of Congress: 1492, An Ongoing Voyage"
+      }
+    ],
+    "tags": ["historia", "kolumbus"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-waterloo",
+    "question": "Missä taistelussa Napoleon kärsi lopullisen tappionsa vuonna 1815?",
+    "category": "historia",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Waterloo",
+        "points": 40,
+        "aliases": ["Waterloon taistelu"]
+      }
+    ],
+    "canonicalAnswer": "Waterloo",
+    "explanation": "Waterloon taistelu käytiin nykyisen Belgian alueella. Tappion jälkeen Napoleon karkotettiin Saint Helenan saarelle.",
+    "sources": [
+      {
+        "title": "National Army Museum: Battle of Waterloo"
+      }
+    ],
+    "tags": ["historia", "waterloo"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-magna-carta",
+    "question": "Missä maassa kuningas Juhana hyväksyi Magna Cartan vuonna 1215?",
+    "category": "historia",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Englanti",
+        "points": 50,
+        "aliases": ["Englannissa"]
+      }
+    ],
+    "canonicalAnswer": "Englanti",
+    "explanation": "Magna Carta rajoitti kuninkaan valtaa. Sen myöhemmillä tulkinnoilla on ollut suuri vaikutus oikeusvaltion kehitykseen.",
+    "sources": [
+      {
+        "title": "British Library: Magna Carta"
+      }
+    ],
+    "tags": ["historia", "magna-carta"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-inka",
+    "question": "Minkä valtakunnan hallintokeskus oli Cusco ennen espanjalaisten valloitusta?",
+    "category": "historia",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Inkavaltakunta",
+        "points": 40,
+        "aliases": ["Inkat", "Inkojen valtakunta"]
+      }
+    ],
+    "canonicalAnswer": "Inkavaltakunta",
+    "explanation": "Cusco sijaitsee nykyisessä Perussa. Inkojen valtakunta ulottui laajalle Andien alueelle.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: City of Cuzco"
+      }
+    ],
+    "tags": ["historia", "inka"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "historia-bantu",
+    "question": "Millä nimellä kutsutaan vuosisatojen kuluessa tapahtunutta bantukieliä puhuvien kansojen levittäytymistä Saharan eteläpuolisessa Afrikassa?",
+    "category": "historia",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Bantuekspansio",
+        "points": 70,
+        "aliases": [
+          "Bantujen vaellus",
+          "Bantujen muuttoliike",
+          "Bantujen levittäytyminen"
+        ]
+      }
+    ],
+    "canonicalAnswer": "Bantuekspansio",
+    "explanation": "Bantukielten leviäminen liittyi pitkään muuttoliikkeiden ja kulttuurisen vuorovaikutuksen historiaan. Kyse ei ollut yhdestä yhtenäisestä vaelluksesta.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Bantu peoples"
+      }
+    ],
+    "tags": ["historia", "bantu"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-valtameri",
+    "question": "Mikä on pinta-alaltaan maailman suurin valtameri?",
+    "category": "maantiede",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Tyynimeri",
+        "points": 20,
+        "aliases": ["Tyyni valtameri"]
+      }
+    ],
+    "canonicalAnswer": "Tyynimeri",
+    "explanation": "Tyynimeri ulottuu Aasian ja Australian itäpuolelta Amerikan länsirannikolle.",
+    "sources": [
+      {
+        "title": "NOAA: How big is the Pacific Ocean?"
+      }
+    ],
+    "tags": ["maantiede", "valtameri"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-aavikko",
+    "question": "Mikä on maailman suurin kuuma aavikko?",
+    "category": "maantiede",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Sahara",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Sahara",
+    "explanation": "Sahara sijaitsee Pohjois-Afrikassa. Kylmät napa-aavikot mukaan luettaessa Etelämanner on sitä suurempi.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Sahara"
+      }
+    ],
+    "tags": ["maantiede", "aavikko"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-fuji",
+    "question": "Missä maassa Fuji-vuori sijaitsee?",
+    "category": "maantiede",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Japani",
+        "points": 20,
+        "aliases": ["Japanissa"]
+      }
+    ],
+    "canonicalAnswer": "Japani",
+    "explanation": "Fuji on Japanin korkein vuori ja aktiiviseksi luokiteltu tulivuori.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Fujisan"
+      }
+    ],
+    "tags": ["maantiede", "fuji"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-paivantasaja",
+    "question": "Millä nimellä kutsutaan nollan leveysasteen leveyspiiriä?",
+    "category": "maantiede",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Päiväntasaaja",
+        "points": 30,
+        "aliases": ["Ekvaattori"]
+      }
+    ],
+    "canonicalAnswer": "Päiväntasaaja",
+    "explanation": "Päiväntasaaja jakaa maapallon pohjoiseen ja eteläiseen pallonpuoliskoon.",
+    "sources": [
+      {
+        "title": "National Geographic Education: Equator"
+      }
+    ],
+    "tags": ["maantiede", "paivantasaja"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-ankara",
+    "question": "Mikä on Turkin pääkaupunki?",
+    "category": "maantiede",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Ankara",
+        "points": 40,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Ankara",
+    "explanation": "Ankarasta tuli Turkin pääkaupunki vuonna 1923. Istanbul on historiallisesta merkityksestään huolimatta eri kaupunki.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Ankara"
+      }
+    ],
+    "tags": ["maantiede", "ankara"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-andes",
+    "question": "Mikä vuoristo kulkee pitkin Etelä-Amerikan länsireunaa?",
+    "category": "maantiede",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Andit",
+        "points": 30,
+        "aliases": ["Andien vuoristo"]
+      }
+    ],
+    "canonicalAnswer": "Andit",
+    "explanation": "Andit ulottuvat mantereen pohjoisosista etelään. Vuoristo syntyi mannerlaattojen liikkeiden seurauksena.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Andes Mountains"
+      }
+    ],
+    "tags": ["maantiede", "andes"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maantiede-baikal",
+    "question": "Mikä järvi on maailman syvin?",
+    "category": "maantiede",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Baikal",
+        "points": 70,
+        "aliases": ["Baikaljärvi", "Baikal järvi"]
+      }
+    ],
+    "canonicalAnswer": "Baikal",
+    "explanation": "Siperian Baikaljärven suurin syvyys on yli 1 600 metriä. Järvi sisältää suuren osan maailman sulasta makeasta pintavedestä.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Lake Baikal"
+      }
+    ],
+    "tags": ["maantiede", "baikal"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-eduskunta",
+    "question": "Mikä toimielin käyttää Suomessa lainsäädäntövaltaa?",
+    "category": "yhteiskunta",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Eduskunta",
+        "points": 20,
+        "aliases": ["Suomen eduskunta"]
+      }
+    ],
+    "canonicalAnswer": "Eduskunta",
+    "explanation": "Eduskunta säätää lait. Hallitus valmistelee suuren osan lakiesityksistä.",
+    "sources": [
+      {
+        "title": "Suomen perustuslaki, 3 §"
+      }
+    ],
+    "tags": ["yhteiskunta", "eduskunta"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-aanioikeus",
+    "question": "Minä vuonna Suomen naiset saivat valtiollisen äänioikeuden ja vaalikelpoisuuden?",
+    "category": "yhteiskunta",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "1906",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "1906",
+    "explanation": "Vuoden 1906 eduskuntauudistus toi yleisen ja yhtäläisen äänioikeuden sekä oikeuden asettua ehdolle myös naisille.",
+    "sources": [
+      {
+        "title": "Eduskunta: Naiset ja eduskuntavaalit"
+      }
+    ],
+    "tags": ["yhteiskunta", "aanioikeus"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-yk",
+    "question": "Mitä suomenkielisiä sanoja lyhenne YK tarkoittaa?",
+    "category": "yhteiskunta",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Yhdistyneet kansakunnat",
+        "points": 10,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Yhdistyneet kansakunnat",
+    "explanation": "YK perustettiin vuonna 1945 edistämään muun muassa kansainvälistä rauhaa ja yhteistyötä.",
+    "sources": [
+      {
+        "title": "United Nations: History of the United Nations"
+      }
+    ],
+    "tags": ["yhteiskunta", "yk"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-vallanjako",
+    "question": "Mikä vallan kolmijako-opin osa ratkaisee oikeusriitoja ja rikosasioita?",
+    "category": "yhteiskunta",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Tuomiovalta",
+        "points": 40,
+        "aliases": ["Tuomiovalta eli oikeudellinen valta"]
+      }
+    ],
+    "canonicalAnswer": "Tuomiovalta",
+    "explanation": "Kolmijako-opissa erotetaan lainsäädäntövalta, toimeenpanovalta ja tuomiovalta. Tuomiovaltaa käyttävät riippumattomat tuomioistuimet.",
+    "sources": [
+      {
+        "title": "Suomen perustuslaki, 3 §"
+      }
+    ],
+    "tags": ["yhteiskunta", "vallanjako"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-kansanaanestys",
+    "question": "Millä nimellä kutsutaan äänestystä, jossa kansalaiset ottavat suoraan kantaa tiettyyn asiakysymykseen?",
+    "category": "yhteiskunta",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Kansanäänestys",
+        "points": 30,
+        "aliases": ["Referendumi", "Referendum"]
+      }
+    ],
+    "canonicalAnswer": "Kansanäänestys",
+    "explanation": "Kansanäänestyksessä äänestetään asiasta eikä edustajan valinnasta. Äänestys voi olla neuvoa-antava tai sitova.",
+    "sources": [
+      {
+        "title": "Kielitoimiston sanakirja: kansanäänestys"
+      }
+    ],
+    "tags": ["yhteiskunta", "kansanaanestys"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-rooman-sopimus",
+    "question": "Nimeä yksi valtio, joka allekirjoitti Euroopan talousyhteisön perustaneen Rooman sopimuksen vuonna 1957.",
+    "category": "yhteiskunta",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Saksa",
+        "points": 20,
+        "aliases": ["Länsi-Saksa", "Saksan liittotasavalta"]
+      },
+      {
+        "canonical": "Ranska",
+        "points": 20,
+        "aliases": []
+      },
+      {
+        "canonical": "Italia",
+        "points": 30,
+        "aliases": []
+      },
+      {
+        "canonical": "Belgia",
+        "points": 50,
+        "aliases": []
+      },
+      {
+        "canonical": "Alankomaat",
+        "points": 50,
+        "aliases": ["Hollanti"]
+      },
+      {
+        "canonical": "Luxemburg",
+        "points": 100,
+        "aliases": ["Luxembourg"]
+      }
+    ],
+    "canonicalAnswer": "Saksa / Ranska / Italia / Belgia / Alankomaat / Luxemburg",
+    "explanation": "Sopimuksen allekirjoittivat Belgia, Alankomaat, Luxemburg, Ranska, Italia ja Länsi-Saksa. ETY aloitti toimintansa vuonna 1958.",
+    "sources": [
+      {
+        "title": "EUR-Lex: Treaty of Rome (EEC)",
+        "url": "https://eur-lex.europa.eu/EN/legal-content/summary/treaty-of-rome-eec.html"
+      }
+    ],
+    "tags": ["yhteiskunta", "rooman-sopimus"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "yhteiskunta-ombudsman",
+    "question": "Mikä eduskunnan valitsema laillisuusvalvoja valvoo viranomaisten toimintaa ja perus- ja ihmisoikeuksien toteutumista?",
+    "category": "yhteiskunta",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Eduskunnan oikeusasiamies",
+        "points": 70,
+        "aliases": ["Oikeusasiamies"]
+      }
+    ],
+    "canonicalAnswer": "Eduskunnan oikeusasiamies",
+    "explanation": "Oikeusasiamies käsittelee kanteluita ja tekee tarkastuksia. Hän on oikeuskanslerin ohella Suomen ylimpiä laillisuusvalvojia.",
+    "sources": [
+      {
+        "title": "Eduskunnan oikeusasiamies: Oikeusasiamiehen tehtävät"
+      }
+    ],
+    "tags": ["yhteiskunta", "ombudsman"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-vesi",
+    "question": "Minkä aineen kemiallinen kaava on H₂O?",
+    "category": "tiede",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Vesi",
+        "points": 10,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Vesi",
+    "explanation": "Vesimolekyylissä on kaksi vetyatomia ja yksi happiatomi.",
+    "sources": [
+      {
+        "title": "Royal Society of Chemistry: Water"
+      }
+    ],
+    "tags": ["tiede", "vesi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-painovoima",
+    "question": "Mikä voima pitää planeetat Auringon kiertoradalla?",
+    "category": "tiede",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Painovoima",
+        "points": 20,
+        "aliases": ["Gravitaatio", "Gravitaatiovoima", "Vetovoima"]
+      }
+    ],
+    "canonicalAnswer": "Painovoima",
+    "explanation": "Kappaleiden massat vetävät toisiaan puoleensa. Planeetan liike ja Auringon vetovoima muodostavat kiertoradan.",
+    "sources": [
+      {
+        "title": "NASA Space Place: What is gravity?"
+      }
+    ],
+    "tags": ["tiede", "painovoima"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-punainen-planeetta",
+    "question": "Mikä planeetta tunnetaan punaisena planeettana?",
+    "category": "tiede",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Mars",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Mars",
+    "explanation": "Marsin pintaa peittävä rautaoksidipitoinen pöly antaa sille punertavan värin.",
+    "sources": [
+      {
+        "title": "NASA Science: Mars Facts"
+      }
+    ],
+    "tags": ["tiede", "punainen-planeetta"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-alkuaine",
+    "question": "Minkä alkuaineen kemiallinen merkki on Au?",
+    "category": "tiede",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Kulta",
+        "points": 40,
+        "aliases": ["Aurum"]
+      }
+    ],
+    "canonicalAnswer": "Kulta",
+    "explanation": "Tunnus Au tulee kullan latinankielisestä nimestä aurum.",
+    "sources": [
+      {
+        "title": "Royal Society of Chemistry: Gold"
+      }
+    ],
+    "tags": ["tiede", "alkuaine"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-si-yksikko",
+    "question": "Mikä on sähkövirran SI-yksikkö?",
+    "category": "tiede",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Ampeeri",
+        "points": 40,
+        "aliases": ["Ampere", "A"]
+      }
+    ],
+    "canonicalAnswer": "Ampeeri",
+    "explanation": "Ampeeri on yksi SI-järjestelmän seitsemästä perusyksiköstä. Sen tunnus on A.",
+    "sources": [
+      {
+        "title": "BIPM: SI Brochure"
+      }
+    ],
+    "tags": ["tiede", "si-yksikko"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-planeetat",
+    "question": "Nimeä yksi Aurinkokunnan neljästä jättiläisplaneetasta.",
+    "category": "tiede",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Jupiter",
+        "points": 20,
+        "aliases": []
+      },
+      {
+        "canonical": "Saturnus",
+        "points": 30,
+        "aliases": []
+      },
+      {
+        "canonical": "Uranus",
+        "points": 70,
+        "aliases": []
+      },
+      {
+        "canonical": "Neptunus",
+        "points": 100,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Jupiter / Saturnus / Uranus / Neptunus",
+    "explanation": "Jupiter ja Saturnus ovat kaasujättiläisiä, Uranus ja Neptunus jääjättiläisiä. Kaikki neljä sijaitsevat asteroidivyöhykkeen ulkopuolella.",
+    "sources": [
+      {
+        "title": "NASA Science: Our Solar System",
+        "url": "https://science.nasa.gov/solar-system/planet-sizes-and-locations-in-our-solar-system/"
+      }
+    ],
+    "tags": ["tiede", "planeetat"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "tiede-avogadro",
+    "question": "Kenen mukaan on nimetty vakio, joka ilmaisee hiukkasten määrän yhdessä moolissa?",
+    "category": "tiede",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Amedeo Avogadro",
+        "points": 70,
+        "aliases": ["Avogadro"]
+      }
+    ],
+    "canonicalAnswer": "Amedeo Avogadro",
+    "explanation": "Avogadron vakio on täsmälleen 6,02214076 × 10²³ hiukkasta moolia kohti.",
+    "sources": [
+      {
+        "title": "BIPM: SI Brochure, mole"
+      }
+    ],
+    "tags": ["tiede", "avogadro"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-yhteyttaminen",
+    "question": "Millä nimellä kutsutaan prosessia, jossa kasvit valmistavat valon avulla sokereita hiilidioksidista ja vedestä?",
+    "category": "luonto",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Yhteyttäminen",
+        "points": 20,
+        "aliases": ["Fotosynteesi"]
+      }
+    ],
+    "canonicalAnswer": "Yhteyttäminen",
+    "explanation": "Yhteyttämisessä valoenergiaa sitoutuu kemialliseksi energiaksi. Happea vapautuu sivutuotteena.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Photosynthesis"
+      }
+    ],
+    "tags": ["luonto", "yhteyttaminen"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-nisakas",
+    "question": "Mihin selkärankaisten luokkaan valaat kuuluvat?",
+    "category": "luonto",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Nisäkkäät",
+        "points": 20,
+        "aliases": ["Nisäkäs"]
+      }
+    ],
+    "canonicalAnswer": "Nisäkkäät",
+    "explanation": "Valaat hengittävät keuhkoilla ja imettävät poikasiaan. Ne ovat sopeutuneet elämään vedessä.",
+    "sources": [
+      {
+        "title": "NOAA Fisheries: Whales"
+      }
+    ],
+    "tags": ["luonto", "nisakas"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-pandaruoka",
+    "question": "Mikä kasviryhmä muodostaa valtaosan isopandan ravinnosta?",
+    "category": "luonto",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Bambu",
+        "points": 20,
+        "aliases": ["Bambut"]
+      }
+    ],
+    "canonicalAnswer": "Bambu",
+    "explanation": "Isopanda syö pääasiassa bambua, vaikka sen suolisto muistuttaa muiden petoeläinten suolistoa.",
+    "sources": [
+      {
+        "title": "Smithsonian National Zoo: Giant panda"
+      }
+    ],
+    "tags": ["luonto", "pandaruoka"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-muniva-nisakas",
+    "question": "Nimeä yksi kahdesta elossa olevasta nokkaeläinten ryhmästä: toinen on vesieläin, toinen piikikäs maaeläin.",
+    "category": "luonto",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Vesinokkaeläin",
+        "points": 30,
+        "aliases": []
+      },
+      {
+        "canonical": "Nokkasiilit",
+        "points": 70,
+        "aliases": ["Nokkasiili"]
+      }
+    ],
+    "canonicalAnswer": "Vesinokkaeläin / Nokkasiilit",
+    "explanation": "Nokkaeläimet ovat munivia nisäkkäitä. Ryhmään kuuluvat vesinokkaeläin ja nokkasiilit.",
+    "sources": [
+      {
+        "title": "Australian Museum: Monotremes",
+        "url": "https://australian.museum/learn/species-identification/ask-an-expert/what-is-a-monotreme/"
+      }
+    ],
+    "tags": ["luonto", "muniva-nisakas"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-symbioosi",
+    "question": "Mihin eliökuntaan kuuluu jäkälän osakas, joka saa ravintonsa yhteyttävältä levältä tai syanobakteerilta?",
+    "category": "luonto",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Sienet",
+        "points": 30,
+        "aliases": ["Sieni"]
+      }
+    ],
+    "canonicalAnswer": "Sienet",
+    "explanation": "Jäkälän pääosakkaat ovat sieni ja yhteyttävä levä tai syanobakteeri. Jäkälässä voi elää myös muita mikrobeja.",
+    "sources": [
+      {
+        "title": "British Lichen Society: What is a lichen?"
+      }
+    ],
+    "tags": ["luonto", "symbioosi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-muodonvaihdos",
+    "question": "Mikä on perhosen toukka- ja aikuisvaiheen välissä olevan kehitysvaiheen nimi?",
+    "category": "luonto",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Kotelo",
+        "points": 40,
+        "aliases": ["Kotelovaihe"]
+      }
+    ],
+    "canonicalAnswer": "Kotelo",
+    "explanation": "Täydelliseen muodonvaihdokseen kuuluvat muna, toukka, kotelo ja aikuinen. Kotelon sisällä elimistö muuttuu voimakkaasti.",
+    "sources": [
+      {
+        "title": "Smithsonian: Butterfly life cycle",
+        "url": "https://gardens.si.edu/learn/for-educators/cultivating-habitat/butterfly-gardening/about-butterflies/"
+      }
+    ],
+    "tags": ["luonto", "muodonvaihdos"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "luonto-sydan",
+    "question": "Kuinka monta sydäntä tursaalla on?",
+    "category": "luonto",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Kolme",
+        "points": 70,
+        "aliases": ["3", "Kolme sydäntä"]
+      }
+    ],
+    "canonicalAnswer": "Kolme",
+    "explanation": "Kaksi sydäntä pumppaa verta kiduksille ja kolmas muualle ruumiiseen.",
+    "sources": [
+      {
+        "title": "Natural History Museum London: Octopuses keep surprising us",
+        "url": "https://www.nhm.ac.uk/discover/octopuses-keep-surprising-us-here-are-eight-examples-how.html"
+      }
+    ],
+    "tags": ["luonto", "sydan"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-muumit",
+    "question": "Kuka loi Muumit?",
+    "category": "kirjallisuus",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Tove Jansson",
+        "points": 20,
+        "aliases": ["Jansson"]
+      }
+    ],
+    "canonicalAnswer": "Tove Jansson",
+    "explanation": "Tove Jansson oli kirjailija ja kuvataiteilija. Ensimmäinen muumikirja ilmestyi vuonna 1945.",
+    "sources": [
+      {
+        "title": "Moomin Characters: Tove Jansson"
+      }
+    ],
+    "tags": ["kirjallisuus", "muumit"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-seitseman-veljesta",
+    "question": "Kuka kirjoitti romaanin Seitsemän veljestä?",
+    "category": "kirjallisuus",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Aleksis Kivi",
+        "points": 20,
+        "aliases": ["Kivi", "Alexis Stenvall", "Aleksis Stenvall"]
+      }
+    ],
+    "canonicalAnswer": "Aleksis Kivi",
+    "explanation": "Vuonna 1870 ilmestynyt Seitsemän veljestä seuraa Jukolan veljesten kasvua osaksi yhteisöä.",
+    "sources": [
+      {
+        "title": "Suomalaisen Kirjallisuuden Seura: Aleksis Kivi"
+      }
+    ],
+    "tags": ["kirjallisuus", "seitsemän-veljesta"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-hobitti",
+    "question": "Kuka kirjoitti Hobitin ja Tarun sormusten herrasta?",
+    "category": "kirjallisuus",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "J. R. R. Tolkien",
+        "points": 30,
+        "aliases": ["Tolkien", "John Ronald Reuel Tolkien"]
+      }
+    ],
+    "canonicalAnswer": "J. R. R. Tolkien",
+    "explanation": "Tolkien kehitti Keski-Maan tarinoiden lisäksi laajan kielten ja historian kokonaisuuden.",
+    "sources": [
+      {
+        "title": "The Tolkien Estate: Writing"
+      }
+    ],
+    "tags": ["kirjallisuus", "hobitti"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-frankenstein",
+    "question": "Kuka kirjoitti vuonna 1818 ilmestyneen romaanin Frankenstein?",
+    "category": "kirjallisuus",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Mary Shelley",
+        "points": 40,
+        "aliases": ["Shelley"]
+      }
+    ],
+    "canonicalAnswer": "Mary Shelley",
+    "explanation": "Mary Shelleyn romaani pohtii luomisen vastuuta. Frankenstein on tiedemiehen sukunimi.",
+    "sources": [
+      {
+        "title": "British Library: Frankenstein by Mary Shelley"
+      }
+    ],
+    "tags": ["kirjallisuus", "frankenstein"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-kalevala",
+    "question": "Kuka kokosi Kalevalan?",
+    "category": "kirjallisuus",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Elias Lönnrot",
+        "points": 30,
+        "aliases": ["Lönnrot", "Elias Lonnrot", "Lonnrot"]
+      }
+    ],
+    "canonicalAnswer": "Elias Lönnrot",
+    "explanation": "Lönnrot kokosi eepoksen suullisesta kansanrunoudesta. Vanha Kalevala ilmestyi 1835 ja laajennettu laitos 1849.",
+    "sources": [
+      {
+        "title": "Suomalaisen Kirjallisuuden Seura: Kalevala"
+      }
+    ],
+    "tags": ["kirjallisuus", "kalevala"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-macondo",
+    "question": "Kuka kirjoitti romaanin Sadan vuoden yksinäisyys?",
+    "category": "kirjallisuus",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Gabriel García Márquez",
+        "points": 50,
+        "aliases": [
+          "García Márquez",
+          "Garcia Marquez",
+          "Gabriel Garcia Marquez",
+          "Márquez",
+          "Marquez"
+        ]
+      }
+    ],
+    "canonicalAnswer": "Gabriel García Márquez",
+    "explanation": "Romaani kertoo Buendían suvusta kuvitteellisessa Macondon kaupungissa. Se on maagisen realismin tunnettu teos.",
+    "sources": [
+      {
+        "title": "NobelPrize.org: Gabriel García Márquez, Biographical"
+      }
+    ],
+    "tags": ["kirjallisuus", "macondo"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kirjallisuus-genji",
+    "question": "Kenen nimiin 1000-luvun alussa Japanissa kirjoitettu Genjin tarina tavallisesti luetaan?",
+    "category": "kirjallisuus",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Murasaki Shikibu",
+        "points": 100,
+        "aliases": ["Murasaki"]
+      }
+    ],
+    "canonicalAnswer": "Murasaki Shikibu",
+    "explanation": "Hovinaisena elänyt Murasaki Shikibu kuvasi teoksessa Heian-kauden aristokratian elämää.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Murasaki Shikibu"
+      }
+    ],
+    "tags": ["kirjallisuus", "genji"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-suomen-sukulainen",
+    "question": "Mikä Viron pääkieli on suomen lähisukukieli?",
+    "category": "kieli",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Viro",
+        "points": 10,
+        "aliases": ["Viron kieli", "Eesti"]
+      }
+    ],
+    "canonicalAnswer": "Viro",
+    "explanation": "Suomi ja viro kuuluvat itämerensuomalaisiin kieliin. Niillä on paljon yhteistä sanastoa mutta myös harhaanjohtavia samanlaisia sanoja.",
+    "sources": [
+      {
+        "title": "Kotimaisten kielten keskus: Suomen sukukielet"
+      }
+    ],
+    "tags": ["kieli", "suomen-sukulainen"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-vastakohta",
+    "question": "Millä kielitieteen termillä tarkoitetaan sanan vastakohtaa, kuten sanaparin kuuma ja kylmä toista osapuolta?",
+    "category": "kieli",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Antonyymi",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Antonyymi",
+    "explanation": "Antonyymit ovat vastakohtaisia sanoja, kuten kuuma ja kylmä. Synonyymien merkitys on sama tai läheinen.",
+    "sources": [
+      {
+        "title": "Kielitoimiston sanakirja: antonyymi"
+      }
+    ],
+    "tags": ["kieli", "vastakohta"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-aakkoset",
+    "question": "Millä kirjaimella suomen kielen aakkosto päättyy?",
+    "category": "kieli",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Ö",
+        "points": 10,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Ö",
+    "explanation": "Suomen aakkosten viimeiset kirjaimet ovat å, ä ja ö. Ä ja ö ovat itsenäisiä kirjaimia.",
+    "sources": [
+      {
+        "title": "Kotimaisten kielten keskus: Aakkostus"
+      }
+    ],
+    "tags": ["kieli", "aakkoset"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-palindromi",
+    "question": "Mikä on nimitys sanalle, joka on sama sekä etu- että takaperin luettuna, kuten saippuakauppias?",
+    "category": "kieli",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Palindromi",
+        "points": 40,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Palindromi",
+    "explanation": "Palindromi voi olla myös kokonainen lause. Lausepalindromeissa välilyönnit ja välimerkit yleensä sivuutetaan.",
+    "sources": [
+      {
+        "title": "Kielitoimiston sanakirja: palindromi"
+      }
+    ],
+    "tags": ["kieli", "palindromi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-essiivi",
+    "question": "Mikä sijamuoto on sanassa opettajana?",
+    "category": "kieli",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Essiivi",
+        "points": 50,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Essiivi",
+    "explanation": "Essiivin päätteet ovat -na ja -nä. Sillä voidaan ilmaista esimerkiksi olotilaa tai tehtävää.",
+    "sources": [
+      {
+        "title": "VISK: Essiivi"
+      }
+    ],
+    "tags": ["kieli", "essiivi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-lainasana",
+    "question": "Mistä kielestä suomeen on lainattu sana karaoke?",
+    "category": "kieli",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Japani",
+        "points": 40,
+        "aliases": ["Japanista", "Japanin kielestä"]
+      }
+    ],
+    "canonicalAnswer": "Japani",
+    "explanation": "Karaoke on japania ja tarkoittaa sananmukaisesti tyhjää orkesteria. Sanan loppuosa on lyhentymä orkesteria tarkoittavasta lainasanasta.",
+    "sources": [
+      {
+        "title": "Kielitoimiston sanakirja: karaoke; Oxford English Dictionary: karaoke"
+      }
+    ],
+    "tags": ["kieli", "lainasana"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "kieli-abessiivi",
+    "question": "Mikä sijamuoto on sanassa rahatta?",
+    "category": "kieli",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Abessiivi",
+        "points": 70,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Abessiivi",
+    "explanation": "Abessiivin päätteet ovat -tta ja -ttä. Sijamuoto ilmaisee jonkin puuttumista.",
+    "sources": [
+      {
+        "title": "VISK: Abessiivi"
+      }
+    ],
+    "tags": ["kieli", "abessiivi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-mona-lisa",
+    "question": "Kuka maalasi Mona Lisan?",
+    "category": "taide",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Leonardo da Vinci",
+        "points": 20,
+        "aliases": ["Da Vinci", "Leonardo"]
+      }
+    ],
+    "canonicalAnswer": "Leonardo da Vinci",
+    "explanation": "Mona Lisa on renessanssiajan muotokuva. Teos kuuluu Louvren kokoelmiin Pariisissa.",
+    "sources": [
+      {
+        "title": "Musée du Louvre: Mona Lisa"
+      }
+    ],
+    "tags": ["taide", "mona-lisa"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-huuto",
+    "question": "Kuka norjalainen taiteilija tunnetaan Huuto-teoksesta?",
+    "category": "taide",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Edvard Munch",
+        "points": 30,
+        "aliases": ["Munch"]
+      }
+    ],
+    "canonicalAnswer": "Edvard Munch",
+    "explanation": "Munch teki Huudosta useita versioita. Aaltoileva maisema korostaa kuvan voimakasta tunnetta.",
+    "sources": [
+      {
+        "title": "MUNCH museum: The Scream"
+      }
+    ],
+    "tags": ["taide", "huuto"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-sivellin",
+    "question": "Mikä maalaustekniikka käyttää vedellä ohennettavia läpikuultavia värejä ja tunnetaan myös vesivärimaalauksena?",
+    "category": "taide",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Akvarelli",
+        "points": 20,
+        "aliases": ["Akvarellimaalaus"]
+      }
+    ],
+    "canonicalAnswer": "Akvarelli",
+    "explanation": "Akvarellissa paperin vaalea pinta kuultaa tavallisesti värikerrosten läpi.",
+    "sources": [
+      {
+        "title": "Tate: Watercolour"
+      }
+    ],
+    "tags": ["taide", "sivellin"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-guernica",
+    "question": "Kuka maalasi Guernican vuonna 1937?",
+    "category": "taide",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Pablo Picasso",
+        "points": 40,
+        "aliases": ["Picasso"]
+      }
+    ],
+    "canonicalAnswer": "Pablo Picasso",
+    "explanation": "Guernica käsittelee sodan kauhuja. Se syntyi Espanjan sisällissodan aikana tapahtuneen pommituksen jälkeen.",
+    "sources": [
+      {
+        "title": "Museo Reina Sofía: Guernica"
+      }
+    ],
+    "tags": ["taide", "guernica"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-tytto-helmikorvakoru",
+    "question": "Kuka maalasi teoksen Tyttö ja helmikorvakoru?",
+    "category": "taide",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Johannes Vermeer",
+        "points": 50,
+        "aliases": ["Vermeer", "Jan Vermeer"]
+      }
+    ],
+    "canonicalAnswer": "Johannes Vermeer",
+    "explanation": "Vermeerin teos on tronie eli tietynlaista hahmoa tai ilmettä tutkiva kuva, ei tilattu muotokuva.",
+    "sources": [
+      {
+        "title": "Mauritshuis: Girl with a Pearl Earring"
+      }
+    ],
+    "tags": ["taide", "tytto-helmikorvakoru"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-suudelma",
+    "question": "Kuka itävaltalainen taiteilija maalasi kultasävyisen teoksen Suudelma vuosina 1908–1909?",
+    "category": "taide",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Gustav Klimt",
+        "points": 50,
+        "aliases": ["Klimt"]
+      }
+    ],
+    "canonicalAnswer": "Gustav Klimt",
+    "explanation": "Suudelma on Klimtin kultaisen kauden tunnetuimpia teoksia. Se kuuluu Wienin Belvederen kokoelmiin.",
+    "sources": [
+      {
+        "title": "Belvedere: The Kiss"
+      }
+    ],
+    "tags": ["taide", "suudelma"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "taide-sammallahti",
+    "question": "Kuka suomalainen valokuvaaja tunnetaan erityisesti mustavalkoisista maisema- ja eläinaiheisista kuvistaan sekä teoksesta Täällä kaukana?",
+    "category": "taide",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Pentti Sammallahti",
+        "points": 70,
+        "aliases": ["Sammallahti"]
+      }
+    ],
+    "canonicalAnswer": "Pentti Sammallahti",
+    "explanation": "Sammallahden kuvissa ihmiset ja eläimet ovat usein pieni osa laajaa ympäristöä. Hänet tunnetaan myös vedostamisen taidosta.",
+    "sources": [
+      {
+        "title": "Suomen valokuvataiteen museo: Pentti Sammallahti",
+        "url": "https://www.valokuvataiteenmuseo.fi/fi/kokoelmat/karjalan-kansaa-katsomassa"
+      }
+    ],
+    "tags": ["taide", "sammallahti"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-sibelius",
+    "question": "Kuka sävelsi Finlandian?",
+    "category": "musiikki",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Jean Sibelius",
+        "points": 20,
+        "aliases": ["Sibelius", "Johan Sibelius"]
+      }
+    ],
+    "canonicalAnswer": "Jean Sibelius",
+    "explanation": "Finlandia on orkesteriteos, jonka hymnijakso tunnetaan myös laulettuna.",
+    "sources": [
+      {
+        "title": "Sibelius.fi: Finlandia"
+      }
+    ],
+    "tags": ["musiikki", "sibelius"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-abba",
+    "question": "Mistä maasta ABBA-yhtye on kotoisin?",
+    "category": "musiikki",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Ruotsi",
+        "points": 20,
+        "aliases": ["Ruotsista"]
+      }
+    ],
+    "canonicalAnswer": "Ruotsi",
+    "explanation": "ABBA nousi kansainväliseen maineeseen voitettuaan Eurovision laulukilpailun Waterloolla vuonna 1974.",
+    "sources": [
+      {
+        "title": "ABBA: The Story"
+      }
+    ],
+    "tags": ["musiikki", "abba"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-koskettimet",
+    "question": "Kuinka monta kosketinta tavallisessa täysikokoisessa modernissa pianossa on?",
+    "category": "musiikki",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "88",
+        "points": 30,
+        "aliases": ["Kahdeksankymmentäkahdeksan"]
+      }
+    ],
+    "canonicalAnswer": "88",
+    "explanation": "Tavallisessa pianossa on 52 valkoista ja 36 mustaa kosketinta. Erikoismalleissa määrä voi poiketa tästä.",
+    "sources": [
+      {
+        "title": "Yamaha: The Structure of the Piano"
+      }
+    ],
+    "tags": ["musiikki", "koskettimet"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-taikahuilu",
+    "question": "Kuka sävelsi oopperan Taikahuilu?",
+    "category": "musiikki",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Wolfgang Amadeus Mozart",
+        "points": 40,
+        "aliases": ["Mozart", "W. A. Mozart"]
+      }
+    ],
+    "canonicalAnswer": "Wolfgang Amadeus Mozart",
+    "explanation": "Taikahuilu sai ensi-iltansa Wienissä vuonna 1791. Sen tunnetuimpiin numeroihin kuuluu Yön kuningattaren aaria.",
+    "sources": [
+      {
+        "title": "English National Opera: The Magic Flute"
+      }
+    ],
+    "tags": ["musiikki", "taikahuilu"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-reggae",
+    "question": "Millä Karibian saarella reggae-musiikki syntyi?",
+    "category": "musiikki",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Jamaika",
+        "points": 40,
+        "aliases": ["Jamaikalla", "Jamaica"]
+      }
+    ],
+    "canonicalAnswer": "Jamaika",
+    "explanation": "Reggae kehittyi Jamaikalla 1960-luvun lopulla muun muassa ska- ja rocksteady-musiikista.",
+    "sources": [
+      {
+        "title": "UNESCO Intangible Heritage: Reggae music of Jamaica"
+      }
+    ],
+    "tags": ["musiikki", "reggae"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-vivaldi",
+    "question": "Kuka sävelsi viulukonserttosarjan Neljä vuodenaikaa?",
+    "category": "musiikki",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Antonio Vivaldi",
+        "points": 40,
+        "aliases": ["Vivaldi"]
+      }
+    ],
+    "canonicalAnswer": "Antonio Vivaldi",
+    "explanation": "Sarjan neljä konserttoa kuvaavat kevättä, kesää, syksyä ja talvea. Ne julkaistiin vuonna 1725.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: The Four Seasons"
+      }
+    ],
+    "tags": ["musiikki", "vivaldi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "musiikki-theremin",
+    "question": "Mikä elektroninen soitin tuottaa säveliä soittajan käsien liikkeistä ilman, että soitinta kosketetaan?",
+    "category": "musiikki",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Theremin",
+        "points": 70,
+        "aliases": ["Teremin"]
+      }
+    ],
+    "canonicalAnswer": "Theremin",
+    "explanation": "Thereminin antennit reagoivat käsien etäisyyteen. Toinen käsi ohjaa yleensä sävelkorkeutta ja toinen äänenvoimakkuutta.",
+    "sources": [
+      {
+        "title": "Science Museum: Theremin"
+      }
+    ],
+    "tags": ["musiikki", "theremin"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-totoro",
+    "question": "Mikä japanilainen animaatiostudio tuotti elokuvan Naapurini Totoro?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Studio Ghibli",
+        "points": 30,
+        "aliases": ["Ghibli"]
+      }
+    ],
+    "canonicalAnswer": "Studio Ghibli",
+    "explanation": "Hayao Miyazakin ohjaama Naapurini Totoro ilmestyi vuonna 1988. Totoro-hahmo esiintyy myös studion tunnuksessa.",
+    "sources": [
+      {
+        "title": "Studio Ghibli: My Neighbor Totoro"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "totoro"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-titanic",
+    "question": "Kuka ohjasi vuonna 1997 ensi-iltansa saaneen Titanic-elokuvan?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "James Cameron",
+        "points": 30,
+        "aliases": ["Cameron"]
+      }
+    ],
+    "canonicalAnswer": "James Cameron",
+    "explanation": "Cameronin Titanic yhdistää kuvitteellisen rakkaustarinan historialliseen laivaturmaan.",
+    "sources": [
+      {
+        "title": "Academy of Motion Picture Arts and Sciences: 1998 Oscars"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "titanic"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-bond",
+    "question": "Mikä on James Bondin kolminumeroinen agenttitunnus?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "007",
+        "points": 10,
+        "aliases": ["Nolla nolla seitsemän"]
+      }
+    ],
+    "canonicalAnswer": "007",
+    "explanation": "Bondin tunnus on 007. Ian Flemingin luoma hahmo esiintyi ensin romaaneissa.",
+    "sources": [
+      {
+        "title": "Ian Fleming Publications: James Bond"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "bond"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-chaplin",
+    "question": "Kuka näyttelijä ja ohjaaja loi mykkäelokuvien Kulkurin hahmon?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Charlie Chaplin",
+        "points": 40,
+        "aliases": ["Chaplin", "Charles Chaplin"]
+      }
+    ],
+    "canonicalAnswer": "Charlie Chaplin",
+    "explanation": "Kulkurin tunnusmerkkejä ovat knalli, keppi, pienet viikset ja liian suuret kengät.",
+    "sources": [
+      {
+        "title": "Charlie Chaplin Official Website: The Tramp"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "chaplin"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-metropolis",
+    "question": "Kuka ohjasi vuonna 1927 valmistuneen tieteiselokuvan Metropolis?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Fritz Lang",
+        "points": 50,
+        "aliases": ["Lang"]
+      }
+    ],
+    "canonicalAnswer": "Fritz Lang",
+    "explanation": "Saksalainen mykkäelokuva kuvaa tulevaisuuden kaupunkia ja jyrkkiä luokkaeroja.",
+    "sources": [
+      {
+        "title": "BFI: Metropolis"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "metropolis"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-spock",
+    "question": "Mikä televisiosarja esitteli alun perin Spockin ja kapteeni Kirkin?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Star Trek",
+        "points": 40,
+        "aliases": ["Star Trek The Original Series"]
+      }
+    ],
+    "canonicalAnswer": "Star Trek",
+    "explanation": "Alkuperäinen Star Trek alkoi vuonna 1966. Sen tapahtumat sijoittuvat tähtialus Enterpriselle.",
+    "sources": [
+      {
+        "title": "StarTrek.com: Star Trek The Original Series"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "spock"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "elokuvat-ja-televisio-rashomon",
+    "question": "Kuka ohjasi elokuvan Rashōmon vuonna 1950?",
+    "category": "elokuvat-ja-televisio",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Akira Kurosawa",
+        "points": 70,
+        "aliases": ["Kurosawa"]
+      }
+    ],
+    "canonicalAnswer": "Akira Kurosawa",
+    "explanation": "Rashōmon esittää saman tapahtuman useina ristiriitaisina kertomuksina. Se teki Kurosawan kansainvälisesti tunnetuksi.",
+    "sources": [
+      {
+        "title": "BFI: Rashomon"
+      }
+    ],
+    "tags": ["elokuvat-ja-televisio", "rashomon"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-maraton",
+    "question": "Mikä on maratonjuoksun virallinen matka kilometreinä?",
+    "category": "urheilu",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "42,195",
+        "points": 30,
+        "aliases": ["42,195 km", "42 km 195 m", "42195 metriä"]
+      }
+    ],
+    "canonicalAnswer": "42,195",
+    "explanation": "Maratonin vakiintunut matka on 42 kilometriä ja 195 metriä. Se vahvistettiin kansainväliseksi standardiksi vuonna 1921.",
+    "sources": [
+      {
+        "title": "World Athletics: Marathon"
+      }
+    ],
+    "tags": ["urheilu", "maraton"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-shakki",
+    "question": "Mikä shakkinappula liikkuu L-kirjaimen muotoisesti ja voi hypätä muiden nappuloiden yli?",
+    "category": "urheilu",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Ratsu",
+        "points": 20,
+        "aliases": ["Hevonen"]
+      }
+    ],
+    "canonicalAnswer": "Ratsu",
+    "explanation": "Ratsu siirtyy kaksi ruutua yhteen suuntaan ja yhden kohtisuoraan. Se vaihtaa jokaisella siirrolla ruudun väriä.",
+    "sources": [
+      {
+        "title": "FIDE Laws of Chess, article 3.6"
+      }
+    ],
+    "tags": ["urheilu", "shakki"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-koripallo",
+    "question": "Kuinka monta pelaajaa yhdestä joukkueesta on koripallossa kentällä tavallisessa viisi vastaan viisi -pelissä?",
+    "category": "urheilu",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Viisi",
+        "points": 10,
+        "aliases": ["5"]
+      }
+    ],
+    "canonicalAnswer": "Viisi",
+    "explanation": "Tavallisessa koripallossa kentällä on viisi pelaajaa kummastakin joukkueesta. 3x3 on erillinen pelimuoto.",
+    "sources": [
+      {
+        "title": "FIBA: Official Basketball Rules"
+      }
+    ],
+    "tags": ["urheilu", "koripallo"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-grand-slam",
+    "question": "Nimeä yksi tenniksen neljästä Grand Slam -turnauksesta.",
+    "category": "urheilu",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Wimbledon",
+        "points": 20,
+        "aliases": []
+      },
+      {
+        "canonical": "Ranskan avoimet",
+        "points": 40,
+        "aliases": ["Roland Garros", "Ranskan avoin tennisturnaus"]
+      },
+      {
+        "canonical": "Yhdysvaltain avoimet",
+        "points": 50,
+        "aliases": ["US Open", "USA:n avoimet", "Yhdysvaltojen avoimet"]
+      },
+      {
+        "canonical": "Australian avoimet",
+        "points": 70,
+        "aliases": ["Australian Open", "Australian avoin tennisturnaus"]
+      }
+    ],
+    "canonicalAnswer": "Wimbledon / Ranskan avoimet / Yhdysvaltain avoimet / Australian avoimet",
+    "explanation": "Grand Slam -turnaukset ovat Australian avoimet, Ranskan avoimet, Wimbledon ja Yhdysvaltain avoimet. Niitä pelataan eri alustoilla.",
+    "sources": [
+      {
+        "title": "International Tennis Federation: Grand Slam tournaments"
+      }
+    ],
+    "tags": ["urheilu", "grand-slam"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-decathlon",
+    "question": "Mikä juoksumatka päättää miesten yleisurheilun kymmenottelun?",
+    "category": "urheilu",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "1 500 metriä",
+        "points": 40,
+        "aliases": ["1500 metriä", "1500 m", "1 500 m", "1500", "1,5 km"]
+      }
+    ],
+    "canonicalAnswer": "1 500 metriä",
+    "explanation": "Kymmenottelun viimeinen laji on 1 500 metrin juoksu. Ottelu käydään kahden päivän aikana.",
+    "sources": [
+      {
+        "title": "World Athletics: Decathlon"
+      }
+    ],
+    "tags": ["urheilu", "decathlon"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-judon-alkupera",
+    "question": "Missä maassa judo kehitettiin 1800-luvun lopulla?",
+    "category": "urheilu",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Japani",
+        "points": 40,
+        "aliases": ["Japanissa"]
+      }
+    ],
+    "canonicalAnswer": "Japani",
+    "explanation": "Jigoro Kano perusti Kodokan-koulun vuonna 1882. Judossa hyödynnetään muun muassa heittoja ja sidontoja.",
+    "sources": [
+      {
+        "title": "International Judo Federation: History of judo"
+      }
+    ],
+    "tags": ["urheilu", "judon-alkupera"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "urheilu-niskanen",
+    "question": "Kuka suomalainen voitti miesten 50 kilometrin perinteisen hiihtotavan olympiakullan Pyeongchangissa vuonna 2018?",
+    "category": "urheilu",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Iivo Niskanen",
+        "points": 70,
+        "aliases": ["Niskanen"]
+      }
+    ],
+    "canonicalAnswer": "Iivo Niskanen",
+    "explanation": "Iivo Niskanen voitti kilpailun ennen Aleksandr Bolšunovia. Kyseessä oli hänen ensimmäinen henkilökohtainen olympiakultansa.",
+    "sources": [
+      {
+        "title": "Olympics: PyeongChang 2018, cross-country skiing 50km men"
+      }
+    ],
+    "tags": ["urheilu", "niskanen"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-www",
+    "question": "Mitä englanninkielisiä sanoja lyhenne WWW tarkoittaa?",
+    "category": "teknologia",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "World Wide Web",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "World Wide Web",
+    "explanation": "World Wide Web on internetissä toimiva hypertekstijärjestelmä. Web ja internet eivät tarkoita aivan samaa asiaa.",
+    "sources": [
+      {
+        "title": "CERN: The birth of the Web"
+      }
+    ],
+    "tags": ["teknologia", "www"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-binaari",
+    "question": "Mitä lukua binaariluku 10 vastaa kymmenjärjestelmässä?",
+    "category": "teknologia",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "2",
+        "points": 20,
+        "aliases": ["Kaksi"]
+      }
+    ],
+    "canonicalAnswer": "2",
+    "explanation": "Binaarijärjestelmän paikkalukujen arvot ovat kahden potensseja. Luvussa 10 on yksi kakkonen ja nolla ykköstä.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Binary number system"
+      }
+    ],
+    "tags": ["teknologia", "binaari"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-linux",
+    "question": "Kuka suomalainen aloitti Linux-ytimen kehittämisen vuonna 1991?",
+    "category": "teknologia",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Linus Torvalds",
+        "points": 20,
+        "aliases": ["Torvalds"]
+      }
+    ],
+    "canonicalAnswer": "Linus Torvalds",
+    "explanation": "Linux alkoi Torvaldsin omana projektina ja kasvoi kansainväliseksi avoimen lähdekoodin yhteistyöksi.",
+    "sources": [
+      {
+        "title": "Linux Foundation: History of Linux"
+      }
+    ],
+    "tags": ["teknologia", "linux"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-dns",
+    "question": "Mikä kolmikirjaiminen internetin nimipalvelujärjestelmä yhdistää verkkotunnuksia IP-osoitteisiin?",
+    "category": "teknologia",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "DNS",
+        "points": 40,
+        "aliases": ["Domain Name System"]
+      }
+    ],
+    "canonicalAnswer": "DNS",
+    "explanation": "Domain Name System mahdollistaa nimien käytön numeeristen IP-osoitteiden sijaan.",
+    "sources": [
+      {
+        "title": "IETF: RFC 1034"
+      }
+    ],
+    "tags": ["teknologia", "dns"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-transistori",
+    "question": "Mikä puolijohdekomponentti voi toimia sekä sähköisenä kytkimenä että vahvistimena?",
+    "category": "teknologia",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Transistori",
+        "points": 40,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Transistori",
+    "explanation": "Transistorit ovat mikropiirien keskeisiä rakennusosia. Niillä voidaan ohjata sähkövirtaa.",
+    "sources": [
+      {
+        "title": "NobelPrize.org: The transistor"
+      }
+    ],
+    "tags": ["teknologia", "transistori"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-punainen-planeetta-kulkija",
+    "question": "Mikä NASA:n mönkijä laskeutui Marsiin elokuussa 2012?",
+    "category": "teknologia",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Curiosity",
+        "points": 50,
+        "aliases": ["Mars Science Laboratory", "MSL"]
+      }
+    ],
+    "canonicalAnswer": "Curiosity",
+    "explanation": "Curiosity laskeutui Galen kraatteriin tutkimaan muun muassa Marsin aiempaa elinkelpoisuutta.",
+    "sources": [
+      {
+        "title": "NASA Science: Curiosity"
+      }
+    ],
+    "tags": ["teknologia", "punainen-planeetta-kulkija"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "teknologia-ada",
+    "question": "Mikä ohjelmointikieli on nimetty matemaatikko Lovelacen etunimen mukaan?",
+    "category": "teknologia",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Ada",
+        "points": 70,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Ada",
+    "explanation": "Nimi viittaa Ada Lovelaceen, joka kirjoitti 1800-luvulla Charles Babbagen analyyttiseen koneeseen liittyvän algoritmin.",
+    "sources": [
+      {
+        "title": "Ada Resource Association: Ada history"
+      }
+    ],
+    "tags": ["teknologia", "ada"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-valuutta",
+    "question": "Mikä rahayksikkö oli Suomessa käytössä ennen euroa?",
+    "category": "talous",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Markka",
+        "points": 10,
+        "aliases": ["Suomen markka"]
+      }
+    ],
+    "canonicalAnswer": "Markka",
+    "explanation": "Suomen markka otettiin käyttöön vuonna 1860. Eurosetelit ja -kolikot tulivat kiertoon vuonna 2002.",
+    "sources": [
+      {
+        "title": "Suomen Pankki: Markan historia"
+      }
+    ],
+    "tags": ["talous", "valuutta"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-inflaatio",
+    "question": "Millä nimellä kutsutaan tavaroiden ja palvelujen yleisen hintatason nousua?",
+    "category": "talous",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Inflaatio",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Inflaatio",
+    "explanation": "Inflaatio heikentää rahan ostovoimaa: samalla rahamäärällä saa keskimäärin vähemmän kuin ennen.",
+    "sources": [
+      {
+        "title": "Euroopan keskuspankki: Mitä on inflaatio?"
+      }
+    ],
+    "tags": ["talous", "inflaatio"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-korko",
+    "question": "Mikä on lainatusta rahasta maksettavan korvauksen tavallinen nimi?",
+    "category": "talous",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Korko",
+        "points": 20,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Korko",
+    "explanation": "Korko ilmaistaan usein prosenttina lainapääomasta vuodessa. Muita luottokuluja voi tulla sen lisäksi.",
+    "sources": [
+      {
+        "title": "Suomen Pankki: Talousosaaminen, korko"
+      }
+    ],
+    "tags": ["talous", "korko"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-bkt",
+    "question": "Mitä suomenkielistä sanaa lyhenne BKT tarkoittaa?",
+    "category": "talous",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Bruttokansantuote",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Bruttokansantuote",
+    "explanation": "BKT kuvaa kansantaloudessa tiettynä aikana tuotettujen tavaroiden ja palvelujen arvonlisäystä.",
+    "sources": [
+      {
+        "title": "Tilastokeskus: Bruttokansantuote"
+      }
+    ],
+    "tags": ["talous", "bkt"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-monopoli",
+    "question": "Millä nimellä kutsutaan markkinatilannetta, jossa tuotteella tai palvelulla on vain yksi myyjä?",
+    "category": "talous",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Monopoli",
+        "points": 40,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Monopoli",
+    "explanation": "Monopolissa myyjällä ei ole suoraa kilpailijaa kyseisillä markkinoilla. Ostajan yksinvaltaa kutsutaan monopsoniksi.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Monopoly and competition"
+      }
+    ],
+    "tags": ["talous", "monopoli"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-osinko",
+    "question": "Millä nimellä kutsutaan osakeyhtiön omistajilleen jakamaa voitto-osuutta?",
+    "category": "talous",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Osinko",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Osinko",
+    "explanation": "Osinko on yksi tapa jakaa yhtiön varoja osakkeenomistajille. Päätös perustuu yleensä yhtiökokouksen ratkaisuun.",
+    "sources": [
+      {
+        "title": "Pörssisäätiö: Osinko"
+      }
+    ],
+    "tags": ["talous", "osinko"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "talous-gini",
+    "question": "Minkä kertoimen avulla kuvataan usein tulonjaon epätasaisuutta?",
+    "category": "talous",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Gini-kerroin",
+        "points": 70,
+        "aliases": ["Gini", "Gini-indeksi"]
+      }
+    ],
+    "canonicalAnswer": "Gini-kerroin",
+    "explanation": "Gini-kertoimen arvo nolla tarkoittaa täydellisen tasaista tulonjakoa. Suurempi arvo merkitsee suurempia tuloeroja.",
+    "sources": [
+      {
+        "title": "Tilastokeskus: Gini-kerroin"
+      }
+    ],
+    "tags": ["talous", "gini"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-hummus",
+    "question": "Mikä palkokasvi on perinteisen hummuksen pääraaka-aine?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Kikherne",
+        "points": 20,
+        "aliases": ["Kikherneet"]
+      }
+    ],
+    "canonicalAnswer": "Kikherne",
+    "explanation": "Hummukseen käytetään kikherneiden lisäksi tavallisesti tahinia, sitruunaa ja valkosipulia.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Hummus"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "hummus"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-sushi",
+    "question": "Mikä vilja on sushin perusta?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Riisi",
+        "points": 10,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Riisi",
+    "explanation": "Sushissa käytetään maustettua riisiä. Kala ei ole välttämätön osa jokaista sushia.",
+    "sources": [
+      {
+        "title": "Japan National Tourism Organization: Sushi"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "sushi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-sauna",
+    "question": "Mikä suomalainen kylpemisperinne lisättiin Unescon aineettoman kulttuuriperinnön luetteloon vuonna 2020?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Sauna",
+        "points": 10,
+        "aliases": ["Saunominen", "Saunaperinne", "Suomalainen saunaperinne"]
+      }
+    ],
+    "canonicalAnswer": "Sauna",
+    "explanation": "Suomalainen saunaperinne kattaa kylpemisen lisäksi siihen liittyviä tapoja, tietoja ja yhteisöllisyyttä.",
+    "sources": [
+      {
+        "title": "UNESCO Intangible Heritage: Sauna culture in Finland"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "sauna"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-sahrami",
+    "question": "Mistä sahramikrookuksen kukan osista sahramimauste kerätään?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Luotit",
+        "points": 50,
+        "aliases": ["Luotti", "Luoteista", "Emin luotit", "Emin luoteista"]
+      }
+    ],
+    "canonicalAnswer": "Luotit",
+    "explanation": "Sahramimauste kerätään Crocus sativus -kasvin kukkien luoteista. Käsin tehtävä keruu tekee mausteesta työlään tuottaa.",
+    "sources": [
+      {
+        "title": "Royal Botanic Gardens Kew: Crocus sativus"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "sahrami"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-kimchi",
+    "question": "Minkä maan ruokakulttuuriin kimchi erityisesti kuuluu?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Korea",
+        "points": 40,
+        "aliases": ["Etelä-Korea", "Pohjois-Korea", "Korean niemimaa"]
+      }
+    ],
+    "canonicalAnswer": "Korea",
+    "explanation": "Kimchi on hapattamalla valmistettu kasvisruoka. Tunnetuin versio tehdään kiinankaalista.",
+    "sources": [
+      {
+        "title": "UNESCO Intangible Heritage: Kimjang"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "kimchi"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-tahini",
+    "question": "Mistä siemenistä tahini valmistetaan?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Seesaminsiemenet",
+        "points": 40,
+        "aliases": ["Seesami", "Seesam", "Seesaminsiemenistä"]
+      }
+    ],
+    "canonicalAnswer": "Seesaminsiemenet",
+    "explanation": "Tahini on jauhetuista seesaminsiemenistä tehty tahna, jota käytetään esimerkiksi hummuksessa.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Tahini"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "tahini"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "ruoka-ja-kulttuuri-injera",
+    "question": "Mikä vilja on perinteisen etiopialaisen injeran keskeinen raaka-aine?",
+    "category": "ruoka-ja-kulttuuri",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Teff",
+        "points": 70,
+        "aliases": ["Teffi"]
+      }
+    ],
+    "canonicalAnswer": "Teff",
+    "explanation": "Teff on pienijyväinen heinäkasvi. Injeran taikina hapatetaan, jolloin leivästä tulee hieman hapan ja huokoinen.",
+    "sources": [
+      {
+        "title": "Encyclopaedia Britannica: Teff"
+      }
+    ],
+    "tags": ["ruoka-ja-kulttuuri", "injera"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-pyramidit",
+    "question": "Missä maassa Gizan pyramidit sijaitsevat?",
+    "category": "maailma",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Egypti",
+        "points": 10,
+        "aliases": ["Egyptissä"]
+      }
+    ],
+    "canonicalAnswer": "Egypti",
+    "explanation": "Gizan pyramidialue sijaitsee Kairon tuntumassa. Suurin pyramidi rakennettiin faarao Khufulle eli Kheopsille.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Memphis and its Necropolis"
+      }
+    ],
+    "tags": ["maailma", "pyramidit"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-machu-picchu",
+    "question": "Missä maassa Machu Picchu sijaitsee?",
+    "category": "maailma",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Peru",
+        "points": 20,
+        "aliases": ["Perussa"]
+      }
+    ],
+    "canonicalAnswer": "Peru",
+    "explanation": "Machu Picchu on Andeilla sijaitseva inkakohde, joka rakennettiin 1400-luvulla.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Historic Sanctuary of Machu Picchu"
+      }
+    ],
+    "tags": ["maailma", "machu-picchu"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-nobel-kaupunki",
+    "question": "Missä kaupungissa Nobelin rauhanpalkinto jaetaan?",
+    "category": "maailma",
+    "difficulty": "helppo",
+    "answers": [
+      {
+        "canonical": "Oslo",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Oslo",
+    "explanation": "Rauhanpalkinto jaetaan Norjan Oslossa. Muut alkuperäiset Nobel-palkinnot jaetaan Tukholmassa.",
+    "sources": [
+      {
+        "title": "NobelPrize.org: The Nobel Prize award ceremonies"
+      }
+    ],
+    "tags": ["maailma", "nobel-kaupunki"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-taj-mahal",
+    "question": "Missä Intian kaupungissa Taj Mahal sijaitsee?",
+    "category": "maailma",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Agra",
+        "points": 40,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Agra",
+    "explanation": "Taj Mahal rakennettiin mogulihallitsija Shah Jahanin puolison Mumtaz Mahalin mausoleumiksi.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Taj Mahal"
+      }
+    ],
+    "tags": ["maailma", "taj-mahal"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-kilimanjaro",
+    "question": "Missä maassa Kilimanjaro sijaitsee?",
+    "category": "maailma",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Tansania",
+        "points": 40,
+        "aliases": ["Tansaniassa", "Tanzania"]
+      }
+    ],
+    "canonicalAnswer": "Tansania",
+    "explanation": "Kilimanjaro on Afrikan korkein vuori. Se sijaitsee Tansaniassa lähellä Kenian rajaa.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Kilimanjaro National Park"
+      }
+    ],
+    "tags": ["maailma", "kilimanjaro"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-pohjoismaat",
+    "question": "Nimeä Suomen lisäksi yksi Pohjoismaihin kuuluvista itsenäisistä valtioista.",
+    "category": "maailma",
+    "difficulty": "keskitaso",
+    "answers": [
+      {
+        "canonical": "Ruotsi",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Norja",
+        "points": 20,
+        "aliases": []
+      },
+      {
+        "canonical": "Tanska",
+        "points": 40,
+        "aliases": []
+      },
+      {
+        "canonical": "Islanti",
+        "points": 70,
+        "aliases": []
+      }
+    ],
+    "canonicalAnswer": "Ruotsi / Norja / Tanska / Islanti",
+    "explanation": "Pohjoismaiden viisi itsenäistä valtiota ovat Suomi, Ruotsi, Norja, Tanska ja Islanti. Yhteistyöhön osallistuvat myös Ahvenanmaa, Färsaaret ja Grönlanti.",
+    "sources": [
+      {
+        "title": "Pohjoismainen yhteistyö: Tietoa Pohjoismaista"
+      }
+    ],
+    "tags": ["maailma", "pohjoismaat"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  },
+  {
+    "id": "maailma-timbuktu",
+    "question": "Missä valtiossa historiallinen oppineisuuden keskus Timbuktu sijaitsee?",
+    "category": "maailma",
+    "difficulty": "vaikea",
+    "answers": [
+      {
+        "canonical": "Mali",
+        "points": 70,
+        "aliases": ["Malissa"]
+      }
+    ],
+    "canonicalAnswer": "Mali",
+    "explanation": "Timbuktu oli tärkeä Saharan kaupan ja islamilaisen oppineisuuden keskus. Kaupungissa säilytettiin suuria käsikirjoituskokoelmia.",
+    "sources": [
+      {
+        "title": "UNESCO World Heritage Centre: Timbuktu"
+      }
+    ],
+    "tags": ["maailma", "timbuktu"],
+    "evergreen": true,
+    "status": "active",
+    "version": 1,
+    "author": "Mylvisa"
+  }
+]
