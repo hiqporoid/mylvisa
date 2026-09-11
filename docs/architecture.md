@@ -20,7 +20,7 @@ flowchart LR
 
 ## Luottamusraja
 
-`src/data/releases.ts`, `src/lib/server/bank.ts` ja `src/lib/server/game.ts` ovat server-only-koodia. Ennen vastausta DTO:ssa on vain `id`, `prompt`, `category`, `universeId` ja kierrosnumero. Vastauksen jälkeen palautetaan pelaajan oma syöte, hyväksytty kanoninen nimi ja tier tai yhdellä esimerkkivastauksella varustettu hylkäyspalaute. Koko hyväksyttyjen vastausten lista, aliakset, pistekartta, lähteet ja kaikki korkean arvon vastaukset eivät ylitä rajaa.
+`src/data/releases.ts`, `src/lib/server/bank.ts` ja `src/lib/server/game.ts` ovat server-only-koodia. Ennen vastausta DTO:ssa on vain `id`, `prompt`, `category`, `universeId` ja kierrosnumero. Vastauksen jälkeen palautetaan pelaajan oma syöte, jos se oli väärä, tai hyväksytty kanoninen nimi ja tier. Väärä vastaus ei paljasta esimerkkivastausta eikä hyväksyttyjen vastausten listaa. Koko hyväksyttyjen vastausten lista, aliakset, pistekartta, lähteet ja kaikki korkean arvon vastaukset eivät ylitä rajaa.
 
 Tuotantobuildin `scripts/check-client-bundle.ts` tarkistaa promptit, selitykset ja riittävän pitkät kanoniset vastaukset JavaScript- ja source map -tiedostoista. Repositoryn lukija näkee JSON:n GitHubissa; tämä suojaa pelaamista selaimen ennakkolataukselta, ei julkista lähdekoodia vastaan.
 
@@ -46,4 +46,4 @@ Stateless transcript on MVP:n tietoinen rajoitus. Tilin, globaalin tulostaulun j
 
 Jäsenyys ja pisteytys ovat erillisiä: `src/data/universes.ts` sisältää lähde-backed complete universet ja `src/data/question-authorship.ts` suomalaisille pelaajille tehdyt promptit sekä jäsen-ID:ihin sidotut editorial scoret. Generatorin fail-closed-tarkistukset estävät tuntemattomat jäsenet, väärät expected countit, aliastörmäykset, puuttuvat pisteet ja osittaisen universumin hiljaisen julkaisun.
 
-`validateBank` tarkistaa lisäksi release-JSON:n ja universe-rekisterin välisen jäsenyysjoukon, lähteen, viitepäivän, review-statukset ja score-histogrammit. Se ei hyväksy aktiivista kysymystä, jonka completeness ei ole `verified`; kuuden tierin pakottaminen on poistettu.
+`validateBank` tarkistaa lisäksi release-JSON:n ja universe-rekisterin välisen jäsenyysjoukon, lähteen, viitepäivän, review-statukset, accessibility-metadatan ja score-histogrammit. Daily-valinta ei hyväksy kysymystä, jonka `max(answer.points)` ei ole 100 tai jolta puuttuu 10/15 pisteen entry point. Runtime laskee kysymyskohtaisen maksimin vastausjoukosta; se ei oleta 100:aa.

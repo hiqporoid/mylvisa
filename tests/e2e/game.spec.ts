@@ -12,12 +12,12 @@ test("daily rarity game supports preview, one answer and shareable result", asyn
   await expect(page.getByLabel("Vastauksesi")).toBeFocused();
   await page.getByLabel("Vastauksesi").fill("Suomi");
   await page.getByLabel("Vastauksesi").press("Enter");
-  await expect(page.getByText(/HYVÄKSYTTY|EI TÄLLÄ KERTAA/)).toBeVisible();
+  await expect(page.getByText(/Hyväksytty|Ei hyväksytty|Aika loppui/)).toBeVisible();
   for (let index = 1; index < 7; index++) {
-    await page.getByRole("button", { name: "Seuraava kysymys" }).click();
+    await page.getByRole("button", { name: /Seuraava/ }).click();
     await page.waitForTimeout(3_200);
     await page.getByRole("button", { name: "Ohita" }).click();
-    await expect(page.getByRole("button", { name: index === 6 ? "Katso tulos" : "Seuraava kysymys" })).toBeVisible();
+    await expect(page.getByRole("button", { name: index === 6 ? "Katso tulos" : /Seuraava/ })).toBeVisible();
   }
   await page.getByRole("button", { name: "Katso tulos" }).click();
   await expect(page.getByRole("heading", { name: "Päivän tulos" })).toBeVisible();
@@ -43,7 +43,7 @@ test("keyboard flow reaches the field after preview", async ({ page }) => {
   await expect(page.getByLabel("Vastauksesi")).toBeFocused();
   await page.keyboard.type("Testi");
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("button", { name: "Seuraava kysymys" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Seuraava/ })).toBeVisible();
   await page.keyboard.press("Enter");
   await expect(page.getByText("Lue kysymys rauhassa")).toBeVisible();
 });

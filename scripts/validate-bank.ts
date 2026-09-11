@@ -21,6 +21,7 @@ for (const release of releases) {
   previous = release.effectiveFrom;
   const { questions, issues, quality } = validateBank(release.questions);
   console.log(`\n${release.id}: ${questions.length} kysymystä (${quality.activeQuestionCount} aktiivista)`);
+  console.log(`Daily-eligible: ${quality.dailyEligibleQuestionCount}; review/non-daily: ${quality.nonDailyRetainedCount}; retired: ${quality.retiredCount}`);
   for (const issue of issues)
     console.log(
       `${issue.severity.toUpperCase()} ${issue.id}: ${issue.message}`,
@@ -30,6 +31,7 @@ for (const release of releases) {
     console.log(`${label}: ${questions.filter((q) => q.category === category && q.status === "active").length}`);
   console.log(`Vastauksia yhteensä: ${quality.answerCount}; mediaani / aktiivinen kysymys: ${quality.medianAnswers}`);
   console.log(`Verifioituja universumeja: ${quality.verifiedUniverseCount}`);
+  console.log(`Johdettuja universumeja: ${quality.derivedUniverseCount}; 100-pisteen kysymyksiä: ${quality.max100QuestionCount}; low-tier-entry: ${quality.lowTierQuestionCount}`);
   console.log(`Pistejakauma: ${SCORE_TIERS.map((tier) => `${tier} ${quality.points[String(tier)] ?? 0}`).join(", ")}`);
   console.log(`Rarity-histogrammit: ${Object.entries(quality.histograms).map(([key, count]) => `${key} × ${count}`).join(" | ")}`);
   console.log(`Rarity-arvion tarkistettavat: ${quality.rarityReview.length}`);

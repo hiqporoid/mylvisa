@@ -60,6 +60,15 @@ const questions = questionAuthorship.map((authored) => {
     if (!supportedScores.has(authored.scores[id])) fail(`${authored.id} assigns unsupported score ${authored.scores[id]}`);
   }
 
+  const maximum = Math.max(...Object.values(authored.scores));
+  const dailyEligible = authored.dailyEligible ?? (maximum === 100 && universe.expectedCount >= 8);
+  const accessibility = authored.accessibility ?? (dailyEligible ? 4 : 3);
+  const accessibilityReview = authored.accessibilityReview ?? (dailyEligible ? "verified" : "needs-review");
+  if (dailyEligible && maximum !== 100) fail(`${authored.id} is daily eligible but has no 100-point answer`);
+  if (dailyEligible && !Object.values(authored.scores).some((points) => points === 10 || points === 15))
+    fail(`${authored.id} is daily eligible but has no 10- or 15-point entry answer`);
+  if (dailyEligible && universe.expectedCount < 5) fail(`${authored.id} is daily eligible but has fewer than five answers`);
+
   return {
     id: authored.id,
     prompt: authored.prompt,
@@ -89,7 +98,13 @@ const questions = questionAuthorship.map((authored) => {
     source: universe.source,
     tags: [...authored.tags, "rarity"],
     evergreen: true,
-    status: "active",
+    status: dailyEligible ? "active" : "review",
+    dailyEligible,
+    accessibilityReview,
+    accessibility,
+    ...(authored.dailyEligibilityReason ? { dailyEligibilityReason: authored.dailyEligibilityReason } : {}),
+    ...(authored.baseUniverseId ? { baseUniverseId: authored.baseUniverseId } : {}),
+    ...(authored.predicateId ? { predicateId: authored.predicateId } : {}),
     version: 3,
     author: "Mylvisa editorial 2026-09-11",
     contentReview: "verified",

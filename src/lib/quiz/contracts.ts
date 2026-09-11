@@ -14,7 +14,6 @@ export type AnswerResult = {
   answer: string;
   accepted: boolean;
   canonicalAnswer?: string;
-  exampleAnswer?: string;
   points: number;
   maxPoints: number;
   tier?: string;

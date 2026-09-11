@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { CATEGORIES, MAX_ANSWER_LENGTH, MAX_GAME_SCORE, ROUND_SECONDS } from "@/lib/quiz/catalog";
+import { CATEGORIES, MAX_ANSWER_LENGTH, ROUND_SECONDS } from "@/lib/quiz/catalog";
 import { formatDate } from "@/lib/quiz/date";
 import { remainingSeconds } from "@/lib/quiz/timer";
 import { useQuiz } from "@/lib/client/use-quiz";
@@ -69,7 +69,13 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
                 <div className="preview-message" role="status"><span className="preview-number">{previewLeft}</span><span>Lue kysymys rauhassa</span></div>
               ) : (
                 <form className="answer-form" onSubmit={onSubmit}>
-                  <div className={`timer ${remaining <= 5 ? "timer-warning" : ""}`} role="timer" aria-live="polite" aria-label={`${remaining} sekuntia jäljellä`}><span>{remaining}</span><small>s</small></div>
+                  <div className={`timer ${remaining <= 5 ? "timer-warning" : ""}`} role="timer" aria-live="polite" aria-label={`${remaining} sekuntia jäljellä`}>
+                    <span className="timer-ring" aria-hidden="true">
+                      <svg viewBox="0 0 40 40"><circle className="timer-ring-track" cx="20" cy="20" r="17" /><circle className="timer-ring-progress" cx="20" cy="20" r="17" style={{ strokeDashoffset: `${106.8 * (1 - remaining / ROUND_SECONDS)}` }} /></svg>
+                      <b>{remaining}</b>
+                    </span>
+                    <small>sek</small>
+                  </div>
                   <label htmlFor="answer">Vastauksesi</label>
                   <input ref={input} id="answer" value={answer} onChange={(event) => setAnswer(event.target.value)} maxLength={MAX_ANSWER_LENGTH} autoComplete="off" autoCapitalize="sentences" spellCheck={false} placeholder="Kirjoita yksi vastaus" disabled={busy} />
                   <p className="input-note">Yksi hyväksytty vastaus riittää. Kirjainkoolla ei ole väliä.</p>
@@ -82,13 +88,12 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
 
         {phase === "feedback" && game && result && (
           <section className={`feedback-screen ${result.accepted ? "is-accepted" : "is-missed"}`} aria-labelledby="feedback-heading">
-            <p className="feedback-status" id="feedback-heading">{result.accepted ? "HYVÄKSYTTY" : result.answer ? "EI TÄLLÄ KERTAA" : "AIKA LOPPUI"}</p>
-            <p className="feedback-answer">{result.accepted ? result.canonicalAnswer : result.answer || "Ei vastausta"}</p>
-            <div className="feedback-score"><strong>{result.points}</strong><span>pistettä</span></div>
+            <p className="feedback-status" id="feedback-heading">{result.accepted ? "Hyväksytty" : result.answer ? "Ei hyväksytty" : "Aika loppui"}</p>
+            {result.accepted && <p className="feedback-answer">{result.canonicalAnswer}</p>}
+            <div className="feedback-score"><strong>{result.points}</strong><span>p</span></div>
             {result.accepted && <p className="feedback-tier">{result.tier}</p>}
-            {!result.accepted && result.exampleAnswer && <p className="feedback-example">Yksi mahdollinen vastaus: {result.exampleAnswer}</p>}
-            <p className="feedback-explanation">{result.explanation}</p>
-            <button className="button button-primary button-large" onClick={advance}>{roundNumber === count ? "Katso tulos" : "Seuraava kysymys"} <span aria-hidden="true">→</span></button>
+            {result.accepted && result.explanation && <p className="feedback-explanation">{result.explanation}</p>}
+            <button className="button button-primary button-large" onClick={advance}>{roundNumber === count ? "Katso tulos" : "Seuraava"} <span aria-hidden="true">→</span></button>
           </section>
         )}
 
@@ -96,7 +101,7 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
           <section className="result-screen" aria-labelledby="result-heading">
             <p className="kicker">MYLVISA · {formatDate(game.date)}</p>
             <h1 ref={heading} tabIndex={-1} id="result-heading">Päivän tulos</h1>
-            <div className="total-score"><strong>{game.summary.points}</strong><span>/ {game.summary.maxPoints || MAX_GAME_SCORE}</span></div>
+            <div className="total-score"><strong>{game.summary.points}</strong><span>/ {game.summary.maxPoints}</span></div>
             <p className="result-count">{game.summary.correct} / {game.length} vastausta hyväksyttiin</p>
             <ol className="result-list">{game.results.map((item, index) => <li key={`${item.id}-${index}`}><span>{String(index + 1).padStart(2, "0")}</span><span className={item.accepted ? "result-tier" : "result-muted"}>{item.accepted ? item.tier : "Ei osumaa"}</span><strong>{item.points} p</strong></li>)}</ol>
             <ShareResult game={game} />

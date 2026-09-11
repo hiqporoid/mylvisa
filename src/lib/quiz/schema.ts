@@ -46,6 +46,12 @@ export const questionSchema = z.strictObject({
   validFrom: dateSchema.optional(),
   validUntil: dateSchema.optional(),
   status: z.enum(["active", "review", "retired"]),
+  dailyEligible: z.boolean(),
+  accessibilityReview: z.enum(["verified", "needs-review"]),
+  accessibility: z.number().int().min(1).max(5),
+  dailyEligibilityReason: text.optional(),
+  baseUniverseId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+  predicateId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
   version: z.number().int().positive(),
   author: text.optional(),
   contentReview: z.enum(["pending", "verified", "retire"]),
@@ -68,6 +74,14 @@ export const questionSchema = z.strictObject({
     context.addIssue({ code: "custom", message: "Rarity name must match points" });
   if (question.status === "active" && (question.contentReview !== "verified" || question.rarityReview !== "editorial-reviewed"))
     context.addIssue({ code: "custom", message: "Active questions require verified content and editorial rarity review" });
+  if (question.dailyEligible && question.status !== "active")
+    context.addIssue({ code: "custom", message: "Daily-eligible questions must be active" });
+  if (question.dailyEligible && question.accessibilityReview !== "verified")
+    context.addIssue({ code: "custom", message: "Daily-eligible questions require verified accessibility review" });
+  if (question.dailyEligible && question.accessibility < 4)
+    context.addIssue({ code: "custom", message: "Daily-eligible questions need accessibility score 4 or 5" });
+  if (question.dailyEligible && question.answers.length < 8 && !question.dailyEligibilityReason)
+    context.addIssue({ code: "custom", message: "Small daily universes need an explicit eligibility reason" });
 });
 
 export type Question = z.infer<typeof questionSchema>;

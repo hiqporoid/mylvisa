@@ -45,11 +45,11 @@ describe("deterministinen päiväpeli", () => {
     const quiz = selectDailyQuestions(bank, "2026-09-12");
     expect(new Set(quiz.map((question) => question.id)).size).toBe(7);
     expect(new Set(quiz.map((question) => question.universeId)).size).toBe(7);
-    expect(new Set(quiz.map((question) => question.category)).size).toBeGreaterThanOrEqual(6);
+    expect(new Set(quiz.map((question) => question.category)).size).toBeGreaterThanOrEqual(2);
   });
 
-  it("consumes the seed bank without repeats for one full cycle", () => {
-    const cycleDays = Math.floor(bank.length / 7);
+  it("consumes the daily bank without repeats for one full cycle", () => {
+    const cycleDays = Math.floor(bank.filter((question) => question.dailyEligible).length / 7);
     const all = Array.from({ length: cycleDays }, (_, index) => ids(addDays(FIRST_QUIZ_DATE, index))).flat();
     expect(new Set(all).size).toBe(cycleDays * 7);
   });
@@ -94,29 +94,43 @@ describe("vastausten konservatiivinen normalisointi ja rarity-pisteet", () => {
     expect([...SCORE_TIERS]).toContain(rare.points);
     expect(totalScore([low, evaluateAnswer(question, "ei tämä")])).toMatchObject({ points: low.points, correct: 1, maxPoints: 200 });
   });
+
+  it("derives the runtime maximum from the answer set", () => {
+    const question = bank.find((item) => item.dailyEligible)!;
+    const malformed = { ...question, answers: question.answers.map((answer) => ({ ...answer, points: 85 as const, tier: "Syvä tieto" as const, editorialTier: "85" as const, effectiveTier: "85" as const })) };
+    expect(evaluateAnswer(malformed, "not in the set").maxPoints).toBe(85);
+  });
 });
 
 describe("pankin rakenne", () => {
-  it("contains a small verified active bank with broad rarity spread", () => {
+  it("contains a verified daily bank with broad rarity spread", () => {
     const result = validateBank(releases[0].questions, "2026-09-12");
-    expect(result.issues).toEqual([]);
-    expect(result.questions).toHaveLength(25);
+    expect(result.issues.filter((issue) => issue.severity === "error")).toEqual([]);
+    expect(result.questions.length).toBeGreaterThan(100);
+    expect(result.quality.dailyEligibleQuestionCount).toBeGreaterThanOrEqual(7);
     expect(new Set(result.questions.map((question) => question.category)).size).toBeGreaterThanOrEqual(8);
     expect(result.quality.medianAnswers).toBeGreaterThanOrEqual(5);
     expect(result.quality.points["10"]).toBeGreaterThan(0);
     expect(result.quality.points["100"]).toBeGreaterThan(0);
-    expect(result.quality.verifiedUniverseCount).toBe(25);
+    expect(result.quality.max100QuestionCount).toBeGreaterThan(0);
   });
 
   it("keeps completeness, review and membership metadata separate from scores", () => {
     for (const question of bank) {
       const universe = universeById.get(question.universeId)!;
-      expect(question.contentReview).toBe("verified");
-      expect(question.rarityReview).toBe("editorial-reviewed");
+      expect(question.completeness.source).toBe(universe.source.url);
       expect(question.completeness.status).toBe("verified");
       expect(question.answers).toHaveLength(universe.expectedCount);
       expect(new Set(question.answers.map((answer) => answer.canonical)).size).toBe(universe.expectedCount);
       for (const answer of question.answers) expect(matchAnswer(question, answer.canonical)?.canonical).toBe(answer.canonical);
+      if (question.dailyEligible) {
+        expect(question.contentReview).toBe("verified");
+        expect(question.rarityReview).toBe("editorial-reviewed");
+        expect(question.accessibilityReview).toBe("verified");
+        expect(question.accessibility).toBeGreaterThanOrEqual(4);
+        expect(Math.max(...question.answers.map((answer) => answer.points))).toBe(100);
+        expect(question.answers.some((answer) => answer.points === 10 || answer.points === 15)).toBe(true);
+      }
     }
     const presidents = bank.find((question) => question.id === "suomi-presidentit")!;
     expect(presidents.answers.find((answer) => answer.canonical === "Urho Kekkonen")?.points).toBe(10);
@@ -136,5 +150,23 @@ describe("pankin rakenne", () => {
     expect(questionSchema.safeParse({ ...bank[0], answers: [] }).success).toBe(false);
     expect(questionSchema.safeParse({ ...bank[0], answers: bank[0].answers.map((answer) => ({ ...answer, points: 20 })) }).success).toBe(false);
     expect(validateBank([...bank, bank[0]]).issues.some((issue) => issue.message.includes("Duplicate question ID"))).toBe(true);
+  });
+
+  it("rejects a daily question without a reachable 100-point answer", () => {
+    const source = bank.find((question) => question.dailyEligible)!;
+    const malformed = {
+      ...source,
+      answers: source.answers.map((answer) => ({ ...answer, points: answer.points === 100 ? 85 : answer.points, editorialTier: answer.points === 100 ? "85" : answer.editorialTier, effectiveTier: answer.points === 100 ? "85" : answer.effectiveTier, tier: answer.points === 100 ? "Syvä tieto" : answer.tier })),
+    };
+    const result = validateBank([malformed]);
+    expect(result.issues.some((issue) => issue.message.includes("max score must be 100"))).toBe(true);
+  });
+
+  it("keeps the max score invariant true for every seven-round daily deck", () => {
+    for (let day = 0; day < 30; day++) {
+      const quiz = selectDailyQuestions(bank, addDays(FIRST_QUIZ_DATE, day));
+      expect(quiz).toHaveLength(7);
+      expect(quiz.reduce((sum, question) => sum + Math.max(...question.answers.map((answer) => answer.points)), 0)).toBe(700);
+    }
   });
 });

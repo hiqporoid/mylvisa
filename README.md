@@ -45,13 +45,13 @@ Palvelin lähettää selaimeen ennen vastausta vain kysymyksen, kategorian, nume
 
 ## Päivävalinta ja ajastin
 
-`helsinkiDate` käyttää aina `Europe/Helsinki`-aikavyöhykettä. Aktiivinen release valitaan sen `effectiveFrom`-päivän perusteella. Valitsin käyttää versionoitua FNV-1a-hajautusta, kierroksia ja ilman korvaamista tapahtuvaa valintaa. Seitsemän eri kategoriaa ja universumia ovat ensisijaisia tavoitteita, eikä kysymys toistu saman 36 päivän siemenvaiheen aikana. Kun pankki kasvaa vähintään 630 kysymykseen, sama rakenne antaa vähintään 90 päivän käytännön kierron.
+`helsinkiDate` käyttää aina `Europe/Helsinki`-aikavyöhykettä. Aktiivinen release valitaan sen `effectiveFrom`-päivän perusteella. Valitsin käyttää versionoitua FNV-1a-hajautusta, kierroksia ja ilman korvaamista tapahtuvaa valintaa. Daily-eligible-kysymys ei toistu saman valitsinsyklin aikana; todellinen kiertohorisontti on `floor(dailyEligibleCount / 7)` päivää.
 
 Kierroskello tallentaa absoluuttiset aikaleimat `startedAt`, `previewUntil` ja `deadline`. Selain piirtää jäljellä olevan ajan näistä aikaleimoista, joten välilehden taustalla olo tai hidastunut renderöinti ei palauta aikaa. Palvelin tarkistaa saman 28 sekunnin ikkunan lähetyksen yhteydessä ja muuttaa myöhästyneen vastauksen aikakatkaisuksi.
 
 ## Kysymysmalli ja vastausten tarkistus
 
-Jokainen kysymys sisältää `id`, `prompt`, `category`, `universeId`, objektiivisen `referenceDefinition`-rajauksen, vähintään viisi vastausoliota, `explanation`-tekstin, lähteen, tagit, elinkaaritiedot ja rarity-metadatan. Vastausolio sisältää `canonical`-nimen, eksplisiittiset `aliases`-aliakset, pisteet, suomalaisen rarity-nimen, toimituksellisen ja tulevan empiirisen tierin sekä provenienssin.
+Jokainen kysymys sisältää `id`, `prompt`, `category`, `universeId`, objektiivisen `referenceDefinition`-rajauksen, vähintään viisi vastausoliota, `explanation`-tekstin, lähteen, tagit, elinkaaritiedot, `dailyEligible`-portin ja accessibility-metadatan. Vastausolio sisältää `canonical`-nimen, eksplisiittiset `aliases`-aliakset, pisteet, suomalaisen rarity-nimen, toimituksellisen ja tulevan empiirisen tierin sekä provenienssin.
 
 Tuetut pisteet ovat **10, 15, 30, 60, 85 ja 100**. 10 ja 15 ovat helposti mieleen tulevia vastauksia; 60–100 ovat harvinaisempia oivalluksia. Mikään hyväksytty vastaus ei ole huono.
 
@@ -59,9 +59,9 @@ Normalisointi tekee NFKC-Unicode-normalisoinnin, pienaakkoset, reunojen ja toist
 
 ## Pankin laajentaminen
 
-Lue [kysymysten kirjoittajan opas](docs/question-authoring.md) ja [rarity-malli](docs/rarity-model.md). Lisää kysymyksiä toimituksen lähdeskriptiin, muodosta snapshot ja aja validointi. `npm run validate:bank` ilmoittaa muun muassa vähimmäisvastausten puuttumisesta, pisteistä, alias- ja ID-törmäyksistä, päällekkäisestä tekstistä, vanhentumisesta, epätasaisesta rarity-jakaumasta, lähdepuutteista ja epämääräisistä joukkorajauksista. Kaikki 17 aktiivista kategoriaa vaaditaan.
+Lue [kysymysten kirjoittajan opas](docs/question-authoring.md) ja [rarity-malli](docs/rarity-model.md). Lisää kysymyksiä toimituksen lähdeskriptiin, muodosta snapshot ja aja validointi. `npm run validate:bank` ilmoittaa muun muassa vähimmäisvastausten puuttumisesta, pisteistä, alias- ja ID-törmäyksistä, päällekkäisestä tekstistä, vanhentumisesta, epätasaisesta rarity-jakaumasta, accessibility-portista ja lähdepuutteista. Daily-kysymys tarvitsee vähintään yhden 10/15-pisteen sisääntulon ja tosiasiallisen 100-pisteen vastauksen.
 
-Siemenpankissa on 255 aktiivista kysymystä ja 2 101 kanonista vastausta. Kysymykset on jaettu 15 kappaleeseen jokaiseen kategoriaan: Suomi, Suomen historia, Maailmanhistoria, Maantiede, Yhteiskunta, Tiede, Luonto, Kirjallisuus, Suomen kieli, Taide, Musiikki, Elokuvat ja televisio, Urheilu, Teknologia, Talous, Ruoka ja kulttuuri sekä Maailma. Vanha 112 kysymyksen snapshot on `src/data/retired/`-hakemistossa eikä osallistu valintaan.
+Nykyinen julkaisu sisältää 204 kysymystä, joista 85 on daily-eligible; se ei vielä täytä 360–400 kysymyksen julkaisumaalia. Yksityiskohtainen auditointi on [bank-quality-report-2026-09.md](docs/bank-quality-report-2026-09.md). Vanha 112 kysymyksen snapshot on `src/data/retired/`-hakemistossa eikä osallistu valintaan.
 
 ## Vercel ja tulevat laajennukset
 

@@ -8,9 +8,16 @@ export type BankIssue = { severity: "error" | "warning"; id: string; message: st
 export type BankQuality = {
   questionCount: number;
   activeQuestionCount: number;
+  dailyEligibleQuestionCount: number;
+  nonDailyRetainedCount: number;
+  retiredCount: number;
   medianAnswers: number;
   answerCount: number;
   verifiedUniverseCount: number;
+  derivedUniverseCount: number;
+  accessibility: Record<string, number>;
+  lowTierQuestionCount: number;
+  max100QuestionCount: number;
   points: Record<string, number>;
   categories: Record<string, number>;
   rarityReview: string[];
@@ -60,9 +67,16 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
   const quality: BankQuality = {
     questionCount: 0,
     activeQuestionCount: 0,
+    dailyEligibleQuestionCount: 0,
+    nonDailyRetainedCount: 0,
+    retiredCount: 0,
     medianAnswers: 0,
     answerCount: 0,
     verifiedUniverseCount: 0,
+    derivedUniverseCount: 0,
+    accessibility: Object.fromEntries([1, 2, 3, 4, 5].map((score) => [String(score), 0])),
+    lowTierQuestionCount: 0,
+    max100QuestionCount: 0,
     points: Object.fromEntries(SCORE_TIERS.map((tier) => [String(tier), 0])),
     categories: Object.fromEntries(Object.keys(CATEGORIES).map((category) => [category, 0])),
     rarityReview: [],
@@ -93,6 +107,8 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
     if (!universe) {
       issue("error", question.id, `Unknown universe ${question.universeId}.`);
     } else {
+      if (question.baseUniverseId && !universe.baseUniverseId)
+        issue("error", question.id, "Derived question must reference a derived universe.");
       if (universe.expectedCount !== universe.entities.length)
         issue("error", question.id, `Universe declares ${universe.expectedCount} members but stores ${universe.entities.length}.`);
       if (question.completeness.status !== "verified") issue("error", question.id, "Active question has no verified completeness status.");
@@ -112,6 +128,7 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
         activeUniverseIds.add(question.universeId);
         quality.verifiedUniverseCount++;
       }
+      if (universe.baseUniverseId) quality.derivedUniverseCount++;
     }
 
     const text = normalizeAnswer(question.prompt);
@@ -162,18 +179,39 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
     if (question.status === "active" && question.completeness.status !== "verified") issue("error", question.id, "Production-active question references an unverified universe.");
     if (question.rarityReview !== "editorial-reviewed") quality.rarityReview.push(question.id);
     quality.categories[question.category] = (quality.categories[question.category] ?? 0) + Number(question.status === "active");
+    quality.accessibility[String(question.accessibility)] = (quality.accessibility[String(question.accessibility)] ?? 0) + 1;
+    const maximum = Math.max(...question.answers.map((answer) => answer.points));
+    if (maximum === 100) quality.max100QuestionCount++;
+    if (question.answers.some((answer) => answer.points === 10 || answer.points === 15)) quality.lowTierQuestionCount++;
+    if (question.status === "active" && !question.dailyEligible) quality.nonDailyRetainedCount++;
+    if (question.status === "review") quality.nonDailyRetainedCount++;
+    if (question.status === "retired") quality.retiredCount++;
+    if (question.dailyEligible) {
+      quality.dailyEligibleQuestionCount++;
+      if (question.status !== "active") issue("error", question.id, "Daily-eligible question must be active.");
+      if (question.contentReview !== "verified") issue("error", question.id, "Daily question needs verified content review.");
+      if (question.rarityReview !== "editorial-reviewed") issue("error", question.id, "Daily question needs editorial rarity review.");
+      if (question.accessibilityReview !== "verified") issue("error", question.id, "Daily question needs verified accessibility review.");
+      if (question.accessibility < 4) issue("error", question.id, "Daily question accessibility must be at least 4.");
+      if (maximum !== 100) issue("error", question.id, `Daily question max score must be 100, got ${maximum}.`);
+      if (!question.answers.some((answer) => answer.points === 10 || answer.points === 15))
+        issue("error", question.id, "Daily question needs a 10- or 15-point entry answer.");
+      if (question.answers.length < 5) issue("error", question.id, "Daily question needs at least five canonical answers.");
+      if (question.answers.length < 8 && !question.dailyEligibilityReason)
+        issue("error", question.id, "Daily question below eight answers needs an explicit exception.");
+    }
   }
 
   quality.questionCount = questions.length;
   quality.activeQuestionCount = questions.filter((question) => question.status === "active").length;
-  quality.medianAnswers = median(questions.filter((question) => question.status === "active").map((question) => question.answers.length));
+  quality.medianAnswers = median(questions.filter((question) => question.dailyEligible).map((question) => question.answers.length));
   const activeHistograms = Object.values(quality.histograms);
   if (activeHistograms.length && Math.max(...activeHistograms) >= Math.max(10, Math.ceil(quality.activeQuestionCount * 0.8)))
     issue("warning", "rarity-histograms", "Many active questions share the exact same rarity histogram; inspect for mechanical scoring.");
   const repeatedIndexPattern = Math.max(0, ...indexPatterns.values());
   if (repeatedIndexPattern >= Math.max(10, Math.ceil(quality.activeQuestionCount * 0.8)))
     issue("warning", "rarity-index-pattern", "Many active questions share the exact same answer-index-to-score pattern.");
-  if (quality.activeQuestionCount < 7) issue("error", "active-count", "At least seven active questions are required for a seven-round game.");
+  if (quality.dailyEligibleQuestionCount < 7) issue("error", "daily-count", "At least seven daily-eligible questions are required for a seven-round game.");
   const activeCounts = Object.values(quality.categories).filter((count) => count > 0);
   if (activeCounts.length && Math.max(...activeCounts) > Math.max(7, Math.min(...activeCounts) * 4))
     issue("warning", "categories", "Category distribution is strongly imbalanced.");

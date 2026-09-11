@@ -1,3 +1,5 @@
+import { expandedUniverses } from "./expanded-content";
+
 export type SourceRecord = {
   title: string;
   url: string;
@@ -18,12 +20,14 @@ export type VerifiedUniverse = {
   membershipBasis: string;
   expectedCount: number;
   entities: UniverseEntity[];
+  baseUniverseId?: string;
+  predicateId?: string;
 };
 
 const entity = (id: string, canonical: string, aliases: string[] = []): UniverseEntity => ({ id, canonical, aliases });
 const source = (title: string, url: string, note: string): SourceRecord => ({ title, url, note });
 
-export const universes: VerifiedUniverse[] = [
+const baseUniverses: VerifiedUniverse[] = [
   {
     id: "suomen-presidentit-1919-2026",
     description: "Suomen tasavallan presidentit ensimmäisestä presidentistä 1.9.2026 asti.",
@@ -537,5 +541,7 @@ export const universes: VerifiedUniverse[] = [
     ],
   },
 ];
+
+export const universes: VerifiedUniverse[] = [...baseUniverses, ...expandedUniverses];
 
 export const universeById = new Map(universes.map((universe) => [universe.id, universe]));

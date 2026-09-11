@@ -24,15 +24,18 @@ export function matchAnswer(question: Question, input: string) {
 export function evaluateAnswer(question: Question, input: string, scored = true) {
   const match = matchAnswer(question, input);
   const points = scored && match ? match.points : 0;
+  const maxPoints = scored && question.answers.length
+    ? Math.max(...question.answers.map((answer) => answer.points))
+    : 0;
   return {
     id: question.id,
     prompt: question.prompt,
     category: question.category,
     answer: input,
     accepted: Boolean(match),
-    ...(match ? { canonicalAnswer: match.canonical } : { exampleAnswer: question.answers[0]?.canonical }),
+    ...(match ? { canonicalAnswer: match.canonical } : {}),
     points,
-    maxPoints: scored ? 100 : 0,
+    maxPoints,
     ...(match
       ? {
           tier: RARITY_TIERS[match.points as keyof typeof RARITY_TIERS],

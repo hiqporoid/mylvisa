@@ -16,6 +16,8 @@ Mylvisa-kysymys pyytää nimeämään yhden jäsenen objektiivisesti määritell
 
 Tuotantokysymyksellä on lisäksi `completeness.status: "verified"`, `contentReview: "verified"` ja `rarityReview: "editorial-reviewed"`. Raaka, tarkistamaton tai osittainen kysymys jää pois aktiivisesta release-snapshotista.
 
+Daily-valintaan pääsevä kysymys merkitään lisäksi `dailyEligible: true`, `accessibilityReview: "verified"` ja accessibility-arvolla 4 tai 5. Sen vastausjoukossa on oltava oikea 100 pisteen häntä sekä vähintään yksi 10/15 pisteen sisääntulo. Alle kahdeksan jäsenen joukko tarvitsee eksplisiittisen `dailyEligibilityReason`-perustelun; alle viiden jäsenen joukkoa ei käytetä Dailyssä.
+
 ## Rarity-arvio
 
 Pisteet ovat 10, 15, 30, 60, 85 tai 100. Ne arvioivat suomalaisen yleissivistyspelaajan spontaania recall-todennäköisyyttä 25 sekunnissa:
@@ -37,6 +39,6 @@ Aliakset osoittavat täsmälleen yhteen kanoniseen vastaukseen. Normalisointi ho
 2. Rajaa kysymys lähteen ja viitepäivän mukaiseksi; lisää päivämäärä promptiin, jos nykyinen jäsenyys voi muuttua.
 3. Tarkista, että tavallinen pelaaja voi nimetä vähintään yhden vastauksen.
 4. Arvioi pisteet jäsenkohtaisesti: “kuinka todennäköisesti suomalainen aikuinen kirjoittaa tämän 25 sekunnissa?”
-5. Aja `npm run generate:bank`, `npm run validate:bank` ja testit. Generatorin virhe tarkoittaa, että toimitusdataa pitää korjata.
+5. Aja `npm run generate:bank`, `npm run validate:bank` ja testit. Generatorin virhe tarkoittaa, että toimitusdataa pitää korjata. `validate:bank` on kovavirhe, jos daily-kysymykseltä puuttuu 100 pisteen vastaus, matalan tierin entry point, täydellinen jäsenyys tai accessibility-review.
 
 Jos täydellistä lähdejoukkoa ei voi todentaa, kysymys rajataan objektiivisesti tai retiretetään. Osittaista käsin valittua esimerkkilistaa ei julkaista täydellisenä universumina.

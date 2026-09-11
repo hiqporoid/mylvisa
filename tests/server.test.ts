@@ -22,12 +22,20 @@ describe("server boundary and rarity game", () => {
 
   it("validates each submitted answer server-side and gives feedback only for it", () => {
     const questions = getDailyQuiz(date).questions;
-    const first = play({ ...input, answers: [questions[0].answers[0].canonical], roundStartedAt: now.toISOString() }, now);
+    const expected = questions[0].answers.find((answer) => answer.points === 10 || answer.points === 15)!;
+    const first = play({ ...input, answers: [expected.canonical], roundStartedAt: now.toISOString() }, now);
     expect(first.results).toHaveLength(1);
     expect(first.results[0].accepted).toBe(true);
-    expect(first.results[0].points).toBe(10);
+    expect(first.results[0].points).toBe(expected.points);
     expect(first.current?.number).toBe(2);
     expect(JSON.stringify(first)).not.toContain("aliases");
+  });
+
+  it("accepts an incorrect answer as a final zero-point submission and advances", () => {
+    const game = play({ ...input, answers: ["tämä ei ole hyväksytty"], roundStartedAt: now.toISOString() }, now);
+    expect(game.results[0]).toMatchObject({ accepted: false, points: 0, maxPoints: 100 });
+    expect(game.results[0].canonicalAnswer).toBeUndefined();
+    expect(game.current?.number).toBe(2);
   });
 
   it("forces a late submission to timeout using the absolute deadline", () => {
@@ -38,9 +46,8 @@ describe("server boundary and rarity game", () => {
 
   it("returns a seven-round maximum of 700 points", () => {
     const questions = getDailyQuiz(date).questions;
-    const game = play({ ...input, answers: questions.map((question) => question.answers.at(-1)!.canonical) }, now);
-    const expectedPoints = questions.reduce((total, question) => total + question.answers.at(-1)!.points, 0);
-    expect(game.summary).toEqual({ points: expectedPoints, maxPoints: 700, correct: 7 });
+    const game = play({ ...input, answers: questions.map((question) => question.answers.find((answer) => answer.points === 100)!.canonical) }, now);
+    expect(game.summary).toEqual({ points: 700, maxPoints: 700, correct: 7 });
   });
 
   it("rejects stale, future and tampered requests", () => {

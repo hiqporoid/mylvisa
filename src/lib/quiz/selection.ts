@@ -14,6 +14,13 @@ export function hash(value: string): number {
 export function isEligible(question: Question, date: string): boolean {
   return (
     question.status === "active" &&
+    question.dailyEligible &&
+    question.contentReview === "verified" &&
+    question.rarityReview === "editorial-reviewed" &&
+    question.accessibilityReview === "verified" &&
+    question.accessibility >= 4 &&
+    Math.max(...question.answers.map((answer) => answer.points)) === 100 &&
+    question.answers.some((answer) => answer.points === 10 || answer.points === 15) &&
     (!question.validFrom || question.validFrom <= date) &&
     (!question.validUntil || question.validUntil >= date)
   );
@@ -42,7 +49,7 @@ export function selectDailyQuestions(
   const epoch = options.epoch ?? FIRST_QUIZ_DATE;
   const elapsed = dayNumber(date) - dayNumber(epoch);
   if (elapsed < 0) throw new Error("Date precedes bank release");
-  const activeCount = bank.filter((question) => question.status === "active").length;
+  const activeCount = bank.filter((question) => isEligible(question, date)).length;
   const cycleDays = Math.max(1, Math.floor(activeCount / length));
   const cycle = Math.floor(elapsed / cycleDays);
   const dayInCycle = elapsed % cycleDays;

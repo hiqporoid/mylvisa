@@ -1,3 +1,5 @@
+import { expandedQuestions } from "./expanded-content";
+
 export type AuthoredQuestion = {
   id: string;
   prompt: string;
@@ -6,11 +8,17 @@ export type AuthoredQuestion = {
   explanation: string;
   tags: string[];
   scores: Record<string, number>;
+  dailyEligible?: boolean;
+  accessibilityReview?: "verified" | "needs-review";
+  accessibility?: 1 | 2 | 3 | 4 | 5;
+  dailyEligibilityReason?: string;
+  baseUniverseId?: string;
+  predicateId?: string;
 };
 
 const scores = (...entries: Array<[string, number]>): Record<string, number> => Object.fromEntries(entries);
 
-export const questionAuthorship: AuthoredQuestion[] = [
+const baseQuestionAuthorship: AuthoredQuestion[] = [
   {
     id: "suomi-presidentit",
     prompt: "Nimeä Suomen tasavallan presidentti (presidenttiluettelo 1.9.2026).",
@@ -94,7 +102,7 @@ export const questionAuthorship: AuthoredQuestion[] = [
     universeId: "itameren-rannikkovaltiot",
     explanation: "Hyväksytty vastaus on HELCOMin määritelmän mukainen Itämeren rannikkovaltio.",
     tags: ["maantiede", "itämeri", "toimittajan-tarkistama"],
-    scores: scores(["suomi", 10], ["ruotsi", 10], ["saksa", 15], ["tanska", 15], ["puola", 15], ["viro", 30], ["latvia", 60], ["liettua", 60], ["venaja", 85]),
+    scores: scores(["suomi", 10], ["ruotsi", 10], ["saksa", 15], ["tanska", 15], ["puola", 15], ["viro", 30], ["latvia", 60], ["liettua", 85], ["venaja", 100]),
   },
   {
     id: "maantiede-etel-amerikka",
@@ -145,7 +153,9 @@ export const questionAuthorship: AuthoredQuestion[] = [
     universeId: "g7-jasenet-2026",
     explanation: "Hyväksytty vastaus on G7:n seitsemän valtion jäsenjoukossa.",
     tags: ["yhteiskunta", "g7", "toimittajan-tarkistama"],
-    scores: scores(["yhdysvallat", 10], ["japani", 15], ["saksa", 15], ["ranska", 15], ["iso-britannia", 15], ["italia", 30], ["kanada", 60]),
+    dailyEligible: true,
+    dailyEligibilityReason: "Seitsemän valtiota muodostaa lähteen määrittelemän pienen mutta yleissivistyksessä helposti lähestyttävän G7-joukon.",
+    scores: scores(["yhdysvallat", 10], ["japani", 15], ["saksa", 15], ["ranska", 15], ["iso-britannia", 15], ["italia", 30], ["kanada", 100]),
   },
   {
     id: "yhteiskunta-yk-kielet",
@@ -270,3 +280,5 @@ export const questionAuthorship: AuthoredQuestion[] = [
     scores: scores(["100-metri", 10], ["pituushyppy", 10], ["korkeushyppy", 10], ["kuulantyonto", 15], ["400-metri", 15], ["110-aitajuoksu", 30], ["keihaanheitto", 30], ["kiekonheitto", 60], ["seivashyppy", 60], ["1500-metri", 85]),
   },
 ];
+
+export const questionAuthorship: AuthoredQuestion[] = [...baseQuestionAuthorship, ...expandedQuestions];
