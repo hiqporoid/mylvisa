@@ -1,4 +1,5 @@
 import { expandedQuestions } from "./expanded-content";
+import { productionQuestions } from "./production-content";
 
 export type AuthoredQuestion = {
   id: string;
@@ -14,6 +15,8 @@ export type AuthoredQuestion = {
   dailyEligibilityReason?: string;
   baseUniverseId?: string;
   predicateId?: string;
+  familyId?: string;
+  reviewDisposition?: "hard" | "retire";
 };
 
 const scores = (...entries: Array<[string, number]>): Record<string, number> => Object.fromEntries(entries);
@@ -58,6 +61,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "suomen-unesco-maailmanperintokohteet-2026",
     explanation: "Hyväksytty vastaus on UNESCO World Heritage Centre -luettelossa Suomen kohteena.",
     tags: ["suomi", "unesco", "toimittajan-tarkistama"],
+    dailyEligible: true,
+    dailyEligibilityReason: "UNESCOn Suomen kohteiden pieni mutta yleissivistyksessä lähestyttävä virallinen joukko sisältää sekä ikonisen että harvinaisen vastauksen.",
     scores: scores(
       ["suomenlinna", 10], ["vanha-rauma", 15], ["petajaveden-vanha-kirkko", 30], ["verla", 30],
       ["sammallahdenmaki", 60], ["merenkurkun-saaristo", 85], ["struven-ketju", 100],
@@ -70,11 +75,12 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "suomen-maakunnat-2026",
     explanation: "Hyväksytty vastaus on Suomen virallisen aluejaon maakunta.",
     tags: ["suomi", "aluejako", "toimittajan-tarkistama"],
+    dailyEligible: true,
     scores: scores(
       ["uusimaa", 10], ["pirkanmaa", 15], ["varsinais-suomi", 15], ["lappi", 15], ["pohjois-pohjanmaa", 30],
       ["satakunta", 30], ["paijat-hame", 30], ["kymenlaakso", 30], ["etela-karjala", 60], ["etela-savo", 60],
       ["pohjois-savo", 60], ["pohjois-karjala", 60], ["keski-suomi", 60], ["etela-pohjanmaa", 60],
-      ["pohjanmaa", 60], ["keski-pohjanmaa", 85], ["kanta-hame", 60], ["kainuu", 85], ["ahvenanmaa", 85],
+      ["pohjanmaa", 60], ["keski-pohjanmaa", 85], ["kanta-hame", 60], ["kainuu", 85], ["ahvenanmaa", 100],
     ),
   },
   {
@@ -84,7 +90,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "nobel-laureates-born-in-finland",
     explanation: "Hyväksytty vastaus on Nobel Prize -tietokannan laureaatti, jonka syntymämaaksi on merkitty Finland.",
     tags: ["suomi", "nobel", "toimittajan-tarkistama"],
-    scores: scores(["ahtisaari", 10], ["virtanen", 15], ["holmstrom", 30], ["sillanpaa", 60], ["granit", 85]),
+    dailyEligible: true,
+    dailyEligibilityReason: "Nobel-arkiston pieni Suomi-rajaus on poikkeus, mutta siinä on sekä erittäin tunnettu että harvinainen laureaatti.",
+    scores: scores(["ahtisaari", 10], ["virtanen", 15], ["holmstrom", 30], ["sillanpaa", 60], ["granit", 100]),
   },
   {
     id: "kirjallisuus-nobel-kirjallisuus",
@@ -93,6 +101,7 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "nobel-literature-laureates-born-in-finland",
     explanation: "Kysymyksen lähdejoukossa on yksi jäsen: Frans Eemil Sillanpää.",
     tags: ["kirjallisuus", "nobel", "toimittajan-tarkistama"],
+    reviewDisposition: "hard",
     scores: scores(["sillanpaa", 10]),
   },
   {
@@ -120,7 +129,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "mustanmeren-rannikkovaltiot",
     explanation: "Hyväksytty vastaus on Mustanmeren suora rannikkovaltio.",
     tags: ["maantiede", "meret", "toimittajan-tarkistama"],
-    scores: scores(["turkki", 10], ["ukraina", 15], ["romania", 15], ["bulgaria", 30], ["venaja", 30], ["georgia", 60]),
+    dailyEligible: true,
+    dailyEligibilityReason: "Mustanmeren kuuden rannikkovaltion rajaus on pieni mutta helposti lähestyttävä maantieteellinen joukko.",
+    scores: scores(["turkki", 10], ["ukraina", 15], ["romania", 15], ["bulgaria", 30], ["venaja", 60], ["georgia", 100]),
   },
   {
     id: "maantiede-suurimmat-valtameret",
@@ -129,7 +140,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "maailman-viisi-valtamerta",
     explanation: "Hyväksytty vastaus kuuluu NOAA:n käyttämään viiden valtameren jaotteluun.",
     tags: ["maantiede", "valtameret", "toimittajan-tarkistama"],
-    scores: scores(["tyynimeri", 10], ["atlantti", 15], ["intian-valtameri", 30], ["jaameri", 60], ["etelainen-jaameri", 85]),
+    dailyEligible: true,
+    dailyEligibilityReason: "NOAA:n viiden valtameren suljettu joukko on pieni, mutta vastaukset ovat yleissivistyksessä tunnistettavia.",
+    scores: scores(["tyynimeri", 10], ["atlantti", 15], ["intian-valtameri", 30], ["jaameri", 60], ["etelainen-jaameri", 100]),
   },
   {
     id: "yhteiskunta-eu-jasenet",
@@ -164,7 +177,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "yk-viralliset-kielet",
     explanation: "Hyväksytty vastaus on YK:n virallisella sivulla mainittu virallinen kieli.",
     tags: ["yhteiskunta", "yk", "toimittajan-tarkistama"],
-    scores: scores(["englanti", 10], ["espanja", 15], ["ranska", 15], ["arabia", 30], ["kiina", 30], ["venaja", 60]),
+    dailyEligible: true,
+    dailyEligibilityReason: "YK:n kuuden virallisen kielen joukko on pieni, mutta kaikki nimet ovat tavallisen pelaajan tunnistettavissa.",
+    scores: scores(["englanti", 10], ["espanja", 15], ["ranska", 15], ["arabia", 30], ["kiina", 60], ["venaja", 100]),
   },
   {
     id: "yhteiskunta-eu-toimielimet",
@@ -173,7 +188,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "eu-toimielimet-2026",
     explanation: "Hyväksytty vastaus on EU:n virallinen toimielin, ei erillinen elin tai virasto.",
     tags: ["yhteiskunta", "eu", "toimielimet", "toimittajan-tarkistama"],
-    scores: scores(["euroopan-parlamentti", 10], ["komissio", 10], ["eu-neuvosto", 15], ["eurooppa-neuvosto", 15], ["tuomioistuin", 30], ["keskuspankki", 30], ["tilintarkastustuomioistuin", 60]),
+    dailyEligible: true,
+    dailyEligibilityReason: "EU:n seitsemän virallista toimielintä muodostavat suljetun ja yleissivistyksessä helposti lähestyttävän joukon.",
+    scores: scores(["euroopan-parlamentti", 10], ["komissio", 10], ["eu-neuvosto", 15], ["eurooppa-neuvosto", 15], ["tuomioistuin", 30], ["keskuspankki", 60], ["tilintarkastustuomioistuin", 100]),
   },
   {
     id: "tiede-yksikirjaimiset-symbolit",
@@ -191,7 +208,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "aurinkokunnan-planeetat",
     explanation: "Hyväksytty vastaus on yksi NASA:n planeettaluettelon kahdeksasta planeetasta; kääpiöplaneetat eivät kuulu tähän kysymykseen.",
     tags: ["tiede", "avaruus", "toimittajan-tarkistama"],
-    scores: scores(["maa", 10], ["mars", 10], ["jupiter", 10], ["venus", 15], ["saturnus", 15], ["neptunus", 30], ["uranus", 60], ["merkurius", 60]),
+    dailyEligible: true,
+    scores: scores(["maa", 10], ["mars", 10], ["jupiter", 10], ["venus", 15], ["saturnus", 15], ["neptunus", 30], ["uranus", 60], ["merkurius", 100]),
   },
   {
     id: "tiede-si-perusyksikot",
@@ -200,7 +218,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "si-perusyksikot-2019",
     explanation: "Hyväksytty vastaus on BIPM:n SI-järjestelmän perusyksikkö.",
     tags: ["tiede", "si", "toimittajan-tarkistama"],
-    scores: scores(["metri", 10], ["sekunti", 10], ["kilogramma", 15], ["ampeeri", 15], ["kelvin", 30], ["mooli", 30], ["kandela", 60]),
+    dailyEligible: true,
+    dailyEligibilityReason: "SI:n seitsemän perusyksikköä ovat virallinen pieni joukko, jossa on sekä arkipäiväinen että harvinainen vastaus.",
+    scores: scores(["metri", 10], ["sekunti", 10], ["kilogramma", 15], ["ampeeri", 15], ["kelvin", 30], ["mooli", 60], ["kandela", 100]),
   },
   {
     id: "tiede-sahkomagneettinen-spektri",
@@ -209,6 +229,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "sahkomagneettisen-spektrin-alueet",
     explanation: "Hyväksytty vastaus on NASA:n opetussivun seitsemän pääaluetta.",
     tags: ["tiede", "fysiikka", "toimittajan-tarkistama"],
+    dailyEligible: true,
+    dailyEligibilityReason: "NASA:n seitsemänalueinen sähkömagneettisen spektrin jaottelu on pieni mutta koulutieteessä vakiintunut joukko.",
     scores: scores(["nakyvavalo", 10], ["radioaallot", 15], ["infrapuna", 30], ["mikroaallot", 30], ["ultravioletti", 60], ["rontgensateily", 85], ["gammasateily", 100]),
   },
   {
@@ -218,11 +240,12 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "eurovision-voittajamaat-1956-2025",
     explanation: "Hyväksytty vastaus on EBU:n kilpailuhistoriassa vähintään kerran voittanut maa vuosien 1956–2025 kilpailuissa.",
     tags: ["musiikki", "eurovision", "toimittajan-tarkistama"],
+    dailyEligible: true,
     scores: scores(
       ["ruotsi", 10], ["irlanti", 10], ["iso-britannia", 10], ["ranska", 15], ["suomi", 15], ["italia", 15], ["norja", 15],
       ["ukraina", 15], ["alankomaat", 15], ["saksa", 30], ["espanja", 30], ["tanska", 30], ["israel", 30], ["kreikka", 30],
       ["itavalta", 30], ["portugali", 30], ["sveitsi", 60], ["turkki", 60], ["serbia", 60], ["venaja", 60],
-      ["luxemburg", 85], ["monaco", 85], ["azerbaidzan", 85],
+      ["luxemburg", 85], ["monaco", 100], ["azerbaidzan", 85],
     ),
   },
   {
@@ -232,7 +255,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "bond-nayttelijat-eon-elokuvat",
     explanation: "Hyväksytty vastaus on yksi Eon Productionsin virallisen Bond-elokuvasarjan kuudesta pääosan näyttelijästä.",
     tags: ["elokuvat", "bond", "toimittajan-tarkistama"],
-    scores: scores(["sean-connery", 10], ["roger-moore", 10], ["daniel-craig", 15], ["pierce-brosnan", 15], ["timothy-dalton", 30], ["george-lazenby", 60]),
+    dailyEligible: true,
+    dailyEligibilityReason: "Eon-elokuvien kuuden Bond-näyttelijän joukko on pieni mutta kansainvälisesti hyvin tunnistettava.",
+    scores: scores(["sean-connery", 10], ["roger-moore", 10], ["daniel-craig", 15], ["pierce-brosnan", 15], ["timothy-dalton", 30], ["george-lazenby", 100]),
   },
   {
     id: "elokuvat-ja-televisio-miyazaki",
@@ -241,7 +266,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "miyazaki-ghibli-pitkat-elokuvat-1986-2023",
     explanation: "Hyväksytty vastaus on Studio Ghiblin teosluettelossa oleva Miyazakin ohjaama pitkä elokuva; lyhytelokuvat ja muiden ohjaajien elokuvat eivät kuulu joukkoon.",
     tags: ["elokuvat", "studio-ghibli", "toimittajan-tarkistama"],
-    scores: scores(["henkien-katkema", 10], ["naapurini-totoro", 10], ["liikkuva-linna", 10], ["kikin-lahettipalvelu", 15], ["prinsessa-mononoke", 15], ["poika-ja-haikara", 30], ["ponyo", 30], ["taivaan-linna", 60], ["porco-rosso", 60], ["tuuli-nousee", 85]),
+    dailyEligible: true,
+    scores: scores(["henkien-katkema", 10], ["naapurini-totoro", 10], ["liikkuva-linna", 10], ["kikin-lahettipalvelu", 15], ["prinsessa-mononoke", 15], ["poika-ja-haikara", 30], ["ponyo", 30], ["taivaan-linna", 60], ["porco-rosso", 60], ["tuuli-nousee", 100]),
   },
   {
     id: "maailmanhistoria-apollo-lennot",
@@ -250,7 +276,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "apollo-miehitetyt-lennot",
     explanation: "Hyväksytty vastaus on NASA:n luettelon yksi yhdestätoista miehitetystä Apollo-lennosta.",
     tags: ["historia", "avaruus", "toimittajan-tarkistama"],
-    scores: scores(["apollo-11", 10], ["apollo-13", 10], ["apollo-8", 15], ["apollo-12", 15], ["apollo-17", 15], ["apollo-7", 30], ["apollo-9", 30], ["apollo-10", 30], ["apollo-14", 60], ["apollo-15", 60], ["apollo-16", 85]),
+    dailyEligible: true,
+    scores: scores(["apollo-11", 10], ["apollo-13", 10], ["apollo-8", 15], ["apollo-12", 15], ["apollo-17", 15], ["apollo-7", 30], ["apollo-9", 30], ["apollo-10", 30], ["apollo-14", 60], ["apollo-15", 60], ["apollo-16", 100]),
   },
   {
     id: "maailmanhistoria-antiikin-ihmeet",
@@ -259,6 +286,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "antiikin-maailman-seitseman-ihmetta",
     explanation: "Hyväksytty vastaus kuuluu perinteiseen klassiseen seitsemän ihmeen luetteloon.",
     tags: ["historia", "antiikki", "toimittajan-tarkistama"],
+    dailyEligible: true,
+    dailyEligibilityReason: "Perinteinen seitsemän ihmeen luettelo on pieni mutta vakiintunut yleissivistyksen suljettu joukko.",
     scores: scores(["gizan-pyramidi", 10], ["aleksandrian-majakka", 15], ["rhodoksen-kolossi", 30], ["zeuksen-patsas", 30], ["artemiin-temppeli", 60], ["halikarnassoksen-mausoleumi", 85], ["babylonin-puutarhat", 100]),
   },
   {
@@ -268,7 +297,8 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "jalkapallon-mm-voittajamaat-1930-2022",
     explanation: "Hyväksytty vastaus on FIFA:n miesten MM-historiassa vähintään kerran turnauksen voittanut maa vuoden 2022 loppuun asti.",
     tags: ["urheilu", "jalkapallo", "toimittajan-tarkistama"],
-    scores: scores(["brasilia", 10], ["argentiina", 10], ["saksa", 10], ["italia", 15], ["ranska", 15], ["espanja", 15], ["englanti", 15], ["uruguay", 60]),
+    dailyEligible: true,
+    scores: scores(["brasilia", 10], ["argentiina", 10], ["saksa", 10], ["italia", 15], ["ranska", 15], ["espanja", 15], ["englanti", 15], ["uruguay", 100]),
   },
   {
     id: "urheilu-kymmenottelu",
@@ -277,8 +307,9 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
     universeId: "kymmenottelun-lajit",
     explanation: "Hyväksytty vastaus on yksi World Athleticsin kymmenottelun kymmenestä lajista.",
     tags: ["urheilu", "yleisurheilu", "toimittajan-tarkistama"],
-    scores: scores(["100-metri", 10], ["pituushyppy", 10], ["korkeushyppy", 10], ["kuulantyonto", 15], ["400-metri", 15], ["110-aitajuoksu", 30], ["keihaanheitto", 30], ["kiekonheitto", 60], ["seivashyppy", 60], ["1500-metri", 85]),
+    dailyEligible: true,
+    scores: scores(["100-metri", 10], ["pituushyppy", 10], ["korkeushyppy", 10], ["kuulantyonto", 15], ["400-metri", 15], ["110-aitajuoksu", 30], ["keihaanheitto", 30], ["kiekonheitto", 60], ["seivashyppy", 60], ["1500-metri", 100]),
   },
 ];
 
-export const questionAuthorship: AuthoredQuestion[] = [...baseQuestionAuthorship, ...expandedQuestions];
+export const questionAuthorship: AuthoredQuestion[] = [...baseQuestionAuthorship, ...expandedQuestions, ...productionQuestions];

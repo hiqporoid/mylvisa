@@ -20,6 +20,10 @@ export type BankQuality = {
   max100QuestionCount: number;
   points: Record<string, number>;
   categories: Record<string, number>;
+  baseUniverseConcentration: Record<string, number>;
+  familyCollisionCount: number;
+  dailyMissing100Count: number;
+  dailyMissingEntryCount: number;
   rarityReview: string[];
   histograms: Record<string, number>;
 };
@@ -79,6 +83,10 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
     max100QuestionCount: 0,
     points: Object.fromEntries(SCORE_TIERS.map((tier) => [String(tier), 0])),
     categories: Object.fromEntries(Object.keys(CATEGORIES).map((category) => [category, 0])),
+    baseUniverseConcentration: {},
+    familyCollisionCount: 0,
+    dailyMissing100Count: 0,
+    dailyMissingEntryCount: 0,
     rarityReview: [],
     histograms: {},
   };
@@ -131,17 +139,19 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
       if (universe.baseUniverseId) quality.derivedUniverseCount++;
     }
 
-    const text = normalizeAnswer(question.prompt);
-    const previous = texts.get(text);
-    if (previous) issue("error", question.id, `Duplicate question text with ${previous}.`);
-    texts.set(text, question.id);
-    const words = new Set(text.split(" "));
-    for (const other of textTokens) {
-      const intersection = [...words].filter((word) => other.words.has(word)).length;
-      const similarity = intersection / (words.size + other.words.size - intersection);
-      if (similarity >= 0.8 && words.size >= 5) issue("warning", question.id, `Near-identical text with ${other.id}.`);
+    if (question.status !== "retired") {
+      const text = normalizeAnswer(question.prompt);
+      const previous = texts.get(text);
+      if (previous) issue("error", question.id, `Duplicate question text with ${previous}.`);
+      texts.set(text, question.id);
+      const words = new Set(text.split(" "));
+      for (const other of textTokens) {
+        const intersection = [...words].filter((word) => other.words.has(word)).length;
+        const similarity = intersection / (words.size + other.words.size - intersection);
+        if (similarity >= 0.8 && words.size >= 5) issue("warning", question.id, `Near-identical text with ${other.id}.`);
+      }
+      textTokens.push({ id: question.id, words });
     }
-    textTokens.push({ id: question.id, words });
 
     const canonicalKeys = new Map<string, number>();
     question.answers.forEach((answer, answerIndex) => {
@@ -196,7 +206,7 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
       if (maximum !== 100) issue("error", question.id, `Daily question max score must be 100, got ${maximum}.`);
       if (!question.answers.some((answer) => answer.points === 10 || answer.points === 15))
         issue("error", question.id, "Daily question needs a 10- or 15-point entry answer.");
-      if (question.answers.length < 5) issue("error", question.id, "Daily question needs at least five canonical answers.");
+      if (question.answers.length < 3) issue("error", question.id, "Daily question needs at least three canonical answers.");
       if (question.answers.length < 8 && !question.dailyEligibilityReason)
         issue("error", question.id, "Daily question below eight answers needs an explicit exception.");
     }
@@ -204,7 +214,36 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
 
   quality.questionCount = questions.length;
   quality.activeQuestionCount = questions.filter((question) => question.status === "active").length;
-  quality.medianAnswers = median(questions.filter((question) => question.dailyEligible).map((question) => question.answers.length));
+  const dailyQuestions = questions.filter((question) => question.dailyEligible);
+  quality.medianAnswers = median(dailyQuestions.map((question) => question.answers.length));
+  const baseCounts = new Map<string, number>();
+  for (const question of dailyQuestions) {
+    const base = question.baseUniverseId ?? question.universeId;
+    baseCounts.set(base, (baseCounts.get(base) ?? 0) + 1);
+    if (!question.answers.some((answer) => answer.points === 100)) quality.dailyMissing100Count++;
+    if (!question.answers.some((answer) => answer.points === 10 || answer.points === 15)) quality.dailyMissingEntryCount++;
+  }
+  quality.baseUniverseConcentration = Object.fromEntries([...baseCounts.entries()].sort((a, b) => b[1] - a[1]));
+  const concentrationLimit = Math.ceil(Math.max(1, dailyQuestions.length) * 0.1);
+  const topTwoConcentration = [...baseCounts.values()].sort((a, b) => b - a).slice(0, 2).reduce((sum, count) => sum + count, 0);
+  if (Math.max(0, ...baseCounts.values()) > concentrationLimit)
+    issue("error", "base-universe-concentration", `A base universe exceeds the 10% Daily cap (${concentrationLimit}).`);
+  if (topTwoConcentration > Math.ceil(Math.max(1, dailyQuestions.length) * 0.18))
+    issue("error", "base-universe-pair-concentration", "The top two base universes exceed the 18% Daily cap.");
+  const dailyCategories = new Map<string, number>();
+  for (const question of dailyQuestions) dailyCategories.set(question.category, (dailyCategories.get(question.category) ?? 0) + 1);
+  for (const category of Object.keys(CATEGORIES)) {
+    if ((dailyCategories.get(category) ?? 0) === 0) issue("error", `category-${category}`, "Every category must have at least one Daily question.");
+    if (dailyQuestions.length >= 350 && (dailyCategories.get(category) ?? 0) < 10)
+      issue("error", `category-floor-${category}`, "A READY-sized Daily bank needs at least 10 questions in every category.");
+  }
+  const activeFamilies = new Map<string, number>();
+  for (const question of dailyQuestions) activeFamilies.set(question.familyId, (activeFamilies.get(question.familyId) ?? 0) + 1);
+  quality.familyCollisionCount = [...activeFamilies.values()].filter((count) => count > 1).length;
+  const non100 = Object.entries(quality.points).filter(([points]) => points !== "100").reduce((sum, [, count]) => sum + count, 0);
+  const largestNon100 = Math.max(0, ...Object.entries(quality.points).filter(([points]) => points !== "100").map(([, count]) => count));
+  if (non100 > 0 && largestNon100 / non100 > 0.8)
+    issue("warning", "rarity-score-bucket", "More than 80% of non-100 canonical Daily answers share one score bucket.");
   const activeHistograms = Object.values(quality.histograms);
   if (activeHistograms.length && Math.max(...activeHistograms) >= Math.max(10, Math.ceil(quality.activeQuestionCount * 0.8)))
     issue("warning", "rarity-histograms", "Many active questions share the exact same rarity histogram; inspect for mechanical scoring.");

@@ -13,6 +13,7 @@ type AuthoredExpandedQuestion = {
   accessibility: 4 | 5;
   baseUniverseId: string;
   predicateId: string;
+  reviewDisposition?: "hard" | "retire";
 };
 
 type PredicateSpec = {
@@ -308,4 +309,31 @@ const derived = [
 
 export const expandedBaseUniverses: VerifiedUniverse[] = [countryBase, elementBase];
 export const expandedUniverses: VerifiedUniverse[] = [...expandedBaseUniverses, ...derived.map((item) => item.universe)];
-export const expandedQuestions = derived.map((item) => item.question);
+const retainedDerivedPredicates = new Set([
+  "continent-afrikka",
+  "continent-aasia",
+  "continent-eurooppa",
+  "continent-pohjois-amerikka",
+  "continent-etela-amerikka",
+  "continent-oseania",
+  "country-group-eu",
+  "country-group-nato",
+  "country-group-eurozone",
+  "country-group-commonwealth",
+  "country-group-oecd",
+  "country-group-opec",
+  "country-group-g20",
+  "atomic-range-1-36",
+  "atomic-range-19-54",
+  "atomic-range-37-72",
+  "atomic-range-55-90",
+  "atomic-range-73-118",
+  "atomic-range-1-54",
+  "atomic-range-55-118",
+]);
+
+export const expandedQuestions = derived.map((item) => ({
+  ...item.question,
+  dailyEligible: retainedDerivedPredicates.has(item.question.predicateId) && Object.values(item.question.scores).some((points) => points === 10 || points === 15) && Object.values(item.question.scores).includes(100),
+  ...(retainedDerivedPredicates.has(item.question.predicateId) && Object.values(item.question.scores).some((points) => points === 10 || points === 15) && Object.values(item.question.scores).includes(100) ? {} : { reviewDisposition: "retire" as const }),
+}));

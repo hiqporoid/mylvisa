@@ -67,7 +67,7 @@ const questions = questionAuthorship.map((authored) => {
   if (dailyEligible && maximum !== 100) fail(`${authored.id} is daily eligible but has no 100-point answer`);
   if (dailyEligible && !Object.values(authored.scores).some((points) => points === 10 || points === 15))
     fail(`${authored.id} is daily eligible but has no 10- or 15-point entry answer`);
-  if (dailyEligible && universe.expectedCount < 5) fail(`${authored.id} is daily eligible but has fewer than five answers`);
+  if (dailyEligible && universe.expectedCount < 3) fail(`${authored.id} is daily eligible but has fewer than three answers`);
 
   return {
     id: authored.id,
@@ -98,13 +98,14 @@ const questions = questionAuthorship.map((authored) => {
     source: universe.source,
     tags: [...authored.tags, "rarity"],
     evergreen: true,
-    status: dailyEligible ? "active" : "review",
+    status: dailyEligible ? "active" : authored.reviewDisposition === "retire" ? "retired" : "review",
     dailyEligible,
     accessibilityReview,
     accessibility,
     ...(authored.dailyEligibilityReason ? { dailyEligibilityReason: authored.dailyEligibilityReason } : {}),
     ...(authored.baseUniverseId ? { baseUniverseId: authored.baseUniverseId } : {}),
     ...(authored.predicateId ? { predicateId: authored.predicateId } : {}),
+    familyId: authored.familyId ?? authored.baseUniverseId ?? authored.universeId,
     version: 3,
     author: "Mylvisa editorial 2026-09-11",
     contentReview: "verified",

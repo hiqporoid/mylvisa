@@ -52,6 +52,7 @@ export const questionSchema = z.strictObject({
   dailyEligibilityReason: text.optional(),
   baseUniverseId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
   predicateId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
+  familyId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   version: z.number().int().positive(),
   author: text.optional(),
   contentReview: z.enum(["pending", "verified", "retire"]),

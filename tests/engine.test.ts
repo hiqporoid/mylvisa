@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { releases } from "@/data/releases";
-import { FIRST_QUIZ_DATE, SCORE_TIERS } from "@/lib/quiz/catalog";
+import { CATEGORIES, FIRST_QUIZ_DATE, SCORE_TIERS } from "@/lib/quiz/catalog";
 import { addDays, helsinkiDate, isDateKey, nextMidnight } from "@/lib/quiz/date";
 import { normalizeAnswer } from "@/lib/quiz/normalize";
 import { questionSchema } from "@/lib/quiz/schema";
@@ -45,6 +45,7 @@ describe("deterministinen päiväpeli", () => {
     const quiz = selectDailyQuestions(bank, "2026-09-12");
     expect(new Set(quiz.map((question) => question.id)).size).toBe(7);
     expect(new Set(quiz.map((question) => question.universeId)).size).toBe(7);
+    expect(new Set(quiz.map((question) => question.familyId)).size).toBe(7);
     expect(new Set(quiz.map((question) => question.category)).size).toBeGreaterThanOrEqual(2);
   });
 
@@ -58,6 +59,30 @@ describe("deterministinen päiväpeli", () => {
     expect(ids("2026-09-15")).toEqual(selectDailyQuestions([...bank].reverse(), "2026-09-15").map((question) => question.id));
     expect(isEligible({ ...bank[0], status: "retired" }, "2026-09-12")).toBe(false);
     expect(isEligible({ ...bank[0], validUntil: "2026-09-11" }, "2026-09-12")).toBe(false);
+  });
+
+  it("keeps a 60-day repeat horizon and family-diverse decks", () => {
+    const seen = new Set<string>();
+    let firstRepeatDay = Number.POSITIVE_INFINITY;
+    let familyCollisions = 0;
+    let universeCollisions = 0;
+    const categoryCounts = new Map<string, number>();
+    for (let day = 0; day < 60; day++) {
+      const quiz = selectDailyQuestions(bank, addDays(FIRST_QUIZ_DATE, day));
+      const families = new Set(quiz.map((question) => question.familyId));
+      const universes = new Set(quiz.map((question) => question.universeId));
+      familyCollisions += quiz.length - families.size;
+      universeCollisions += quiz.length - universes.size;
+      for (const question of quiz) {
+        if (seen.has(question.id)) firstRepeatDay = Math.min(firstRepeatDay, day);
+        seen.add(question.id);
+        categoryCounts.set(question.category, (categoryCounts.get(question.category) ?? 0) + 1);
+      }
+    }
+    expect(firstRepeatDay).toBeGreaterThanOrEqual(Math.floor(bank.filter((question) => question.dailyEligible).length / 7));
+    expect(familyCollisions).toBe(0);
+    expect(universeCollisions).toBe(0);
+    expect(categoryCounts.size).toBe(Object.keys(CATEGORIES).length);
   });
 });
 
@@ -113,6 +138,33 @@ describe("pankin rakenne", () => {
     expect(result.quality.points["10"]).toBeGreaterThan(0);
     expect(result.quality.points["100"]).toBeGreaterThan(0);
     expect(result.quality.max100QuestionCount).toBeGreaterThan(0);
+  });
+
+  it("represents all categories and meets the READY floor", () => {
+    const daily = bank.filter((question) => question.dailyEligible);
+    const counts = Object.fromEntries(Object.keys(CATEGORIES).map((category) => [category, daily.filter((question) => question.category === category).length]));
+    expect(daily.length).toBeGreaterThanOrEqual(350);
+    expect(Object.values(counts).every((count) => count >= 10)).toBe(true);
+  });
+
+  it("enforces base-universe concentration limits", () => {
+    const result = validateBank(bank, "2026-09-12");
+    const counts = Object.values(result.quality.baseUniverseConcentration);
+    expect(Math.max(...counts)).toBeLessThanOrEqual(Math.ceil(result.quality.dailyEligibleQuestionCount * 0.1));
+    expect(counts.sort((a, b) => b - a).slice(0, 2).reduce((sum, count) => sum + count, 0)).toBeLessThanOrEqual(Math.ceil(result.quality.dailyEligibleQuestionCount * 0.18));
+  });
+
+  it("has no unresolved review leakage or missing rarity gates in Daily", () => {
+    expect(bank.filter((question) => question.dailyEligible && question.status !== "active")).toHaveLength(0);
+    const result = validateBank(bank, "2026-09-12");
+    expect(result.quality.dailyMissing100Count).toBe(0);
+    expect(result.quality.dailyMissingEntryCount).toBe(0);
+  });
+
+  it("does not depend on a single mechanical rarity-by-index mapping", () => {
+    const result = validateBank(bank, "2026-09-12");
+    expect(result.issues.some((issue) => issue.id === "rarity-index-pattern")).toBe(false);
+    expect(Object.keys(result.quality.histograms).length).toBeGreaterThan(20);
   });
 
   it("keeps completeness, review and membership metadata separate from scores", () => {

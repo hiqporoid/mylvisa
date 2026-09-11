@@ -1,4 +1,5 @@
 import { expandedUniverses } from "./expanded-content";
+import { productionUniverses } from "./production-content";
 
 export type SourceRecord = {
   title: string;
@@ -542,6 +543,6 @@ const baseUniverses: VerifiedUniverse[] = [
   },
 ];
 
-export const universes: VerifiedUniverse[] = [...baseUniverses, ...expandedUniverses];
+export const universes: VerifiedUniverse[] = [...baseUniverses, ...expandedUniverses, ...productionUniverses];
 
 export const universeById = new Map(universes.map((universe) => [universe.id, universe]));

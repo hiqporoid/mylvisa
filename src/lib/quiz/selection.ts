@@ -2,7 +2,7 @@ import { DEFAULT_QUIZ_LENGTH, FIRST_QUIZ_DATE } from "./catalog";
 import { addDays, dayNumber } from "./date";
 import type { Question } from "./schema";
 
-export const SELECTION_VERSION = "rarity-deck-v2";
+export const SELECTION_VERSION = "rarity-deck-v3";
 
 export function hash(value: string): number {
   let result = 2166136261;
@@ -66,17 +66,22 @@ export function selectDailyQuestions(
     const pool = fresh.length >= length ? fresh : eligible;
     const categories = new Set<string>();
     const universes = new Set<string>();
+    const families = new Set<string>();
     for (let slot = 0; slot < length; slot++) {
-      const candidates = pool.filter((question) => !selected.some((item) => item.id === question.id));
+      const remaining = pool.filter((question) => !selected.some((item) => item.id === question.id));
+      const familyDiverse = remaining.filter((question) => !families.has(question.familyId));
+      const candidates = familyDiverse.length >= length - slot ? familyDiverse : remaining;
       let best = candidates[0];
       let bestRank = [
         Number(universes.has(best.universeId)),
+        Number(families.has(best.familyId)),
         Number(categories.has(best.category)),
         hash(`${seed}:${day}:${slot}:${best.id}`),
       ];
       for (const candidate of candidates.slice(1)) {
         const rank = [
           Number(universes.has(candidate.universeId)),
+          Number(families.has(candidate.familyId)),
           Number(categories.has(candidate.category)),
           hash(`${seed}:${day}:${slot}:${candidate.id}`),
         ];
@@ -90,6 +95,7 @@ export function selectDailyQuestions(
       used.add(best.id);
       categories.add(best.category);
       universes.add(best.universeId);
+      families.add(best.familyId);
     }
   }
   return selected;
