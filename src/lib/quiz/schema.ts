@@ -18,6 +18,14 @@ export const answerSchema = z.strictObject({
   explanation: text.optional(),
 });
 
+export const completenessSchema = z.strictObject({
+  status: z.literal("verified"),
+  source: z.url().refine((url) => url.startsWith("https://")),
+  asOf: dateSchema,
+  expectedCount: z.number().int().positive(),
+  basis: text,
+});
+
 export const questionSchema = z.strictObject({
   id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   prompt: text,
@@ -25,7 +33,8 @@ export const questionSchema = z.strictObject({
   subcategory: text.optional(),
   universeId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   referenceDefinition: text,
-  answers: z.array(answerSchema).min(5),
+  completeness: completenessSchema,
+  answers: z.array(answerSchema).min(1),
   explanation: text,
   source: z.strictObject({
     title: text,
@@ -39,7 +48,8 @@ export const questionSchema = z.strictObject({
   status: z.enum(["active", "review", "retired"]),
   version: z.number().int().positive(),
   author: text.optional(),
-  rarityReview: z.enum(["editorial", "calibrate", "verified"]),
+  contentReview: z.enum(["pending", "verified", "retire"]),
+  rarityReview: z.enum(["pending", "editorial-reviewed", "calibrate"]),
   frequency: z.strictObject({
     status: z.enum(["pending", "sampled", "calibrated"]),
     plays: z.number().int().nonnegative().optional(),
@@ -50,18 +60,14 @@ export const questionSchema = z.strictObject({
     context.addIssue({ code: "custom", message: "validFrom must precede validUntil" });
   if (!question.evergreen && (!question.validFrom || !question.validUntil))
     context.addIssue({ code: "custom", message: "Time-sensitive questions need both validity dates" });
-  if (!question.answers.some((answer) => answer.points === 10 || answer.points === 15))
-    context.addIssue({ code: "custom", message: "Set needs a common low-value answer" });
-  if (!question.answers.some((answer) => answer.points >= 60))
-    context.addIssue({ code: "custom", message: "Set needs a rare high-value answer" });
-  if (new Set(question.answers.map((answer) => answer.points)).size < 3)
-    context.addIssue({ code: "custom", message: "Rarity distribution is too flat" });
   if (new Set(question.answers.map((answer) => answer.canonical)).size !== question.answers.length)
     context.addIssue({ code: "custom", message: "Duplicate canonical answers" });
   if (question.answers.some((answer) => answer.editorialTier !== String(answer.points) || answer.effectiveTier !== String(answer.points)))
     context.addIssue({ code: "custom", message: "Tier metadata must match points in the MVP" });
   if (question.answers.some((answer) => answer.tier !== RARITY_TIERS[answer.points as keyof typeof RARITY_TIERS]))
     context.addIssue({ code: "custom", message: "Rarity name must match points" });
+  if (question.status === "active" && (question.contentReview !== "verified" || question.rarityReview !== "editorial-reviewed"))
+    context.addIssue({ code: "custom", message: "Active questions require verified content and editorial rarity review" });
 });
 
 export type Question = z.infer<typeof questionSchema>;

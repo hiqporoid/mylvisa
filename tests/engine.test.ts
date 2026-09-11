@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { releases } from "@/data/releases";
-import { CATEGORIES, FIRST_QUIZ_DATE, SCORE_TIERS } from "@/lib/quiz/catalog";
+import { FIRST_QUIZ_DATE, SCORE_TIERS } from "@/lib/quiz/catalog";
 import { addDays, helsinkiDate, isDateKey, nextMidnight } from "@/lib/quiz/date";
 import { normalizeAnswer } from "@/lib/quiz/normalize";
 import { questionSchema } from "@/lib/quiz/schema";
@@ -8,6 +8,7 @@ import { evaluateAnswer, matchAnswer, totalScore } from "@/lib/quiz/score";
 import { isEligible, selectDailyQuestions } from "@/lib/quiz/selection";
 import { createRoundClock, remainingSeconds, roundStatus } from "@/lib/quiz/timer";
 import { validateBank } from "@/lib/quiz/validate";
+import { universeById } from "@/data/universes";
 
 const bank = releases[0].questions.map((question) => questionSchema.parse(question));
 const ids = (date: string) => selectDailyQuestions(bank, date).map((question) => question.id);
@@ -44,12 +45,13 @@ describe("deterministinen päiväpeli", () => {
     const quiz = selectDailyQuestions(bank, "2026-09-12");
     expect(new Set(quiz.map((question) => question.id)).size).toBe(7);
     expect(new Set(quiz.map((question) => question.universeId)).size).toBe(7);
-    expect(new Set(quiz.map((question) => question.category)).size).toBe(7);
+    expect(new Set(quiz.map((question) => question.category)).size).toBeGreaterThanOrEqual(6);
   });
 
   it("consumes the seed bank without repeats for one full cycle", () => {
-    const all = Array.from({ length: 36 }, (_, index) => ids(addDays(FIRST_QUIZ_DATE, index))).flat();
-    expect(new Set(all).size).toBe(252);
+    const cycleDays = Math.floor(bank.length / 7);
+    const all = Array.from({ length: cycleDays }, (_, index) => ids(addDays(FIRST_QUIZ_DATE, index))).flat();
+    expect(new Set(all).size).toBe(cycleDays * 7);
   });
 
   it("is independent of input order and excludes inactive records", () => {
@@ -95,14 +97,39 @@ describe("vastausten konservatiivinen normalisointi ja rarity-pisteet", () => {
 });
 
 describe("pankin rakenne", () => {
-  it("contains 255 active set questions, every category and broad rarity spread", () => {
+  it("contains a small verified active bank with broad rarity spread", () => {
     const result = validateBank(releases[0].questions, "2026-09-12");
     expect(result.issues).toEqual([]);
-    expect(result.questions).toHaveLength(255);
-    expect(new Set(result.questions.map((question) => question.category)).size).toBe(Object.keys(CATEGORIES).length);
+    expect(result.questions).toHaveLength(25);
+    expect(new Set(result.questions.map((question) => question.category)).size).toBeGreaterThanOrEqual(8);
     expect(result.quality.medianAnswers).toBeGreaterThanOrEqual(5);
     expect(result.quality.points["10"]).toBeGreaterThan(0);
     expect(result.quality.points["100"]).toBeGreaterThan(0);
+    expect(result.quality.verifiedUniverseCount).toBe(25);
+  });
+
+  it("keeps completeness, review and membership metadata separate from scores", () => {
+    for (const question of bank) {
+      const universe = universeById.get(question.universeId)!;
+      expect(question.contentReview).toBe("verified");
+      expect(question.rarityReview).toBe("editorial-reviewed");
+      expect(question.completeness.status).toBe("verified");
+      expect(question.answers).toHaveLength(universe.expectedCount);
+      expect(new Set(question.answers.map((answer) => answer.canonical)).size).toBe(universe.expectedCount);
+      for (const answer of question.answers) expect(matchAnswer(question, answer.canonical)?.canonical).toBe(answer.canonical);
+    }
+    const presidents = bank.find((question) => question.id === "suomi-presidentit")!;
+    expect(presidents.answers.find((answer) => answer.canonical === "Urho Kekkonen")?.points).toBe(10);
+    expect(presidents.answers.find((answer) => answer.canonical === "Risto Ryti")?.points).toBe(60);
+    expect(presidents.answers.find((answer) => answer.canonical === "Carl Gustaf Emil Mannerheim")?.points).toBe(15);
+  });
+
+  it("rejects a truncated verified universe", () => {
+    const parks = bank.find((question) => question.id === "suomi-kansallispuistot")!;
+    const truncated = { ...parks, answers: parks.answers.slice(0, -1) };
+    const result = validateBank([truncated]);
+    expect(result.issues.some((item) => item.message.includes("canonical answers"))).toBe(true);
+    expect(result.issues.some((item) => item.message.includes("equal the verified universe"))).toBe(true);
   });
 
   it("catches malformed rarity records", () => {

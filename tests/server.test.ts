@@ -39,7 +39,8 @@ describe("server boundary and rarity game", () => {
   it("returns a seven-round maximum of 700 points", () => {
     const questions = getDailyQuiz(date).questions;
     const game = play({ ...input, answers: questions.map((question) => question.answers.at(-1)!.canonical) }, now);
-    expect(game.summary).toEqual({ points: 700, maxPoints: 700, correct: 7 });
+    const expectedPoints = questions.reduce((total, question) => total + question.answers.at(-1)!.points, 0);
+    expect(game.summary).toEqual({ points: expectedPoints, maxPoints: 700, correct: 7 });
   });
 
   it("rejects stale, future and tampered requests", () => {

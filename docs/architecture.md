@@ -4,7 +4,10 @@ Mylvisa pitää pelin säännöt React-esityksestä erillään:
 
 ```mermaid
 flowchart LR
-  JSON[Immutable JSON release] --> Bank[server-only bank]
+  Universe[Verified universes] --> Generator[Editorial generator]
+  Authorship[Question + rarity metadata] --> Generator
+  Generator --> JSON[Immutable JSON release]
+  JSON --> Bank[server-only bank]
   Bank --> Select[Deterministinen valitsin]
   Request[Transcript + kierrosaikaleima] --> Game[server-only pelipalvelu]
   Select --> Game
@@ -38,3 +41,9 @@ Kysymysten `validFrom` ja `validUntil` ovat kalenteripäiviä. Vanhentunut tai t
 `useQuiz`-tilat ovat `home → preview → question → feedback → … → complete`. Paikallinen tallennus palauttaa keskeneräisen kierroksen aikaleiman ja valmistuneen tuloksen. Tallennuksen puuttuminen näyttää ilmoituksen, mutta ei estä pelaamista.
 
 Stateless transcript on MVP:n tietoinen rajoitus. Tilin, globaalin tulostaulun ja yhden yrityksen palvelineston lisäämiseksi luodaan palvelinpuolen `attempt`-tietue, jossa säilytetään release-, valitsin- ja kysymys-ID:t sekä idempotenssiavain. Pure functions (`selectDailyQuestions`, `matchAnswer`, `evaluateAnswer`) säilyvät samoina.
+
+## Sisältödata
+
+Jäsenyys ja pisteytys ovat erillisiä: `src/data/universes.ts` sisältää lähde-backed complete universet ja `src/data/question-authorship.ts` suomalaisille pelaajille tehdyt promptit sekä jäsen-ID:ihin sidotut editorial scoret. Generatorin fail-closed-tarkistukset estävät tuntemattomat jäsenet, väärät expected countit, aliastörmäykset, puuttuvat pisteet ja osittaisen universumin hiljaisen julkaisun.
+
+`validateBank` tarkistaa lisäksi release-JSON:n ja universe-rekisterin välisen jäsenyysjoukon, lähteen, viitepäivän, review-statukset ja score-histogrammit. Se ei hyväksy aktiivista kysymystä, jonka completeness ei ole `verified`; kuuden tierin pakottaminen on poistettu.

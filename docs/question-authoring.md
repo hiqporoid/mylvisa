@@ -1,67 +1,42 @@
 # Kysymysten kirjoittajan opas
 
-Mylvisa-kysymys pyytää nimeämään yhden jäsenen objektiivisesti määritellystä joukosta. Kysymys, johon useimmat eivät keksi yhtäkään vastausta, on yleensä huono Mylvisa-kysymys. Vaikean osan pitää olla harvinaisemman hyväksytyn vastauksen löytäminen, ei minkään vastauksen löytäminen.
+Mylvisa-kysymys pyytää nimeämään yhden jäsenen objektiivisesti määritellystä joukosta. Kysymys, johon tavallinen suomalainen pelaaja ei keksi yhtäkään vastausta, on huono; haastavuuden pitää syntyä harvinaisemman jäsenen löytämisestä.
 
-## Tietue
+## Kaksi erillistä lähdettä
 
-```json
-{
-  "id": "maantiede-itämeri",
-  "prompt": "Nimeä Itämereen rannikkonsa ulottava valtio.",
-  "category": "maantiede",
-  "universeId": "maantiede-itameri",
-  "referenceDefinition": "Suljettu lista Itämeren rannikkovaltioista, jäädytetty 1.1.2024.",
-  "answers": [
-    {
-      "canonical": "Suomi",
-      "aliases": ["Finland"],
-      "points": 10,
-      "tier": "Ilmeinen valinta",
-      "editorialTier": "10",
-      "effectiveTier": "10",
-      "provenance": "Lähteen nimi"
-    },
-    {
-      "canonical": "Liettua",
-      "aliases": [],
-      "points": 85,
-      "tier": "Syvä tieto",
-      "editorialTier": "85",
-      "effectiveTier": "85",
-      "provenance": "Lähteen nimi"
-    }
-  ],
-  "explanation": "Vastaus kuuluu rajattuun rannikkovaltioiden joukkoon.",
-  "source": { "title": "Julkinen lähde", "url": "https://example.org/source" },
-  "tags": ["maantiede", "rarity"],
-  "evergreen": true,
-  "status": "active",
-  "version": 2,
-  "rarityReview": "editorial",
-  "frequency": { "status": "pending" }
-}
-```
+`src/data/universes.ts` on jäsenyyden lähde. Jokainen universe sisältää:
 
-`id` on pieniä ASCII-merkkejä sisältävä pysyvä tunniste. `universeId` kertoo valitsimelle, ettei samasta vastausmaailmasta oteta kahta kysymystä samaan päivään. `referenceDefinition` kertoo täsmälleen, mikä lista on hyväksytty: käytä virallista luetteloa, standardia tai jäädytettyä tilastopäivää. Vältä sanoja kuten “kuuluisa”, “paras” ja “suosittu”, ellei niitä ole sidottu nimettyyn objektiiviseen listaan.
+- virallisen tai muuten perustellun lähde-URL:n;
+- näkyvän viitepäivän;
+- jäsenyyden perusteen;
+- `expectedCount`-määrän;
+- jokaisen kanonisen vastauksen ja vain yksiselitteiset aliakset.
 
-## Vastaukset ja rarity
+`src/data/question-authorship.ts` on kysymys- ja rarity-toimitus. Sen `scores`-kartta käyttää universe-jäsenen pysyvää ID:tä, ei taulukkoindeksiä. `scripts/generate-rarity-bank.mjs` saa vain yhdistää nämä lähteet release-JSON:ksi; se ei saa keksiä, leikata tai järjestää jäsenyyttä eikä laskea pisteitä.
 
-Lisää yleensä 8–30 kanonista vastausta. Vähintään viisi on rakennevaatimus; poikkeus vaatii erillisen toimituksellisen perustelun. Jokaisella vastauksella on pisteet 10, 15, 30, 60, 85 tai 100. Järjestä vastaukset karkeasti sen mukaan, mitä suomalainen pelaaja kirjoittaisi spontaanisti 25 sekunnissa: 10 ja 15 ovat ilmeisiä, 60–100 harvinaisempia. Älä anna lisäpisteitä siksi, että itse fakta olisi vaikeampi.
+Tuotantokysymyksellä on lisäksi `completeness.status: "verified"`, `contentReview: "verified"` ja `rarityReview: "editorial-reviewed"`. Raaka, tarkistamaton tai osittainen kysymys jää pois aktiivisesta release-snapshotista.
 
-Jokaisessa tavallisessa kysymyksessä pitää olla vähintään yksi 10/15 pisteen ja yksi 60/85/100 pisteen vastaus sekä vähintään kolme eri tieriä. `editorialTier` ja `effectiveTier` ovat nyt samat. Myöhemmin `effectiveTier` voidaan laskea havaituista vastausmääristä ilman että kysymyksen muoto muuttuu.
+## Rarity-arvio
 
-Aliakset osoittavat täsmälleen yhteen kanoniseen vastaukseen. Lisää vain viralliset rinnakkaisnimet, yksiselitteiset lyhenteet ja yleinen nimi, kun se ei törmää toiseen vastaukseen. Kirjainkoko, välilyönnit ja turvalliset välimerkit normalisoituvat jo. Yleisiä kirjoitusvirheitä ei lisätä; moottori sallii yhden vierekkäisen merkin vaihtumisen vain yksiselitteisessä tapauksessa.
+Pisteet ovat 10, 15, 30, 60, 85 tai 100. Ne arvioivat suomalaisen yleissivistyspelaajan spontaania recall-todennäköisyyttä 25 sekunnissa:
 
-## Lähde, elinkaari ja tarkistus
+- 10: erittäin ilmeinen/default-vastaus;
+- 15: hyvin tavallinen;
+- 30: tuttu mutta ei automaattinen;
+- 60: melko harvinainen;
+- 85: harvinainen;
+- 100: poikkeuksellinen mutta puolustettava.
 
-Lähde, URL ja vastauskohtainen provenienssi ovat pakollisia. Evergreen-kysymyksissä faktan pitää säilyä vakaana. Muuttuva lista saa `evergreen: false` ja sekä `validFrom` että `validUntil`. Käytä `review`-tilaa, jos jäsenyys tai suomenkielinen muoto vaatii vielä ihmisen tarkistuksen. `retired` säilyttää historian mutta ei pääse valintaan.
+Älä käytä järjestystä, aakkosia, väkilukua, kronologiaa, listan pituutta tai satunnaisuutta pisteiden määrittämiseen. Kaikkia kuutta tieriä ei tarvitse käyttää: yhdellä kysymyksellä voi olla yksi jäsen, toisella useita 10-pisteen jäseniä ja kolmannella ei lainkaan 100-pisteen jäseniä.
 
-Ennen julkaisua:
+Aliakset osoittavat täsmälleen yhteen kanoniseen vastaukseen. Normalisointi hoitaa kirjainkoon, turvalliset välimerkit ja yhden vierekkäisen merkkienvaihdon; yleisiä kirjoitusvirheitä ei lisätä aliaksiksi.
 
-1. Tarkista listan jäsenyys ensisijaisesta julkisesta lähteestä.
-2. Kysy itseltäsi, tietääkö tavallinen pelaaja ainakin yhden vastauksen.
-3. Merkitse ilmeinen, keskitasoinen ja harvinainen vastaus tietoisesti; älä käytä aakkosjärjestystä tai väkilukua ainoana proxy-arvona.
-4. Aja `npm run validate:bank` ja korjaa kaikki virheet sekä arvioi varoitukset.
-5. Muodosta uusi snapshot `npm run generate:bank`, lisää release aikajärjestyksessä ja aja typecheck, testit, build ja client-leak-scan.
+## Julkaisun tarkistus
 
-Validointi löytää rakenteen, aliastörmäykset, puuttuvat tierit, tasaisen jakauman, päällekkäisen tekstin, vanhentuneet päivät, puuttuvan provenienssin ja kaikki kategoriavajeet. Se ei todista lähteen sisältöä tai kaikkia taivutusmuotoja; toimituksellinen faktantarkistus jää aina ihmiselle.
+1. Hae täydellinen jäsenlista nimetystä auktoritatiivisesta lähteestä.
+2. Rajaa kysymys lähteen ja viitepäivän mukaiseksi; lisää päivämäärä promptiin, jos nykyinen jäsenyys voi muuttua.
+3. Tarkista, että tavallinen pelaaja voi nimetä vähintään yhden vastauksen.
+4. Arvioi pisteet jäsenkohtaisesti: “kuinka todennäköisesti suomalainen aikuinen kirjoittaa tämän 25 sekunnissa?”
+5. Aja `npm run generate:bank`, `npm run validate:bank` ja testit. Generatorin virhe tarkoittaa, että toimitusdataa pitää korjata.
+
+Jos täydellistä lähdejoukkoa ei voi todentaa, kysymys rajataan objektiivisesti tai retiretetään. Osittaista käsin valittua esimerkkilistaa ei julkaista täydellisenä universumina.

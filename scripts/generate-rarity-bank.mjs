@@ -1,321 +1,6 @@
 import { writeFile } from "node:fs/promises";
-
-const defaultSource = {
-  title: "Mylvisa-kysymysten toimituksellinen lähdeluettelo",
-  url: "https://www.britannica.com/",
-  note: "Setti on jäädytetty toimituksen ilmoittamaan viitepäivään; jäsenyys tarkistetaan julkisista lähteistä.",
-};
-const sourceByCategory = {
-  suomi: { title: "InfoFinland: Suomi", url: "https://www.infofinland.fi/fi/tietoa-suomesta", note: "Suomea koskeva virallinen taustalähde." },
-  "suomen-historia": { title: "Kansallisarkisto", url: "https://kansallisarkisto.fi/", note: "Suomen historian julkinen arkistolähde." },
-  maailmanhistoria: { title: "Encyclopaedia Britannica: History", url: "https://www.britannica.com/topic/history", note: "Historiallisten joukkojen julkinen yleislähde." },
-  maantiede: { title: "National Geographic: Geography", url: "https://education.nationalgeographic.org/resource/geography/", note: "Maantieteellisten nimien ja rajojen julkinen taustalähde." },
-  yhteiskunta: { title: "Euroopan unioni: EU", url: "https://european-union.europa.eu/principles-countries-history/country-profiles_en", note: "Jäsenyyksien ja toimielinten julkinen lähde." },
-  tiede: { title: "NIST: SI units", url: "https://www.nist.gov/pml/owm/metric-si/si-units", note: "Tieteellisten yksiköiden ja standardien lähde." },
-  luonto: { title: "IUCN Red List", url: "https://www.iucnredlist.org/", note: "Lajien nimien julkinen luonnontieteellinen lähde." },
-  kirjallisuus: { title: "Encyclopaedia Britannica: Literature", url: "https://www.britannica.com/art/literature", note: "Kirjallisuusteosten ja lajien julkinen taustalähde." },
-  "suomen-kieli": { title: "Kotus", url: "https://www.kotus.fi/", note: "Suomen kielen julkinen asiantuntijalähde." },
-  taide: { title: "The Metropolitan Museum of Art", url: "https://www.metmuseum.org/toah/", note: "Taiteen tekniikoiden ja teosten julkinen taustalähde." },
-  musiikki: { title: "Encyclopaedia Britannica: Music", url: "https://www.britannica.com/art/music", note: "Musiikkitermien ja teosten julkinen taustalähde." },
-  "elokuvat-ja-televisio": { title: "British Film Institute", url: "https://www.bfi.org.uk/", note: "Elokuvien ja tekijöiden julkinen elokuvalähde." },
-  urheilu: { title: "Olympics.com", url: "https://olympics.com/en/sports/", note: "Olympialajien ja kilpailujen julkinen lähde." },
-  teknologia: { title: "IETF RFC Editor", url: "https://www.rfc-editor.org/", note: "Verkkoprotokollien ja standardien julkinen lähde." },
-  talous: { title: "International Monetary Fund", url: "https://www.imf.org/en/Publications/fandd", note: "Taloustermien ja kansainvälisten ryhmien julkinen taustalähde." },
-  "ruoka-ja-kulttuuri": { title: "UNESCO Intangible Cultural Heritage", url: "https://ich.unesco.org/", note: "Ruoka- ja kulttuuriperinnön julkinen taustalähde." },
-  maailma: { title: "United Nations", url: "https://www.un.org/en/", note: "Maailman valtioiden ja kansainvälisten joukkojen julkinen taustalähde." },
-};
-
-const groups = [
-  ["suomi", [
-    ["presidentit", "Nimeä Suomen presidentti.", ["Kaarlo Juho Ståhlberg", "Urho Kekkonen", "Tarja Halonen", "P. E. Svinhufvud", "Kyösti Kallio", "Martti Ahtisaari", "Mauno Koivisto", "Sauli Niinistö", "Juho Kusti Paasikivi", "Lauri Kristian Relander", "Risto Ryti", "Carl Gustaf Mannerheim"]],
-    ["kansallispuistot", "Nimeä Suomen kansallispuisto.", ["Nuuksio", "Oulanka", "Koli", "Pallas-Yllästunturi", "Urho Kekkosen kansallispuisto", "Lemmenjoki", "Repovesi", "Pyhä-Luosto", "Saaristomeri", "Riisitunturi", "Hossa", "Patvinsuo"]],
-    ["suuret-kaupungit", "Nimeä suomalainen kaupunki, jossa on yli 50 000 asukasta Tilastokeskuksen vuoden 2024 kuntajaon mukaan.", ["Helsinki", "Espoo", "Tampere", "Vantaa", "Oulu", "Turku", "Jyväskylä", "Kuopio", "Lahti", "Pori", "Kouvola", "Joensuu"]],
-    ["suurimmat-jarvet", "Nimeä Suomessa sijaitseva järvi, joka kuuluu Suomen pinta-alaltaan suurimpien järvien joukkoon (yli 100 km²).", ["Saimaa", "Päijänne", "Inarijärvi", "Pielinen", "Oulujärvi", "Keitele", "Kallavesi", "Höytiäinen"]],
-    ["unesco-kohteet", "Nimeä Suomessa sijaitseva Unescon maailmanperintökohde.", ["Suomenlinna", "Vanha Rauma", "Petäjäveden vanha kirkko", "Verlan puuhiomo", "Sammallahdenmäki", "Struven ketju", "Merenkurkun saaristo"]],
-    ["maakunnat", "Nimeä Suomen maakunta.", ["Uusimaa", "Pirkanmaa", "Varsinais-Suomi", "Pohjois-Pohjanmaa", "Lappi", "Pohjois-Savo", "Keski-Suomi", "Satakunta", "Kanta-Häme", "Päijät-Häme", "Kymenlaakso", "Etelä-Karjala"]],
-    ["suomalaiset-saariryhmat", "Nimeä Saaristomeren saaristoon kuuluva saari tai saariryhmä.", ["Nauvo", "Korppoo", "Seili", "Utö", "Kökar", "Iniö", "Houtskari", "Jurmo"]],
-    ["kirkot", "Nimeä suomalainen keskiaikainen kivikirkko.", ["Turun tuomiokirkko", "Porvoon tuomiokirkko", "Naantalin kirkko", "Hattulan Pyhän Ristin kirkko", "Lohjan Pyhän Laurin kirkko", "Sipoon kirkko", "Kemiön kirkko", "Rauman Pyhän Ristin kirkko"]],
-    ["nobel-suomi", "Nimeä suomalainen Nobel-palkittu tai Suomessa syntynyt Nobel-palkittu.", ["A. I. Virtanen", "Martti Ahtisaari", "Frans Emil Sillanpää", "Ragnar Granit", "Bengt Holmström"]],
-    ["säveltajat", "Nimeä suomalainen säveltäjä.", ["Jean Sibelius", "Oskar Merikanto", "Kaija Saariaho", "Einojuhani Rautavaara", "Magnus Lindberg", "Leevi Madetoja", "Toivo Kuula", "Uuno Klami"]],
-    ["linnat", "Nimeä Suomessa sijaitseva historiallinen linna tai linnoitus.", ["Hämeen linna", "Turun linna", "Olavinlinna", "Raaseporin linna", "Kastelholman linna", "Suomenlinna", "Svartholman merilinnoitus", "Bomarsund"]],
-    ["suurimmat-saaret", "Nimeä Suomen suurimpiin merisaariin kuuluva saari.", ["Föglö", "Hailuoto", "Kemiönsaari", "Nauvo", "Korppoo", "Iniö", "Brändö", "Vårdö"]],
-    ["olympiamitalistit", "Nimeä suomalainen olympiavoittaja.", ["Paavo Nurmi", "Lasse Virén", "Iivo Niskanen", "Kalle Anttila", "Hannes Kolehmainen", "Matti Nykänen", "Sami Jauhojärvi", "Pertti Karppinen"]],
-    ["kirjailijat", "Nimeä suomalainen kirjailija.", ["Minna Canth", "Aleksis Kivi", "Mika Waltari", "Tove Jansson", "Sofi Oksanen", "Väinö Linna", "Kjell Westö", "Rosa Liksom"]],
-    ["luontosymbolit", "Nimeä Suomen virallinen luontosymboli.", ["laulujoutsen", "karhu", "koivu", "kielo", "ahven", "ahomansikka", "mustikka", "sinitiainen"]],
-  ]],
-  ["suomen-historia", [
-    ["suuriruhtinaskunnan-kaupungit", "Nimeä Suomen suuriruhtinaskunnan aikainen suomalainen kaupunki.", ["Helsinki", "Turku", "Viipuri", "Tampere", "Pori", "Vaasa", "Oulu", "Kuopio"]],
-    ["suomen-sota", "Nimeä Suomen sodan 1808–1809 taistelu.", ["Siikajoen taistelu", "Oravaisten taistelu", "Juutinrauman taistelu", "Lapuankaan taistelu", "Alavuden taistelu", "Sävarin taistelu"]],
-    ["sortokaudet", "Nimeä Suomen ensimmäisen sortokauden lähteissä dokumentoitu vastarinnan muoto tai tapahtuma.", ["Suuri adressi", "Kagaali", "Bobrikovin murha", "Voima-lehti", "perustuslaillinen vastarinta", "asevelvollisuuslakko"]],
-    ["entiset-laanit", "Nimeä Suomessa historiallisesti käytetty lääni.", ["Uudenmaan lääni", "Turun ja Porin lääni", "Hämeen lääni", "Viipurin lääni", "Mikkelin lääni", "Kuopion lääni", "Oulun lääni", "Lapin lääni"]],
-    ["sisällissodan-paikat", "Nimeä Suomen vuoden 1918 sisällissodan keskeinen taistelupaikka.", ["Tampere", "Varkaus", "Viipuri", "Lahti", "Hämeenlinna", "Suinula", "Kuru", "Rautu"]],
-    ["jatkosodan-rintamat", "Nimeä jatkosodan suomalainen rintamasuunta tai alue.", ["Karjalan kannas", "Aunus", "Syväri", "Vienan-Karjala", "Petsamo", "Laatokan Karjala"]],
-    ["rauha-sopimukset", "Nimeä Suomen historiaan liittyvä rauhansopimus.", ["Tarton rauha", "Moskovan rauha", "Moskovan välirauha", "Pariisin rauhansopimus", "Haminan rauha", "Uudenkaupungin rauha"]],
-    ["valtiopaivat", "Nimeä Suomen historian valtiopäiväkokous.", ["Porvoon valtiopäivät", "Turun valtiopäivät", "Helsingin valtiopäivät", "Säätyvaltiopäivät 1863", "Säätyvaltiopäivät 1867", "Säätyvaltiopäivät 1885"]],
-    ["itsenäisyyden-tunnustajat", "Nimeä valtio, joka tunnusti Suomen itsenäisyyden joulukuussa 1917 tai pian sen jälkeen.", ["Neuvosto-Venäjä", "Ruotsi", "Saksa", "Ranska", "Iso-Britannia", "Yhdysvallat"]],
-    ["vanhat-kaupungit", "Nimeä Suomen keskiajalla perustettu kaupunki.", ["Turku", "Porvoo", "Rauma", "Naantali", "Viipuri", "Ulvila"]],
-    ["presidenttien-ensimmaiset", "Nimeä Suomen ensimmäiseen presidenttikauteen ennen vuotta 1950 liittyvä presidentti.", ["K. J. Ståhlberg", "L. K. Relander", "P. E. Svinhufvud", "Kyösti Kallio", "Risto Ryti", "Carl Gustaf Mannerheim"]],
-    ["karjalan-kaupungit", "Nimeä luovutetun Karjalan historiallinen kaupunki.", ["Viipuri", "Sortavala", "Käkisalmi", "Suojärvi", "Pitkäranta", "Lahdenpohja"]],
-    ["autonomian-uudistukset", "Nimeä Suomen autonomian ajan uudistus tai instituutio.", ["senaatti", "valtiopäivät", "kieliasetus", "elinkeinovapaus", "kansakouluasetus", "suomen markka"]],
-    ["kansallisliikkeen-hahmot", "Nimeä Suomen kansallisen heräämisen keskeinen henkilö.", ["J. V. Snellman", "Elias Lönnrot", "Johan Ludvig Runeberg", "Zacharias Topelius", "Fredrik Cygnaeus", "Anders Chydenius"]],
-    ["sotakorvaukset", "Nimeä Suomen sotakorvausteollisuuden valmistama tuote tai tuoteryhmä.", ["laivat", "veturit", "kaapelit", "koneet", "sähkömoottorit", "paperikoneet"]],
-  ]],
-  ["maailmanhistoria", [
-    ["antiikin-ihmeet", "Nimeä yksi antiikin maailman seitsemästä ihmeestä.", ["Gizan suuri pyramidi", "Babylonin riippuvat puutarhat", "Artemiin temppeli", "Zeuksen patsas", "Halikarnassoksen mausoleumi", "Rhodoksen kolossi", "Aleksandrian majakka"]],
-    ["apollo-lennot", "Nimeä Apollo-ohjelman miehitetty lento.", ["Apollo 7", "Apollo 8", "Apollo 9", "Apollo 10", "Apollo 11", "Apollo 12", "Apollo 13", "Apollo 15"]],
-    ["kreikan-jumalat", "Nimeä antiikin Kreikan olympolainen jumala.", ["Zeus", "Hera", "Poseidon", "Athena", "Apollo", "Artemis", "Ares", "Afrodite", "Hermes", "Demeter", "Hefaistos", "Dionysos"]],
-    ["kiinan-dynastiat", "Nimeä Kiinan historian keisaridynastia.", ["Qin", "Han", "Tang", "Song", "Yuan", "Ming", "Sui", "Zhou"]],
-    ["ranskan-vallankumous", "Nimeä Ranskan suuren vallankumouksen henkilö.", ["Maximilien Robespierre", "Georges Danton", "Jean-Paul Marat", "Olympe de Gouges", "Emmanuel Sieyès", "Lafayette"]],
-    ["toinen-maailmansota", "Nimeä toisen maailmansodan liittoutuneisiin kuulunut valtio.", ["Yhdysvallat", "Iso-Britannia", "Neuvostoliitto", "Kiina", "Ranska", "Kanada", "Australia", "Puola"]],
-    ["kirjoitusjarjestelmat", "Nimeä historiallinen kirjoitusjärjestelmä.", ["hieroglyfit", "nuolenpääkirjoitus", "foinikialainen aakkosto", "latinalainen aakkosto", "kreikkalainen aakkosto", "riimukirjoitus", "brahmi", "mayakirjoitus"]],
-    ["rooman-keisarit", "Nimeä Rooman keisari Julio-Claudianus-dynastiasta.", ["Augustus", "Tiberius", "Caligula", "Claudius", "Nero"]],
-    ["historialliset-imperiumit", "Nimeä historiallinen imperiumi.", ["Rooman valtakunta", "Bysantin valtakunta", "Mongolivaltakunta", "Osmanien valtakunta", "Britannian imperiumi", "Persian valtakunta", "Azteekkivaltakunta", "Inkojen valtakunta"]],
-    ["maailmannayttelyt", "Nimeä kaupunki, jossa on järjestetty virallinen maailmannäyttely ennen vuotta 2025.", ["Lontoo", "Pariisi", "Chicago", "New York", "Bryssel", "Osaka", "Shanghai", "Dubai"]],
-    ["kylma-sota", "Nimeä kylmän sodan keskeinen kriisi tai tapahtuma.", ["Berliinin saarto", "Kuuban ohjuskriisi", "Berliinin muuri", "Unkarin kansannousu", "Prahan kevät", "Afganistanin sota"]],
-    ["muinaiset-kulttuurit", "Nimeä muinainen korkeakulttuuri.", ["Muinainen Egypti", "Sumer", "Minoalainen kulttuuri", "Mykene", "Indus-kulttuuri", "Olmeekit", "Moche-kulttuuri", "Klassinen Maya"]],
-    ["uskonnolliset-tekstit", "Nimeä historiallinen uskonnollinen teksti.", ["Raamattu", "Koraani", "Veda-kirjat", "Tripitaka", "Toora", "Avesta", "Tao Te Ching", "Kojiki"]],
-    ["renessanssin-hahmot", "Nimeä renessanssin eurooppalainen vaikuttaja.", ["Leonardo da Vinci", "Michelangelo", "Rafael", "Niccolò Machiavelli", "Erasmus Rotterdamilainen", "Galileo Galilei"]],
-    ["vallankumoukset", "Nimeä historiallinen vallankumous.", ["Ranskan vallankumous", "Amerikan vallankumous", "Venäjän vallankumous", "Haitin vallankumous", "Teollinen vallankumous", "Neilikkavallankumous"]],
-  ]],
-  ["maantiede", [
-    ["itämeri", "Nimeä Itämereen rannikkonsa ulottava valtio.", ["Suomi", "Ruotsi", "Viro", "Latvia", "Liettua", "Puola", "Saksa", "Tanska", "Venäjä"]],
-    ["paivantasaaja", "Nimeä valtio, jonka alueella päiväntasaaja kulkee.", ["Ecuador", "Kolumbia", "Brasilia", "São Tomé ja Príncipe", "Gabon", "Kongon tasavalta", "Kongon demokraattinen tasavalta", "Uganda", "Kenia", "Somalia", "Indonesia", "Kiribati"]],
-    ["tonavan-valtiot", "Nimeä valtio, jonka läpi Tonava virtaa.", ["Saksa", "Itävalta", "Slovakia", "Unkari", "Kroatia", "Serbia", "Romania", "Bulgaria", "Moldova", "Ukraina"]],
-    ["valimeri", "Nimeä Välimeren rannikkovaltio.", ["Espanja", "Ranska", "Italia", "Kreikka", "Turkki", "Kypros", "Malta", "Egypti", "Libya", "Tunisia", "Algeria", "Marokko"]],
-    ["etel-amerikka", "Nimeä Etelä-Amerikan itsenäinen valtio.", ["Argentiina", "Bolivia", "Brasilia", "Chile", "Kolumbia", "Ecuador", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"]],
-    ["pohjoismaat", "Nimeä Pohjoismaiden neuvoston jäsenmaa.", ["Suomi", "Ruotsi", "Norja", "Tanska", "Islanti", "Färsaaret", "Grönlanti", "Ahvenanmaa"]],
-    ["mustameri", "Nimeä Mustanmeren rannikkovaltio.", ["Turkki", "Bulgaria", "Romania", "Ukraina", "Venäjä", "Georgia"]],
-    ["karibian-valtiot", "Nimeä Karibianmeren saarivaltio.", ["Kuuba", "Jamaika", "Haiti", "Dominikaaninen tasavalta", "Barbados", "Bahama", "Trinidad ja Tobago", "Saint Lucia"]],
-    ["karkipiiri", "Nimeä maa tai alue, jonka halki Kravun kääntöpiiri kulkee.", ["Meksiko", "Bahama", "Länsi-Sahara", "Egypti", "Saudi-Arabia", "Intia", "Kiina", "Taiwan", "Japani"]],
-    ["euroopan-mikrovaltiot", "Nimeä Euroopan mikrovaltio.", ["Andorra", "Liechtenstein", "Monaco", "San Marino", "Vatikaani", "Malta"]],
-    ["suurimmat-valtameret", "Nimeä yksi maailman viidestä valtamerestä.", ["Tyynimeri", "Atlantti", "Intian valtameri", "Jäämeri", "Eteläinen jäämeri"]],
-    ["afrikan-jarvet", "Nimeä Afrikan suuri järvi.", ["Victoriajärvi", "Tanganyikajärvi", "Malawijärvi", "Turkanajärvi", "Albertjärvi", "Edwardjärvi", "Kivujärvi"]],
-    ["vuoristot", "Nimeä maailman kartastoissa nimetty vuoristo.", ["Alpit", "Andit", "Himalaja", "Kalliovuoret", "Kaukasus", "Uralvuoret", "Pyreneet", "Atlasvuoret"]],
-    ["euroopan-joet", "Nimeä Euroopan joki.", ["Volga", "Tonava", "Rein", "Elbe", "Seine", "Loire", "Po", "Veiksel", "Dnepr"]],
-    ["aavikot", "Nimeä maailman aavikko.", ["Sahara", "Gobin autiomaa", "Atacaman autiomaa", "Kalahari", "Namib", "Arabian aavikko", "Mojaven autiomaa", "Sonoran autiomaa"]],
-  ]],
-  ["yhteiskunta", [
-    ["eu-jasenet", "Nimeä Euroopan unionin jäsenvaltio 1.1.2024 tilanteen mukaan.", ["Suomi", "Ruotsi", "Viro", "Saksa", "Ranska", "Italia", "Espanja", "Puola", "Irlanti", "Kreikka", "Portugali", "Itävalta"]],
-    ["nato-perustajat", "Nimeä Naton vuonna 1949 perustanut jäsenvaltio.", ["Yhdysvallat", "Kanada", "Iso-Britannia", "Ranska", "Italia", "Belgia", "Alankomaat", "Luxemburg", "Tanska", "Norja", "Islanti", "Portugali"]],
-    ["g7", "Nimeä G7-maa.", ["Yhdysvallat", "Kanada", "Iso-Britannia", "Ranska", "Saksa", "Italia", "Japani"]],
-    ["yk-kielet", "Nimeä YK:n virallinen kieli.", ["arabia", "kiina", "englanti", "ranska", "venäjä", "espanja"]],
-    ["eu-toimielimet", "Nimeä Euroopan unionin toimielin.", ["Euroopan parlamentti", "Eurooppa-neuvosto", "Euroopan unionin neuvosto", "Euroopan komissio", "Euroopan unionin tuomioistuin", "Euroopan keskuspankki", "Euroopan tilintarkastustuomioistuin"]],
-    ["suomen-perustuselimet", "Nimeä Suomen perustuslaissa mainittu valtioelin.", ["eduskunta", "tasavallan presidentti", "valtioneuvosto", "tuomioistuimet", "laillisuusvalvonta", "keskusvaalilautakunta"]],
-    ["g20", "Nimeä G20-ryhmän jäsen.", ["Argentiina", "Australia", "Brasilia", "Kanada", "Kiina", "Ranska", "Saksa", "Intia", "Indonesia", "Italia", "Japani", "Meksiko"]],
-    ["pohjoismaiden-neuvosto", "Nimeä Pohjoismaiden neuvoston jäsenalue.", ["Suomi", "Ruotsi", "Norja", "Tanska", "Islanti", "Färsaaret", "Grönlanti", "Ahvenanmaa"]],
-    ["turvallisuusneuvosto", "Nimeä YK:n turvallisuusneuvoston pysyvä jäsen.", ["Yhdysvallat", "Venäjä", "Kiina", "Ranska", "Iso-Britannia"]],
-    ["suomen-vaalit", "Nimeä Suomessa järjestettävä lakisääteinen vaali.", ["eduskuntavaalit", "presidentinvaalit", "kuntavaalit", "aluevaalit", "europarlamenttivaalit", "kirkollisvaalit"]],
-    ["ihmisoikeusasiakirjat", "Nimeä kansainvälinen ihmisoikeusasiakirja.", ["ihmisoikeuksien yleismaailmallinen julistus", "Euroopan ihmisoikeussopimus", "lapsen oikeuksien sopimus", "pakolaissopimus", "kidutuksen vastainen sopimus", "vammaissopimus"]],
-    ["kansalaisyhteiskunta", "Nimeä suomalainen laissa tunnistettu yhteisömuoto.", ["yhdistys", "säätiö", "osuuskunta", "ammattiliitto", "puolue", "seurakunta"]],
-    ["julkishallinto", "Nimeä Suomen valtionhallinnon viranomainen.", ["Verohallinto", "Kela", "Poliisi", "Tulli", "Tilastokeskus", "Maanmittauslaitos", "Traficom", "Ruokavirasto"]],
-    ["kansainvaliset-tuomioistuimet", "Nimeä kansainvälinen tuomioistuin tai tuomioelin.", ["Kansainvälinen tuomioistuin", "Kansainvälinen rikostuomioistuin", "Euroopan ihmisoikeustuomioistuin", "Euroopan unionin tuomioistuin", "Merenkulun kansainvälinen tuomioistuin", "Andien yhteisön tuomioistuin"]],
-    ["julkiset-palvelut", "Nimeä suomalaisen hyvinvointivaltion lakisääteinen julkinen palvelu.", ["perusopetus", "kirjastopalvelut", "päivähoito", "pelastustoimi", "terveydenhuolto", "sosiaalihuolto", "joukkoliikenne"]],
-  ]],
-  ["tiede", [
-    ["yksikirjaimiset-symbolit", "Nimeä alkuaine, jonka kemiallinen merkki on yksi kirjain.", ["boori", "hiili", "fluori", "vety", "jodi", "kalium", "typpi", "happi", "fosfori", "rikki", "uraani", "vanadiini"]],
-    ["aurinkokunta", "Nimeä aurinkokunnan planeetta tai Kansainvälisen tähtitieteellisen unionin tunnustama kääpiöplaneetta.", ["Merkurius", "Venus", "Maa", "Mars", "Jupiter", "Saturnus", "Uranus", "Neptunus", "Pluto", "Ceres", "Eris", "Haumea"]],
-    ["si-perusyksikot", "Nimeä SI-järjestelmän perusyksikkö.", ["metri", "kilogramma", "sekunti", "ampeeri", "kelvin", "mooli", "kandela"]],
-    ["sahkomagneettinen-spektri", "Nimeä sähkömagneettisen spektrin alue.", ["radioaallot", "mikroaallot", "infrapuna", "näkyvä valo", "ultravioletti", "röntgensäteily", "gammasäteily"]],
-    ["ilmakehan-kerrokset", "Nimeä Maan ilmakehän kerros.", ["troposfääri", "stratosfääri", "mesosfääri", "termosfääri", "eksosfääri", "ionosfääri"]],
-    ["pilvisuvut", "Nimeä Maailman ilmatieteen järjestön pilvisuku.", ["cirrus", "cumulus", "stratus", "stratocumulus", "cirrocumulus", "cirrostratus", "altocumulus", "altostratus", "nimbostratus", "cumulonimbus"]],
-    ["nukleiinihapot", "Nimeä DNA:n tai RNA:n emäs.", ["adeniini", "sytosiini", "guaniini", "tymiini", "urasiili"]],
-    ["standardimallin-hiukkaset", "Nimeä hiukkasfysiikan standardimallin fermioni.", ["elektroni", "myoni", "tau-leptoni", "elektronin neutriino", "muonneutriino", "tauneutriino", "ylös-kvarkki", "alas-kvarkki", "s-kvarkki", "c-kvarkki", "t-kvarkki", "b-kvarkki"]],
-    ["geologiset-kaudet", "Nimeä geologinen maailmankausi tai -kausi.", ["kambrikausi", "ordovikikausi", "siluurikausi", "devonikausi", "hiilikausi", "permikausi", "triaskausi", "jurakausi", "liitukausi", "paleogeenikausi", "neogeenikausi", "kvartäärikausi"]],
-    ["veriryhmat", "Nimeä ABO- tai Rh-järjestelmän veriryhmä.", ["A-positiivinen", "A-negatiivinen", "B-positiivinen", "B-negatiivinen", "AB-positiivinen", "AB-negatiivinen", "O-positiivinen", "O-negatiivinen"]],
-    ["aminohapot", "Nimeä proteiineissa tavattava standardi aminohappo.", ["alaniini", "arginiini", "asparagiini", "aspartaatti", "kysteiini", "glutamiini", "glutamaatti", "glysiini", "histidiini", "isoleusiini", "leusiini", "lysiini", "metioniini", "fenyylialaniini", "proliini", "seriini", "treoniini", "tryptofaani", "tyrosiini", "valiini"]],
-    ["hiukkaskiihdyttimet", "Nimeä hiukkaskiihdytin tai hiukkasfysiikan tutkimuslaite.", ["LHC", "Tevatron", "PETRA", "LEP", "SPS", "Fermilab", "KEK", "RHIC"]],
-    ["sukupuut", "Nimeä SI-järjestelmän kerrannaisyksikön etuliite.", ["kilo", "mega", "giga", "tera", "milli", "mikro", "nano", "piko", "sentti", "desi"]],
-    ["kallonhermot", "Nimeä aivohermo.", ["hajuhermo", "näköhermo", "silmän liikehermo", "telahermo", "kolmoishermo", "loitontajahermo", "kasvohermo", "kuulo-tasapainohermo"]],
-    ["tieteelliset-yksikot", "Nimeä johdettu SI-yksikkö.", ["newton", "joule", "watti", "pascal", "voltti", "ohmi", "tesla", "hertsi"]],
-  ]],
-  ["luonto", [
-    ["suurpedot", "Nimeä nykyisin elävä suurpeto.", ["karhu", "susi", "ilves", "ahma", "leijona", "tiikeri", "jääkarhu", "jaguaari"]],
-    ["karhulajit", "Nimeä karhulaji.", ["ruskeakarhu", "jääkarhu", "mustakarhu", "huulikarhu", "aurinkokarhu", "silmäkarhu", "isosilmäkarhu", "pandakarhu"]],
-    ["valaat", "Nimeä valaslaji.", ["sinivalas", "ryhävalas", "miekkavalas", "kaskelotti", "lahtivalas", "harmaavalas", "sarvivalas", "beluga"]],
-    ["suomen-puut", "Nimeä Suomessa luonnonvaraisena kasvava puulaji.", ["rauduskoivu", "hieskoivu", "mänty", "kuusi", "haapa", "harmaaleppä", "tervaleppä", "pihlaja", "tuomi", "vaahtera"]],
-    ["hait", "Nimeä hailaji.", ["valkohai", "vasarahai", "jättiläishai", "tiikerihai", "sin hai", "hoitajahai", "musteväkihai", "ketunhai"]],
-    ["nisakkaiden-lahkot", "Nimeä nisäkkäiden lahko.", ["petoeläimet", "jyrsijät", "lepakot", "valaansukuiset", "kädelliset", "sorkkaeläimet", "norsueläimet", "hyönteissyöjät"]],
-    ["suomen-linnut", "Nimeä Suomessa tavattava lintulaji.", ["laulujoutsen", "merikotka", "sinitiainen", "talitiainen", "varpunen", "harakka", "kurki", "kuikka", "teeri", "metso"]],
-    ["apinat", "Nimeä kädellinen eläin.", ["simpanssi", "bonobo", "gorilla", "orangitani", "ihminen", "gibboni", "makaki", "kapusiini"]],
-    ["biomit", "Nimeä maapallon biomi.", ["tundra", "taiga", "aavikko", "savanni", "sademetsä", "arojen ruohikko", "välimerenkasvillisuus", "lauhkea lehtimetsä"]],
-    ["niveljalkaiset", "Nimeä niveljalkainen eläinryhmä.", ["hyönteiset", "hämähäkkieläimet", "äyriäiset", "tuhatjalkaiset", "satajalkaiset", "siipijalkaiset"]],
-    ["sammakkoelaimet", "Nimeä sammakkoeläin.", ["sammakko", "rupikonna", "vesilisko", "salamanteri", "keuhkoton salamanteri", "viitasammakko", "axolotl"]],
-    ["havupuut", "Nimeä havupuulaji.", ["mänty", "kuusi", "kataja", "lehtikuusi", "pihta", "douglaskuusi", "sypressi", "marjakuusi"]],
-    ["koralliriutat", "Nimeä koralliriutan eläin.", ["koralli", "merivuokko", "merikilpikonna", "papukaijakala", "merihevonen", "riuttahai", "jättisimpukka", "merimakkara"]],
-    ["kasvin-osat", "Nimeä kasvin perusrakenneosa.", ["juuri", "varsi", "lehti", "kukka", "hedelmä", "siemen", "silmu", "pihka"]],
-    ["perhoset", "Nimeä Suomessa tavattava päiväperhonen.", ["amiraali", "neitoperhonen", "sitruunaperhonen", "tesmaperhonen", "nokkosperhonen", "herukkaperhonen", "ritariperhonen", "kangasperhonen"]],
-  ]],
-  ["kirjallisuus", [
-    ["shakespeare", "Nimeä William Shakespearen näytelmä.", ["Hamlet", "Romeo ja Julia", "Macbeth", "Othello", "Kuningas Lear", "Myrsky", "Julius Caesar", "Kuten haluatte"]],
-    ["dickens", "Nimeä Charles Dickensin romaani.", ["Oliver Twist", "David Copperfield", "Suuria odotuksia", "Kaksi kaupunkia", "Pickwick-kerhon jälkeenjääneet paperit", "Joululaulu", "Nicholas Nickleby"]],
-    ["tolkien", "Nimeä J. R. R. Tolkienin teos.", ["Hobitti", "Sormusten herra", "Silmarillion", "Hurinin lasten tarina", "Keskeneräisten tarujen kirja", "Roverandom", "Kullervon tarina"]],
-    ["austen", "Nimeä Jane Austenin romaani.", ["Ylpeys ja ennakkoluulo", "Järki ja tunteet", "Emma", "Mansfield Park", "Northanger Abbey", "Viisasteleva sydän"]],
-    ["muumit", "Nimeä Tove Janssonin muumikirja.", ["Muumi ja suuri tuhotulva", "Vaarallinen juhannus", "Muumipapan urotyöt", "Muumilaakson marraskuu", "Taikurin hattu", "Muumipeikko ja pyrstötähti", "Muumipeikko ja pyrstötähti -sarjakuva"]],
-    ["suomalaiset-kirjailijat", "Nimeä suomalainen kirjailija, jolla on teoksia 1900-luvulta.", ["Edith Södergran", "Hellaakoski", "Kalle Päätalo", "Maria Jotuni", "Juhani Aho", "Ilmari Kianto", "Pentti Saarikoski", "Anja Kauranen"]],
-    ["kirjallisuuden-lajit", "Nimeä kirjallisuuden laji.", ["romaani", "novelli", "runous", "draama", "essee", "elämäkerta", "sarjakuva", "aforismi"]],
-    ["dekkarihahmot", "Nimeä rikoskirjallisuudessa esiintyvä etsivähahmo.", ["Sherlock Holmes", "Hercule Poirot", "Miss Marple", "Maigret", "Philip Marlowe", "Sam Spade", "Mikael Blomkvist", "Harry Hole"]],
-    ["kirjallisuuskaudet", "Nimeä kirjallisuuden historiallinen aikakausi tai suuntaus.", ["antiikki", "keskiaika", "renessanssi", "barokki", "valistus", "romantiikka", "realismi", "modernismi", "postmodernismi"]],
-    ["nobel-kirjallisuus", "Nimeä kirjallisuuden Nobel-palkinnon saanut kirjailija.", ["Selma Lagerlöf", "Ernest Hemingway", "Toni Morrison", "Gabriel García Márquez", "Wisława Szymborska", "Kazuo Ishiguro", "Annie Ernaux", "Albert Camus"]],
-    ["eepokset", "Nimeä historiallinen eepos.", ["Kalevala", "Ilias", "Odysseia", "Gilgamešin eepos", "Beowulf", "Mahabharata", "Ramayana", "Popol Vuh"]],
-    ["satu-ja-kansanperinne", "Nimeä satu- tai kansanperinnekokoelma.", ["Grimmin sadut", "Tuhat ja yksi yötä", "Aisopoksen sadut", "Kalevala", "Nibelungenlaulu", "Kansansatuja Suomesta"]],
-    ["dystopiat", "Nimeä kaunokirjallinen dystopia.", ["1984", "Uljas uusi maailma", "Fahrenheit 451", "Neitiärrä", "Kärpästen herra", "Orjattaresi", "Me"]],
-    ["suomalaiset-klassikot", "Nimeä suomalaisen kirjallisuuden klassikkoteos.", ["Seitsemän veljestä", "Tuntematon sotilas", "Sinuhe egyptiläinen", "Puhdistus", "Kultahattu", "Juoksuhaudantie", "Rikos ja rangaistus"]],
-    ["kirjalliset-palkinnot", "Nimeä kansainvälinen kirjallisuuspalkinto.", ["Booker-palkinto", "Pulitzer-palkinto", "Goncourt-palkinto", "Neustadt-palkinto", "Hugo-palkinto", "Nebula-palkinto", "Finlandia-palkinto"]],
-  ]],
-  ["suomen-kieli", [
-    ["sijamuodot", "Nimeä suomen kielen sijamuoto.", ["nominatiivi", "genetiivi", "partitiivi", "inessiivi", "elatiivi", "illatiivi", "adessiivi", "ablatiivi", "allatiivi", "essiivi", "translatiivi", "abessiivi", "komitatiivi", "instruktiivi", "akkusatiivi"]],
-    ["vokaalit", "Nimeä suomen kielen vokaali.", ["a", "e", "i", "o", "u", "y", "ä", "ö"]],
-    ["diftongit", "Nimeä suomen kielessä esiintyvä diftongi.", ["ai", "ei", "oi", "ui", "yi", "äy", "öy", "au", "eu", "ou", "iu", "ie"]],
-    ["sanaluokat", "Nimeä suomen kielen sanaluokka.", ["substantiivi", "adjektiivi", "verbi", "pronomini", "numeraali", "adverbi", "prepositio", "postpositio", "konjunktio", "interjektio"]],
-    ["uralilaiset-kielet", "Nimeä uralilainen kieli.", ["suomi", "viro", "unkari", "saame", "livvi", "udmurtti", "mari", "komi", "hanti", "mansi"]],
-    ["välimerkit", "Nimeä suomen kielessä käytetty välimerkki.", ["piste", "pilkku", "puolipiste", "kaksoispiste", "kysymysmerkki", "huutomerkki", "ajatusviiva", "sulkeet", "lainausmerkit", "heittomerkki"]],
-    ["kuukaudet", "Nimeä kalenterikuukausi suomeksi.", ["tammikuu", "helmikuu", "maaliskuu", "huhtikuu", "toukokuu", "kesäkuu", "heinäkuu", "elokuu", "syyskuu", "lokakuu", "marraskuu", "joulukuu"]],
-    ["kieliopilliset-modukset", "Nimeä suomen kielen verbin tapaluokka.", ["indikatiivi", "imperatiivi", "konditionaali", "potentiaali", "infinitiivi", "partisiippi"]],
-    ["äänteenmuutokset", "Nimeä suomen kielen äänteenmuutos.", ["astevaihtelu", "vokaaliharmonia", "loppuheitto", "sisäheitto", "geminaatio", "palatalisaatio"]],
-    ["aakkoset", "Nimeä suomen aakkosten kirjain.", ["a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "l", "m", "n", "o", "p"]],
-    ["lainasanat", "Nimeä kieli, josta suomeen on tullut runsaasti lainasanoja.", ["ruotsi", "venäjä", "saksa", "latina", "kreikka", "englanti", "ranska", "saame"]],
-    ["retoriset-keinot", "Nimeä retorinen tehokeino.", ["metafora", "vertailu", "ironia", "anafora", "allitteraatio", "hyperbola", "antiteesi", "retorinen kysymys"]],
-    ["lausetyypit", "Nimeä suomen kielen lausetyyppi.", ["väitelause", "kysymyslause", "käskylause", "huudahduslause", "sivulause", "päälause"]],
-    ["suomen-murteet", "Nimeä suomen kielen murrealue tai murre.", ["savolaismurteet", "hämäläismurteet", "kaakkoismurteet", "lounaismurteet", "pohjalaismurteet", "peräpohjalaiset murteet", "keski- ja pohjoispohjalaiset murteet"]],
-    ["kirjoitusmerkit", "Nimeä tekstissä käytetty typografinen merkki.", ["asteriski", "risuaita", "vinoviiva", "kenoviiva", "yhtäsuuruusmerkki", "prosenttimerkki", "euromerkki", "at-merkki"]],
-  ]],
-  ["taide", [
-    ["taidesuuntaukset", "Nimeä länsimaisen taiteen suuntaus.", ["renessanssi", "barokki", "rokokoo", "romantiikka", "impressionismi", "kubismi", "surrealismi", "ekspressionismi", "minimalismi"]],
-    ["van-gogh", "Nimeä Vincent van Goghin maalaus.", ["Tähtikirkas yö", "Auringonkukat", "Perunansyöjät", "Makuuhuone Arlesissa", "Kahvila yöllä", "Tohtori Gachetin muotokuva", "Korpit vehnäpellossa"]],
-    ["picasso", "Nimeä Pablo Picasson teos.", ["Guernica", "Avignonin neidot", "Itkevä nainen", "Kolme muusikkoa", "Nainen peilin edessä", "Dora Maarin muotokuva", "Härkä"]],
-    ["suomalaiset-taiteilijat", "Nimeä suomalainen kuvataiteilija.", ["Akseli Gallen-Kallela", "Helene Schjerfbeck", "Hugo Simberg", "Pekka Halonen", "Ellen Thesleff", "Tyko Sallinen", "Venny Soldan-Brofeldt", "Albert Edelfelt"]],
-    ["museot", "Nimeä suomalainen taidemuseo.", ["Ateneum", "Kiasma", "Amos Rex", "Sinebrychoffin taidemuseo", "Didrichsenin taidemuseo", "Serlachius-museot", "EMMA", "Turun taidemuseo"]],
-    ["renessanssin-taiteilijat", "Nimeä renessanssin taiteilija.", ["Leonardo da Vinci", "Michelangelo", "Rafael", "Sandro Botticelli", "Tizian", "Donatello", "Albrecht Dürer", "Caravaggio"]],
-    ["värit", "Nimeä näkyvän valon spektrin väri.", ["punainen", "oranssi", "keltainen", "vihreä", "sininen", "indigo", "violetti"]],
-    ["maalaustekniikat", "Nimeä maalaustekniikka.", ["öljymaalaus", "akvarelli", "guassi", "fresko", "tempera", "akryylimaalaus", "pastelli", "encaustiikka"]],
-    ["veistosmateriaalit", "Nimeä kuvanveistossa käytetty materiaali.", ["marmori", "pronssi", "puu", "savi", "kipsi", "teräs", "lasikuitu", "alumiini"]],
-    ["arkkitehtuurin-klassiset-ordot", "Nimeä klassinen arkkitehtuurin pylväsjärjestelmä.", ["doorilainen", "joonialainen", "korinttilainen", "toskaanilainen", "komposiittinen"]],
-    ["valokuvaus", "Nimeä valokuvauksen lajityyppi.", ["muotokuva", "maisemakuva", "katukuva", "luontokuva", "makrokuva", "uutiskuva", "arkkitehtuurikuva", "still life"]],
-    ["monet", "Nimeä Claude Monet'n maalaus.", ["Impressio, auringonnousu", "Vesililjat", "Rouenin katedraali", "Heinäsuovat", "Parlamenttitalo", "Nainen päivänvarjon kanssa", "Etretat'n kalliot"]],
-    ["da-vinci", "Nimeä Leonardo da Vincin teos.", ["Mona Lisa", "Viimeinen ehtoollinen", "Vitruviuksen mies", "Neitsyt Maria kallioilla", "Pyhä Anna, Neitsyt Maria ja Jeesus-lapsi", "Johannes Kastaja"]],
-    ["taiteen-mediat", "Nimeä kuvataiteen perinteinen taiteenlaji tai media.", ["maalaus", "piirustus", "grafiikka", "veistos", "keramiikka", "tekstiilitaide", "valokuvaus", "videotaide"]],
-    ["museotyypit", "Nimeä museotyyppi.", ["taidemuseo", "luonnontieteellinen museo", "historiallinen museo", "tekniikan museo", "merimuseo", "ulkomuseo", "designmuseo", "lastenmuseo"]],
-  ]],
-  ["musiikki", [
-    ["sibelius", "Nimeä Jean Sibeliuksen teos.", ["Finlandia", "Karelia-sarja", "Valse triste", "Viulukonsertto", "Satu", "Lemminkäisen paluu", "Tuonelan joutsen", "Pelléas ja Mélisande"]],
-    ["beatles", "Nimeä The Beatlesin kappale.", ["Hey Jude", "Yesterday", "Let It Be", "Help!", "A Day in the Life", "Come Together", "Eleanor Rigby", "Here Comes the Sun"]],
-    ["abba", "Nimeä ABBAn kappale.", ["Dancing Queen", "Mamma Mia", "Waterloo", "Fernando", "The Winner Takes It All", "Take a Chance on Me", "SOS", "Gimme! Gimme! Gimme!"]],
-    ["orkesterisoittimet", "Nimeä sinfoniaorkesterin soitin.", ["viulu", "alttoviulu", "sello", "kontrabasso", "huilu", "oboe", "klarinetti", "fagotti", "käyrätorvi", "trumpetti", "pasuuna", "timpani"]],
-    ["dynamiikka", "Nimeä nuottikirjoituksessa käytetty dynamiikkamerkintä.", ["piano", "forte", "fortissimo", "pianissimo", "mezzo piano", "mezzo forte", "crescendo", "diminuendo"]],
-    ["nuotit", "Nimeä länsimaisen sävelasteikon sävel.", ["c", "d", "e", "f", "g", "a", "h"]],
-    ["jousisoittimet", "Nimeä jousisoitin.", ["viulu", "alttoviulu", "sello", "kontrabasso", "harppu", "kitara", "mandoliini", "balalaikka"]],
-    ["eurovision-voittajat", "Nimeä maa, joka on voittanut Eurovision laulukilpailun viimeistään vuonna 2024.", ["Suomi", "Ruotsi", "Norja", "Tanska", "Irlanti", "Yhdistynyt kuningaskunta", "Italia", "Ranska", "Saksa", "Ukraina", "Portugali", "Alankomaat"]],
-    ["oopperasäveltäjät", "Nimeä oopperasäveltäjä.", ["Wolfgang Amadeus Mozart", "Giuseppe Verdi", "Richard Wagner", "Giacomo Puccini", "Georges Bizet", "Claudio Monteverdi", "Jean-Philippe Rameau", "Hector Berlioz"]],
-    ["jazz-soittimet", "Nimeä jazzissa tavallinen soitin.", ["saksofoni", "trumpetti", "piano", "kontrabasso", "rummut", "klarinetti", "pasuuna", "kitara"]],
-    ["musiikkityylit", "Nimeä musiikin tyylilaji.", ["rock", "jazz", "klassinen musiikki", "reggae", "blues", "hiphop", "elektroninen musiikki", "kansanmusiikki", "metalli"]],
-    ["mozart-oopperat", "Nimeä Wolfgang Amadeus Mozartin ooppera.", ["Figaron häät", "Don Giovanni", "Taikahuilu", "Così fan tutte", "Idomeneo", "Ryöstö Seraljista", "Mitridate"]],
-    ["suomalaiset-kansansoittimet", "Nimeä suomalainen kansanmusiikin soitin.", ["kantele", "viulu", "harmonikka", "jouhikko", "paimensoitin", "torvi", "säkkipilli", "rumpu"]],
-    ["musiikkitermit", "Nimeä musiikin esitysmerkintä tai termi.", ["adagio", "allegro", "andante", "presto", "a tempo", "da capo", "legato", "staccato"]],
-    ["kuorotyypit", "Nimeä kuoromuoto tai kuorotyyppi.", ["sekakuoro", "naiskuoro", "mieskuoro", "lapsikuoro", "kamarikuoro", "oopperakuoro", "gospelkuoro"]],
-  ]],
-  ["elokuvat-ja-televisio", [
-    ["bond-näyttelijät", "Nimeä James Bondia elokuvissa näytellyt näyttelijä.", ["Sean Connery", "George Lazenby", "Roger Moore", "Timothy Dalton", "Pierce Brosnan", "Daniel Craig"]],
-    ["star-wars", "Nimeä Star Wars -elokuva.", ["Uusi toivo", "Imperiumin vastaisku", "Jedin paluu", "Pimeä uhka", "Kloonien hyökkäys", "Sithin kosto", "Voima herää", "Viimeinen jedi", "Skywalkerin nousu"]],
-    ["pixar", "Nimeä Pixarin pitkä animaatioelokuva.", ["Toy Story", "Ötökän elämää", "Toy Story 2", "Monsterit Oy", "Nemoa etsimässä", "Ratatouille", "Up", "Coco", "Soul"]],
-    ["hitchcock", "Nimeä Alfred Hitchcockin ohjaama elokuva.", ["Psyko", "Vertigo", "Takaikkuna", "Linnut", "North by Northwest", "Rebecca", "Mies joka tiesi liikaa"]],
-    ["miyazaki", "Nimeä Hayao Miyazakin ohjaama elokuva.", ["Naapurini Totoro", "Henkien kätkemä", "Prinsessa Mononoke", "Liikkuva linna", "Kikin lähettipalvelu", "Tuulen laakson Nausicaä", "Ponyo rantakalliolla", "Tuuli nousee"]],
-    ["suomalaiset-ohjaajat", "Nimeä suomalainen elokuvaohjaaja.", ["Aki Kaurismäki", "Mika Kaurismäki", "Dome Karukoski", "Aku Louhimies", "Klaus Härö", "Pirjo Honkasalo", "Renny Harlin", "Selma Vilhunen"]],
-    ["oscar-elokuvat", "Nimeä parhaan elokuvan Oscar-palkinnon saanut elokuva.", ["Kummisetä", "Casablanca", "Titanic", "Moonlight", "Loordien tanssi", "The Departed", "12 Years a Slave", "Parasiitti"]],
-    ["elokuvagenret", "Nimeä elokuvan lajityyppi.", ["draama", "komedia", "trilleri", "kauhu", "dokumentti", "musikaali", "western", "film noir", "tieteiselokuva"]],
-    ["mykätähdet", "Nimeä mykkäelokuvan tähti.", ["Charlie Chaplin", "Buster Keaton", "Mary Pickford", "Harold Lloyd", "Greta Garbo", "Rudolph Valentino", "Lillian Gish"]],
-    ["televisiogenret", "Nimeä television ohjelmatyyppi.", ["draamasarja", "komediasarja", "dokumenttisarja", "uutislähetys", "visailu", "reality-ohjelma", "talk show", "lastenohjelma"]],
-    ["star-trek-kapteenit", "Nimeä Star Trek -sarjojen kapteeni.", ["James T. Kirk", "Jean-Luc Picard", "Benjamin Sisko", "Kathryn Janeway", "Jonathan Archer", "Michael Burnham"]],
-    ["suomalaiset-elokuvat", "Nimeä suomalainen pitkä elokuva.", ["Mies vailla menneisyyttä", "Tuntematon sotilas", "Komisario Palmun erehdys", "Loma", "Risto Räppääjä", "Postia pappi Jaakobille", "Koirankynnen leikkaaja", "Le Havre"]],
-    ["bergman", "Nimeä Ingmar Bergmanin elokuva.", ["Seitsemäs sinetti", "Persona", "Fanny ja Alexander", "Mansikoita ja maitohampaita", "Kohtauksia eräästä avioliitosta", "Neidonlähde", "Huutoja ja kuiskauksia"]],
-    ["kurosawa", "Nimeä Akira Kurosawan ohjaama elokuva.", ["Seitsemän samuraita", "Rashomon", "Ikiru", "Kagemusha", "Ran", "Yojimbo", "Veri ja hiekka"]],
-    ["elokuvan-ammattinimikkeet", "Nimeä elokuvatuotannon ammattinimike.", ["ohjaaja", "käsikirjoittaja", "tuottaja", "kuvaaja", "leikkaaja", "lavastaja", "pukusuunnittelija", "äänisuunnittelija"]],
-  ]],
-  ["urheilu", [
-    ["olympialajit", "Nimeä Pariisin 2024 kesäolympialaisten ohjelmassa ollut urheilulaji.", ["yleisurheilu", "uinti", "jalkapallo", "koripallo", "tennis", "purjehdus", "jousiammunta", "miekkailu", "ratsastus", "soutu", "painonnosto", "nyrkkeily"]],
-    ["talviolympialajit", "Nimeä talviolympialaisten ohjelmassa oleva laji.", ["alppihiihto", "maastohiihto", "mäkihyppy", "yhdistetty", "ampumahiihto", "jääkiekko", "curling", "taitoluistelu", "pikaluistelu", "lumilautailu", "freestylehiihto", "kelkkailu"]],
-    ["kymmenottelu", "Nimeä yleisurheilun kymmenottelun laji.", ["100 metrin juoksu", "pituushyppy", "kuulantyöntö", "korkeushyppy", "400 metrin juoksu", "110 metrin aitajuoksu", "kiekonheitto", "seiväshyppy", "keihäänheitto", "1500 metrin juoksu"]],
-    ["jalkapallon-paikat", "Nimeä jalkapallon pelipaikka.", ["maalivahti", "puolustaja", "keskikenttäpelaaja", "hyökkääjä", "laitapuolustaja", "libero", "laitahyökkääjä"]],
-    ["jalkapallon-maailmanmestarit", "Nimeä jalkapallon miesten maailmanmestaruuden voittanut maa.", ["Brasilia", "Saksa", "Italia", "Argentiina", "Ranska", "Uruguay", "Englanti", "Espanja"]],
-    ["olympiakaupungit", "Nimeä kesäolympialaiset isännöinyt kaupunki.", ["Helsinki", "Lontoo", "Pariisi", "Tokio", "Ateena", "Sydney", "Rio de Janeiro", "Los Angeles", "Rooma"]],
-    ["talviolympiakaupungit", "Nimeä talviolympialaiset isännöinyt kaupunki.", ["Helsinki", "Oslo", "Innsbruck", "Grenoble", "Sapporo", "Calgary", "Lillehammer", "Vancouver", "Pyeongchang"]],
-    ["formula1-mestarit", "Nimeä Formula 1:n maailmanmestaruuden voittanut kuljettaja.", ["Juan Manuel Fangio", "Jack Brabham", "Alain Prost", "Ayrton Senna", "Michael Schumacher", "Mika Häkkinen", "Lewis Hamilton", "Sebastian Vettel", "Max Verstappen"]],
-    ["uintilajit", "Nimeä olympiauinnin kilpailumatka tai uintilaji.", ["vapaauinti", "selkäuinti", "rintauinti", "perhosuinti", "sekarinta", "viesti", "avovesiuinti"]],
-    ["hiihtolajit", "Nimeä hiihtourheilun kilpailulaji.", ["sprintti", "viesti", "yhdistelmäkilpailu", "mäkihyppy", "pujottelu", "suurpujottelu", "freeride", "ampumahiihto"]],
-    ["taistelulajit", "Nimeä kamppailu- tai taistelulaji.", ["judo", "karate", "taekwondo", "nyrkkeily", "wushu", "miekkailu", "paini", "brasilialainen jujutsu"]],
-    ["pallolajit", "Nimeä urheilulaji, jossa käytetään palloa.", ["jalkapallo", "koripallo", "lentopallo", "käsipallo", "tennis", "golf", "baseball", "vesipallo", "rugby"]],
-    ["paralympialajit", "Nimeä paralympialaisten kilpailulaji.", ["pyörätuolikoripallo", "maalipallo", "sähköpyörätuolijalkapallo", "boccia", "parauinti", "para-yleisurheilu", "pyörätuolirugby", "parajousiammunta"]],
-    ["voimistelun-valineet", "Nimeä telinevoimistelun väline.", ["rekki", "renkaat", "hevonen", "permanto", "hyppy", "puomi", "nojapuut"]],
-    ["yleisurheilun-lajit", "Nimeä yleisurheilun kilpailulaji.", ["100 metrin juoksu", "maraton", "aitajuoksu", "pituushyppy", "kolmiloikka", "kuulantyöntö", "moukarinheitto", "keihäänheitto", "kymmenottelu"]],
-  ]],
-  ["teknologia", [
-    ["ohjelmointikielet", "Nimeä ohjelmointikieli.", ["Python", "JavaScript", "Java", "C", "C++", "Ruby", "Go", "Rust", "Swift", "Kotlin", "PHP", "Haskell"]],
-    ["verkkoprotokollat", "Nimeä internetin tai tietoverkkojen protokolla.", ["HTTP", "HTTPS", "DNS", "TCP", "IP", "SMTP", "IMAP", "FTP", "SSH"]],
-    ["tiedostomuodot", "Nimeä digitaalinen tiedostomuoto.", ["PDF", "JPEG", "PNG", "GIF", "SVG", "MP3", "MP4", "CSV", "JSON", "XML"]],
-    ["funktio-näppäimet", "Nimeä näppäimistön funktionäppäin.", ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12"]],
-    ["käyttöjärjestelmät", "Nimeä käyttöjärjestelmä.", ["Windows", "macOS", "Linux", "Android", "iOS", "ChromeOS", "FreeBSD", "Ubuntu", "Debian"]],
-    ["ohjelmointiparadigmat", "Nimeä ohjelmointiparadigma.", ["olio-ohjelmointi", "funktionaalinen ohjelmointi", "proseduraalinen ohjelmointi", "logiikkaohjelmointi", "tapahtumapohjainen ohjelmointi", "reaktiivinen ohjelmointi", "rinnakkaisohjelmointi"]],
-    ["tietokantamallit", "Nimeä tietokantamalli.", ["relaatiotietokanta", "dokumenttitietokanta", "avain-arvo-tietokanta", "graafitietokanta", "aikasarjatietokanta", "vektoritietokanta", "saraketietokanta"]],
-    ["salausalgoritmit", "Nimeä salausalgoritmi tai -standardi.", ["AES", "RSA", "ECC", "DES", "3DES", "ChaCha20", "Blowfish", "Twofish"]],
-    ["http-tilakoodit", "Nimeä HTTP:n tilakoodi.", ["200", "201", "301", "302", "400", "401", "403", "404", "500", "503"]],
-    ["internet-tunnukset", "Nimeä maatunnus tai yleinen ylätason verkkotunnus.", [".fi", ".se", ".no", ".dk", ".de", ".fr", ".uk", ".com", ".org", ".net"]],
-    ["avaruusluotaimet", "Nimeä avaruusluotain.", ["Voyager 1", "Voyager 2", "Cassini", "Hubble", "Juno", "New Horizons", "Rosetta", "Pioneer 10"]],
-    ["tietotekniikan-pioneerit", "Nimeä tietotekniikan historian pioneeri.", ["Ada Lovelace", "Alan Turing", "Grace Hopper", "Tim Berners-Lee", "John von Neumann", "Katherine Johnson", "Dennis Ritchie", "Donald Knuth"]],
-    ["merkkauskielet", "Nimeä merkkauskieli.", ["HTML", "XML", "Markdown", "LaTeX", "SVG", "YAML", "TOML", "reStructuredText"]],
-    ["versionhallinta", "Nimeä versionhallintajärjestelmä.", ["Git", "Subversion", "Mercurial", "Perforce", "Bazaar", "CVS"]],
-    ["puolijohdekomponentit", "Nimeä puolijohdekomponentti.", ["diodi", "transistori", "mikropiiri", "LED", "MOSFET", "tyristori", "fotodiodi", "aurinkokenno"]],
-  ]],
-  ["talous", [
-    ["euroalue", "Nimeä euroalueen jäsenmaa 1.1.2024 tilanteen mukaan.", ["Suomi", "Saksa", "Ranska", "Italia", "Espanja", "Viro", "Latvia", "Liettua", "Irlanti", "Kreikka", "Portugali", "Itävalta"]],
-    ["g20-taloudet", "Nimeä G20-ryhmään kuuluva talous.", ["Yhdysvallat", "Kiina", "Intia", "Brasilia", "Saksa", "Ranska", "Japani", "Etelä-Afrikka", "Australia", "Indonesia", "Meksiko", "Turkki"]],
-    ["keskuspankin-tehtavat", "Nimeä keskuspankin lakisääteinen tehtävä tai väline.", ["rahapolitiikka", "setelien liikkeeseenlasku", "pankkijärjestelmän vakaus", "valuuttavaranto", "maksujärjestelmät", "pankkien jälleenrahoitus"]],
-    ["talouden-sektorit", "Nimeä talouden toimiala tai sektori.", ["alkutuotanto", "jalostus", "palvelut", "rakentaminen", "teknologia", "rahoitus", "logistiikka", "energia"]],
-    ["markkinarakenteet", "Nimeä taloustieteen markkinarakenne.", ["täydellinen kilpailu", "monopoli", "oligopoli", "monopolistinen kilpailu", "kaksipuolinen monopoli", "monopsoni"]],
-    ["inflaatiotyypit", "Nimeä taloustieteessä käytetty inflaatiotyyppi.", ["kysyntäinflaatio", "kustannusinflaatio", "rakenteellinen inflaatio", "tuonti-inflaatio", "palkkainflaatio", "hyperinflaatio"]],
-    ["sijoituslajit", "Nimeä sijoitusinstrumentti tai omaisuuslaji.", ["osake", "joukkovelkakirja", "sijoitusrahasto", "ETF", "kiinteistö", "kulta", "talletus", "johdannainen"]],
-    ["verolajit", "Nimeä vero tai verolaji.", ["arvonlisävero", "tulovero", "pääomatulovero", "perintövero", "lahjavero", "kiinteistövero", "valmistevero", "varainsiirtovero"]],
-    ["vakuutukset", "Nimeä vakuutuslaji.", ["kotivakuutus", "liikennevakuutus", "kaskovakuutus", "henkivakuutus", "tapaturmavakuutus", "matkavakuutus", "vastuuvakuutus", "sairausvakuutus"]],
-    ["osakeindeksit", "Nimeä osakeindeksi.", ["OMX Helsinki 25", "S&P 500", "Dow Jones", "Nasdaq Composite", "FTSE 100", "DAX", "CAC 40", "Nikkei 225", "Hang Seng"]],
-    ["talouden-kasitteet", "Nimeä kansantalouden tilinpidon tai talouspolitiikan käsite.", ["bruttokansantuote", "inflaatio", "työttömyysaste", "vaihtotase", "julkinen velka", "tuottavuus", "kuluttajahintaindeksi", "ohjauskorko"]],
-    ["raaka-aineet", "Nimeä maailmanmarkkinoilla noteerattava raaka-aine.", ["raakaöljy", "maakaasu", "kulta", "hopea", "kupari", "vehnä", "kahvi", "kaakao", "sokeri"]],
-    ["talousnobel", "Nimeä taloustieteen Nobel-palkinnon saanut tutkija.", ["Paul Samuelson", "Amartya Sen", "Joseph Stiglitz", "Elinor Ostrom", "Paul Krugman", "Robert Shiller", "Jean Tirole", "Angus Deaton"]],
-    ["suomalaiset-pankit", "Nimeä Suomessa toimiva pankki.", ["OP", "Nordea", "Danske Bank", "Säästöpankki", "S-Pankki", "Aktia", "Ålandsbanken", "POP Pankki"]],
-    ["yritysmuodot", "Nimeä suomalainen yritysmuoto.", ["osakeyhtiö", "avoin yhtiö", "kommandiittiyhtiö", "toiminimi", "osuuskunta", "julkinen osakeyhtiö", "eurooppayhtiö"]],
-  ]],
-  ["ruoka-ja-kulttuuri", [
-    ["suomen-ruoat", "Nimeä suomalainen perinneruoka.", ["karjalanpiirakka", "kalakukko", "poronkäristys", "hernekeitto", "lohikeitto", "maksalaatikko", "lanttulaatikko", "mämmi", "leipäjuusto"]],
-    ["pastat", "Nimeä pastalaji.", ["spagetti", "penne", "fusilli", "tagliatelle", "lasagne", "ravioli", "maccheroni", "linguine", "orecchiette"]],
-    ["juustot", "Nimeä juusto.", ["emmental", "gouda", "cheddar", "parmesan", "mozzarella", "brie", "camembert", "feta", "blue cheese"]],
-    ["mausteet", "Nimeä ruoanlaitossa käytettävä mauste.", ["mustapippuri", "kaneli", "kardemumma", "inkivääri", "kurkuma", "paprika", "juustokumina", "neilikka", "sahrami"]],
-    ["teelaadut", "Nimeä teelaji tai teetyyppi.", ["musta tee", "vihreä tee", "valkoinen tee", "oolong", "pu-erh", "matcha", "rooibos", "yrttitee"]],
-    ["kahvimenetelmät", "Nimeä kahvinvalmistusmenetelmä.", ["suodatinkahvi", "espresso", "pressopannu", "moka-pannu", "pour over", "aeropress", "cold brew", "turkkilainen kahvi"]],
-    ["sushit", "Nimeä sushityyppi.", ["nigiri", "maki", "uramaki", "temaki", "gunkan", "chirashi", "inari", "oshizushi"]],
-    ["leivät", "Nimeä leipälaji.", ["ruisleipä", "patonki", "ciabatta", "focaccia", "naan", "pita", "bagel", "sämpylä", "hapanjuurileipä"]],
-    ["yrtit", "Nimeä keittiössä käytettävä yrtti.", ["basilika", "persilja", "tilli", "rosmariini", "timjami", "salvia", "minttu", "korianteri", "ruohosipuli"]],
-    ["hedelmat", "Nimeä hedelmä.", ["omena", "banaani", "appelsiini", "päärynä", "mango", "ananas", "kiivi", "persikka", "granaattiomena"]],
-    ["ruokasienet", "Nimeä Suomessa syötävä ruokasieni.", ["kantarelli", "suppilovahvero", "herkkutatti", "mustatorvisieni", "haaparousku", "kangasrousku", "lampaankääpä", "vaaleaorakas"]],
-    ["hapatetut-ruoat", "Nimeä hapatettu tai fermentoitu ruoka.", ["jogurtti", "hapankaali", "kimchi", "miso", "tempe", "kefiiri", "kombutsa", "soijakastike"]],
-    ["säilöntä", "Nimeä ruoan säilöntämenetelmä.", ["kuivaaminen", "suolaaminen", "sokerointi", "pakastaminen", "pastörointi", "savustaminen", "etikkasäilöntä", "hapattaminen"]],
-    ["juhlapäivät", "Nimeä Suomessa vietettävä perinteinen juhlapäivä.", ["joulu", "juhannus", "pääsiäinen", "vappu", "laskiainen", "itsenäisyyspäivä", "loppiainen", "helatorstai"]],
-    ["ruokakulttuurit", "Nimeä maa, jonka ruokaperinne kuuluu Unescon aineettoman kulttuuriperinnön luetteloon.", ["Japani", "Meksiko", "Ranska", "Georgia", "Italia", "Marokko", "Belgia", "Etelä-Korea"]],
-  ]],
-  ["maailma", [
-    ["eteläisen-pallonpuoliskon-maat", "Nimeä valtio, jonka alueesta osa on eteläisellä pallonpuoliskolla.", ["Australia", "Etelä-Afrikka", "Brasilia", "Argentiina", "Chile", "Indonesia", "Kenia", "Madagaskar", "Uusi-Seelanti", "Peru"]],
-    ["maailman-joet", "Nimeä maailman suuri joki.", ["Amazon", "Niili", "Jangtse", "Mississippi", "Mekong", "Ganges", "Tonava", "Volga", "Kongo"]],
-    ["maailman-saaret", "Nimeä yksi maailman kymmenestä pinta-alaltaan suurimmasta saaresta (Australiaa ei lasketa saareksi tässä luettelossa).", ["Grönlanti", "Uusi-Guinea", "Borneo", "Madagaskar", "Baffininsaari", "Sumatra", "Honshu", "Victoriansaari", "Britannia", "Ellesmerensaari"]],
-    ["maailman-vuoristot", "Nimeä maailman vuorijono.", ["Himalaja", "Andit", "Alpit", "Kalliovuoret", "Kaukasus", "Atlasvuoret", "Appalakit", "Drakensberg"]],
-    ["maailman-aavikot", "Nimeä maailman suuri aavikko.", ["Sahara", "Gobi", "Kalahari", "Namib", "Atacama", "Arabian aavikko", "Great Victoria", "Patagonian aavikko"]],
-    ["maailman-liput", "Nimeä maa tai itsehallintoalue, jonka lipussa on selkeä skandinaavinen risti.", ["Suomi", "Ruotsi", "Norja", "Tanska", "Islanti", "Färsaaret", "Ahvenanmaa"]],
-    ["maailman-valuutat", "Nimeä kansainvälisesti käytetty valuutta.", ["euro", "Yhdysvaltain dollari", "Japanin jeni", "Ison-Britannian punta", "Sveitsin frangi", "Kanadan dollari", "Australian dollari", "Kiinan yuan"]],
-    ["kansainväliset-jarjestot", "Nimeä kansainvälinen järjestö.", ["YK", "WHO", "UNESCO", "Nato", "WTO", "OECD", "Punainen Risti", "Amnesty International"]],
-    ["maailmanperintö", "Nimeä Unescon maailmanperintökohde.", ["Machu Picchu", "Taj Mahal", "Petra", "Akropolis", "Galápagossaaret", "Yellowstonen kansallispuisto", "Angkor", "Serengeti"]],
-    ["meret", "Nimeä maailman meri.", ["Välimeri", "Karibianmeri", "Itämeri", "Pohjanmeri", "Mustameri", "Punainenmeri", "Etelä-Kiinan meri", "Arabianmeri"]],
-    ["afrikan-valtiot", "Nimeä Afrikan valtio.", ["Egypti", "Marokko", "Nigeria", "Kenia", "Etelä-Afrikka", "Etiopia", "Ghana", "Tansania", "Namibia", "Senegal"]],
-    ["aasian-valtiot", "Nimeä Aasian valtio.", ["Japani", "Kiina", "Intia", "Etelä-Korea", "Indonesia", "Vietnam", "Thaimaa", "Nepal", "Mongolia", "Filippiinit"]],
-    ["euroopan-valtiot", "Nimeä Euroopan valtio.", ["Suomi", "Ruotsi", "Norja", "Saksa", "Ranska", "Espanja", "Italia", "Puola", "Kreikka", "Portugali"]],
-    ["pohjois-amerikan-valtiot", "Nimeä Pohjois-Amerikan valtio.", ["Kanada", "Yhdysvallat", "Meksiko", "Guatemala", "Kuuba", "Jamaika", "Panama", "Costa Rica", "Haiti"]],
-    ["maailman-kaupungit", "Nimeä valtio, jonka pääkaupunki on myös valtion väkiluvultaan suurin kaupunki.", ["Suomi", "Ruotsi", "Norja", "Ranska", "Espanja", "Italia", "Kreikka", "Portugali", "Itävalta", "Puola"]],
-  ]],
-];
+import { questionAuthorship } from "../src/data/question-authorship.ts";
+import { universeById } from "../src/data/universes.ts";
 
 const tierNames = {
   10: "Ilmeinen valinta",
@@ -325,68 +10,94 @@ const tierNames = {
   85: "Syvä tieto",
   100: "Täysosuma",
 };
-const aliasMap = {
-  "Urho Kekkonen": ["Kekkonen"],
-  "Kaarlo Juho Ståhlberg": ["K. J. Ståhlberg"],
-  "A. I. Virtanen": ["Artturi Ilmari Virtanen"],
-  "Jean Sibelius": ["Sibelius"],
-  "Vincent van Gogh": ["Van Gogh"],
-  "Yhdysvallat": ["USA", "United States"],
-  "Iso-Britannia": ["Yhdistynyt kuningaskunta", "Britannia"],
-};
+const supportedScores = new Set(Object.keys(tierNames).map(Number));
 
-function scoreFor(index, length) {
-  if (index === 0) return 10;
-  if (index === 1) return 15;
-  if (index === length - 1) return 100;
-  if (index === length - 2) return 85;
-  if (index === length - 3) return 60;
-  return 30;
+function normalize(value) {
+  return value
+    .normalize("NFKC")
+    .toLocaleLowerCase("fi-FI")
+    .replace(/[’‘ʼ]/gu, "'")
+    .replace(/[‐‑‒–—]/gu, "-")
+    .replace(/(?<=\p{L})-(?=\p{L})/gu, " ")
+    .replace(/[.,!?;:"“”„()\[\]{}]/gu, " ")
+    .replace(/\s+/gu, " ")
+    .trim();
 }
 
-const questions = groups.flatMap(([category, entries]) =>
-  entries.map(([slug, prompt, values]) => {
-    const id = `${category}-${slug}`
-      .normalize("NFKD")
-      .replace(/\p{M}/gu, "")
-      .toLocaleLowerCase("en-US")
-      .replace(/[^a-z0-9]+/gu, "-")
-      .replace(/^-|-$/gu, "");
-    const recordSource = sourceByCategory[category] ?? defaultSource;
-    const answers = values.map((value, index) => {
-      const canonical = value;
-      const aliases = canonical === "Suomi" ? ["Finland"] : (aliasMap[canonical] ?? []);
-      const points = scoreFor(index, values.length);
+function fail(message) {
+  throw new Error(`Editorial bank generation failed: ${message}`);
+}
+
+const seenIds = new Set();
+const questions = questionAuthorship.map((authored) => {
+  if (seenIds.has(authored.id)) fail(`duplicate question id ${authored.id}`);
+  seenIds.add(authored.id);
+  const universe = universeById.get(authored.universeId);
+  if (!universe) fail(`${authored.id} references unknown universe ${authored.universeId}`);
+  if (universe.expectedCount !== universe.entities.length)
+    fail(`${universe.id} declares ${universe.expectedCount} members but stores ${universe.entities.length}`);
+  if (!universe.source.url.startsWith("https://")) fail(`${universe.id} has a non-HTTPS source`);
+  if (universe.expectedCount < 1) fail(`${universe.id} has no members`);
+
+  const entityIds = new Set();
+  const answerKeys = new Map();
+  for (const entity of universe.entities) {
+    if (entityIds.has(entity.id)) fail(`${universe.id} repeats entity id ${entity.id}`);
+    entityIds.add(entity.id);
+    for (const value of [entity.canonical, ...entity.aliases]) {
+      const key = normalize(value);
+      if (!key) fail(`${universe.id} contains an empty answer`);
+      if (answerKeys.has(key)) fail(`${universe.id} has an alias collision for ${value}`);
+      answerKeys.set(key, entity.id);
+    }
+  }
+
+  const scoreIds = Object.keys(authored.scores);
+  if (scoreIds.length !== universe.entities.length)
+    fail(`${authored.id} has ${scoreIds.length} rarity assignments for ${universe.entities.length} members`);
+  for (const id of scoreIds) {
+    if (!entityIds.has(id)) fail(`${authored.id} assigns a score to unknown member ${id}`);
+    if (!supportedScores.has(authored.scores[id])) fail(`${authored.id} assigns unsupported score ${authored.scores[id]}`);
+  }
+
+  return {
+    id: authored.id,
+    prompt: authored.prompt,
+    category: authored.category,
+    universeId: authored.universeId,
+    referenceDefinition: `${universe.description} Jäsenyysperuste: ${universe.membershipBasis} Viitepäivä: ${universe.asOf}.`,
+    completeness: {
+      status: "verified",
+      source: universe.source.url,
+      asOf: universe.asOf,
+      expectedCount: universe.expectedCount,
+      basis: universe.membershipBasis,
+    },
+    answers: universe.entities.map((entity) => {
+      const points = authored.scores[entity.id];
       return {
-        canonical,
-        aliases,
+        canonical: entity.canonical,
+        aliases: entity.aliases,
         points,
         tier: tierNames[points],
         editorialTier: String(points),
         effectiveTier: String(points),
-        provenance: recordSource.title,
+        provenance: universe.source.title,
       };
-    });
-    return {
-      id,
-      prompt,
-      category,
-      universeId: id,
-      referenceDefinition: `Suljettu toimituksellinen joukko: ${prompt.replace(/^Nimeä /u, "").replace(/\.$/u, "")}. Jäsenyys on tarkistettu julkisesta lähteestä ja jäädytetty päivämäärälle 2024-01-01.`,
-      answers,
-      explanation: "Hyväksytty vastaus kuuluu kysymyksessä rajattuun joukkoon. Pisteet kuvaavat sitä, kuinka helposti suomalainen pelaaja todennäköisesti keksii vastauksen 25 sekunnissa.",
-      source: recordSource,
-      tags: [category, "rarity", "evergreen"],
-      evergreen: true,
-      status: "active",
-      version: 2,
-      author: "Mylvisa editorial",
-      rarityReview: "editorial",
-      frequency: { status: "pending" },
-    };
-  }),
-);
+    }),
+    explanation: authored.explanation,
+    source: universe.source,
+    tags: [...authored.tags, "rarity"],
+    evergreen: true,
+    status: "active",
+    version: 3,
+    author: "Mylvisa editorial 2026-09-11",
+    contentReview: "verified",
+    rarityReview: "editorial-reviewed",
+    frequency: { status: "pending" },
+  };
+});
 
-if (questions.length < 250) throw new Error(`Expected at least 250 questions, got ${questions.length}`);
+if (questions.length < 7) fail(`expected at least 7 active questions, got ${questions.length}`);
 await writeFile("src/data/releases/2026-09-01.json", `${JSON.stringify(questions, null, 2)}\n`);
-console.log(`Generated ${questions.length} rarity questions`);
+console.log(`Generated ${questions.length} verified rarity questions from ${universeById.size} universes`);

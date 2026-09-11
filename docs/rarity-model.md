@@ -23,7 +23,7 @@ Nimet eivät arvota pelaajaa. Myös 10 pisteen vastaus on hyväksytty ja hyvä t
 
 Arvioi ensin suomalaisen aikuisen spontaani muistikuva, ei jäsenen objektiivista merkittävyyttä, kokoa tai vaikeusastetta. Läheisyys Suomeen, koulussa toistuminen, mediaesiintyvyys ja nimen lyhyys voivat tehdä vastauksesta ilmeisen. Jos arvio on epävarma, käytä varovaisempaa tieriä ja merkitse `rarityReview: "calibrate"`.
 
-Tuleva empiirinen kalibrointi voi kerätä vain vähimmäistiedon:
+Yksikään kysymys ei tarvitse kaikkia kuutta tieriä. Validator tarkistaa pisteiden tuen, mutta liputtaa vain mekaanisia tai poikkeuksellisen tasaisia jakaumia. Tuleva empiirinen kalibrointi voi kerätä vain vähimmäistiedon:
 
 ```text
 question_id
