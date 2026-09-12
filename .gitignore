@@ -10,3 +10,5 @@ test-results/
 .vercel/
 .DS_Store
 npm-debug.log*
+
+supabase/.temp/
