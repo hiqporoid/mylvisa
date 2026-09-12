@@ -1,3 +1,5 @@
+> Beta hardening status (12 September 2026): **NOT_READY_FOR_CONNECTED_BETA_SETUP**. The editorial audit reduced the trusted Daily bank to 69 questions; the unchanged content readiness test still fails. Supabase profiles, authoritative runs and a private-by-default leaderboard are implemented. See [editorial audit](docs/editorial-audit-2026-09.md), [bank quality](docs/bank-quality-report-2026-09.md) and [connected setup](docs/supabase-setup.md) for current details. Older release claims below are historical.
+
 # Mylvisa
 
 Mylvisa on suomalainen päivittäinen rarity-tietopeli. Kysymyksessä on suljettu joukko oikeita vastauksia: jokainen hyväksytty vastaus on onnistuminen, mutta harvinaisemman vastauksen löytäminen tuottaa enemmän pisteitä.

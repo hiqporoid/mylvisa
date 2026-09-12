@@ -2,7 +2,7 @@ import { DEFAULT_QUIZ_LENGTH, FIRST_QUIZ_DATE } from "./catalog";
 import { addDays, dayNumber } from "./date";
 import type { Question } from "./schema";
 
-export const SELECTION_VERSION = "rarity-deck-v3";
+export const SELECTION_VERSION = "rarity-deck-v4";
 
 export function hash(value: string): number {
   let result = 2166136261;
@@ -69,8 +69,15 @@ export function selectDailyQuestions(
     const families = new Set<string>();
     for (let slot = 0; slot < length; slot++) {
       const remaining = pool.filter((question) => !selected.some((item) => item.id === question.id));
-      const familyDiverse = remaining.filter((question) => !families.has(question.familyId));
-      const candidates = familyDiverse.length >= length - slot ? familyDiverse : remaining;
+      const allowed = (question: Question) => !families.has(question.familyId) &&
+        !universes.has(question.universeId) &&
+        (!(question.category === "videopelit" || question.category === "internet-ja-digikulttuuri") || !categories.has(question.category));
+      // Family diversity is a hard constraint, even at a deck boundary. If the
+      // unused tail cannot fill the day, repeat a safe family rather than place
+      // two almost identical questions together. Simulations report real repeats.
+      let candidates = remaining.filter(allowed);
+      if (!candidates.length) candidates = eligible.filter(question => allowed(question) && !selected.some(item => item.id === question.id));
+      if (!candidates.length) throw new Error("Not enough independent question families for a safe Daily");
       let best = candidates[0];
       let bestRank = [
         Number(universes.has(best.universeId)),

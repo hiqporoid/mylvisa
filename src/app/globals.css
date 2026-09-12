@@ -120,3 +120,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+/* Lightweight account surfaces share the Daily typography and buttons. */
+.account-tabs { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+.account-page form { display: grid; gap: .7rem; margin-block: 1.5rem; }
+.account-page input { padding: .8rem; border: 1px solid currentColor; border-radius: .4rem; font: inherit; width: 100%; }
+.account-page h2 { margin-top: 2rem; }
+.table-scroll { overflow-x: auto; margin-block: 1.5rem; }
+.table-scroll table { border-collapse: collapse; width: 100%; }
+.table-scroll th, .table-scroll td { padding: .7rem; text-align: left; border-bottom: 1px solid #aaa5; }

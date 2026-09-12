@@ -4,6 +4,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Mode, QuizRequest, QuizResponse } from "@/lib/quiz/contracts";
 import { createRoundClock, roundStatus, type RoundClock } from "@/lib/quiz/timer";
 import { readGame, saveGame, STORAGE_PREFIX } from "./storage";
+import { ensureIdentity } from "@/lib/supabase/browser";
+
+async function persistentRequest(command?: unknown): Promise<QuizResponse | null> {
+  const response = await fetch("/api/daily", command ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(command), cache: "no-store", signal: AbortSignal.timeout(15_000) } : { cache: "no-store", signal: AbortSignal.timeout(15_000) });
+  const data = await response.json();
+  if (!response.ok) throw new ApiError(data.error, data.code);
+  return data.game;
+}
 
 export type Phase = "home" | "preview" | "question" | "feedback" | "complete";
 
@@ -35,14 +43,25 @@ export function useQuiz() {
   const answers = useRef<string[]>([]);
   const lock = useRef(false);
   const generation = useRef(0);
+  const connected = useRef(false);
   const submitRef = useRef<(answer: string) => Promise<void>>(async () => undefined);
 
   const accept = useCallback((next: QuizResponse) => setGame(next), []);
+  const acceptPersistent = useCallback((next: QuizResponse) => {
+    setGame(next);
+    setNotice("Tulos tallennetaan profiiliisi. Julkaisu tulostaululla edellyttää nimimerkkiä.");
+    if (next.roundStartedAt) {
+      const clock = createRoundClock(Date.now() + Date.parse(next.roundStartedAt) - Date.parse(next.serverNow));
+      setRoundClock(clock); setClockNow(Date.now());
+      setPhase(roundStatus(clock) === "preview" ? "preview" : "question");
+    } else { setRoundClock(null); setPhase(next.summary ? "complete" : "feedback"); }
+  }, []);
   const persist = useCallback((next: QuizResponse, started: boolean, feedback: boolean, clock?: RoundClock | null) => {
     if (next.mode !== "daily") return;
     const ok = saveGame({
       version: 2,
       date: next.date,
+      releaseId: next.releaseId,
       answers: answers.current,
       started,
       feedback,
@@ -57,8 +76,32 @@ export function useQuiz() {
     setBusy(true);
     return request().then(async (today) => {
       if (version !== generation.current) return;
+      accept(today);
+      connected.current = false;
+      if (today.supportsPersistence) {
+        connected.current = await ensureIdentity();
+        if (connected.current) {
+          const restored = await persistentRequest();
+          if (version !== generation.current) return;
+          if (restored) acceptPersistent(restored);
+          else { accept(today); setPhase("home"); setRoundClock(null); setNotice(message); }
+          setError("");
+          return;
+        }
+        throw new ApiError("Profiilin yhteys ei onnistu. Päivän peliä ei aloitettu eikä aiempia tuloksia poistettu. Yritä uudelleen.", "AUTH_UNAVAILABLE");
+      }
       let saved = null;
       try { saved = readGame(today.date); } catch { setStorageAvailable(false); }
+      const savedRelease = saved?.releaseId ?? saved?.result?.releaseId;
+      if (saved && savedRelease !== today.releaseId) {
+        if (saved.result?.summary) {
+          accept(saved.result); setPhase("complete"); setRoundClock(null);
+          setNotice("Aiemman julkaisun paikallinen tulos. Sitä ei siirretä tulostaululle.");
+          return;
+        }
+        saved = null;
+        message = "Kysymyspankki päivittyi. Vanha paikallinen peli säilytetään selaimen arkistossa; uusi peli alkaa alusta.";
+      }
       const savedStarted = saved?.roundStartedAt ? Date.parse(saved.roundStartedAt) : NaN;
       const savedClock = Number.isFinite(savedStarted) ? createRoundClock(savedStarted) : null;
       const restoredExpired = Boolean(saved?.started && !saved.feedback && savedClock && roundStatus(savedClock) === "expired");
@@ -77,7 +120,7 @@ export function useQuiz() {
       if (version !== generation.current) return;
       accept(next);
       setError("");
-      setNotice(message);
+      setNotice(message || "Paikallinen peli: tulosta ei tallenneta tulostaululle.");
       if (saved?.started && (saved.feedback || restoredExpired) && next.results.length) {
         setRoundClock(null);
         setPhase("feedback");
@@ -100,7 +143,7 @@ export function useQuiz() {
     }).finally(() => {
       if (version === generation.current) setBusy(false);
     });
-  }, [accept, persist]);
+  }, [accept, acceptPersistent, persist]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => { void loadToday(); }, 0);
@@ -147,6 +190,14 @@ export function useQuiz() {
     if (!game || lock.current) return;
     setError("");
     if (mode === "daily") {
+      if (connected.current) {
+        lock.current = true; setBusy(true);
+        try { const next = await persistentRequest({ action: "start" }); if (next) acceptPersistent(next); }
+        catch (error) { setError(error instanceof Error ? error.message : "Pelin aloitus epäonnistui."); }
+        finally { lock.current = false; setBusy(false); }
+        return;
+      }
+      if (game.supportsPersistence) { setError("Tallennusyhteys puuttuu. Yritä uudelleen tai pelaa edellispäivän harjoitus."); return; }
       answers.current = [];
       const clock = createRoundClock();
       setRoundClock(clock);
@@ -179,6 +230,11 @@ export function useQuiz() {
     setError("");
     const action = async () => {
       try {
+        if (connected.current && game.mode === "daily") {
+          const next = await persistentRequest({ action: "answer", version: game.runVersion, questionId: game.current!.id, answer });
+          if (next) acceptPersistent(next);
+          return;
+        }
         if (game.mode === "daily") {
           try {
             const saved = readGame(game.date);
@@ -210,14 +266,21 @@ export function useQuiz() {
       if (navigator.locks && game.mode === "daily") await navigator.locks.request(`mylvisa:${game.date}`, action);
       else await action();
     } finally { lock.current = false; setBusy(false); }
-  }, [accept, game, loadToday, persist, phase, roundClock]);
+  }, [accept, acceptPersistent, game, loadToday, persist, phase, roundClock]);
 
   useEffect(() => {
     submitRef.current = submit;
   }, [submit]);
 
-  function next() {
+  async function next() {
     if (!game || busy || phase !== "feedback") return;
+    if (connected.current && game.mode === "daily") {
+      lock.current = true; setBusy(true);
+      try { const updated = await persistentRequest({ action: "next", version: game.runVersion }); if (updated) acceptPersistent(updated); }
+      catch (error) { setError(error instanceof Error ? error.message : "Kierroksen avaus epäonnistui."); }
+      finally { lock.current = false; setBusy(false); }
+      return;
+    }
     if (game.summary) {
       persist(game, true, false);
       setPhase("complete");

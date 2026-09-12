@@ -1,0 +1,1506 @@
+{
+  "suomi-presidentit": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "suomi-kansallispuistot": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "suomi-unesco-kohteet": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "suomi-maakunnat": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "suomi-nobel-suomi": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "maantiede-itameri": {
+    "classification": "RESCORE",
+    "reason": "Baltic coast membership is complete. Russia and Estonia are familiar nearby answers; Lithuania is a less spontaneously recalled coastal member."
+  },
+  "maantiede-etel-amerikka": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "maantiede-mustameri": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "maantiede-suurimmat-valtameret": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "yhteiskunta-eu-jasenet": {
+    "classification": "RETIRE",
+    "reason": "Incomplete or unbounded universe; cannot safely advertise exhaustive acceptance."
+  },
+  "yhteiskunta-g7": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "yhteiskunta-yk-kielet": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "yhteiskunta-eu-toimielimet": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "tiede-yksikirjaimiset-symbolit": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "tiede-aurinkokunta": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "tiede-si-perusyksikot": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "tiede-sahkomagneettinen-spektri": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "musiikki-eurovision-voittajat": {
+    "classification": "RETIRE",
+    "reason": "Incomplete or unbounded universe; cannot safely advertise exhaustive acceptance."
+  },
+  "elokuvat-ja-televisio-bond-nayttelijat": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "elokuvat-ja-televisio-miyazaki": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "maailmanhistoria-apollo-lennot": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "maailmanhistoria-antiikin-ihmeet": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "urheilu-jalkapallon-maailmanmestarit": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "urheilu-kymmenottelu": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "derived-continent-aasia": {
+    "classification": "RETIRE",
+    "reason": "Country classification/membership errors or duplicate coverage; inherited near-uniform 30-point scores. Examples: Micronesia in Asia, Zimbabwe in Commonwealth, missing India in G20."
+  },
+  "derived-continent-eurooppa": {
+    "classification": "RETIRE",
+    "reason": "Country classification/membership errors or duplicate coverage; inherited near-uniform 30-point scores. Examples: Micronesia in Asia, Zimbabwe in Commonwealth, missing India in G20."
+  },
+  "derived-continent-etela-amerikka": {
+    "classification": "RETIRE",
+    "reason": "Country classification/membership errors or duplicate coverage; inherited near-uniform 30-point scores. Examples: Micronesia in Asia, Zimbabwe in Commonwealth, missing India in G20."
+  },
+  "derived-continent-oseania": {
+    "classification": "RETIRE",
+    "reason": "Country classification/membership errors or duplicate coverage; inherited near-uniform 30-point scores. Examples: Micronesia in Asia, Zimbabwe in Commonwealth, missing India in G20."
+  },
+  "derived-country-group-commonwealth": {
+    "classification": "RETIRE",
+    "reason": "Country classification/membership errors or duplicate coverage; inherited near-uniform 30-point scores. Examples: Micronesia in Asia, Zimbabwe in Commonwealth, missing India in G20."
+  },
+  "derived-country-group-g20": {
+    "classification": "RETIRE",
+    "reason": "Country classification/membership errors or duplicate coverage; inherited near-uniform 30-point scores. Examples: Micronesia in Asia, Zimbabwe in Commonwealth, missing India in G20."
+  },
+  "derived-atomic-range-37-72": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "derived-atomic-range-55-90": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "derived-atomic-range-73-118": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "derived-atomic-range-55-118": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-fi-national-symbols-official": {
+    "classification": "RETIRE",
+    "reason": "Incorrect or incomplete official membership: national butterfly is not a species named päivänperhonen; Lapland University missing; obsolete Saimaan AMK retained."
+  },
+  "content-fi-universities-all": {
+    "classification": "RETIRE",
+    "reason": "Incorrect or incomplete official membership: national butterfly is not a species named päivänperhonen; Lapland University missing; obsolete Saimaan AMK retained."
+  },
+  "content-fi-universities-research": {
+    "classification": "RETIRE",
+    "reason": "Incorrect or incomplete official membership: national butterfly is not a species named päivänperhonen; Lapland University missing; obsolete Saimaan AMK retained."
+  },
+  "content-fi-universities-of-applied-sciences-all": {
+    "classification": "RETIRE",
+    "reason": "Incorrect or incomplete official membership: national butterfly is not a species named päivänperhonen; Lapland University missing; obsolete Saimaan AMK retained."
+  },
+  "content-fi-government-ministries-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-fi-electoral-districts-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-fi-national-landscapes-all": {
+    "classification": "RETIRE",
+    "reason": "Claimed national landscapes list and regional partitions do not match the official 27 landscapes; several invented labels and incomplete regional universes."
+  },
+  "content-fi-national-landscapes-south": {
+    "classification": "RETIRE",
+    "reason": "Claimed national landscapes list and regional partitions do not match the official 27 landscapes; several invented labels and incomplete regional universes."
+  },
+  "content-fi-national-landscapes-lake-district": {
+    "classification": "RETIRE",
+    "reason": "Claimed national landscapes list and regional partitions do not match the official 27 landscapes; several invented labels and incomplete regional universes."
+  },
+  "content-fi-national-landscapes-ostrobothnia": {
+    "classification": "RETIRE",
+    "reason": "Claimed national landscapes list and regional partitions do not match the official 27 landscapes; several invented labels and incomplete regional universes."
+  },
+  "content-fi-national-landscapes-north": {
+    "classification": "RETIRE",
+    "reason": "Claimed national landscapes list and regional partitions do not match the official 27 landscapes; several invented labels and incomplete regional universes."
+  },
+  "content-fi-national-landscapes-eastern": {
+    "classification": "RETIRE",
+    "reason": "Claimed national landscapes list and regional partitions do not match the official 27 landscapes; several invented labels and incomplete regional universes."
+  },
+  "content-fi-recent-prime-ministers-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-fi-recent-prime-ministers-after-2000": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-fi-recent-prime-ministers-1990s": {
+    "classification": "RETIRE",
+    "reason": "Incorrect service dates, missing prime ministers or undefined era/conflict boundary; small sets have forced 100-point answers."
+  },
+  "content-fi-recent-prime-ministers-2000s": {
+    "classification": "RETIRE",
+    "reason": "Incorrect service dates, missing prime ministers or undefined era/conflict boundary; small sets have forced 100-point answers."
+  },
+  "content-fi-recent-prime-ministers-coalition": {
+    "classification": "RETIRE",
+    "reason": "Incorrect service dates, missing prime ministers or undefined era/conflict boundary; small sets have forced 100-point answers."
+  },
+  "content-fi-recent-prime-ministers-female": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-fi-recent-prime-ministers-recent": {
+    "classification": "RETIRE",
+    "reason": "Incorrect service dates, missing prime ministers or undefined era/conflict boundary; small sets have forced 100-point answers."
+  },
+  "content-fi-20th-century-conflicts-all": {
+    "classification": "RETIRE",
+    "reason": "Incorrect service dates, missing prime ministers or undefined era/conflict boundary; small sets have forced 100-point answers."
+  },
+  "content-continents-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-major-rivers-all": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-rivers-asia": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-rivers-americas": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-rivers-europe": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-rivers-africa": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-rivers-familiar": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-mountain-ranges-all": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-major-deserts-all": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-world-lakes-all": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-international-organisations-all": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-international-organisations-health": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-international-organisations-development": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-international-organisations-finance": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-international-organisations-un-programmes": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-international-organisations-specialised": {
+    "classification": "RETIRE",
+    "reason": "Open or incomplete geographic/organization universes; false regional members (Kongo in America/Europe) and organization roles."
+  },
+  "content-nato-members-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-nato-members-nordic": {
+    "classification": "RETIRE",
+    "reason": "Incomplete or unbounded universe; cannot safely advertise exhaustive acceptance."
+  },
+  "content-schengen-members-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-council-of-europe-members-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-nordic-countries-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-world-bank-income-groups-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-human-body-systems-all": {
+    "classification": "RETIRE",
+    "reason": "Open anatomical universe/undefined taxonomy presented as a complete enumeration."
+  },
+  "content-science-cell-structures-all": {
+    "classification": "RETIRE",
+    "reason": "Open anatomical universe/undefined taxonomy presented as a complete enumeration."
+  },
+  "content-science-vitamins-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-science-vitamins-fat-soluble": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-vitamins-b-group": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-science-vitamins-common": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-vitamins-food": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-vitamins-numbered": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-geological-periods-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-geological-periods-paleozoic": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-geological-periods-mesozoic": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-geological-periods-cenozoic": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-geological-periods-dinosaur": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-geological-periods-early": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-metric-prefixes-all": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-fundamental-interactions-all": {
+    "classification": "RETIRE",
+    "reason": "Unbounded or incomplete vitamin/SI/geological definitions; geological and physics prompts include members outside the stated class."
+  },
+  "content-science-dwarf-planets-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-nature-finnish-game-animals-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-finnish-game-animals-large-mammals": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-finnish-game-animals-ungulates": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-finnish-game-animals-predators": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-finnish-game-animals-forest-birds": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-finnish-game-animals-hares": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-bear-species-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-big-cats-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-great-apes-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-penguins-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete species lists or false members: fox as hare, mallard as forest grouse, laiskiainen as bear, undefined big-cat member soukko."
+  },
+  "content-nature-iucn-categories-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-language-finnish-cases-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-language-finnish-cases-basic": {
+    "classification": "RETIRE",
+    "reason": "Undefined grammatical subgroups or incomplete Shakespeare canon; histories included as tragedies."
+  },
+  "content-language-finnish-cases-inessive": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-language-finnish-cases-internal": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-language-finnish-cases-external": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-language-finnish-cases-rare": {
+    "classification": "RETIRE",
+    "reason": "Undefined grammatical subgroups or incomplete Shakespeare canon; histories included as tragedies."
+  },
+  "content-language-finnish-verb-types-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-literature-shakespeare-plays-all": {
+    "classification": "RETIRE",
+    "reason": "Undefined grammatical subgroups or incomplete Shakespeare canon; histories included as tragedies."
+  },
+  "content-literature-shakespeare-plays-tragedies": {
+    "classification": "RETIRE",
+    "reason": "Undefined grammatical subgroups or incomplete Shakespeare canon; histories included as tragedies."
+  },
+  "content-literature-shakespeare-plays-comedies": {
+    "classification": "RETIRE",
+    "reason": "Undefined grammatical subgroups or incomplete Shakespeare canon; histories included as tragedies."
+  },
+  "content-literature-moomin-books-all": {
+    "classification": "RETIRE",
+    "reason": "Moomin list duplicates titles/editions and invents entries instead of enumerating the official novels."
+  },
+  "content-literature-harry-potter-books-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-literature-booker-2010s-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-literature-booker-2010s-mantel": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-literature-booker-2010s-recent": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-literature-booker-2010s-women": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-literature-booker-2010s-translated": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-literature-booker-2010s-authors": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-turner-prize-all": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-pritzker-laureates-all": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-modern-movements-all": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-modern-movements-avant-garde": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-modern-movements-color": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-modern-movements-abstract": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-modern-movements-postwar": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-art-modern-movements-early-modern": {
+    "classification": "RETIRE",
+    "reason": "Wrong answer type (author for novel), incomplete award lists, false winners and subjective art movements; specialist accessibility unsubstantiated."
+  },
+  "content-music-beatles-albums-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-music-beatles-albums-late": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-music-beatles-albums-early": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-abba-albums-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-music-queen-albums-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-music-queen-albums-seventies": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-queen-albums-early": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-queen-albums-eighties": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-queen-albums-late": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-queen-albums-classic": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-queen-albums-title": {
+    "classification": "RETIRE",
+    "reason": "Album era subsets omit valid albums or use undefined classic/later boundaries; duplicate 1970s prompts."
+  },
+  "content-music-metallica-albums-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-music-grammy-album-of-year-all": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-grammy-album-of-year-2010s": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-grammy-album-of-year-2020s": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-grammy-album-of-year-women": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-grammy-album-of-year-pop": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-grammy-album-of-year-recent": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-eurovision-winner-eras-all": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-music-eurovision-winner-eras-nordic-winners": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-all": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-oscar-era": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-early": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-2000s": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-2010s": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-recent": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-pixar-features-toy-story": {
+    "classification": "RETIRE",
+    "reason": "Award list contains non-winners; Eurovision and Pixar sets incomplete, era boundaries false, Nordic list includes Ireland."
+  },
+  "content-film-star-wars-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-film-harry-potter-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-film-harry-potter-early": {
+    "classification": "RETIRE",
+    "reason": "Undefined early/middle/late film subsets; final-film question accepts multiple non-final films."
+  },
+  "content-film-harry-potter-middle": {
+    "classification": "RETIRE",
+    "reason": "Undefined early/middle/late film subsets; final-film question accepts multiple non-final films."
+  },
+  "content-film-harry-potter-final": {
+    "classification": "RETIRE",
+    "reason": "Undefined early/middle/late film subsets; final-film question accepts multiple non-final films."
+  },
+  "content-film-harry-potter-title": {
+    "classification": "RETIRE",
+    "reason": "Undefined early/middle/late film subsets; final-film question accepts multiple non-final films."
+  },
+  "content-film-harry-potter-late": {
+    "classification": "RETIRE",
+    "reason": "Undefined early/middle/late film subsets; final-film question accepts multiple non-final films."
+  },
+  "content-film-best-picture-recent-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-film-bond-films-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-sport-summer-olympic-hosts-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-sport-winter-olympic-hosts-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-f1-world-champions-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-f1-world-champions-modern": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-nhl-teams-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-nhl-teams-canadian": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-nhl-teams-original-six": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-sport-champions-league-winners-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-champions-league-winners-iberia": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-sport-champions-league-winners-england": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-champions-league-winners-italy": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-sport-champions-league-winners-2000s": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-champions-league-winners-historic": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-grand-slam-tournaments-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-grand-slam-tournaments-tournaments": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-sport-grand-slam-tournaments-hard-court": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-grand-slam-tournaments-grass": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-grand-slam-tournaments-clay": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/team lists or wrong geography and surfaces; forced long tails. Hockey roster outdated and F1 omits Finnish champions."
+  },
+  "content-sport-grand-slam-tournaments-singles": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-sport-ice-hockey-world-champions-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-tech-iphone-generations-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-iphone-generations-pre-x": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-iphone-generations-modern": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-playstation-consoles-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-nintendo-home-consoles-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-tech-windows-releases-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-tech-windows-releases-classic": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-windows-releases-xp-era": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-windows-releases-modern": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-windows-releases-numbered": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-windows-releases-recent": {
+    "classification": "RETIRE",
+    "reason": "Incomplete hardware/OS generations or undefined classic/modern eras; console families mixed with regional names."
+  },
+  "content-tech-nasa-missions-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-economics-nobel-recent-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-economics-stock-indices-all": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-economics-stock-indices-us": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-economics-stock-indices-europe": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-economics-stock-indices-asia": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-economics-stock-indices-named": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-economics-stock-indices-broad": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-finnish-protected-names-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-food-unesco-traditions-all": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-protected-cheeses-all": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-protected-cheeses-italy": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-protected-cheeses-france": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-protected-cheeses-spain": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-protected-cheeses-blue": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-food-protected-cheeses-familiar": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-world-currencies-all": {
+    "classification": "RETIRE",
+    "reason": "Open index/food universes, wrong countries, duplicate translations, and invented protected names."
+  },
+  "content-world-new-seven-wonders-all": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "content-world-time-zones-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-world-continents-by-ocean-all": {
+    "classification": "RETIRE",
+    "reason": "Undefined regions or insufficiently bounded membership/suspension/territory criteria."
+  },
+  "content-society-asean-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-society-mercosur-all": {
+    "classification": "RETIRE",
+    "reason": "Undefined regions or insufficiently bounded membership/suspension/territory criteria."
+  },
+  "content-society-gulf-cooperation-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-society-baltic-sea-council-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-world-brics-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-world-caribbean-community-all": {
+    "classification": "RETIRE",
+    "reason": "Undefined regions or insufficiently bounded membership/suspension/territory criteria."
+  },
+  "content-world-pacific-islands-forum-all": {
+    "classification": "RETIRE",
+    "reason": "Undefined regions or insufficiently bounded membership/suspension/territory criteria."
+  },
+  "content-world-eea-countries-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-geo-mediterranean-coasts-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-geo-red-sea-coasts-all": {
+    "classification": "PASS",
+    "reason": "Finnish prompt and closed membership are intelligible; accessible spontaneous entry and defensible long-tail recall; existing aliases and scores accepted."
+  },
+  "content-geo-persian-gulf-coasts-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-geo-equator-countries-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-geo-tropic-of-cancer-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-geo-alpine-countries-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-geo-danube-basin-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-nature-finnish-national-symbols-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-nature-biomes-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-nature-ocean-zones-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-nature-tree-types-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-literature-pulitzer-fiction-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-literature-hugo-novel-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-art-nobel-architecture-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-art-photography-genres-all": {
+    "classification": "RETIRE",
+    "reason": "Land/territorial-water criteria mixed; open or incomplete scientific, award, language and art universes."
+  },
+  "content-film-animated-oscar-winners-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-film-cannes-palme-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-tech-android-releases-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-tech-web-browsers-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-economics-reserve-currencies-all": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-economics-economic-sectors-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-food-coffee-preparations-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-food-unesco-crafts-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-large-lakes-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-cities-all": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-cities-capital-region": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-cities-university-cities": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-cities-western": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-cities-eastern": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-cities-coastal": {
+    "classification": "RETIRE",
+    "reason": "Incomplete winners/platform lists and open cities/lakes/coffee universes; capital-region list omits Kauniainen."
+  },
+  "content-fi-museums-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-history-finland-treaties-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-history-finnish-historical-centres-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-history-finland-milestones-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-language-finnish-moods-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-language-parts-of-speech-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-language-uralic-families-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-language-writing-systems-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-art-sculptors-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-art-artistic-techniques-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-art-museum-masterpieces-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-music-jazz-standards-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-music-classical-composers-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-music-finnish-classical-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-film-director-works-all": {
+    "classification": "RETIRE",
+    "reason": "Open history/art/music universes and invented grammatical categories; duplicate translated film titles."
+  },
+  "content-film-disney-renaissance-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-sport-tennis-courts-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-sport-athletics-throws-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-tech-programming-languages-accessible-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-economics-central-banks-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-economics-financial-institutions-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-economics-trade-organisations-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-finnish-breads-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-finnish-breads-rye": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-finnish-breads-pastry": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-finnish-breads-regional": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-finnish-breads-everyday": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-finnish-breads-named": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-spices-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-food-fermented-products-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-world-heritage-regions-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-world-heritage-regions-continents": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-world-heritage-regions-americas": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-world-heritage-regions-asia": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-world-heritage-regions-europe-africa": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-world-heritage-regions-regional": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-global-health-organisations-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-international-courts-all": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-international-courts-un": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-international-courts-europe": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-international-courts-human-rights": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-international-courts-regional": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-world-international-courts-maritime": {
+    "classification": "RETIRE",
+    "reason": "Open sport/tech/food/economics universes; false physical/geographic/institutional members and unspecified source enumeration."
+  },
+  "content-history-finnish-presidential-eras-all": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-history-finnish-presidential-eras-early": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-history-finnish-presidential-eras-late": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-science-astronomical-groups-planets": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-science-astronomical-groups-dwarfs": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-science-astronomical-groups-outer": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-sport-olympic-host-groups-summer": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-sport-olympic-host-groups-winter": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-sport-olympic-host-groups-europe": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-sport-olympic-host-groups-asia": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-sport-olympic-host-groups-english-speaking": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-literature-major-awards-modern": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-literature-major-awards-classics": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-literature-major-awards-europe": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-literature-major-awards-english": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-literature-major-awards-translated": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-art-award-decades-early": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-art-award-decades-2000s": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-art-award-decades-2020s": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-art-award-decades-asia": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-music-genre-albums-pop-rock": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-music-genre-albums-jazz": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-music-genre-albums-electronic": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-music-genre-albums-hiphop": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-music-genre-albums-best-known": {
+    "classification": "RETIRE",
+    "reason": "Duplicate or incomplete canon; Olympic, award and genre membership errors; forced 100-point iconic answers."
+  },
+  "content-film-franchise-groups-lotr": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-film-franchise-groups-matrix": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-film-franchise-groups-jurassic": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-film-franchise-groups-back-to-future": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-film-franchise-groups-sequels": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-language-european-families-all": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-language-european-families-indo-european": {
+    "classification": "DEMOTE",
+    "reason": "Insufficient general-audience entry, meaningful variety or defensible exceptional tail; kept for review without Daily eligibility. No forced 100-point promotion."
+  },
+  "content-language-european-families-northern": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-language-european-families-romance": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-language-european-families-slavic": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-food-world-staples-asia": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-food-world-staples-europe": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-food-world-staples-middle-east": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-food-world-staples-noodles": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-world-international-days-all": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-world-international-days-environment": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-world-international-days-human-rights": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-world-international-days-health": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-world-international-days-education": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-science-physics-quantities-base": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-science-physics-quantities-electricity": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-science-physics-quantities-mechanics": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-science-physics-quantities-thermo": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-science-physics-quantities-measurement": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-nature-animal-groups-all": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-nature-animal-groups-vertebrates": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-nature-animal-groups-invertebrates": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-nature-animal-groups-water": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-nature-animal-groups-land": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-tech-computer-platforms-operating-systems": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-tech-computer-platforms-mobile": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-tech-computer-platforms-game": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-tech-computer-platforms-open": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-tech-computer-platforms-desktop": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-economics-market-concepts-macro": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-economics-market-concepts-finance": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-economics-market-concepts-public": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-economics-market-concepts-prices": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-economics-market-concepts-labour": {
+    "classification": "RETIRE",
+    "reason": "Open/incomplete genres, language families, thematic days, scientific groups, operating systems and economic concepts."
+  },
+  "content-history-us-presidents-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-history-us-presidents-founding-era": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-history-us-presidents-nineteenth-century": {
+    "classification": "RETIRE",
+    "reason": "Incorrect presidential date boundaries, missing presidents or undefined historical periods."
+  },
+  "content-history-us-presidents-twentieth-century": {
+    "classification": "RETIRE",
+    "reason": "Incorrect presidential date boundaries, missing presidents or undefined historical periods."
+  },
+  "content-history-us-presidents-founding": {
+    "classification": "RETIRE",
+    "reason": "Incorrect presidential date boundaries, missing presidents or undefined historical periods."
+  },
+  "content-history-us-presidents-civil-war": {
+    "classification": "RETIRE",
+    "reason": "Incorrect presidential date boundaries, missing presidents or undefined historical periods."
+  },
+  "content-history-us-presidents-postwar": {
+    "classification": "RETIRE",
+    "reason": "Incorrect presidential date boundaries, missing presidents or undefined historical periods."
+  },
+  "content-history-us-presidents-modern": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-history-us-presidents-james-john": {
+    "classification": "RETIRE",
+    "reason": "Incorrect presidential date boundaries, missing presidents or undefined historical periods."
+  },
+  "content-history-french-presidents-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-history-uk-monarchs-all": {
+    "classification": "RESCORE",
+    "reason": "Closed set retained. Explicit answer-level corrections distinguish Finnish spontaneous recall from prominence/order; prompt and aliases reviewed."
+  },
+  "content-history-spacewalkers-all": {
+    "classification": "RETIRE",
+    "reason": "Open history sets or incomplete historical membership; source citation does not establish complete set."
+  },
+  "content-history-roman-emperors-all": {
+    "classification": "REWRITE",
+    "reason": "Rebuilt or explicitly bounded the source universe, corrected wording/aliases and reviewed rarity in this specific prompt."
+  },
+  "content-history-ancient-civilisations-all": {
+    "classification": "RETIRE",
+    "reason": "Open history sets or incomplete historical membership; source citation does not establish complete set."
+  }
+}

@@ -215,6 +215,9 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
   quality.questionCount = questions.length;
   quality.activeQuestionCount = questions.filter((question) => question.status === "active").length;
   const dailyQuestions = questions.filter((question) => question.dailyEligible);
+  const audienceCount = dailyQuestions.filter(question => question.category === "videopelit" || question.category === "internet-ja-digikulttuuri").length;
+  if (audienceCount > dailyQuestions.length * 0.15)
+    issue("error", "audience-concentration", "Gaming and digital culture exceed the 15% Daily cap.");
   quality.medianAnswers = median(dailyQuestions.map((question) => question.answers.length));
   const baseCounts = new Map<string, number>();
   for (const question of dailyQuestions) {

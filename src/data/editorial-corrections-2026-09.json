@@ -1,0 +1,1757 @@
+{
+  "suomi-maakunnat": {
+    "universeId": "suomen-maakunnat-2026",
+    "scores": {
+      "Ahvenanmaa": 30,
+      "Keski-Suomi": 15,
+      "Kainuu": 60,
+      "Keski-Pohjanmaa": 100,
+      "Pohjois-Karjala": 30
+    }
+  },
+  "yhteiskunta-eu-toimielimet": {
+    "universeId": "eu-toimielimet-2026",
+    "scores": {
+      "Euroopan keskuspankki": 15,
+      "Eurooppa-neuvosto": 60,
+      "Euroopan unionin neuvosto": 60
+    }
+  },
+  "maailmanhistoria-antiikin-ihmeet": {
+    "universeId": "antiikin-maailman-seitseman-ihmetta",
+    "scores": {
+      "Babylonin riippuvat puutarhat": 15,
+      "Halikarnassoksen mausoleumi": 100,
+      "Aleksandrian majakka": 30
+    }
+  },
+  "content-fi-government-ministries-all": {
+    "universeId": "fi-government-ministries-all",
+    "scores": {
+      "Oikeusministeriö": 30,
+      "Valtioneuvoston kanslia": 100,
+      "Sosiaali- ja terveysministeriö": 15
+    }
+  },
+  "content-fi-electoral-districts-all": {
+    "universeId": "fi-electoral-districts-all",
+    "scores": {
+      "Satakunta": 60,
+      "Ahvenanmaa": 100,
+      "Lappi": 15
+    }
+  },
+  "content-fi-recent-prime-ministers-all": {
+    "universeId": "fi-recent-prime-ministers-all",
+    "scores": {
+      "Kalevi Sorsa": 60,
+      "Mari Kiviniemi": 100,
+      "Anneli Jäätteenmäki": 60,
+      "Antti Rinne": 85
+    },
+    "prompt": "Nimeä Suomen pääministerinä vuosina 1982–2025 toiminut henkilö.",
+    "aliases": {
+      "Kalevi Sorsa": [
+        "Sorsa"
+      ],
+      "Harri Holkeri": [
+        "Holkeri"
+      ],
+      "Esko Aho": [
+        "Aho"
+      ],
+      "Paavo Lipponen": [
+        "Lipponen"
+      ],
+      "Anneli Jäätteenmäki": [
+        "Jäätteenmäki"
+      ],
+      "Matti Vanhanen": [
+        "Vanhanen"
+      ],
+      "Mari Kiviniemi": [
+        "Kiviniemi"
+      ],
+      "Jyrki Katainen": [
+        "Katainen"
+      ],
+      "Alexander Stubb": [
+        "Stubb"
+      ],
+      "Juha Sipilä": [
+        "Sipilä"
+      ],
+      "Antti Rinne": [
+        "Rinne"
+      ],
+      "Sanna Marin": [
+        "Marin"
+      ],
+      "Petteri Orpo": [
+        "Orpo"
+      ]
+    }
+  },
+  "content-fi-recent-prime-ministers-after-2000": {
+    "universeId": "fi-recent-prime-ministers-after-2000",
+    "scores": {
+      "Mari Kiviniemi": 100,
+      "Antti Rinne": 60,
+      "Jyrki Katainen": 30,
+      "Anneli Jäätteenmäki": 85
+    },
+    "prompt": "Nimeä Suomen pääministeri, jonka ensimmäinen kausi alkoi vuosina 2000–2025.",
+    "aliases": {
+      "Anneli Jäätteenmäki": [
+        "Jäätteenmäki"
+      ],
+      "Matti Vanhanen": [
+        "Vanhanen"
+      ],
+      "Mari Kiviniemi": [
+        "Kiviniemi"
+      ],
+      "Jyrki Katainen": [
+        "Katainen"
+      ],
+      "Alexander Stubb": [
+        "Stubb"
+      ],
+      "Juha Sipilä": [
+        "Sipilä"
+      ],
+      "Antti Rinne": [
+        "Rinne"
+      ],
+      "Sanna Marin": [
+        "Marin"
+      ],
+      "Petteri Orpo": [
+        "Orpo"
+      ]
+    }
+  },
+  "content-nato-members-all": {
+    "universeId": "nato-members-all",
+    "scores": {
+      "Albania": 85,
+      "Belgia": 60,
+      "Bulgaria": 60,
+      "Kanada": 30,
+      "Kroatia": 60,
+      "Tšekki": 60,
+      "Tanska": 30,
+      "Viro": 15,
+      "Suomi": 10,
+      "Ranska": 15,
+      "Saksa": 10,
+      "Kreikka": 30,
+      "Unkari": 60,
+      "Islanti": 60,
+      "Italia": 30,
+      "Latvia": 60,
+      "Liettua": 60,
+      "Luxemburg": 85,
+      "Montenegro": 100,
+      "Alankomaat": 30,
+      "Pohjois-Makedonia": 100,
+      "Norja": 15,
+      "Puola": 30,
+      "Portugali": 30,
+      "Romania": 60,
+      "Slovakia": 85,
+      "Slovenia": 85,
+      "Espanja": 15,
+      "Ruotsi": 10,
+      "Turkki": 30,
+      "Yhdistynyt kuningaskunta": 15,
+      "Yhdysvallat": 10
+    },
+    "prompt": "Nimeä Naton jäsenvaltio (32 jäsenen luettelo 11.3.2024)."
+  },
+  "content-schengen-members-all": {
+    "universeId": "schengen-members-all",
+    "scores": {
+      "Belgia": 60,
+      "Bulgaria": 60,
+      "Tšekki": 60,
+      "Tanska": 30,
+      "Saksa": 10,
+      "Viro": 15,
+      "Kreikka": 30,
+      "Espanja": 15,
+      "Ranska": 15,
+      "Kroatia": 60,
+      "Italia": 30,
+      "Latvia": 60,
+      "Liettua": 60,
+      "Luxemburg": 85,
+      "Unkari": 60,
+      "Malta": 85,
+      "Alankomaat": 30,
+      "Itävalta": 30,
+      "Puola": 30,
+      "Portugali": 30,
+      "Romania": 60,
+      "Slovenia": 85,
+      "Slovakia": 85,
+      "Suomi": 10,
+      "Ruotsi": 10,
+      "Islanti": 60,
+      "Liechtenstein": 100,
+      "Norja": 15,
+      "Sveitsi": 30
+    },
+    "prompt": "Nimeä Schengen-alueen valtio (29 valtion luettelo 1.1.2025)."
+  },
+  "content-council-of-europe-members-all": {
+    "universeId": "council-of-europe-members-all",
+    "scores": {
+      "Albania": 85,
+      "Andorra": 100,
+      "Armenia": 85,
+      "Itävalta": 30,
+      "Azerbaidžan": 85,
+      "Belgia": 60,
+      "Bosnia ja Hertsegovina": 85,
+      "Bulgaria": 60,
+      "Kroatia": 60,
+      "Kypros": 85,
+      "Tšekki": 60,
+      "Tanska": 30,
+      "Viro": 15,
+      "Suomi": 10,
+      "Ranska": 15,
+      "Georgia": 85,
+      "Saksa": 10,
+      "Kreikka": 30,
+      "Unkari": 60,
+      "Islanti": 60,
+      "Irlanti": 60,
+      "Italia": 30,
+      "Latvia": 60,
+      "Liechtenstein": 100,
+      "Liettua": 60,
+      "Luxemburg": 85,
+      "Malta": 85,
+      "Moldova": 100,
+      "Monaco": 100,
+      "Montenegro": 100,
+      "Alankomaat": 30,
+      "Pohjois-Makedonia": 100,
+      "Norja": 15,
+      "Puola": 30,
+      "Portugali": 30,
+      "Romania": 60,
+      "San Marino": 100,
+      "Serbia": 85,
+      "Slovakia": 85,
+      "Slovenia": 85,
+      "Espanja": 15,
+      "Ruotsi": 10,
+      "Sveitsi": 30,
+      "Turkki": 30,
+      "Ukraina": 30,
+      "Yhdistynyt kuningaskunta": 15
+    },
+    "prompt": "Nimeä Euroopan neuvoston jäsenvaltio (46 jäsenen luettelo 1.1.2025)."
+  },
+  "content-science-vitamins-all": {
+    "universeId": "science-vitamins-all",
+    "scores": {
+      "B1-vitamiini": 60,
+      "B2-vitamiini": 60,
+      "B3-vitamiini": 85,
+      "B5-vitamiini": 100,
+      "B7-vitamiini": 100,
+      "B9-vitamiini": 60,
+      "E-vitamiini": 15,
+      "K-vitamiini": 30
+    },
+    "aliases": {
+      "B1-vitamiini": [
+        "tiamiini",
+        "B1"
+      ],
+      "B2-vitamiini": [
+        "riboflaviini",
+        "B2"
+      ],
+      "B3-vitamiini": [
+        "niasiini",
+        "B3"
+      ],
+      "B5-vitamiini": [
+        "pantoteenihappo",
+        "B5"
+      ],
+      "B7-vitamiini": [
+        "biotiini",
+        "B7"
+      ],
+      "B9-vitamiini": [
+        "folaatti",
+        "foolihappo",
+        "B9"
+      ],
+      "B12-vitamiini": [
+        "kobalamiini",
+        "B12"
+      ],
+      "A-vitamiini": [
+        "A"
+      ],
+      "B6-vitamiini": [
+        "B6"
+      ],
+      "C-vitamiini": [
+        "C"
+      ],
+      "D-vitamiini": [
+        "D"
+      ],
+      "E-vitamiini": [
+        "E"
+      ],
+      "K-vitamiini": [
+        "K"
+      ]
+    }
+  },
+  "content-science-vitamins-b-group": {
+    "universeId": "science-vitamins-b-group",
+    "scores": {
+      "B1-vitamiini": 60,
+      "B2-vitamiini": 60,
+      "B3-vitamiini": 85,
+      "B5-vitamiini": 100,
+      "B7-vitamiini": 100,
+      "B9-vitamiini": 60
+    },
+    "aliases": {
+      "B1-vitamiini": [
+        "B1",
+        "tiamiini",
+        "B1"
+      ],
+      "B2-vitamiini": [
+        "B2",
+        "riboflaviini",
+        "B2"
+      ],
+      "B3-vitamiini": [
+        "B3",
+        "niasiini",
+        "B3"
+      ],
+      "B5-vitamiini": [
+        "B5",
+        "pantoteenihappo",
+        "B5"
+      ],
+      "B6-vitamiini": [
+        "B6",
+        "B6"
+      ],
+      "B7-vitamiini": [
+        "B7",
+        "biotiini",
+        "B7"
+      ],
+      "B9-vitamiini": [
+        "B9",
+        "folaatti",
+        "foolihappo",
+        "B9"
+      ],
+      "B12-vitamiini": [
+        "B12",
+        "kobalamiini",
+        "B12"
+      ]
+    }
+  },
+  "content-science-dwarf-planets-all": {
+    "universeId": "science-dwarf-planets-all",
+    "scores": {
+      "Ceres": 30,
+      "Haumea": 100,
+      "Makemake": 85,
+      "Eris": 60
+    }
+  },
+  "content-nature-iucn-categories-all": {
+    "universeId": "nature-iucn-categories-all",
+    "scores": {
+      "arvioimatta": 100,
+      "puutteellisesti tunnettu": 85,
+      "sukupuuttoon kuollut": 10,
+      "luonnosta hävinnyt": 85,
+      "vaarantunut": 30
+    }
+  },
+  "content-language-finnish-cases-all": {
+    "universeId": "language-finnish-cases-all",
+    "scores": {
+      "essiivi": 30,
+      "elatiivi": 30,
+      "illatiivi": 30,
+      "abessiivi": 85,
+      "komitatiivi": 85,
+      "instruktiivi": 100,
+      "ablatiivi": 60,
+      "allatiivi": 60
+    }
+  },
+  "content-literature-harry-potter-books-all": {
+    "universeId": "literature-harry-potter-books-all",
+    "scores": {
+      "Azkabanin vanki": 15,
+      "Liekehtivä pikari": 30,
+      "Feeniksin kilta": 60,
+      "Puoliverinen prinssi": 100,
+      "Kuoleman varjelukset": 30
+    },
+    "familyId": "harry-potter"
+  },
+  "content-film-harry-potter-all": {
+    "universeId": "film-harry-potter-all",
+    "scores": {
+      "Azkabanin vanki": 15,
+      "Liekehtivä pikari": 30,
+      "Feeniksin kilta": 60,
+      "Puoliverinen prinssi": 100,
+      "Kuoleman varjelukset – osa 1": 85,
+      "Kuoleman varjelukset – osa 2": 30
+    },
+    "familyId": "harry-potter"
+  },
+  "content-music-beatles-albums-all": {
+    "universeId": "music-beatles-albums-all",
+    "scores": {
+      "The Beatles": 15,
+      "Yellow Submarine": 30,
+      "Magical Mystery Tour": 60,
+      "Beatles for Sale": 100,
+      "With the Beatles": 85
+    },
+    "aliases": {
+      "The Beatles": [
+        "White Album",
+        "The White Album",
+        "Valkoinen albumi"
+      ]
+    }
+  },
+  "content-music-beatles-albums-late": {
+    "universeId": "music-beatles-albums-late",
+    "scores": {
+      "The Beatles": 15,
+      "Magical Mystery Tour": 60,
+      "Yellow Submarine": 100,
+      "Let It Be": 30
+    }
+  },
+  "content-music-abba-albums-all": {
+    "universeId": "music-abba-albums-all",
+    "scores": {
+      "Ring Ring": 100,
+      "Voyage": 60,
+      "Voulez-Vous": 30
+    }
+  },
+  "content-music-queen-albums-all": {
+    "universeId": "music-queen-albums-all",
+    "scores": {
+      "Hot Space": 100,
+      "Made in Heaven": 85,
+      "Innuendo": 30,
+      "Jazz": 60,
+      "The Game": 30,
+      "A Kind of Magic": 15
+    }
+  },
+  "content-music-metallica-albums-all": {
+    "universeId": "music-metallica-albums-all",
+    "scores": {
+      "Kill 'Em All": 15,
+      "St. Anger": 30,
+      "72 Seasons": 60,
+      "Hardwired...to Self-Destruct": 100,
+      "Reload": 85,
+      "Death Magnetic": 60
+    }
+  },
+  "content-film-star-wars-all": {
+    "universeId": "film-star-wars-all",
+    "scores": {
+      "The Rise of Skywalker": 30,
+      "The Clone Wars": 100,
+      "Solo": 85
+    },
+    "prompt": "Nimeä vuosina 1977–2019 teatterilevitykseen julkaistu Star Wars -pitkä elokuva (myös animaatio).",
+    "familyId": "star-wars",
+    "aliases": {
+      "A New Hope": [
+        "Uusi toivo",
+        "Star Wars 4",
+        "Episode IV"
+      ],
+      "The Empire Strikes Back": [
+        "Imperiumin vastaisku",
+        "Star Wars 5",
+        "Episode V"
+      ],
+      "Return of the Jedi": [
+        "Jedin paluu",
+        "Star Wars 6",
+        "Episode VI"
+      ],
+      "The Phantom Menace": [
+        "Pimeä uhka",
+        "Star Wars 1",
+        "Episode I"
+      ],
+      "Attack of the Clones": [
+        "Kloonien hyökkäys",
+        "Star Wars 2",
+        "Episode II"
+      ],
+      "Revenge of the Sith": [
+        "Sithin kosto",
+        "Star Wars 3",
+        "Episode III"
+      ],
+      "The Force Awakens": [
+        "Star Wars 7",
+        "Episode VII"
+      ],
+      "The Last Jedi": [
+        "Star Wars 8",
+        "Episode VIII"
+      ],
+      "The Rise of Skywalker": [
+        "Star Wars 9",
+        "Episode IX"
+      ],
+      "The Clone Wars": [
+        "Kloonisodat"
+      ]
+    }
+  },
+  "content-film-best-picture-recent-all": {
+    "universeId": "film-best-picture-recent-all",
+    "scores": {
+      "Parasite": 15,
+      "The King's Speech": 30,
+      "Argo": 30,
+      "The Shape of Water": 60,
+      "Everything Everywhere All at Once": 15
+    }
+  },
+  "content-film-bond-films-all": {
+    "universeId": "film-bond-films-all",
+    "scores": {
+      "The Man with the Golden Gun": 60,
+      "The Living Daylights": 100,
+      "Skyfall": 10,
+      "No Time to Die": 15
+    },
+    "prompt": "Nimeä Eon Productionsin James Bond -elokuva vuosilta 1962–2021.",
+    "familyId": "james-bond",
+    "aliases": {
+      "Dr. No": [
+        "Salainen agentti 007 ja tohtori No"
+      ],
+      "From Russia with Love": [
+        "Salainen agentti 007 Istanbulissa"
+      ],
+      "Goldfinger": [
+        "007 ja Kultasormi",
+        "Kultasormi"
+      ],
+      "Thunderball": [
+        "Pallosalama",
+        "007 ja pallosalama"
+      ],
+      "You Only Live Twice": [
+        "Elät vain kahdesti"
+      ],
+      "On Her Majesty's Secret Service": [
+        "Hänen majesteettinsa salaisessa palveluksessa"
+      ],
+      "Diamonds Are Forever": [
+        "Timantit ovat ikuisia"
+      ],
+      "Live and Let Die": [
+        "Elä ja anna toisten kuolla"
+      ],
+      "The Man with the Golden Gun": [
+        "007 ja kultainen ase",
+        "Kultainen ase"
+      ],
+      "The Spy Who Loved Me": [
+        "007 rakastettuni"
+      ],
+      "Moonraker": [
+        "Kuuraketti",
+        "007 ja kuuraketti"
+      ],
+      "For Your Eyes Only": [
+        "Erittäin salainen"
+      ],
+      "Octopussy": [
+        "Mustekala",
+        "Octopussy mustekala"
+      ],
+      "A View to a Kill": [
+        "007 ja kuoleman katse",
+        "Kuoleman katse"
+      ],
+      "The Living Daylights": [
+        "007 vaaran vyöhykkeellä",
+        "Vaaran vyöhykkeellä"
+      ],
+      "Licence to Kill": [
+        "007 ja lupa tappaa",
+        "Lupa tappaa"
+      ],
+      "Tomorrow Never Dies": [
+        "Huominen ei koskaan kuole"
+      ],
+      "The World Is Not Enough": [
+        "Kun maailma ei riitä"
+      ],
+      "Die Another Day": [
+        "Kuolema saa odottaa"
+      ]
+    }
+  },
+  "content-sport-summer-olympic-hosts-all": {
+    "universeId": "sport-summer-olympic-hosts-all",
+    "scores": {
+      "Helsinki": 10,
+      "Tokio": 30,
+      "Moskova": 30,
+      "Barcelona": 30,
+      "Sydney": 30,
+      "Antwerpen": 85
+    }
+  },
+  "content-sport-ice-hockey-world-champions-all": {
+    "universeId": "sport-ice-hockey-world-champions-all",
+    "scores": {
+      "Neuvostoliitto": 30,
+      "Slovakia": 100,
+      "Tšekkoslovakia": 85,
+      "Tšekki": 30
+    }
+  },
+  "content-economics-nobel-recent-all": {
+    "universeId": "economics-nobel-recent-all",
+    "scores": {
+      "Peter Diamond": 100,
+      "Dale Mortensen": 100,
+      "Christopher Pissarides": 100,
+      "Thomas Sargent": 85,
+      "Christopher Sims": 100,
+      "Lloyd Shapley": 85,
+      "Alvin Roth": 85,
+      "Eugene Fama": 60,
+      "Lars Peter Hansen": 100,
+      "Robert Shiller": 60,
+      "Jean Tirole": 85,
+      "Angus Deaton": 85,
+      "Oliver Hart": 85,
+      "Bengt Holmström": 10,
+      "Richard Thaler": 60,
+      "William Nordhaus": 85,
+      "Paul Romer": 85,
+      "Abhijit Banerjee": 100,
+      "Esther Duflo": 85,
+      "Michael Kremer": 100,
+      "Robert Wilson": 100,
+      "Paul Milgrom": 100,
+      "David Card": 85,
+      "Joshua Angrist": 100,
+      "Guido Imbens": 100,
+      "Ben Bernanke": 30,
+      "Douglas Diamond": 100,
+      "Philip Dybvig": 100,
+      "Claudia Goldin": 60,
+      "Daron Acemoglu": 30,
+      "Simon Johnson": 100,
+      "James Robinson": 100
+    },
+    "aliases": {
+      "Dale Mortensen": [
+        "Mortensen"
+      ],
+      "Christopher Pissarides": [
+        "Pissarides"
+      ],
+      "Thomas Sargent": [
+        "Sargent"
+      ],
+      "Christopher Sims": [
+        "Sims"
+      ],
+      "Lloyd Shapley": [
+        "Shapley"
+      ],
+      "Alvin Roth": [
+        "Roth"
+      ],
+      "Eugene Fama": [
+        "Fama"
+      ],
+      "Lars Peter Hansen": [
+        "Hansen"
+      ],
+      "Robert Shiller": [
+        "Shiller"
+      ],
+      "Jean Tirole": [
+        "Tirole"
+      ],
+      "Angus Deaton": [
+        "Deaton"
+      ],
+      "Oliver Hart": [
+        "Hart"
+      ],
+      "Bengt Holmström": [
+        "Holmström"
+      ],
+      "Richard Thaler": [
+        "Thaler"
+      ],
+      "William Nordhaus": [
+        "Nordhaus"
+      ],
+      "Paul Romer": [
+        "Romer"
+      ],
+      "Abhijit Banerjee": [
+        "Banerjee"
+      ],
+      "Esther Duflo": [
+        "Duflo"
+      ],
+      "Michael Kremer": [
+        "Kremer"
+      ],
+      "Robert Wilson": [
+        "Wilson"
+      ],
+      "Paul Milgrom": [
+        "Milgrom"
+      ],
+      "David Card": [
+        "Card"
+      ],
+      "Joshua Angrist": [
+        "Angrist"
+      ],
+      "Guido Imbens": [
+        "Imbens"
+      ],
+      "Ben Bernanke": [
+        "Bernanke"
+      ],
+      "Philip Dybvig": [
+        "Dybvig"
+      ],
+      "Claudia Goldin": [
+        "Goldin"
+      ],
+      "Daron Acemoglu": [
+        "Acemoglu"
+      ],
+      "Simon Johnson": [
+        "Johnson"
+      ],
+      "James Robinson": [
+        "Robinson"
+      ]
+    }
+  },
+  "content-society-gulf-cooperation-all": {
+    "universeId": "society-gulf-cooperation-all",
+    "scores": {
+      "Yhdistyneet arabiirikunnat": 15,
+      "Yhdistyneet arabiemiirikunnat": 15,
+      "Bahrain": 100,
+      "Oman": 60
+    }
+  },
+  "content-society-baltic-sea-council-all": {
+    "universeId": "society-baltic-sea-council-all",
+    "scores": {
+      "Viro": 15,
+      "Norja": 30,
+      "Puola": 30
+    }
+  },
+  "content-world-eea-countries-all": {
+    "universeId": "world-eea-countries-all",
+    "scores": {
+      "Viro": 15,
+      "Ruotsi": 10,
+      "Puola": 30,
+      "Malta": 85
+    }
+  },
+  "content-geo-mediterranean-coasts-all": {
+    "universeId": "geo-mediterranean-coasts-all",
+    "scores": {
+      "Monaco": 85,
+      "Slovenia": 85,
+      "Libanon": 60,
+      "Syyria": 60,
+      "Malta": 60
+    }
+  },
+  "content-geo-persian-gulf-coasts-all": {
+    "universeId": "geo-persian-gulf-coasts-all",
+    "scores": {
+      "Yhdistyneet arabiemiirikunnat": 15,
+      "Bahrain": 100,
+      "Oman": 85
+    }
+  },
+  "content-society-asean-all": {
+    "universeId": "society-asean-all",
+    "prompt": "Nimeä ASEANin jäsenvaltio vuoden 2024 lopussa (10 jäsenvaltiota)."
+  },
+  "content-world-brics-all": {
+    "universeId": "world-brics-all",
+    "scores": {
+      "Yhdistyneet arabiemiirikunnat": 60,
+      "Etiopia": 100
+    },
+    "prompt": "Nimeä BRICSin jäsenvaltio tammikuun 2025 lopun kymmenen jäsenen luettelosta."
+  },
+  "content-geo-alpine-countries-all": {
+    "universeId": "geo-alpine-countries-all",
+    "prompt": "Nimeä Alppisopimuksen kahdeksaan sopimusvaltioon kuuluva valtio."
+  },
+  "content-film-disney-renaissance-all": {
+    "universeId": "film-disney-renaissance-all",
+    "scores": {
+      "Notre Damen kellonsoittaja": 30,
+      "Bernard ja Bianca Australiassa": 100,
+      "Tarzan": 15,
+      "Pocahontas": 30
+    }
+  },
+  "content-history-finnish-presidential-eras-early": {
+    "universeId": "history-finnish-presidential-eras-early",
+    "prompt": "Nimeä Suomen tasavallan presidenttinä vuosina 1919–1945 toiminut henkilö.",
+    "familyId": "suomen-presidentit",
+    "aliases": {
+      "Kaarlo Juho Ståhlberg": [
+        "Ståhlberg"
+      ],
+      "Lauri Kristian Relander": [
+        "Relander"
+      ],
+      "P. E. Svinhufvud": [
+        "Svinhufvud"
+      ],
+      "Kyösti Kallio": [
+        "Kallio"
+      ],
+      "Risto Ryti": [
+        "Ryti"
+      ],
+      "C. G. E. Mannerheim": [
+        "Mannerheim"
+      ]
+    }
+  },
+  "content-film-franchise-groups-lotr": {
+    "universeId": "film-franchise-groups-lotr",
+    "scores": {
+      "The Two Towers": 15
+    },
+    "prompt": "Nimeä Peter Jacksonin ohjaama Taru sormusten herrasta- tai Hobitti-elokuva (2001–2014).",
+    "familyId": "middle-earth",
+    "aliases": {
+      "The Fellowship of the Ring": [
+        "Sormuksen ritarit"
+      ],
+      "The Two Towers": [
+        "Kaksi tornia"
+      ],
+      "The Return of the King": [
+        "Kuninkaan paluu"
+      ],
+      "The Hobbit: An Unexpected Journey": [
+        "Odottamaton matka",
+        "Hobitti odottamaton matka"
+      ],
+      "The Hobbit: The Desolation of Smaug": [
+        "Smaugin autioittama maa",
+        "Hobitti Smaugin autioittama maa"
+      ],
+      "The Hobbit: The Battle of the Five Armies": [
+        "Viiden armeijan taistelu",
+        "Hobitti viiden armeijan taistelu"
+      ]
+    }
+  },
+  "content-history-us-presidents-all": {
+    "universeId": "history-us-presidents-all",
+    "scores": {
+      "George Washington": 10,
+      "Abraham Lincoln": 10,
+      "Barack Obama": 10,
+      "Donald Trump": 10,
+      "John F. Kennedy": 15,
+      "Joe Biden": 15,
+      "Bill Clinton": 15,
+      "George W. Bush": 15,
+      "Ronald Reagan": 15,
+      "Thomas Jefferson": 30,
+      "Franklin D. Roosevelt": 30,
+      "Theodore Roosevelt": 30,
+      "Richard Nixon": 30,
+      "George H. W. Bush": 30,
+      "Jimmy Carter": 30,
+      "John Adams": 60,
+      "Harry S. Truman": 60,
+      "Dwight D. Eisenhower": 60,
+      "Lyndon B. Johnson": 60,
+      "Gerald Ford": 60,
+      "Ulysses S. Grant": 60,
+      "Andrew Jackson": 60,
+      "Woodrow Wilson": 60,
+      "Herbert Hoover": 60,
+      "James Madison": 85,
+      "James Monroe": 85,
+      "John Quincy Adams": 85,
+      "Andrew Johnson": 85,
+      "William McKinley": 85,
+      "William Howard Taft": 85,
+      "Warren G. Harding": 85,
+      "Calvin Coolidge": 85,
+      "Grover Cleveland": 85,
+      "Martin Van Buren": 100,
+      "William Henry Harrison": 100,
+      "John Tyler": 100,
+      "James K. Polk": 100,
+      "Zachary Taylor": 100,
+      "Millard Fillmore": 100,
+      "Franklin Pierce": 100,
+      "James Buchanan": 100,
+      "Rutherford B. Hayes": 100,
+      "James A. Garfield": 100,
+      "Chester A. Arthur": 100,
+      "Benjamin Harrison": 100
+    },
+    "prompt": "Nimeä Yhdysvaltain presidenttinä vuosina 1789–2025 toiminut henkilö.",
+    "familyId": "us-presidents",
+    "aliases": {
+      "George Washington": [
+        "Washington"
+      ],
+      "Thomas Jefferson": [
+        "Jefferson"
+      ],
+      "James Madison": [
+        "Madison"
+      ],
+      "James Monroe": [
+        "Monroe"
+      ],
+      "Andrew Jackson": [
+        "Jackson"
+      ],
+      "Martin Van Buren": [
+        "Buren"
+      ],
+      "John Tyler": [
+        "Tyler"
+      ],
+      "James K. Polk": [
+        "Polk"
+      ],
+      "Zachary Taylor": [
+        "Taylor"
+      ],
+      "Millard Fillmore": [
+        "Fillmore"
+      ],
+      "Franklin Pierce": [
+        "Pierce"
+      ],
+      "James Buchanan": [
+        "Buchanan"
+      ],
+      "Abraham Lincoln": [
+        "Lincoln"
+      ],
+      "Ulysses S. Grant": [
+        "Grant"
+      ],
+      "Rutherford B. Hayes": [
+        "Hayes"
+      ],
+      "James A. Garfield": [
+        "Garfield"
+      ],
+      "Chester A. Arthur": [
+        "Arthur"
+      ],
+      "Grover Cleveland": [
+        "Cleveland"
+      ],
+      "William McKinley": [
+        "McKinley"
+      ],
+      "William Howard Taft": [
+        "Taft"
+      ],
+      "Woodrow Wilson": [
+        "Wilson"
+      ],
+      "Warren G. Harding": [
+        "Harding"
+      ],
+      "Calvin Coolidge": [
+        "Coolidge"
+      ],
+      "Herbert Hoover": [
+        "Hoover"
+      ],
+      "Harry S. Truman": [
+        "Truman"
+      ],
+      "Dwight D. Eisenhower": [
+        "Eisenhower"
+      ],
+      "John F. Kennedy": [
+        "Kennedy"
+      ],
+      "Richard Nixon": [
+        "Nixon"
+      ],
+      "Gerald Ford": [
+        "Ford"
+      ],
+      "Jimmy Carter": [
+        "Carter"
+      ],
+      "Ronald Reagan": [
+        "Reagan"
+      ],
+      "Bill Clinton": [
+        "Clinton"
+      ],
+      "Barack Obama": [
+        "Obama"
+      ],
+      "Donald Trump": [
+        "Trump"
+      ],
+      "Joe Biden": [
+        "Biden"
+      ]
+    }
+  },
+  "content-history-us-presidents-founding-era": {
+    "universeId": "history-us-presidents-founding-era",
+    "prompt": "Nimeä Yhdysvaltain presidenttinä vuosina 1789–1824 toiminut henkilö.",
+    "familyId": "us-presidents",
+    "aliases": {
+      "George Washington": [
+        "Washington"
+      ],
+      "John Adams": [
+        "Adams"
+      ],
+      "Thomas Jefferson": [
+        "Jefferson"
+      ],
+      "James Madison": [
+        "Madison"
+      ],
+      "James Monroe": [
+        "Monroe"
+      ]
+    }
+  },
+  "content-history-us-presidents-modern": {
+    "universeId": "history-us-presidents-modern",
+    "scores": {
+      "Joe Biden": 15,
+      "George H. W. Bush": 100,
+      "George W. Bush": 30
+    },
+    "prompt": "Nimeä Yhdysvaltain presidentti, jonka ensimmäinen kausi alkoi vuosina 1981–2025.",
+    "familyId": "us-presidents",
+    "aliases": {
+      "Ronald Reagan": [
+        "Reagan"
+      ],
+      "Bill Clinton": [
+        "Clinton"
+      ],
+      "Barack Obama": [
+        "Obama"
+      ],
+      "Donald Trump": [
+        "Trump"
+      ],
+      "Joe Biden": [
+        "Biden"
+      ]
+    }
+  },
+  "content-history-french-presidents-all": {
+    "universeId": "history-french-presidents-all",
+    "scores": {
+      "François Hollande": 30,
+      "Valéry Giscard d'Estaing": 100,
+      "Georges Pompidou": 85,
+      "François Mitterrand": 30
+    },
+    "aliases": {
+      "Charles de Gaulle": [
+        "Gaulle"
+      ],
+      "Georges Pompidou": [
+        "Pompidou"
+      ],
+      "Valéry Giscard d'Estaing": [
+        "d'Estaing"
+      ],
+      "François Mitterrand": [
+        "Mitterrand"
+      ],
+      "Jacques Chirac": [
+        "Chirac"
+      ],
+      "Nicolas Sarkozy": [
+        "Sarkozy"
+      ],
+      "François Hollande": [
+        "Hollande"
+      ],
+      "Emmanuel Macron": [
+        "Macron"
+      ]
+    }
+  },
+  "content-history-uk-monarchs-all": {
+    "universeId": "history-uk-monarchs-all",
+    "scores": {
+      "George III": 60,
+      "George V": 60,
+      "George I": 85,
+      "William IV": 100,
+      "Edward VII": 85
+    },
+    "aliases": {
+      "Anne": [
+        "Anna"
+      ],
+      "George I": [
+        "Yrjö I",
+        "Yrjö 1"
+      ],
+      "George II": [
+        "Yrjö II",
+        "Yrjö 2"
+      ],
+      "George III": [
+        "Yrjö III",
+        "Yrjö 3"
+      ],
+      "George IV": [
+        "Yrjö IV",
+        "Yrjö 4"
+      ],
+      "William IV": [
+        "Vilhelm IV",
+        "Vilhelm 4"
+      ],
+      "Victoria": [
+        "Viktoria"
+      ],
+      "Edward VII": [
+        "Edvard VII",
+        "Edvard 7"
+      ],
+      "George V": [
+        "Yrjö V",
+        "Yrjö 5"
+      ],
+      "Edward VIII": [
+        "Edvard VIII",
+        "Edvard 8"
+      ],
+      "George VI": [
+        "Yrjö VI",
+        "Yrjö 6"
+      ],
+      "Elizabeth II": [
+        "Elisabet II",
+        "Elisabet 2"
+      ],
+      "Charles III": [
+        "Kaarle III",
+        "Kaarle 3"
+      ]
+    }
+  },
+  "content-fi-museums-all": {
+    "universeId": "fi-museums-all",
+    "prompt": "Nimeä yksi Kansallisgallerian kolmesta taidemuseosta.",
+    "category": "taide",
+    "members": [
+      {
+        "canonical": "Ateneumin taidemuseo",
+        "points": 10,
+        "aliases": [
+          "Ateneum"
+        ]
+      },
+      {
+        "canonical": "Nykytaiteen museo Kiasma",
+        "points": 15,
+        "aliases": [
+          "Kiasma"
+        ]
+      },
+      {
+        "canonical": "Sinebrychoffin taidemuseo",
+        "points": 100,
+        "aliases": [
+          "Sinebrychoff",
+          "Sinebrychoffin museo",
+          "Siffi"
+        ]
+      }
+    ],
+    "source": {
+      "title": "Kansallisgalleria — museot",
+      "url": "https://kansallisgalleria.fi/tietoa-kansallisgalleriasta/",
+      "note": "Primary source checked during September 2026 editorial audit."
+    }
+  },
+  "content-tech-nasa-missions-all": {
+    "universeId": "tech-nasa-missions-all",
+    "prompt": "Nimeä NASAn avaruussukkula, myös ilmakehän koelentoihin rakennettu sukkula hyväksytään (1977–2011).",
+    "members": [
+      {
+        "canonical": "Columbia",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Challenger",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Discovery",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Atlantis",
+        "points": 30,
+        "aliases": []
+      },
+      {
+        "canonical": "Endeavour",
+        "points": 100,
+        "aliases": [
+          "Endeavor"
+        ]
+      },
+      {
+        "canonical": "Enterprise",
+        "points": 60,
+        "aliases": []
+      }
+    ],
+    "source": {
+      "title": "NASA — Orbiter Vehicle",
+      "url": "https://www.nasa.gov/space-shuttle-recordation/orbiter-vehicle/",
+      "note": "Primary source checked during September 2026 editorial audit."
+    }
+  },
+  "content-tech-nintendo-home-consoles-all": {
+    "universeId": "tech-nintendo-home-consoles-all",
+    "prompt": "Nimeä Nintendon kotikonsoliperhe, joka julkaistiin vuosina 1977–2025 (eri alueiden versiot lasketaan yhdeksi).",
+    "category": "videopelit",
+    "members": [
+      {
+        "canonical": "Color TV-Game",
+        "points": 100,
+        "aliases": [
+          "Color TV Game 6",
+          "Color TV Game 15"
+        ]
+      },
+      {
+        "canonical": "Nintendo Entertainment System",
+        "points": 15,
+        "aliases": [
+          "NES",
+          "Famicom",
+          "Family Computer"
+        ]
+      },
+      {
+        "canonical": "Super Nintendo",
+        "points": 30,
+        "aliases": [
+          "SNES",
+          "Super Famicom"
+        ]
+      },
+      {
+        "canonical": "Nintendo 64",
+        "points": 15,
+        "aliases": [
+          "N64"
+        ]
+      },
+      {
+        "canonical": "Nintendo GameCube",
+        "points": 60,
+        "aliases": [
+          "GameCube"
+        ]
+      },
+      {
+        "canonical": "Wii",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Wii U",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Nintendo Switch",
+        "points": 10,
+        "aliases": [
+          "Switch"
+        ]
+      },
+      {
+        "canonical": "Nintendo Switch 2",
+        "points": 30,
+        "aliases": [
+          "Switch 2"
+        ]
+      }
+    ],
+    "source": {
+      "title": "Nintendo — History",
+      "url": "https://www.nintendo.com/en-gb/Hardware/Nintendo-History/Nintendo-History-625945.html",
+      "note": "Primary source checked during September 2026 editorial audit."
+    },
+    "familyId": "nintendo-hardware"
+  },
+  "content-tech-android-releases-all": {
+    "universeId": "tech-android-releases-all",
+    "prompt": "Nimeä Android-version julkinen jälkiruokanimi Cupcakesta Piehin (Android 1.5–9).",
+    "category": "internet-ja-digikulttuuri",
+    "members": [
+      {
+        "canonical": "Cupcake",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Donut",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Eclair",
+        "points": 100,
+        "aliases": [
+          "Éclair"
+        ]
+      },
+      {
+        "canonical": "Froyo",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Gingerbread",
+        "points": 30,
+        "aliases": []
+      },
+      {
+        "canonical": "Honeycomb",
+        "points": 100,
+        "aliases": []
+      },
+      {
+        "canonical": "Ice Cream Sandwich",
+        "points": 30,
+        "aliases": [
+          "ICS"
+        ]
+      },
+      {
+        "canonical": "Jelly Bean",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "KitKat",
+        "points": 10,
+        "aliases": [
+          "Kit Kat"
+        ]
+      },
+      {
+        "canonical": "Lollipop",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Marshmallow",
+        "points": 30,
+        "aliases": []
+      },
+      {
+        "canonical": "Nougat",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Oreo",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Pie",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "source": {
+      "title": "Android Open Source Project — Codenames",
+      "url": "https://source.android.com/docs/setup/reference/build-numbers",
+      "note": "Distinct public dessert codenames from Android 1.5 through 9. Maintenance releases collapsed."
+    },
+    "familyId": "android-versions"
+  },
+  "content-tech-windows-releases-all": {
+    "universeId": "tech-windows-releases-all",
+    "prompt": "Nimeä kotikäyttäjille tarkoitettu Windows-julkaisu Windows 95:stä Windows 11:een (1995–2021; ei NT-, Server- tai päivitysversioita).",
+    "category": "internet-ja-digikulttuuri",
+    "familyId": "windows-versions",
+    "members": [
+      {
+        "canonical": "Windows 95",
+        "points": 30,
+        "aliases": [
+          "95"
+        ]
+      },
+      {
+        "canonical": "Windows 98",
+        "points": 30,
+        "aliases": [
+          "98"
+        ]
+      },
+      {
+        "canonical": "Windows Me",
+        "points": 100,
+        "aliases": [
+          "Me",
+          "Millennium Edition",
+          "Windows Millennium Edition"
+        ]
+      },
+      {
+        "canonical": "Windows XP",
+        "points": 10,
+        "aliases": [
+          "XP"
+        ]
+      },
+      {
+        "canonical": "Windows Vista",
+        "points": 30,
+        "aliases": [
+          "Vista"
+        ]
+      },
+      {
+        "canonical": "Windows 7",
+        "points": 10,
+        "aliases": [
+          "7"
+        ]
+      },
+      {
+        "canonical": "Windows 8",
+        "points": 60,
+        "aliases": [
+          "8"
+        ]
+      },
+      {
+        "canonical": "Windows 8.1",
+        "points": 85,
+        "aliases": [
+          "8.1"
+        ]
+      },
+      {
+        "canonical": "Windows 10",
+        "points": 10,
+        "aliases": [
+          "10"
+        ]
+      },
+      {
+        "canonical": "Windows 11",
+        "points": 15,
+        "aliases": [
+          "11"
+        ]
+      }
+    ],
+    "source": {
+      "title": "Microsoft — Windows lifecycle",
+      "url": "https://learn.microsoft.com/en-us/lifecycle/products/",
+      "note": "Consumer release families 1995–2021; 8.1 is a separately marketed release, service packs and NT/2000/Server excluded."
+    }
+  },
+  "content-history-roman-emperors-all": {
+    "universeId": "history-roman-emperors-all",
+    "prompt": "Nimeä Rooman keisari, joka hallitsi ensimmäisellä vuosisadalla jaa. (1–100).",
+    "members": [
+      {
+        "canonical": "Augustus",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Tiberius",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Caligula",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Claudius",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Nero",
+        "points": 10,
+        "aliases": []
+      },
+      {
+        "canonical": "Galba",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Otho",
+        "points": 100,
+        "aliases": []
+      },
+      {
+        "canonical": "Vitellius",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Vespasianus",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Titus",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Domitianus",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Nerva",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Trajanus",
+        "points": 60,
+        "aliases": [
+          "Trajan"
+        ]
+      }
+    ]
+  },
+  "maantiede-itameri": {
+    "universeId": "itameren-rannikkovaltiot",
+    "scores": {
+      "Venäjä": 30,
+      "Viro": 15,
+      "Puola": 60,
+      "Saksa": 60,
+      "Liettua": 100
+    }
+  },
+  "content-fi-20th-century-conflicts-all": {
+    "universeId": "fi-20th-century-conflicts-all",
+    "scores": {
+      "Lapin sota": 30,
+      "heimosodat": 100
+    }
+  },
+  "content-music-classical-composers-all": {
+    "universeId": "music-classical-composers-all",
+    "scores": {
+      "Jean Sibelius": 10
+    }
+  },
+  "content-food-finnish-breads-all": {
+    "universeId": "food-finnish-breads-all",
+    "scores": {
+      "limppu": 30
+    }
+  },
+  "content-fi-cities-all": {
+    "universeId": "fi-cities-all",
+    "scores": {
+      "Pori": 30
+    }
+  },
+  "content-tech-web-browsers-all": {
+    "universeId": "tech-web-browsers-all",
+    "scores": {
+      "Netscape Navigator": 60
+    }
+  },
+  "content-economics-stock-indices-all": {
+    "universeId": "economics-stock-indices-all",
+    "scores": {
+      "Nikkei 225": 30
+    }
+  },
+  "content-art-museum-masterpieces-all": {
+    "universeId": "art-museum-masterpieces-all",
+    "scores": {
+      "Viimeinen ehtoollinen": 15
+    }
+  },
+  "content-food-finnish-protected-names-all": {
+    "universeId": "food-finnish-protected-names-all",
+    "prompt": "Nimeä Ruokaviraston vuoden 2024 nimisuojaohjeessa lueteltu suomalainen EU-nimisuojattu elintarvike.",
+    "members": [
+      {
+        "canonical": "Karjalanpiirakka",
+        "points": 10,
+        "aliases": [
+          "Karelian pasty"
+        ]
+      },
+      {
+        "canonical": "Kalakukko",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Sahti",
+        "points": 15,
+        "aliases": []
+      },
+      {
+        "canonical": "Lapin puikula",
+        "points": 30,
+        "aliases": [
+          "puikula"
+        ]
+      },
+      {
+        "canonical": "Lapin Poron liha",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Lapin Poron kuivaliha",
+        "points": 85,
+        "aliases": []
+      },
+      {
+        "canonical": "Lapin Poron kylmäsavuliha",
+        "points": 100,
+        "aliases": []
+      },
+      {
+        "canonical": "Kitkan viisas",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Kainuun rönttönen",
+        "points": 60,
+        "aliases": [
+          "kainuulainen rönttönen"
+        ]
+      },
+      {
+        "canonical": "Puruveden muikku",
+        "points": 60,
+        "aliases": []
+      },
+      {
+        "canonical": "Aito saunapalvikinkku",
+        "points": 100,
+        "aliases": [
+          "Äkta basturökt skinka"
+        ]
+      },
+      {
+        "canonical": "Suonenjoen mansikka",
+        "points": 30,
+        "aliases": []
+      }
+    ],
+    "source": {
+      "title": "Ruokavirasto — Nimisuojattujen elintarvikkeiden valvontaohje",
+      "url": "https://www.ruokavirasto.fi/yritykset/oppaat/nimisuojattujen-elintarvikkeiden-valvontaohje/nimisuojattujen-elintarvikkeiden-valvontaohje/",
+      "note": "Sections 1.1.1–1.1.3 list five Finnish PDO, four PGI and three TSG names. The question is bounded to this dated source list, not later registrations."
+    }
+  },
+  "suomi-presidentit": {
+    "universeId": "suomen-presidentit-1919-2026",
+    "familyId": "suomen-presidentit"
+  },
+  "elokuvat-ja-televisio-bond-nayttelijat": {
+    "universeId": "bond-nayttelijat-eon-elokuvat",
+    "familyId": "james-bond"
+  },
+  "content-art-modern-movements-all": {
+    "universeId": "art-modern-movements-all",
+    "scores": {
+      "minimalismi": 30,
+      "konseptualismi": 85
+    }
+  }
+}

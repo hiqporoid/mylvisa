@@ -1,3 +1,4 @@
+import { audienceQuestions } from "./audience-content";
 import { expandedQuestions } from "./expanded-content";
 import { productionQuestions } from "./production-content";
 
@@ -312,4 +313,4 @@ const baseQuestionAuthorship: AuthoredQuestion[] = [
   },
 ];
 
-export const questionAuthorship: AuthoredQuestion[] = [...baseQuestionAuthorship, ...expandedQuestions, ...productionQuestions];
+export const questionAuthorship: AuthoredQuestion[] = [...baseQuestionAuthorship, ...expandedQuestions, ...productionQuestions, ...audienceQuestions];

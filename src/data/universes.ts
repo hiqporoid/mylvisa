@@ -1,3 +1,5 @@
+import { audienceUniverses } from "./audience-content";
+import { editedUniverse } from "./editorial";
 import { expandedUniverses } from "./expanded-content";
 import { productionUniverses } from "./production-content";
 
@@ -543,6 +545,6 @@ const baseUniverses: VerifiedUniverse[] = [
   },
 ];
 
-export const universes: VerifiedUniverse[] = [...baseUniverses, ...expandedUniverses, ...productionUniverses];
+export const universes: VerifiedUniverse[] = [...baseUniverses, ...expandedUniverses, ...productionUniverses, ...audienceUniverses].map(editedUniverse);
 
 export const universeById = new Map(universes.map((universe) => [universe.id, universe]));

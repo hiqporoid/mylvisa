@@ -122,7 +122,7 @@ describe("vastausten konservatiivinen normalisointi ja rarity-pisteet", () => {
 
   it("derives the runtime maximum from the answer set", () => {
     const question = bank.find((item) => item.dailyEligible)!;
-    const malformed = { ...question, answers: question.answers.map((answer) => ({ ...answer, points: 85 as const, tier: "Syvä tieto" as const, editorialTier: "85" as const, effectiveTier: "85" as const })) };
+    const malformed = { ...question, answers: question.answers.map((answer) => ({ ...answer, points: 85 as const, tier: "Harvoin muistettu" as const, editorialTier: "85" as const, effectiveTier: "85" as const })) };
     expect(evaluateAnswer(malformed, "not in the set").maxPoints).toBe(85);
   });
 });
@@ -208,7 +208,7 @@ describe("pankin rakenne", () => {
     const source = bank.find((question) => question.dailyEligible)!;
     const malformed = {
       ...source,
-      answers: source.answers.map((answer) => ({ ...answer, points: answer.points === 100 ? 85 : answer.points, editorialTier: answer.points === 100 ? "85" : answer.editorialTier, effectiveTier: answer.points === 100 ? "85" : answer.effectiveTier, tier: answer.points === 100 ? "Syvä tieto" : answer.tier })),
+      answers: source.answers.map((answer) => ({ ...answer, points: answer.points === 100 ? 85 : answer.points, editorialTier: answer.points === 100 ? "85" : answer.editorialTier, effectiveTier: answer.points === 100 ? "85" : answer.effectiveTier, tier: answer.points === 100 ? "Harvoin muistettu" : answer.tier })),
     };
     const result = validateBank([malformed]);
     expect(result.issues.some((issue) => issue.message.includes("max score must be 100"))).toBe(true);

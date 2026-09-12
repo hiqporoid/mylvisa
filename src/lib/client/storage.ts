@@ -5,6 +5,7 @@ export const STORAGE_PREFIX = "mylvisa:v2:";
 export type SavedGame = {
   version: 2;
   date: string;
+  releaseId?: string;
   answers: string[];
   started: boolean;
   feedback: boolean;
@@ -26,6 +27,7 @@ export function readGame(date: string): SavedGame | null {
     return {
       version: 2,
       date,
+      ...(typeof value.releaseId === "string" ? { releaseId: value.releaseId } : {}),
       answers: value.answers,
       started: value.started,
       feedback: value.feedback,
@@ -39,6 +41,11 @@ export function readGame(date: string): SavedGame | null {
 
 export function saveGame(game: SavedGame): boolean {
   try {
+    const previous = readGame(game.date);
+    const previousRelease = previous?.releaseId ?? previous?.result?.releaseId;
+    if (previous && previousRelease !== game.releaseId) {
+      localStorage.setItem(`mylvisa:archive:${game.date}:${previousRelease ?? "legacy"}`, JSON.stringify(previous));
+    }
     localStorage.setItem(STORAGE_PREFIX + game.date, JSON.stringify(game));
     return true;
   } catch {

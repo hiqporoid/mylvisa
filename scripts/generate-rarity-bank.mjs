@@ -2,12 +2,14 @@ import { writeFile } from "node:fs/promises";
 import { questionAuthorship } from "../src/data/question-authorship.ts";
 import { universeById } from "../src/data/universes.ts";
 
+import { corrections, decisions } from "../src/data/editorial.ts";
+
 const tierNames = {
   10: "Ilmeinen valinta",
   15: "Ensimmäinen mieleen",
   30: "Hyvä oivallus",
   60: "Harvinainen löytö",
-  85: "Syvä tieto",
+  85: "Harvoin muistettu",
   100: "Täysosuma",
 };
 const supportedScores = new Set(Object.keys(tierNames).map(Number));
@@ -29,10 +31,15 @@ function fail(message) {
 }
 
 const seenIds = new Set();
-const questions = questionAuthorship.map((authored) => {
+const questions = questionAuthorship.map((original) => {
+  const edit = corrections[original.id];
+  const decision = decisions[original.id];
+  const authored = { ...original, ...(edit?.prompt ? { prompt: edit.prompt } : {}), ...(edit?.category ? { category: edit.category } : {}), ...(edit?.familyId ? { familyId: edit.familyId } : {}) };
+  if (decision?.classification === "RETIRE" || decision?.classification === "DEMOTE") { authored.dailyEligible = false; authored.reviewDisposition = decision.classification === "RETIRE" ? "retire" : "hard"; authored.accessibility = 3; authored.accessibilityReview = "needs-review"; }
   if (seenIds.has(authored.id)) fail(`duplicate question id ${authored.id}`);
   seenIds.add(authored.id);
   const universe = universeById.get(authored.universeId);
+  if (universe && edit) authored.scores = Object.fromEntries(universe.entities.map(entity => [entity.id, edit.members?.find(member => member.canonical === entity.canonical)?.points ?? edit.scores?.[entity.canonical] ?? authored.scores[entity.id]]));
   if (!universe) fail(`${authored.id} references unknown universe ${authored.universeId}`);
   if (universe.expectedCount !== universe.entities.length)
     fail(`${universe.id} declares ${universe.expectedCount} members but stores ${universe.entities.length}`);
@@ -62,6 +69,7 @@ const questions = questionAuthorship.map((authored) => {
 
   const maximum = Math.max(...Object.values(authored.scores));
   const dailyEligible = authored.dailyEligible ?? (maximum === 100 && universe.expectedCount >= 8);
+  if (dailyEligible && universe.expectedCount < 8 && edit?.members) authored.dailyEligibilityReason = original.id.includes("museums") ? "Kansallisgallerian kolme museota ovat virallinen täydellinen joukko; Ateneum ja Kiasma ovat tuttuja, Sinebrychoffin museo on harvemmin spontaanisti muistettu." : "NASAn kuusi rakennettua lentokelpoista sukkulaa ovat suljettu joukko; Challenger ja Discovery tarjoavat sisääntulon, Endeavour harvemmin muistetun vaihtoehdon.";
   const accessibility = authored.accessibility ?? (dailyEligible ? 4 : 3);
   const accessibilityReview = authored.accessibilityReview ?? (dailyEligible ? "verified" : "needs-review");
   if (dailyEligible && maximum !== 100) fail(`${authored.id} is daily eligible but has no 100-point answer`);
@@ -106,14 +114,14 @@ const questions = questionAuthorship.map((authored) => {
     ...(authored.baseUniverseId ? { baseUniverseId: authored.baseUniverseId } : {}),
     ...(authored.predicateId ? { predicateId: authored.predicateId } : {}),
     familyId: authored.familyId ?? authored.baseUniverseId ?? authored.universeId,
-    version: 3,
+    version: 4,
     author: "Mylvisa editorial 2026-09-11",
-    contentReview: "verified",
+    contentReview: decision?.classification === "RETIRE" ? "retire" : decision?.classification === "DEMOTE" ? "pending" : "verified",
     rarityReview: "editorial-reviewed",
     frequency: { status: "pending" },
   };
 });
 
 if (questions.length < 7) fail(`expected at least 7 active questions, got ${questions.length}`);
-await writeFile("src/data/releases/2026-09-01.json", `${JSON.stringify(questions, null, 2)}\n`);
-console.log(`Generated ${questions.length} verified rarity questions from ${universeById.size} universes`);
+await writeFile("src/data/releases/2026-09-11.json", `${JSON.stringify(questions, null, 2)}\n`);
+console.log(`Generated ${questions.length} question records, including ${questions.filter(question => question.dailyEligible).length} Daily-eligible questions, from ${universeById.size} universes`);

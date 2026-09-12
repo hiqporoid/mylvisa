@@ -1,0 +1,55 @@
+# Supabase and Vercel setup
+
+## Current project
+
+The authenticated Supabase integration created **mylvisa-beta**, project reference `drpfuypbdsqvpcjjzlvo`, in **hiqporoid's Org** (`jhijxfynwikzwylnnngs`), region `eu-north-1`, on the explicitly approved zero/month plan. Do not create a second project for this installation.
+
+Migration `20260912081420_mylvisa_connected_beta.sql` is applied remotely. The filename matches Supabase's recorded migration version. Live inspection confirms RLS enabled on both tables, no `anon` table reads and no `authenticated` inserts/updates. Supabase security advisors returned no findings on 12 September 2026. This verifies the database boundary, not the entire application.
+
+Auth configuration and Vercel deployment status are recorded below as configuration completes. No secret credentials belong in this document.
+
+## Reproduce a new environment
+
+1. Open Supabase, select your organization and create a clearly named Mylvisa project. Confirm the displayed plan/cost before provisioning. For this existing installation, select the project reference above instead.
+2. Install Node 22.12+ and run `npm ci`. Use the official Supabase CLI (`npx supabase`) if you need to manage migrations from a terminal. Sign in with `npx supabase login`, then `npx supabase link --project-ref drpfuypbdsqvpcjjzlvo`. Keep any CLI credentials outside Git.
+3. Copy `.env.example` to ignored `.env.local`. In Project Settings → API Keys obtain the modern publishable key and a server secret key. Set `NEXT_PUBLIC_SUPABASE_URL` to the project's API URL, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to the enabled publishable key, and `SUPABASE_SECRET_KEY` to the server secret. Never give the secret a `NEXT_PUBLIC_` prefix. Never paste keys into issue reports, shell output, source files or documentation.
+4. Run `npx supabase db push` for a new linked database, then `npx supabase migration list`. For the existing database the migration is already applied; do not paste it a second time into SQL Editor. All future schema changes must have a repository migration and use the migration deployment workflow. The app never creates tables at runtime.
+5. Under Authentication → Sign In / Providers enable **Allow new users to sign up**, **Allow anonymous sign-ins**, and **Allow manual linking**. Keep **Confirm email** enabled. Anonymous users receive the authenticated role but can only read their own rows through RLS. Manual linking supports upgrading the existing anonymous identity rather than creating a second profile.
+6. Keep the Email provider enabled. The application offers passwordless email confirmation/sign-in. Configure a trusted SMTP provider for unrestricted beta email delivery. Supabase's built-in email service can restrict recipients and throughput; enabling Email alone does not prove delivery to arbitrary beta users. No SMTP credential is invented by the application. The default confirmation/magic-link templates work via their confirmation link; to additionally show an OTP, include Supabase's supported `{{ .Token }}` variable in the email templates. Leave email confirmation security enabled.
+7. Under Authentication → URL Configuration set **Site URL** to the real production origin returned by Vercel. Add exact redirect URLs for `<production-origin>/auth/callback`, `http://localhost:3000/auth/callback` and `http://127.0.0.1:3000/auth/callback`. Add each approved preview origin's callback explicitly when needed. Do not allow arbitrary external redirect destinations. The callback exchanges the PKCE code and always redirects to the fixed `/profile` route.
+8. In Vercel import **hiqporoid/mylvisa**, branch **main**, into the intended team. Use the **Next.js** preset, repository root `./`, Node 22.x, normal `npm ci` install and `npm run build`. The normal build includes offline bank validators. Configure all three environment variables for Production and only trusted Preview deployments. Mark the server key sensitive. A new deployment is needed after env changes; public variables are embedded at build time. Do not deploy untrusted fork code with the server secret.
+9. Deploy, inspect build logs, then open the real origin. The content gate remains unmet (69 Daily questions versus the retained >=350 floor); deployment does not upgrade the release verdict.
+10. Verify RLS using the checks below, then smoke-test a new anonymous visitor, nickname, seven-round run, refresh/another tab, public leaderboard and email upgrade. On another device use existing-profile sign-in with the same verified email and confirm history/today's completion. Deliverability and cross-device behavior require a real received confirmation email, not just a successful send API response.
+
+## Tables and trusted writes
+
+`profiles` stores the auth-user foreign key, nickname, generated normalized nickname and timestamps. A profile row is created when a nickname is first chosen; a nickname-less anonymous user's runs remain private until then. Uniqueness is case-insensitive and enforced by a unique database constraint. Nicknames are NFC-normalized, trimmed, 3–20 Latin/Finnish visible characters (letters/digits/spaces/underscore/hyphen), exclude markup, URLs and controls, and reject reserved administrator/product names. Atomic advisory locking limits changes to once per 24 hours.
+
+`daily_runs` stores one row per `(user_id, quiz_date)` with release/hash, question IDs, server timestamps, round index, version, status, authoritative totals and a JSON array of round results. Each accepted round stores a stable content-addressed canonical entity ID, question ID, awarded points, outcome and submission timestamp. Raw free-text answers are evaluated transiently and are not persisted. Future frequency calibration can group JSON round entries by question ID and canonical ID and count all played rounds as denominators. This task does not change scores empirically.
+
+The browser never supplies points, accepted counts, rank or authoritative times. Strict command schemas accept only start/next/one answer with a server-issued version and current question ID. The Next.js server verifies the Supabase identity, evaluates the server-only question bank and writes through the server secret. `mylvisa_commit_run` locks the row and compares its version, so retries/two tabs cannot award a round twice. Wrong answers are final zero; receipt at or after the stored 3+25-second deadline is a timeout. The database date is checked in Europe/Helsinki. The unique constraint prevents a second scored run for the same authenticated user/date. Anonymous identities in separate browsers remain different people until an existing permanent identity is used; this is not a Sybil-resistant competition system.
+
+RLS grants authenticated users SELECT only on their own profile/run. Neither `anon` nor `authenticated` can insert/update scores or execute trusted write/leaderboard RPCs. The service role alone invokes the narrowly scoped functions. Public `/api/leaderboard` returns a whitelist of nickname, score, games, average, best, shared rank and accepted count. It never returns UUIDs, email, provider, IP, submitted answers or session data. All identity/private routes are dynamic and `private, no-store`; mutations reject cross-site requests and oversized streamed JSON.
+
+## Leaderboard and identity behavior
+
+- Tänään is the default, using the current Helsinki date; score is displayed out of 700.
+- Viimeiset 7 päivää is today plus the six preceding Helsinki dates, summing valid Daily scores and displaying games played.
+- Kaikki ajat explicitly represents accumulated points and also shows games, average and best. Equal totals share a rank; completion timestamp only makes display deterministic.
+- First visit attempts anonymous Supabase sign-in with no email screen. The browser's persisted Supabase session keeps its identity on subsequent visits.
+- “Tallenna profiilisi” calls `updateUser({ email })` on the anonymous identity. Email confirmation upgrades that same UUID, preserving its nickname and runs. Passwords are not used.
+- Existing-profile email OTP sign-in has `shouldCreateUser: false`. Signing into an already existing account switches to that account; unrelated guest history is deliberately not merged automatically. The UI explains this distinction.
+
+## Local data precedence and outage behavior
+
+Supabase is authoritative for connected Daily completion and leaderboard data. Old local results are never imported as trusted points. Browser-only v2 saves remain intact. Local results from an older release are displayed as historical local results, not regraded against the new bank; unfinished local saves are archived before a new-release save overwrites their current key.
+
+Without Supabase configuration, the original local Daily game works and says its result is not published. With a configured backend, an auth/database outage does not silently downgrade a scored run: the player can retry, and the home screen offers yesterday's unranked practice where a previous date exists. The current Daily's stateless answer API is disabled in connected mode to avoid an unlimited answer-checking oracle. Therefore same-Day offline fallback is deliberately limited; no successful persistence claim is made on failure. A network outage affecting the Next.js server itself still prevents answer evaluation.
+
+## Offline verification
+
+`npm ci`, `npm run generate:bank`, `npm run validate:bank`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run build`, `npm run check:client`. Unit/API tests require no production secrets or network. PGlite runs the actual migration in an isolated embedded PostgreSQL database with test Auth roles/claims; it verifies uniqueness, RLS, service RPC permissions and leaderboard aggregation. It is not a replacement for real Supabase Auth/email testing. The preserved content readiness test currently fails and must not be lowered to hide the shortfall.
+
+Local Playwright was attempted but its web server could not bind `127.0.0.1:3000` (`listen EPERM`). The sandbox restriction was not bypassed. Use an environment that permits the normal Playwright web server, or inspect the real deployment with the connected browser.
+
+For an independent database check, query `pg_class.relrowsecurity` for both tables, `pg_policies` for owner SELECT policies, and `has_table_privilege`/`has_function_privilege` for anon/authenticated. Try direct client inserts/updates and access to a different user's run: these must fail or return no rows. Do not test by temporarily disabling RLS.

@@ -1,5 +1,6 @@
 import { helsinkiDate } from "@/lib/quiz/date";
 import { GameError, play } from "@/lib/server/game";
+import { backendConfigured } from "@/lib/supabase/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const headers = {
@@ -11,7 +12,9 @@ function json(value: unknown, status = 200) {
 }
 export async function GET() {
   try {
-    return json(play({ date: helsinkiDate(), mode: "daily", answers: [] }));
+    const lobby = play({ date: helsinkiDate(), mode: "daily", answers: [] });
+    if (backendConfigured()) lobby.current = null;
+    return json({ ...lobby, supportsPersistence: backendConfigured(), persistence: "local" });
   } catch {
     return json(
       {
@@ -70,6 +73,8 @@ export async function POST(request: Request) {
         400,
       );
     }
+    if (backendConfigured() && (input as { mode?: string })?.mode !== "practice")
+      return json({ code: "CONNECTED_REQUIRED", error: "Päivän peli tarvitsee tallennusyhteyden. Yritä uudelleen; aiempia tuloksia ei poisteta." }, 503);
     return json(play(input));
   } catch (error) {
     if (error instanceof GameError)

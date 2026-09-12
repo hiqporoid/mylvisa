@@ -21,6 +21,11 @@ export type AnswerResult = {
   explanation: string;
 };
 export type QuizResponse = {
+  persistence?: "saved" | "local";
+  supportsPersistence?: boolean;
+  runVersion?: number;
+  runStatus?: "answering" | "feedback" | "completed";
+  roundStartedAt?: string | null;
   date: string;
   today: string;
   mode: Mode;

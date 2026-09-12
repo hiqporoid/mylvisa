@@ -16,6 +16,8 @@ export const CATEGORIES = {
   talous: "Talous",
   "ruoka-ja-kulttuuri": "Ruoka ja kulttuuri",
   maailma: "Maailma",
+  videopelit: "Videopelit",
+  "internet-ja-digikulttuuri": "Internet ja digikulttuuri",
 } as const;
 export type Category = keyof typeof CATEGORIES;
 export const SCORE_TIERS = [10, 15, 30, 60, 85, 100] as const;
@@ -24,7 +26,7 @@ export const RARITY_TIERS = {
   15: "Ensimmäinen mieleen",
   30: "Hyvä oivallus",
   60: "Harvinainen löytö",
-  85: "Syvä tieto",
+  85: "Harvoin muistettu",
   100: "Täysosuma",
 } as const;
 export type RarityTier = keyof typeof RARITY_TIERS;

@@ -42,8 +42,6 @@ for (const release of releases) {
   console.log(`Accessibility / Daily: ${JSON.stringify(dailyAccessibility)}`);
   console.log(`Pistejakauma: ${SCORE_TIERS.map((tier) => `${tier} ${quality.points[String(tier)] ?? 0}`).join(", ")}`);
   console.log(`Rarity-histogrammeja: ${Object.keys(quality.histograms).length}; rarity-arvion tarkistettavat: ${quality.rarityReview.length}`);
-  const legacyReviewDisposition = { PROMOTE: 17, REWRITE: 0, HARD: 1, RETIRE: 101 };
-  console.log(`Baseline 119 review-kysymystä: ${JSON.stringify(legacyReviewDisposition)}`);
   const seen = new Set<string>();
   let firstRepeatDay = Number.POSITIVE_INFINITY;
   let familyCollisions = 0;
@@ -60,7 +58,7 @@ for (const release of releases) {
     }
   }
   const repeatDate = Number.isFinite(firstRepeatDay) ? addDays(FIRST_QUIZ_DATE, firstRepeatDay) : "none";
-  console.log(`60 päivän simulaatio: earliest exact repeat=${repeatDate}; repeat-free complete days=${Math.floor(quality.dailyEligibleQuestionCount / 7)}; categories=${simulationCategories.size}/${Object.keys(CATEGORIES).length}; same-family collisions=${familyCollisions}; universe collisions=${universeCollisions}`);
+  console.log(`60 päivän simulaatio: earliest exact repeat=${repeatDate}; repeat-free complete days=${firstRepeatDay}; categories=${simulationCategories.size}/${Object.keys(CATEGORIES).length}; same-family collisions=${familyCollisions}; universe collisions=${universeCollisions}`);
   console.log(`Rarity-arvion tarkistettavat: ${quality.rarityReview.length}`);
   console.log(
     `${issues.filter((i) => i.severity === "error").length} errors, ${issues.filter((i) => i.severity === "warning").length} warnings`,

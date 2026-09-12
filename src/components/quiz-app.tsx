@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { CATEGORIES, MAX_ANSWER_LENGTH, ROUND_SECONDS } from "@/lib/quiz/catalog";
-import { formatDate } from "@/lib/quiz/date";
+import { CATEGORIES, MAX_ANSWER_LENGTH, ROUND_SECONDS, FIRST_QUIZ_DATE } from "@/lib/quiz/catalog";
+import { addDays, formatDate } from "@/lib/quiz/date";
 import { remainingSeconds } from "@/lib/quiz/timer";
 import { useQuiz } from "@/lib/client/use-quiz";
+import { ProfileLink } from "./profile-link";
 import { ShareResult } from "./share-result";
 
 export function QuizApp({ initialDate, length }: { initialDate: string; length: number }) {
@@ -13,7 +14,6 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
   const [answer, setAnswer] = useState("");
   const heading = useRef<HTMLHeadingElement>(null);
   const input = useRef<HTMLInputElement>(null);
-  const date = game?.today ?? initialDate;
   const count = game?.length ?? length;
   const result = phase === "feedback" ? game?.results.at(-1) : undefined;
   const current = game?.current;
@@ -40,7 +40,7 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
     <div className="app-shell">
       <header className="game-header">
         <Link className="wordmark" href="/" onClick={() => void loadToday()} aria-label="Mylvisa, etusivu">MYLVISA<span aria-hidden="true">·</span></Link>
-        <div className="header-date"><time dateTime={date}>{formatDate(date, true)}</time></div>
+        <nav className="account-tabs" aria-label="Pelaaja"><Link href="/leaderboard">Tulostaulu</Link><ProfileLink /></nav>
       </header>
       <main id="main" className="game-main">
         {notice && <p className="notice" role="status">{notice}</p>}
@@ -49,11 +49,12 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
 
         {phase === "home" && (
           <section className="home-screen" aria-labelledby="home-title">
-            <p className="kicker">PÄIVÄN VISA</p>
+            <p className="kicker">PÄIVÄN VISA · {formatDate(game?.today ?? initialDate, true)}</p>
             <h1 id="home-title">Nimeä oikea.<br /><em>Löydä harvinainen.</em></h1>
             <p className="home-lead">Oikeita vastauksia on monta. Mitä harvinaisemman keksit, sitä enemmän pisteitä saat.</p>
             <div className="home-meta"><span>7 kysymystä</span><span>25 sekuntia / kysymys</span><span>Sama visa kaikille</span></div>
             <button className="button button-primary button-large" onClick={() => void start()} disabled={busy || !game}>Aloita <span aria-hidden="true">→</span></button>
+            {error && game && game.today > FIRST_QUIZ_DATE && <button className="button button-ghost" onClick={() => void start("practice", addDays(game.today, -1))} disabled={busy}>Pelaa edellispäivän harjoitus ilman tallennusta</button>}
             <p className="home-foot">Seuraava visa avautuu keskiyöllä Suomen aikaa.</p>
           </section>
         )}
