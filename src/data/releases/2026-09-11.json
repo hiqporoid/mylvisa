@@ -97033,7 +97033,7 @@
         "provenance": "Bethesda — The Elder Scrolls Anthology"
       }
     ],
-    "explanation": "Five base games; expansion packs and remastered editions are not separate members.",
+    "explanation": "Vuoden 2013 kokoelmasta hyväksytään peruspelit. Lisäosia tai uudelleenjulkaisuja ei lasketa erillisiksi peleiksi.",
     "source": {
       "title": "Bethesda — The Elder Scrolls Anthology",
       "url": "https://elderscrolls.bethesda.net/en-US/anthology",
@@ -97156,7 +97156,7 @@
         "provenance": "Valve — The Orange Box"
       }
     ],
-    "explanation": "Use the seven Items included rows, not the historical five-game advertising paragraph. Includes Lost Coast and Deathmatch.",
+    "explanation": "Rajaus perustuu Steamin päivättyyn tuoteluetteloon. Myös pakettiin sisältyvät bonuspelit hyväksytään.",
     "source": {
       "title": "Valve — The Orange Box",
       "url": "https://store.steampowered.com/sub/469/",
@@ -97260,7 +97260,7 @@
         "provenance": "RFC 1591 — Domain Name System Structure and Delegation"
       }
     ],
-    "explanation": "Section 2 explicitly enumerates COM, EDU, NET, ORG, GOV, MIL and INT. Infrastructure ARPA and country codes excluded.",
+    "explanation": "Rajaus perustuu RFC 1591 -asiakirjan vuoden 1994 luetteloon. Maatunnukset ja infrastruktuuritunnukset eivät kuulu joukkoon.",
     "source": {
       "title": "RFC 1591 — Domain Name System Structure and Delegation",
       "url": "https://www.rfc-editor.org/rfc/rfc1591",

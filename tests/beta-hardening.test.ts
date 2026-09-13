@@ -29,6 +29,12 @@ describe('connected request boundary', () => {
  });
 });
 describe('editorial and selection gates',()=>{
+ it('keeps source membership enumerations out of gameplay feedback',()=>{
+  for(const id of ['games-elder-scrolls-anthology','games-orange-box-steam','digital-historic-generic-tlds']){
+   const question=bank.find(q=>q.id===id)!;
+   for(const answer of question.answers) expect(question.explanation.toLowerCase()).not.toContain(answer.canonical.toLowerCase());
+  }
+ });
  it('records one classification for all 376 original Daily questions',()=>expect(Object.keys(decisions)).toHaveLength(376));
  it('has all 19 categories and remains below 15% gaming/digital concentration',()=>{
   const daily=bank.filter(q=>q.dailyEligible);expect(new Set(daily.map(q=>q.category)).size).toBe(19);expect(Object.keys(CATEGORIES)).toHaveLength(19);

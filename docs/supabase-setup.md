@@ -4,9 +4,9 @@
 
 The authenticated Supabase integration created **mylvisa-beta**, project reference `drpfuypbdsqvpcjjzlvo`, in **hiqporoid's Org** (`jhijxfynwikzwylnnngs`), region `eu-north-1`, on the explicitly approved zero/month plan. Do not create a second project for this installation.
 
-Migration `20260912081420_mylvisa_connected_beta.sql` is applied remotely. The filename matches Supabase's recorded migration version. Live inspection confirms RLS enabled on both tables, no `anon` table reads and no `authenticated` inserts/updates. Supabase security advisors returned no findings on 12 September 2026. This verifies the database boundary, not the entire application.
+Migration `20260912081420_mylvisa_connected_beta.sql` is applied remotely. The filename matches Supabase's recorded migration version. Live inspection confirms RLS enabled on both tables, no `anon` table reads and no `authenticated` inserts/updates. Before anonymous Auth was enabled, Supabase security advisors returned no findings on 12 September 2026. After enabling it, the advisor reports `auth_allow_anonymous_sign_ins` for the two owner-read policies. These are expected: anonymous authenticated users must read their own rows; the policies still require `auth.uid() = user_id`. See https://supabase.com/docs/guides/database/database-advisors?queryGroups=lint&lint=0012_auth_allow_anonymous_sign_ins. This verifies the database boundary, not the entire application.
 
-Auth configuration and Vercel deployment status are recorded below as configuration completes. No secret credentials belong in this document.
+Anonymous sign-ins and manual identity linking are enabled; email confirmation remains enabled. Localhost and 127.0.0.1 callback URLs are saved. Vercel import is in progress. The modern publishable key is used for the browser; the existing legacy service-role key is supplied only as the sensitive server variable because the dashboard did not successfully reveal the modern secret. No secret credentials belong in this document.
 
 ## Reproduce a new environment
 

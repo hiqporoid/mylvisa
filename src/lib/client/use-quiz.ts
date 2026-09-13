@@ -49,6 +49,7 @@ export function useQuiz() {
   const accept = useCallback((next: QuizResponse) => setGame(next), []);
   const acceptPersistent = useCallback((next: QuizResponse) => {
     setGame(next);
+    setError("");
     setNotice("Tulos tallennetaan profiiliisi. Julkaisu tulostaululla edellyttää nimimerkkiä.");
     if (next.roundStartedAt) {
       const clock = createRoundClock(Date.now() + Date.parse(next.roundStartedAt) - Date.parse(next.serverNow));
