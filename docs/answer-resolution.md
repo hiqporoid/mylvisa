@@ -26,4 +26,4 @@ Supabasen commit-RPC lukitsee run-rivin ja vertaa odotettua versiota. Se hyväks
 
 ## Vuotosuoja
 
-Vastaus ei koskaan sisällä vaihtoehtolistaa, ehdokasmäärää, vaihtoehtoisia harvinaisia vastauksia tai pisteitä ennen vahvistuscommittia. Lyhyet ja satunnaiset probe-syötteet tuottavat vain `invalid`. Rate limitin lisäksi tärkein enumerointisuoja on se, ettei endpoint tee prefix- tai substring-hakua. Tuotantobuildin client leak scan kattaa kanoniset nimet, tavalliset aliakset, intent-aliakset ja rarity-datan.
+Vastaus ei koskaan sisällä vaihtoehtolistaa, ehdokasmäärää, vaihtoehtoisia harvinaisia vastauksia tai pisteitä ennen vahvistuscommittia. Lyhyet ja satunnaiset probe-syötteet tuottavat vain `invalid`. Enumerointia rajaavat autentikoitu aktiivinen run, yhden kysymyksen 25 sekunnin deadline sekä se, ettei endpoint tee prefix- tai substring-hakua. Erillistä hajautettua rate limiteriä ei tässä versiossa ole. Tuotantobuildin client leak scan kattaa kanoniset nimet, tavalliset aliakset, intent-aliakset ja rarity-datan.
