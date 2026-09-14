@@ -1,49 +1,55 @@
 # Arkkitehtuuri
 
-Mylvisa pitää pelin säännöt React-esityksestä erillään:
+Mylvisa erottaa server-only-kysymyspankin, auktoritatiivisen Daily-runin ja React-esityksen:
 
 ```mermaid
 flowchart LR
-  Universe[Verified universes] --> Generator[Editorial generator]
-  Authorship[Question + rarity metadata] --> Generator
-  Generator --> JSON[Immutable JSON release]
-  JSON --> Bank[server-only bank]
-  Bank --> Select[Deterministinen valitsin]
-  Request[Transcript + kierrosaikaleima] --> Game[server-only pelipalvelu]
-  Select --> Game
-  Game --> Match[Normalisointi ja vastausmatch]
-  Match --> DTO[Public prompt + feedback]
-  DTO --> Hook[useQuiz]
-  Hook --> UI[QuizApp]
-  Hook --> Local[Paikallinen tallennus]
+  Universe[Verified universes] --> Release[Immutable release]
+  Editorial[Scores + aliases + intentAliases] --> Release
+  Release --> Bank[Server-only bank]
+  Browser[Prompt + intentional attempt] --> Resolver[Answer resolver]
+  Bank --> Resolver
+  Resolver -->|invalid / confirm| Browser
+  Resolver -->|accepted / timeout / skipped| RPC[Locked Supabase commit]
+  RPC --> Run[Daily run + leaderboard]
+  Run --> DTO[Public game DTO]
+  DTO --> Browser
 ```
 
 ## Luottamusraja
 
-`src/data/releases.ts`, `src/lib/server/bank.ts` ja `src/lib/server/game.ts` ovat server-only-koodia. Ennen vastausta DTO:ssa on vain `id`, `prompt`, `category`, `universeId` ja kierrosnumero. Vastauksen jälkeen palautetaan pelaajan oma syöte, jos se oli väärä, tai hyväksytty kanoninen nimi ja tier. Väärä vastaus ei paljasta esimerkkivastausta eikä hyväksyttyjen vastausten listaa. Koko hyväksyttyjen vastausten lista, aliakset, pistekartta, lähteet ja kaikki korkean arvon vastaukset eivät ylitä rajaa.
+`src/data/releases.ts`, release-JSON, `src/lib/server/bank.ts`, resolver ja run engine ovat server-only-koodia. Ennen vastausta selain saa vain kysymyksen ID:n, promptin, kategorian, numeron ja universumin tunnisteen. Kanoniset nimet, tavalliset aliakset, intent-aliakset, pistekartat, lähteet ja vaihtoehtoiset vastaukset eivät ylitä rajaa.
 
-Tuotantobuildin `scripts/check-client-bundle.ts` tarkistaa promptit, selitykset ja riittävän pitkät kanoniset vastaukset JavaScript- ja source map -tiedostoista. Repositoryn lukija näkee JSON:n GitHubissa; tämä suojaa pelaamista selaimen ennakkolataukselta, ei julkista lähdekoodia vastaan.
+Invalid-vastaus palauttaa vain yleisen virheen. Confirm palauttaa yhden kanonisen näyttönimen ja salatun tokenin ilman pisteitä tai rarityä. Vasta terminaalinen accepted-tulos palauttaa pelaajan oman syötteen, kanonisen nimen, pisteet ja tierin. Client leak scan etsii production-JavaScriptistä ja source mapeista promptit, kanoniset nimet, molemmat aliastyypit ja rarity-tietueet.
 
-## Pyyntöprotokolla
+Repositoryn lukija voi nähdä release-JSON:n GitHubissa. Suojaus estää tavallista selaimen kautta tapahtuvaa ennakkolatausta ja enumerointia; se ei väitä tekevänsä julkisesta lähdekoodista salaista.
 
-`GET /api/quiz` palauttaa päivän ensimmäisen promptin sekä palvelimen aikaleimat. `POST /api/quiz` ottaa `{ date, mode, answers, releaseId?, roundStartedAt? }`. `answers` on järjestyksessä lähetetty transcript; palvelin laskee tulokset uudelleen jokaisella pyynnöllä. Zod hylkää ylimääräiset kentät, 160 merkkiä pidemmät syötteet ja liian pitkät transcriptit.
+## Daily-run ja tilakone
 
-`roundStartedAt` on preview-vaiheen alku. Palvelin käsittelee koko 3 + 25 sekunnin ikkunan absoluuttisena deadlinena ja korvaa viimeisen myöhästyneen syötteen tyhjällä vastauksella. Asiakas käyttää samaa deadlinea, tarkistaa ajan näkyviin palatessa ja lukitsee kierroksen heti. Web Locks ja v2-paikallistallennus estävät tavalliset tuplalähetykset yhteistyössä toimivissa välilehdissä.
+Tuotannon tila on `READY → PREVIEW → ANSWERING → (INVALID | CONFIRM) → ANSWERING → ACCEPTED | TIMEOUT | SKIPPED → PROGRESSION → RESULT_READY`. Kierrosten välissä ei ole ajastettua pakkoa: pelaaja avaa seuraavan kierroksen itse. Seitsemännen tuloksen jälkeen UI avaa täydellisen recapin.
 
-## Päivävalinta
+Supabasen `daily_runs` sisältää yhden rivin per käyttäjä ja Helsinki-päivä. `round_started_at` määrittää 3 sekunnin previewn ja sitä seuraavan 25 sekunnin vastausajan absoluuttisen deadlinen. Invalid ja confirm ovat ephemeraaleja eivätkä muuta runia, versiota tai deadlinea. Accepted, timeout ja skip lisäävät täsmälleen yhden terminaalituloksen.
 
-Valitsin käyttää Helsinki-päivää, release-snapshotia ja versionoitua FNV-1a-hajautusta. Yksi sykli on `floor(activeCount / length)` päivää. Sykli replayataan pyydettyyn päivään asti, ja jokaisella slotilla suositaan käyttämätöntä kysymystä, uutta universumia ja uutta kategoriaa. Syötearrayta ei muuteta, eikä `Math.random()` ole mukana. Saman päivän järjestys on sama kaikille prosesseille.
+`mylvisa_commit_run` lukitsee rivin, vertaa `expected_version`-arvoa ja validoi muuttumattomat release- ja kysymys-ID:t, uuden kierroksen outcome-tyypin, pisteet, laskurit, aikaleimat ja completion-tilan. Ensimmäinen terminaalinen kirjoitus voittaa; tupla-Enter, kaksi välilehteä tai viivästynyt vastaus saa takaisin tallennetun uudemman tilan. Invalid/confirm-vastauksen jälkeen palvelin lukee runin uudelleen, jotta rinnakkainen terminaalinen commit ei peity vanhaan ephemeral-vastaukseen.
 
-Kysymysten `validFrom` ja `validUntil` ovat kalenteripäiviä. Vanhentunut tai tulevaisuuden kysymys ei pääse valintaan. Muuttunut algoritmi julkaistaan uutena valitsinversiona; jo voimaan tulleen releasen JSON:ia ei muokata.
+Run säilyttää hyväksytyn syötteen recapin vuoksi sekä kanonisen entity-ID:n. Invalid-vapaatekstiä ei tallenneta. Timeout ja skip eivät sisällä syötettä. Leaderboard käyttää vain auktoritatiivista 0–700 pistemäärää; MYLV johdetaan esityksessä kertoimella 10.
 
-## Tila ja tulevaisuus
+## Resolver
 
-`useQuiz`-tilat ovat `home → preview → question → feedback → … → complete`. Paikallinen tallennus palauttaa keskeneräisen kierroksen aikaleiman ja valmistuneen tuloksen. Tallennuksen puuttuminen näyttää ilmoituksen, mutta ei estä pelaamista.
+Direct match kattaa kanonisen nimen, eksplisiittisen alias-muodon, normalisoinnin ja yhden yksiselitteisen vierekkäisen merkkivaihdon. Kysymyskohtainen intent-alias tuottaa confirm-tilan vain kokonaisen normalisoidun ilmauksen täsmäosumasta. Prefix-, substring-, Levenshtein-, embedding- ja typeahead-hakuja ei ole.
 
-Stateless transcript on MVP:n tietoinen rajoitus. Tilin, globaalin tulostaulun ja yhden yrityksen palvelineston lisäämiseksi luodaan palvelinpuolen `attempt`-tietue, jossa säilytetään release-, valitsin- ja kysymys-ID:t sekä idempotenssiavain. Pure functions (`selectDailyQuestions`, `matchAnswer`, `evaluateAnswer`) säilyvät samoina.
+AES-256-GCM-confirmation token sitoo runin, käyttäjän, kysymyksen, version, alkuperäissyötteen, kanonisen entity-ID:n ja deadlinen. Serveri ei luota clientin lähettämään entity-ID:hen. Yksityiskohdat: [answer-resolution.md](answer-resolution.md).
 
-## Sisältödata
+## Release ja päivävalinta
 
-Jäsenyys ja pisteytys ovat erillisiä: `src/data/universes.ts` sisältää lähde-backed complete universet ja `src/data/question-authorship.ts` suomalaisille pelaajille tehdyt promptit sekä jäsen-ID:ihin sidotut editorial scoret. Generatorin fail-closed-tarkistukset estävät tuntemattomat jäsenet, väärät expected countit, aliastörmäykset, puuttuvat pisteet ja osittaisen universumin hiljaisen julkaisun.
+Valitsin käyttää Helsinki-päivää, immuuttia release-snapshotia ja versionoitua FNV-1a-hajautusta. Uusi run saa päivälle uusimman voimaan tulleen releasen. Jo aloitettu run avataan aina omalla `release_id`:llään, joten kesken päivän julkaisu ei vaihda kysymyksiä, pisteitä tai resolver-dataa.
 
-`validateBank` tarkistaa lisäksi release-JSON:n ja universe-rekisterin välisen jäsenyysjoukon, lähteen, viitepäivän, review-statukset, accessibility-metadatan ja score-histogrammit. Daily-valinta ei hyväksy kysymystä, jonka `max(answer.points)` ei ole 100 tai jolta puuttuu 10/15 pisteen entry point. Runtime laskee kysymyskohtaisen maksimin vastausjoukosta; se ei oleta 100:aa.
+Kysymysten `validFrom` ja `validUntil` ovat kalenteripäiviä. Valinta käyttää seitsemää eri semantic familya ja rajoittaa kategoriakeskittymiä. `validateBank` tarkistaa release-jäsenyyden, lähteet, review-statukset, rarity-histogrammit sekä direct- ja intent-aliasten törmäykset.
+
+## Paikallinen harjoitus
+
+`POST /api/quiz` käsittelee harjoituksen ja backendittömän paikallisen fallbackin samalla resolver-sopimuksella. Selain lähettää oman terminaalisen transcriptinsa, outcome-listan, aktiivisen kierroksen alkuperäisen `roundStartedAt`-ajan ja yhden `attempt`-olion. Invalid/confirm eivät lisäänny transcriptiin. LocalStorage v3 säilyttää vain terminaaliset vastaukset/outcomet ja aktiivisen kellon. Harjoitus ei vaikuta profiiliin tai leaderboardiin.
+
+## Esitys ja saavutettavuus
+
+`useQuiz` hallitsee tilat, palvelimen kellon synkronoinnin, yhden aktiivisen verkkopyynnön, Web Locks -yhteistyön ja progression ajoituksen. `QuizApp` näyttää yhden päätöksen kerrallaan. Mylvintäaalto käyttää vaakasuuntaista maiseman liikettä, score/MYLV-laskureita ja milestone-tekstiä. Reduced-motion vaihtaa tiedon välittömästi uuteen tilaan ilman etenemismerkityksen poistamista. Katso [mylvinta-progression.md](mylvinta-progression.md).

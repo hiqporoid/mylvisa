@@ -10,6 +10,7 @@ export const dateSchema = z.string().refine(isDateKey, "Invalid ISO calendar dat
 export const answerSchema = z.strictObject({
   canonical: text,
   aliases: z.array(text).default([]),
+  intentAliases: z.array(text).default([]),
   points: z.number().refine((value) => (SCORE_TIERS as readonly number[]).includes(value), "Unsupported score tier"),
   tier: z.enum(Object.values(RARITY_TIERS) as [string, ...string[]]),
   editorialTier: tierPoints,
@@ -69,6 +70,16 @@ export const questionSchema = z.strictObject({
     context.addIssue({ code: "custom", message: "Time-sensitive questions need both validity dates" });
   if (new Set(question.answers.map((answer) => answer.canonical)).size !== question.answers.length)
     context.addIssue({ code: "custom", message: "Duplicate canonical answers" });
+  const resolutionOwners = new Map<string, number>();
+  question.answers.forEach((answer, answerIndex) => {
+    for (const value of [answer.canonical, ...answer.aliases, ...answer.intentAliases]) {
+      const key = value.normalize("NFKC").toLocaleLowerCase("fi-FI").trim();
+      const owner = resolutionOwners.get(key);
+      if (owner !== undefined && owner !== answerIndex)
+        context.addIssue({ code: "custom", message: `Resolution alias maps to multiple answers: ${value}` });
+      resolutionOwners.set(key, answerIndex);
+    }
+  });
   if (question.answers.some((answer) => answer.editorialTier !== String(answer.points) || answer.effectiveTier !== String(answer.points)))
     context.addIssue({ code: "custom", message: "Tier metadata must match points in the MVP" });
   if (question.answers.some((answer) => answer.tier !== RARITY_TIERS[answer.points as keyof typeof RARITY_TIERS]))

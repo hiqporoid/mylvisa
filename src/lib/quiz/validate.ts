@@ -175,6 +175,23 @@ export function validateBank(input: unknown, date = helsinkiDate()): { questions
         if (owner !== undefined && owner !== answerIndex) issue("error", question.id, `Alias equals another canonical answer: ${alias}.`);
       }
     });
+    const directOwners = new Map<string, number>();
+    question.answers.forEach((answer, answerIndex) => {
+      for (const value of [answer.canonical, ...answer.aliases]) directOwners.set(normalizeAnswer(value), answerIndex);
+    });
+    const intentOwners = new Map<string, number>();
+    question.answers.forEach((answer, answerIndex) => {
+      for (const alias of answer.intentAliases) {
+        const key = normalizeAnswer(alias);
+        if (key.length < 3) issue("error", question.id, `Intent alias is too short: ${alias}.`);
+        const directOwner = directOwners.get(key);
+        if (directOwner !== undefined) issue("error", question.id, `Intent alias duplicates a direct answer form: ${alias}.`);
+        const previousOwner = intentOwners.get(key);
+        if (previousOwner !== undefined && previousOwner !== answerIndex)
+          issue("error", question.id, `Intent alias is ambiguous between answers ${previousOwner + 1} and ${answerIndex + 1}: ${alias}.`);
+        intentOwners.set(key, answerIndex);
+      }
+    });
 
     if (question.status === "active") {
       const key = histogram(question);

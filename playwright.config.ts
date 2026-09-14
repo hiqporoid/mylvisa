@@ -15,6 +15,7 @@ export default defineConfig({
   ],
   webServer: {
     command: "npm run start -- --hostname 127.0.0.1",
+    env: { ANSWER_CONFIRMATION_SECRET: "mylvisa-e2e-confirmation-secret" },
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,

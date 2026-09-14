@@ -3,6 +3,7 @@ import { questionAuthorship } from "../src/data/question-authorship.ts";
 import { universeById } from "../src/data/universes.ts";
 
 import { corrections, decisions } from "../src/data/editorial.ts";
+import { editorialIntentAliases } from "../src/data/intent-aliases-2026-09.ts";
 
 const tierNames = {
   10: "Ilmeinen valinta",
@@ -58,6 +59,19 @@ const questions = questionAuthorship.map((original) => {
       answerKeys.set(key, entity.id);
     }
   }
+  const intentKeys = new Map();
+  for (const [canonical, aliases] of Object.entries(editorialIntentAliases[authored.id] ?? {})) {
+    const entity = universe.entities.find((candidate) => candidate.canonical === canonical);
+    if (!entity) fail(`${authored.id} assigns intent aliases to unknown answer ${canonical}`);
+    for (const alias of aliases) {
+      const key = normalize(alias);
+      if (key.length < 3) fail(`${authored.id} has a probing-length intent alias ${alias}`);
+      if (answerKeys.has(key)) fail(`${authored.id} intent alias duplicates a direct answer: ${alias}`);
+      const owner = intentKeys.get(key);
+      if (owner && owner !== entity.id) fail(`${authored.id} has an ambiguous intent alias: ${alias}`);
+      intentKeys.set(key, entity.id);
+    }
+  }
 
   const scoreIds = Object.keys(authored.scores);
   if (scoreIds.length !== universe.entities.length)
@@ -95,6 +109,7 @@ const questions = questionAuthorship.map((original) => {
       return {
         canonical: entity.canonical,
         aliases: entity.aliases,
+        intentAliases: editorialIntentAliases[authored.id]?.[entity.canonical] ?? [],
         points,
         tier: tierNames[points],
         editorialTier: String(points),
@@ -114,8 +129,8 @@ const questions = questionAuthorship.map((original) => {
     ...(authored.baseUniverseId ? { baseUniverseId: authored.baseUniverseId } : {}),
     ...(authored.predicateId ? { predicateId: authored.predicateId } : {}),
     familyId: authored.familyId ?? authored.baseUniverseId ?? authored.universeId,
-    version: 4,
-    author: "Mylvisa editorial 2026-09-11",
+    version: 5,
+    author: "Mylvisa editorial 2026-09-13",
     contentReview: decision?.classification === "RETIRE" ? "retire" : decision?.classification === "DEMOTE" ? "pending" : "verified",
     rarityReview: "editorial-reviewed",
     frequency: { status: "pending" },
@@ -123,5 +138,5 @@ const questions = questionAuthorship.map((original) => {
 });
 
 if (questions.length < 7) fail(`expected at least 7 active questions, got ${questions.length}`);
-await writeFile("src/data/releases/2026-09-11.json", `${JSON.stringify(questions, null, 2)}\n`);
+await writeFile("src/data/releases/2026-09-13.json", `${JSON.stringify(questions, null, 2)}\n`);
 console.log(`Generated ${questions.length} question records, including ${questions.filter(question => question.dailyEligible).length} Daily-eligible questions, from ${universeById.size} universes`);

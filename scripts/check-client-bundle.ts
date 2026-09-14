@@ -11,7 +11,7 @@ const paths = (await files(".next/static")).filter((path) => /\.(js|map)$/u.test
 if (!paths.length) throw new Error("No client bundles found; run npm run build first.");
 const forbidden = new Set<string>();
 for (const release of releases) for (const question of release.questions) {
-  for (const value of [question.prompt, question.explanation, question.referenceDefinition, ...question.answers.flatMap((answer) => [answer.canonical, ...answer.aliases])])
+  for (const value of [question.prompt, question.explanation, question.referenceDefinition, ...question.answers.flatMap((answer) => [answer.canonical, ...answer.aliases, ...("intentAliases" in answer ? answer.intentAliases : [])])])
     if (value.length >= 12) forbidden.add(value);
 }
 for (const path of paths) {
@@ -21,4 +21,4 @@ for (const path of paths) {
       throw new Error(`Question bank leaked into ${path}: ${value.slice(0, 40)}`);
   }
 }
-console.log(`PASS: ${paths.length} client assets contain no question prompts, explanations or answer records.`);
+console.log(`PASS: ${paths.length} client assets contain no prompts, answers, aliases, intent aliases or rarity records.`);

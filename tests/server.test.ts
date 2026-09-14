@@ -23,7 +23,8 @@ describe("server boundary and rarity game", () => {
   it("validates each submitted answer server-side and gives feedback only for it", () => {
     const questions = getDailyQuiz(date).questions;
     const expected = questions[0].answers.find((answer) => answer.points === 10 || answer.points === 15)!;
-    const first = play({ ...input, answers: [expected.canonical], roundStartedAt: now.toISOString() }, now);
+    const started = new Date(now.getTime() - 4_000).toISOString();
+    const first = play({ ...input, roundStartedAt: started, attempt: { action: "answer", answer: expected.canonical } }, now);
     expect(first.results).toHaveLength(1);
     expect(first.results[0].accepted).toBe(true);
     expect(first.results[0].points).toBe(expected.points);
@@ -31,17 +32,19 @@ describe("server boundary and rarity game", () => {
     expect(JSON.stringify(first)).not.toContain("aliases");
   });
 
-  it("accepts an incorrect answer as a final zero-point submission and advances", () => {
-    const game = play({ ...input, answers: ["tämä ei ole hyväksytty"], roundStartedAt: now.toISOString() }, now);
-    expect(game.results[0]).toMatchObject({ accepted: false, points: 0, maxPoints: 100 });
-    expect(game.results[0].canonicalAnswer).toBeUndefined();
-    expect(game.current?.number).toBe(2);
+  it("keeps an invalid attempt non-terminal and reveals no candidate", () => {
+    const started = new Date(now.getTime() - 4_000).toISOString();
+    const game = play({ ...input, roundStartedAt: started, attempt: { action: "answer", answer: "tämä ei ole hyväksytty" } }, now);
+    expect(game.results).toEqual([]);
+    expect(game.current?.number).toBe(1);
+    expect(game.resolution).toEqual({ status: "invalid", message: "Ei osumaa, kokeile uudelleen." });
+    expect(JSON.stringify(game)).not.toContain("canonicalAnswer");
   });
 
   it("forces a late submission to timeout using the absolute deadline", () => {
     const started = new Date(now.getTime() - 29_000).toISOString();
-    const game = play({ ...input, answers: ["Suomi"], roundStartedAt: started }, now);
-    expect(game.results[0]).toMatchObject({ accepted: false, points: 0, answer: "" });
+    const game = play({ ...input, roundStartedAt: started, attempt: { action: "timeout" } }, now);
+    expect(game.results[0]).toMatchObject({ accepted: false, points: 0, answer: "", outcome: "timeout" });
   });
 
   it("returns a seven-round maximum of 700 points", () => {

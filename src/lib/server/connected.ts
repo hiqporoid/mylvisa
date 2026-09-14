@@ -4,7 +4,8 @@ import { backendConfigured, serverSupabase, adminSupabase } from "@/lib/supabase
 import { helsinkiDate } from "@/lib/quiz/date";
 import { GameError } from "./game";
 import { getDailyQuiz } from "./bank";
-import { bankHash, runCommand, runResponse, transition, type Run } from "./run-engine";
+import type { Resolution } from "@/lib/quiz/contracts";
+import { bankHash, resolveRunCommand, runCommand, runResponse, type Run } from "./run-engine";
 
 export async function identity() {
   if (!backendConfigured()) throw new GameError("NOT_CONFIGURED", 503, "Tulostaulun tallennus ei ole käytössä.");
@@ -18,10 +19,11 @@ export async function connectedRun(input?: unknown) {
   const db = adminSupabase();
   const now = new Date();
   const date = helsinkiDate(now);
-  const quiz = getDailyQuiz(date);
   const selected = await db.from("daily_runs").select("*").eq("user_id", user.id).eq("quiz_date", date).maybeSingle();
   if (selected.error) throw selected.error;
   let run = selected.data as Run | null;
+  const quiz = getDailyQuiz(date, run?.release_id);
+  let resolution: Resolution | undefined;
   if (input !== undefined) {
     const parsed = runCommand.safeParse(input);
     if (!parsed.success) throw new GameError("INVALID_REQUEST", 400, "Pelin tiedot eivät kelpaa.");
@@ -39,15 +41,38 @@ export async function connectedRun(input?: unknown) {
       } else if (insert.error) throw insert.error;
       else run = insert.data as Run;
     } else if (run && parsed.data.action !== "start") {
-      const next = transition(run, parsed.data, quiz.questions, now);
+      const transition = resolveRunCommand(run, parsed.data, quiz.questions, now);
+      const next = transition.run;
+      resolution = transition.resolution;
       if (next.version !== run.version) {
         const saved = await db.rpc("mylvisa_commit_run", { run_id: run.id, owner_id: user.id, expected_version: run.version, next_state: next });
         if (saved.error) throw saved.error;
         run = saved.data as Run;
+        if (run.version !== next.version) resolution = undefined;
+      } else if (resolution) {
+        // Invalid and confirm are intentionally ephemeral. Re-read after resolving so
+        // a terminal commit from another tab always wins over this stale response.
+        const latest = await db.from("daily_runs").select("*").eq("id", run.id).eq("user_id", user.id).single();
+        if (latest.error) throw latest.error;
+        const current = latest.data as Run;
+        if (current.version !== run.version) resolution = undefined;
+        run = current;
       }
     }
   }
   if (!run) return { available: true, game: null };
   if (run.release_id !== quiz.releaseId || run.bank_hash !== bankHash(quiz.questions)) throw new GameError("RELEASE_CHANGED", 409, "Pelin sisältö on päivittynyt. Vanhaa tulosta ei korvata.");
-  return { available: true, game: runResponse(run, quiz.questions, now) };
+  const response = runResponse(run, quiz.questions, now, resolution);
+  if (response.summary) {
+    const [profile, leaderboard] = await Promise.all([
+      db.from("profiles").select("nickname").eq("user_id", user.id).maybeSingle(),
+      db.rpc("mylvisa_leaderboard", { first_date: date, last_date: date }),
+    ]);
+    const nickname = profile.data?.nickname;
+    if (!profile.error && nickname && !leaderboard.error) {
+      const ownRow = (leaderboard.data as { nickname: string; rank: number }[] | null)?.find((row) => row.nickname === nickname);
+      if (ownRow) response.summary.placement = Number(ownRow.rank);
+    }
+  }
+  return { available: true, game: response };
 }

@@ -6,8 +6,10 @@ const parsed = releases.map((release) => ({
   ...release,
   questions: release.questions.map((q) => questionSchema.parse(q)),
 }));
-export function getDailyQuiz(date: string) {
-  const release = parsed.findLast((r) => r.effectiveFrom <= date);
+export function getDailyQuiz(date: string, releaseId?: string) {
+  const release = releaseId
+    ? parsed.find((item) => item.id === releaseId && item.effectiveFrom <= date)
+    : parsed.findLast((item) => item.effectiveFrom <= date);
   if (!release) throw new Error("No bank release for this date");
   return {
     releaseId: release.id,

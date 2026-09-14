@@ -1,10 +1,10 @@
-> Beta hardening status (12 September 2026): **NOT_READY_FOR_CONNECTED_BETA_SETUP**. The editorial audit reduced the trusted Daily bank to 69 questions; the unchanged content readiness test still fails. Supabase profiles, authoritative runs and a private-by-default leaderboard are implemented. See [editorial audit](docs/editorial-audit-2026-09.md), [bank quality](docs/bank-quality-report-2026-09.md) and [connected setup](docs/supabase-setup.md) for current details. Older release claims below are historical.
+> Gameplay release (14 September 2026): the Supabase-connected Daily, authoritative round deadlines and leaderboard remain in place. Invalid answer attempts are non-terminal, editorial canonicalisation is available after submission, and accepted answers advance the Mylvintäaalto. The trusted Daily bank still contains 69 questions; the separate 300–400 question expansion is intentionally deferred.
 
 # Mylvisa
 
 Mylvisa on suomalainen päivittäinen rarity-tietopeli. Kysymyksessä on suljettu joukko oikeita vastauksia: jokainen hyväksytty vastaus on onnistuminen, mutta harvinaisemman vastauksen löytäminen tuottaa enemmän pisteitä.
 
-Päivän visa on kaikille sama Helsinki-kalenteripäivän aikana. Pelissä on seitsemän kierrosta, kolmen sekunnin lukuvaihe ja sen jälkeen 25 sekunnin vastausaika. Maksimi on 700 pistettä. Päivän yritys ja tulos tallennetaan selaimen paikalliseen tallennustilaan.
+Päivän visa on kaikille sama Helsinki-kalenteripäivän aikana. Pelissä on seitsemän kierrosta, kolmen sekunnin lukuvaihe ja sen jälkeen 25 sekunnin vastausaika. Virheellistä yritystä saa korjata alkuperäisen kellon käydessä. Maksimi on 700 pistettä eli 7000 MYLV. Tuotannon Daily-run ja tulos tallennetaan Supabaseen; harjoitus käyttää paikallista transcriptia.
 
 ## Kehitys
 
@@ -43,17 +43,17 @@ scripts/                       pankin generointi, validointi ja client-leak-tark
 tests/                         Vitest- ja Playwright-testit
 ```
 
-Palvelin lähettää selaimeen ennen vastausta vain kysymyksen, kategorian, numeron ja universumin tunnisteen. Hyväksytyt vastaukset, aliakset, pisteet, lähteet ja selitykset pysyvät server-only-moduuleissa. `check:client` etsii tuotannon JavaScript- ja source map -tiedostoista pankin tekstejä ja vastausolioita.
+Palvelin lähettää selaimeen ennen vastausta vain kysymyksen, kategorian, numeron ja universumin tunnisteen. Hyväksytyt vastaukset, aliakset, intent-aliakset, pisteet, lähteet ja selitykset pysyvät server-only-moduuleissa. `check:client` etsii tuotannon JavaScript- ja source map -tiedostoista pankin tekstejä ja vastausolioita. Katso [vastausten resolver](docs/answer-resolution.md) ja [Mylvintäaalto](docs/mylvinta-progression.md).
 
 ## Päivävalinta ja ajastin
 
 `helsinkiDate` käyttää aina `Europe/Helsinki`-aikavyöhykettä. Aktiivinen release valitaan sen `effectiveFrom`-päivän perusteella. Valitsin käyttää versionoitua FNV-1a-hajautusta, kierroksia ja ilman korvaamista tapahtuvaa valintaa. Daily-eligible-kysymys ei toistu saman valitsinsyklin aikana; todellinen kiertohorisontti on `floor(dailyEligibleCount / 7)` päivää.
 
-Kierroskello tallentaa absoluuttiset aikaleimat `startedAt`, `previewUntil` ja `deadline`. Selain piirtää jäljellä olevan ajan näistä aikaleimoista, joten välilehden taustalla olo tai hidastunut renderöinti ei palauta aikaa. Palvelin tarkistaa saman 28 sekunnin ikkunan lähetyksen yhteydessä ja muuttaa myöhästyneen vastauksen aikakatkaisuksi.
+Kierroskello tallentaa absoluuttiset aikaleimat `startedAt`, `previewUntil` ja `deadline`. Selain piirtää jäljellä olevan ajan näistä aikaleimoista, joten välilehden taustalla olo, virheellinen yritys, vahvistus tai hidastunut renderöinti ei palauta aikaa. Palvelin tarkistaa saman 28 sekunnin ikkunan jokaisella yrityksellä ja päättää myöhästyneen yrityksen aikakatkaisuun.
 
 ## Kysymysmalli ja vastausten tarkistus
 
-Jokainen kysymys sisältää `id`, `prompt`, `category`, `universeId`, objektiivisen `referenceDefinition`-rajauksen, vähintään viisi vastausoliota, `explanation`-tekstin, lähteen, tagit, elinkaaritiedot, `dailyEligible`-portin ja accessibility-metadatan. Vastausolio sisältää `canonical`-nimen, eksplisiittiset `aliases`-aliakset, pisteet, suomalaisen rarity-nimen, toimituksellisen ja tulevan empiirisen tierin sekä provenienssin.
+Jokainen kysymys sisältää `id`, `prompt`, `category`, `universeId`, objektiivisen `referenceDefinition`-rajauksen, vastausoliot, lähteen, elinkaaritiedot ja accessibility-metadatan. Vastausolio sisältää `canonical`-nimen, suoraan hyväksyttävät `aliases`-aliakset, valinnaiset kysymyskohtaiset `intentAliases`-ilmaukset, pisteet, rarity-nimen ja provenienssin. Intent-alias voi vain vahvistaa yhden jo tunnistetun käsitteen; se ei ole typeahead tai vihjehaku.
 
 Tuetut pisteet ovat **10, 15, 30, 60, 85 ja 100**. 10 ja 15 ovat helposti mieleen tulevia vastauksia; 60–100 ovat harvinaisempia oivalluksia. Mikään hyväksytty vastaus ei ole huono.
 
@@ -63,10 +63,8 @@ Normalisointi tekee NFKC-Unicode-normalisoinnin, pienaakkoset, reunojen ja toist
 
 Lue [kysymysten kirjoittajan opas](docs/question-authoring.md) ja [rarity-malli](docs/rarity-model.md). Lisää kysymyksiä toimituksen lähdeskriptiin, muodosta snapshot ja aja validointi. `npm run validate:bank` ilmoittaa muun muassa vähimmäisvastausten puuttumisesta, pisteistä, alias- ja ID-törmäyksistä, päällekkäisestä tekstistä, vanhentumisesta, epätasaisesta rarity-jakaumasta, accessibility-portista ja lähdepuutteista. Daily-kysymys tarvitsee vähintään yhden 10/15-pisteen sisääntulon ja tosiasiallisen 100-pisteen vastauksen.
 
-Nykyinen julkaisu sisältää 204 kysymystä, joista 85 on daily-eligible; se ei vielä täytä 360–400 kysymyksen julkaisumaalia. Yksityiskohtainen auditointi on [bank-quality-report-2026-09.md](docs/bank-quality-report-2026-09.md). Vanha 112 kysymyksen snapshot on `src/data/retired/`-hakemistossa eikä osallistu valintaan.
+Nykyinen julkaisu sisältää 549 säilytettyä kysymystietuetta, joista 69 on daily-eligible. Se ei vielä täytä 300–400 aktiivisen Daily-kysymyksen sisältötavoitetta. Yksityiskohtainen auditointi on [bank-quality-report-2026-09.md](docs/bank-quality-report-2026-09.md).
 
-## Vercel ja tulevat laajennukset
+## Vercel ja Supabase
 
-Sovellus on tavallinen Next.js App Router -sovellus ja tuotantorakennus toimii Vercelissä Node-runtime-reitillä. Tietokantaa, salaisuuksia, cron-tehtävää tai live-deploymentia ei ole tässä tehtävässä lisätty.
-
-Seuraava versio voi lisätä `attempt`-rajapinnan, kirjautumisen, idempotenssiavaimen, palvelimen yhden yrityksen eston, nimettömän taajuuskeräyksen ja leaderboardin ilman että puhdasta valinta-, normalisointi- tai pisteytysmoottoria tarvitsee vaihtaa. Taajuuskalibroinnin suunnitelma on [docs/rarity-model.md](docs/rarity-model.md).
+Sovellus on Next.js App Router -sovellus Vercelissä. Supabase Auth antaa anonyymin identiteetin, `daily_runs` säilyttää yhden versionoidun runin käyttäjää ja Helsinki-päivää kohden, ja service-role-only RPC lukitsee yhden terminaalituloksen kierrosta kohden. Leaderboard käyttää edelleen vain pistemäärää; MYLV on siitä johdettu esitysarvo. Asennusohje on [docs/supabase-setup.md](docs/supabase-setup.md).

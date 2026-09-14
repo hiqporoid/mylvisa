@@ -34,8 +34,12 @@ answer_count
 
 Raakaa vapaatekstiä ei tarvitse säilyttää. Kun havaintoja kertyy, `answer_count / plays` voi järjestää vastaukset kuuteen vakaaseen ämpäriin. `editorialTier` säilyttää alkuperäisen päätöksen ja `effectiveTier` uuden käytössä olevan arvon; kysymysten API ja pelaajan kokemus pysyvät samoina.
 
+## Kysymysten saavutettavuus
+
+Promptin pitää olla heti ymmärrettävä, universumin tuttu ja riittävän laaja: useimmille syntyy ilmeinen 10–15 pisteen lähtövastaus, mutta joukossa on mielekäs pitkä häntä. Tietokantamainen rajaus kuuluu lähde- ja completeness-metadataan; pelaajan tekstin tulee olla mahdollisimman luonnollinen täsmällisyyttä menettämättä. Kapeita, akateemisia muistilistoja ei pidä ottaa Dailyyn vain siksi, että niiden jäsenyys on helppo validoida.
+
 ## Ajastin ja luottamusraja
 
-Kierros alkaa 3 sekunnin previewlla. Sen jälkeen pelaajalla on 25 sekuntia ja yksi lopullinen lähetys. Asiakas käyttää `startedAt`-, `previewUntil`- ja `deadline`-aikaleimoja, ei sekunti kerrallaan vähenevää laskuria. Palvelin tarkistaa 28 sekunnin kokonaisikkunan ja tekee myöhäisestä lähetyksestä tyhjän vastauksen. Välilehden taustalle siirtyminen ei palauta aikaa.
+Kierros alkaa 3 sekunnin previewlla. Sen jälkeen pelaajalla on 25 sekuntia löytää yksi hyväksytty vastaus. Virheelliset yritykset ja canonicalisation-vahvistus eivät päätä kierrosta tai siirrä deadlinea. Hyväksytty vastaus, aikakatkaisu tai eksplisiittinen ohitus ovat terminaalisia. Asiakas käyttää `startedAt`-, `previewUntil`- ja `deadline`-aikaleimoja; palvelin omistaa saman absoluuttisen deadlinen.
 
-Selaimeen lähetetään ennen vastausta vain promptin näyttämiseen tarvittavat tiedot. Hyväksytyt listat, aliaset, tierit ja selitykset jäävät server-only-koodiin. Tämä on selaimen ennakkolatausta vastaan tehty pelieheyssuoja; ilman käyttäjätilejä ja pysyvää yritysrekisteriä se ei ole palkintotason huijauksenesto.
+Selaimeen lähetetään ennen vastausta vain promptin näyttämiseen tarvittavat tiedot. Hyväksytyt listat, aliaset, intent-aliakset, tierit ja selitykset jäävät server-only-koodiin. Ennen commitia palvelin voi palauttaa vain yhden vahvistettavan kanonisen nimen ilman pisteitä. Tarkempi malli on kuvattu [answer-resolution.md](answer-resolution.md).

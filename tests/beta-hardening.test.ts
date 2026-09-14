@@ -7,6 +7,8 @@ import { CATEGORIES } from '../src/lib/quiz/catalog';
 import { readGame, saveGame, STORAGE_PREFIX } from '../src/lib/client/storage';
 import bank from '../src/data/releases/2026-09-11.json';
 import decisions from '../docs/internal/editorial-decisions-2026-09.json';
+import { INTENT_ALIAS_COUNT } from '../src/data/intent-aliases-2026-09';
+import latestBank from '../src/data/releases/2026-09-13.json';
 
 describe('connected request boundary', () => {
  it('rejects cross-site writes', async () => {
@@ -29,6 +31,7 @@ describe('connected request boundary', () => {
  });
 });
 describe('editorial and selection gates',()=>{
+ it('ships exactly the small hand-edited resolver set',()=>{expect(INTENT_ALIAS_COUNT).toBe(32);expect(latestBank.flatMap(question=>question.answers).flatMap(answer=>answer.intentAliases).length).toBe(32);});
  it('keeps source membership enumerations out of gameplay feedback',()=>{
   for(const id of ['games-elder-scrolls-anthology','games-orange-box-steam','digital-historic-generic-tlds']){
    const question=bank.find(q=>q.id===id)!;
@@ -54,7 +57,7 @@ it('preserves pre-Supabase local data in an archive before replacing a release',
  const values=new Map<string,string>();vi.stubGlobal('localStorage',{getItem:(k:string)=>values.get(k)??null,setItem:(k:string,v:string)=>values.set(k,v)});
  try {
   values.set(STORAGE_PREFIX+'2026-09-11',JSON.stringify({version:2,date:'2026-09-11',started:true,feedback:false,answers:['old']}));
-  expect(saveGame({version:2,date:'2026-09-11',releaseId:'new',started:true,feedback:false,answers:[]})).toBe(true);
+  expect(saveGame({version:3,date:'2026-09-11',releaseId:'new',started:true,feedback:false,answers:[],outcomes:[]})).toBe(true);
   expect(JSON.parse(values.get('mylvisa:archive:2026-09-11:legacy')!).answers).toEqual(['old']);
   expect(readGame('2026-09-11')?.releaseId).toBe('new');
  } finally {vi.unstubAllGlobals();}

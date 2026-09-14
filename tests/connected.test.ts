@@ -1,10 +1,17 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { validateNickname } from '../src/lib/profile/nickname';
 import { publicLeaderboard } from '../src/lib/profile/leaderboard';
-import { bankHash, entityId, runCommand, transition, runResponse, type Run } from '../src/lib/server/run-engine';
+import { bankHash, entityId, resolveRunCommand, runCommand, transition, runResponse, type Run } from '../src/lib/server/run-engine';
 import { getDailyQuiz } from '../src/lib/server/bank';
+import { questionSchema } from '../src/lib/quiz/schema';
+import { createConfirmationToken, resolveAnswer } from '../src/lib/server/answer-resolution';
+import latestBank from '../src/data/releases/2026-09-13.json';
+import { MAX_MYLV, mylvFromPoints } from '../src/lib/quiz/progression';
+import { createHash } from 'node:crypto';
+import oldBank from '../src/data/releases/2026-09-11.json';
+import { selectDailyQuestions } from '../src/lib/quiz/selection';
 const date='2026-09-11';
 const questions=getDailyQuiz(date).questions;
 const user='00000000-0000-4000-8000-000000000001';
@@ -16,24 +23,41 @@ describe('authoritative run boundary',()=>{
  it('anonymous identity needs no email to play',()=>expect(answer().current_round).toBe(1));
  it('rejects client points and timing fields',()=>{expect(runCommand.safeParse({action:'start',score:700}).success).toBe(false);expect(runCommand.safeParse({action:'answer',version:0,questionId:'x',answer:'x',roundStartedAt:date}).success).toBe(false);});
  it('recalculates awarded points from server bank',()=>expect(answer().total_score).toBe(questions[0].answers[0].points));
- it('wrong answers are final zeros',()=>{const wrong=answer(initial(),'invalid-no-answer');expect(wrong.total_score).toBe(0);expect(transition(wrong,{action:'answer',version:0,questionId:questions[0].id,answer:questions[0].answers[0].canonical},questions,new Date(date+'T09:00:05Z'))).toEqual(wrong);});
+ it('invalid attempts do not mutate, score or advance the round',()=>{const attempt=resolveRunCommand(initial(),{action:'answer',version:0,questionId:questions[0].id,answer:'invalid-no-answer'},questions,new Date(date+'T09:00:04Z'));expect(attempt.run).toEqual(initial());expect(attempt.resolution?.status).toBe('invalid');expect(attempt.run.round_started_at).toBe(initial().round_started_at);});
+ it('allows multiple invalid retries before one valid terminal answer',()=>{let run=initial();for(const value of ['invalid-one','invalid-two'])run=resolveRunCommand(run,{action:'answer',version:0,questionId:questions[0].id,answer:value},questions,new Date(date+'T09:00:04Z')).run;expect(run.current_round).toBe(0);run=answer(run,questions[0].answers[0].canonical,6);expect(run.current_round).toBe(1);expect(run.rounds).toHaveLength(1);});
  it('deadline is exclusive and late answer scores zero',()=>{expect(answer(initial(),questions[0].answers[0].canonical,28).total_score).toBe(0);expect(answer(initial(),questions[0].answers[0].canonical,29).rounds[0].outcome).toBe('timeout');});
  it('rejects submissions during 3-second preview',()=>expect(()=>answer(initial(),'x',2)).toThrow('Lue kysymys'));
  it('persists canonical entity IDs without raw text',()=>{const next=answer();expect(next.rounds[0].canonical_entity_id).toBe(entityId(questions[0],questions[0].answers[0].canonical));expect(next.rounds[0]).not.toHaveProperty('answer');});
  it('wrong text is not permanently stored',()=>expect(JSON.stringify(answer(initial(),'private-secret-input'))).not.toContain('private-secret-input'));
+ it('timeout and skip are terminal zero-point outcomes',()=>{const timed=transition(initial(),{action:'timeout',version:0,questionId:questions[0].id},questions,new Date(date+'T09:00:29Z'));expect(timed.rounds[0]).toMatchObject({outcome:'timeout',points:0});const skipped=transition(initial(),{action:'skip',version:0,questionId:questions[0].id},questions,new Date(date+'T09:00:04Z'));expect(skipped.rounds[0]).toMatchObject({outcome:'skipped',points:0});});
  it('does not reveal the next prompt in feedback',()=>expect(runResponse(answer(),questions,new Date()).current).toBeNull());
  it('refresh cannot reset active timer',()=>expect(transition(initial(),{action:'next',version:0},questions,new Date(date+'T09:00:10Z'))).toEqual(initial()));
  it('stale request cannot overwrite round state',()=>{const run=answer();expect(transition(run,{action:'next',version:0},questions,new Date(date+'T09:00:10Z'))).toEqual(run);});
  it('release changes cannot regrade a live run',()=>expect(()=>transition({...initial(),bank_hash:'different'},{action:'next',version:0},questions,new Date(date+'T09:00:00Z'))).toThrow('sisältö'));
+ it('keeps the pre-intent-alias release hash compatible with existing runs',()=>{const raw=selectDailyQuestions(oldBank.map(question=>questionSchema.parse(question)),date,{length:7,seed:'2026-09-11-editorial-v4',epoch:'2026-09-01'}).map(question=>({...question,answers:question.answers.map(answer=>Object.fromEntries(Object.entries(answer).filter(([key])=>key!=='intentAliases')))}));expect(bankHash(questions)).toBe(createHash('sha256').update(JSON.stringify(raw)).digest('hex'));});
+ it('keeps the score and MYLV ceilings at 700 and 7000',()=>{expect(questions.reduce((sum,q)=>sum+Math.max(...q.answers.map(a=>a.points)),0)).toBe(700);expect(mylvFromPoints(700)).toBe(MAX_MYLV);});
  it('never publishes private identifiers from leaderboard rows',()=>{const rows=publicLeaderboard([{nickname:'Olli',score:700,games:1,average:700,best:700,rank:1,accepted_count:7,user_id:user,email:'secret@example.invalid',answers:['secret']}]);expect(Object.keys(rows[0]).sort()).toEqual(['nickname','score','games','average','best','rank','accepted_count'].sort());expect(JSON.stringify(rows)).not.toContain(user);});
  it.each(['ab','a'.repeat(21),'admin','https://x.fi','<script>','a\u0000b','a\u202eb','a\u200db'])('rejects invalid nickname %s',value=>expect(()=>validateNickname(value)).toThrow());
  it('supports Finnish letters, trimming and canonical Unicode normalization',()=>{expect(validateNickname('  Ääkkönen  ')).toEqual({nickname:'Ääkkönen',normalized:'ääkkönen'});expect(validateNickname('A\u0308a\u0308kkönen').normalized).toBe('ääkkönen');});
+});
+describe('editorial answer resolution',()=>{
+ const question=questionSchema.parse(latestBank.find(item=>item.id==='tiede-aurinkokunta'));
+ const intent='punainen planeetta';
+ function oneQuestion():Run {return {id:'intent-run',user_id:'intent-user',quiz_date:'2026-09-13',release_id:'test',bank_hash:bankHash([question]),question_ids:[question.id],started_at:'2026-09-13T09:00:00Z',round_started_at:'2026-09-13T09:00:00Z',completed_at:null,current_round:0,total_score:0,accepted_count:0,status:'answering',version:0,rounds:[]};}
+ it('accepts canonical, alias, normalization and a unique adjacent typo directly',()=>{expect(resolveAnswer(question,'Mars').status).toBe('accepted');expect(resolveAnswer(question,'  MARS  ').status).toBe('accepted');expect(resolveAnswer(question,'Mras').status).toBe('accepted');});
+ it.each(['a','mar','ars','random words'])('does not reveal answers for probing input %s',value=>expect(resolveAnswer(question,value)).toEqual({status:'invalid'}));
+ it('does not enumerate candidates under repeated alphabet probing',()=>{for(const letter of 'abcdefghijklmnopqrstuvwxyz')expect(resolveAnswer(question,letter)).toEqual({status:'invalid'});});
+ it('returns exactly one display name and no score for an editorial intent alias',()=>{const result=resolveRunCommand(oneQuestion(),{action:'answer',version:0,questionId:question.id,answer:intent},[question],new Date('2026-09-13T09:00:04Z'),'test-secret');expect(result.run).toEqual(oneQuestion());expect(result.resolution?.status).toBe('confirm');expect(result.resolution).toMatchObject({canonicalAnswer:'Mars'});expect(result.resolution).not.toHaveProperty('points');expect(result.resolution).not.toHaveProperty('rarity');});
+ it('supports invalid, confirm, then accepted without moving the deadline',()=>{const initialRun=oneQuestion();const invalid=resolveRunCommand(initialRun,{action:'answer',version:0,questionId:question.id,answer:'nonsense'},[question],new Date('2026-09-13T09:00:04Z'),'test-secret');const pending=resolveRunCommand(invalid.run,{action:'answer',version:0,questionId:question.id,answer:intent},[question],new Date('2026-09-13T09:00:05Z'),'test-secret');if(pending.resolution?.status!=='confirm')throw new Error('expected confirmation');const accepted=resolveRunCommand(pending.run,{action:'confirm',version:0,questionId:question.id,confirmationToken:pending.resolution.confirmationToken},[question],new Date('2026-09-13T09:00:06Z'),'test-secret');expect(accepted.run.rounds[0]).toMatchObject({outcome:'accepted',original_input:intent});expect(accepted.run.round_started_at).toBeNull();});
+ it('turns confirmation after the original deadline into timeout',()=>{const pending=resolveRunCommand(oneQuestion(),{action:'answer',version:0,questionId:question.id,answer:intent},[question],new Date('2026-09-13T09:00:04Z'),'test-secret');if(pending.resolution?.status!=='confirm')throw new Error('expected confirmation');const late=resolveRunCommand(pending.run,{action:'confirm',version:0,questionId:question.id,confirmationToken:pending.resolution.confirmationToken},[question],new Date('2026-09-13T09:00:29Z'),'test-secret');expect(late.run.rounds[0].outcome).toBe('timeout');});
+ it('rejects a token bound to the wrong question and ignores a stale terminal replay',()=>{const wrong=createConfirmationToken({version:1,runId:'intent-run',userId:'intent-user',questionId:'wrong-question',runVersion:0,normalizedInput:intent,originalInput:intent,canonicalEntityId:entityId(question,'Mars'),expiresAt:Date.parse('2026-09-13T09:00:28Z')},'test-secret');expect(()=>resolveRunCommand(oneQuestion(),{action:'confirm',version:0,questionId:question.id,confirmationToken:wrong},[question],new Date('2026-09-13T09:00:05Z'),'test-secret')).toThrow('voimassa');const terminal=transition(oneQuestion(),{action:'answer',version:0,questionId:question.id,answer:'Mars'},[question],new Date('2026-09-13T09:00:04Z'));expect(resolveRunCommand(terminal,{action:'confirm',version:0,questionId:question.id,confirmationToken:wrong},[question],new Date('2026-09-13T09:00:05Z'),'test-secret').run).toEqual(terminal);});
+ it('rejects ambiguous editorial intent instead of choosing a candidate',()=>{const ambiguous={...question,answers:question.answers.map((answer,index)=>({...answer,intentAliases:index<2?['same concept']:answer.intentAliases}))};expect(resolveAnswer(ambiguous,'same concept')).toEqual({status:'invalid'});});
 });
 describe('real Postgres migration and RLS',()=>{
  const db=new PGlite();
  beforeAll(async()=>{
   await db.exec(`create role anon; create role authenticated; create role service_role bypassrls; create schema auth; create table auth.users(id uuid primary key,email text,is_anonymous boolean default true); create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid $$; grant usage on schema public,auth to anon,authenticated,service_role; grant execute on function auth.uid() to authenticated;`);
-  await db.exec(readFileSync('supabase/migrations/20260912081420_mylvisa_connected_beta.sql','utf8'));
+  for(const migration of readdirSync('supabase/migrations').filter(name=>name.endsWith('.sql')).sort())await db.exec(readFileSync(`supabase/migrations/${migration}`,'utf8'));
   await db.query('insert into auth.users(id) values($1),($2)',[user,other]);
  },30000);
  afterAll(()=>db.close());
@@ -52,11 +76,12 @@ describe('real Postgres migration and RLS',()=>{
  });
  it('database commit serializes retries and rejects another owner',async()=>{
   const today=(await db.query<{date:string}>("select to_char(now() at time zone 'Europe/Helsinki','YYYY-MM-DD') as date")).rows[0].date;
+  const answeredAt=new Date(); const startedAt=new Date(answeredAt.getTime()-4000);
   const owner='00000000-0000-4000-8000-000000000003';
   await db.query('insert into auth.users(id) values($1)',[owner]);
-  const run={...initial(),id:'40000000-0000-4000-8000-000000000001',user_id:owner,quiz_date:today,started_at:today+'T09:00:00Z',round_started_at:today+'T09:00:00Z'};
+  const run={...initial(),id:'40000000-0000-4000-8000-000000000001',user_id:owner,quiz_date:today,started_at:startedAt.toISOString(),round_started_at:startedAt.toISOString()};
   await db.query('insert into daily_runs select * from jsonb_populate_record(null::daily_runs,$1)',[JSON.stringify(run)]);
-  const next=transition(run,{action:'answer',version:0,questionId:questions[0].id,answer:questions[0].answers[0].canonical},questions,new Date(today+'T09:00:04Z'));
+  const next=transition(run,{action:'answer',version:0,questionId:questions[0].id,answer:questions[0].answers[0].canonical},questions,answeredAt);
   await db.exec('set role service_role');
   try {
    await expect(db.query('select mylvisa_commit_run($1,$2,0,$3)',[run.id,other,JSON.stringify(next)])).rejects.toThrow();

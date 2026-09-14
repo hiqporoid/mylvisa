@@ -1,5 +1,12 @@
 import type { Category } from "./catalog";
 export type Mode = "daily" | "practice";
+export type AnswerOutcome = "accepted" | "timeout" | "skipped" | "legacy-invalid";
+export type Resolution =
+  | { status: "invalid"; message: string }
+  | { status: "confirm"; canonicalAnswer: string; confirmationToken: string }
+  | { status: "accepted"; canonicalAnswer: string }
+  | { status: "timeout" }
+  | { status: "skipped" };
 export type PublicQuestion = {
   id: string;
   prompt: string;
@@ -12,8 +19,11 @@ export type AnswerResult = {
   prompt: string;
   category: Category;
   answer: string;
+  originalAnswer?: string;
   accepted: boolean;
   canonicalAnswer?: string;
+  canonicalized?: boolean;
+  outcome: AnswerOutcome;
   points: number;
   maxPoints: number;
   tier?: string;
@@ -26,6 +36,7 @@ export type QuizResponse = {
   runVersion?: number;
   runStatus?: "answering" | "feedback" | "completed";
   roundStartedAt?: string | null;
+  resolution?: Resolution;
   date: string;
   today: string;
   mode: Mode;
@@ -35,12 +46,20 @@ export type QuizResponse = {
   nextRollover: string;
   results: AnswerResult[];
   current: PublicQuestion | null;
-  summary: { points: number; maxPoints: number; correct: number } | null;
+  summary: { points: number; maxPoints: number; correct: number; placement?: number } | null;
 };
+export type LocalRoundOutcome = "answer" | "timeout" | "skipped";
+export type QuizAttempt =
+  | { action: "answer"; answer: string }
+  | { action: "confirm"; confirmationToken: string }
+  | { action: "timeout" }
+  | { action: "skip" };
 export type QuizRequest = {
   date: string;
   mode: Mode;
   answers: string[];
+  outcomes?: LocalRoundOutcome[];
+  attempt?: QuizAttempt;
   releaseId?: string;
   roundStartedAt?: string;
 };

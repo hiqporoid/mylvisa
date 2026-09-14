@@ -33,6 +33,7 @@ export function evaluateAnswer(question: Question, input: string, scored = true)
     category: question.category,
     answer: input,
     accepted: Boolean(match),
+    outcome: match ? "accepted" as const : "legacy-invalid" as const,
     ...(match ? { canonicalAnswer: match.canonical } : {}),
     points,
     maxPoints,
@@ -48,7 +49,7 @@ export function evaluateAnswer(question: Question, input: string, scored = true)
 
 export type EvaluatedAnswer = ReturnType<typeof evaluateAnswer>;
 
-export function totalScore(results: EvaluatedAnswer[]) {
+export function totalScore(results: Array<Pick<EvaluatedAnswer, "points" | "maxPoints" | "accepted">>) {
   return results.reduce(
     (total, result) => ({
       points: total.points + result.points,
