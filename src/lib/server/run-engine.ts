@@ -113,7 +113,7 @@ export function resolveRunCommand(
   if (command.action === "answer") {
     const resolved = resolveAnswer(question, command.answer);
     if (resolved.status === "invalid")
-      return { run, resolution: { status: "invalid", message: "Ei osumaa, kokeile uudelleen." } };
+      return { run, resolution: { status: "invalid", message: "Ei osumaa — kokeile uudelleen." } };
     if (resolved.status === "accepted") {
       return {
         run: finishRound(run, question, now, "accepted", resolved.answer, command.answer),
