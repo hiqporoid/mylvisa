@@ -49,6 +49,7 @@ export const questionSchema = z.strictObject({
   status: z.enum(["active", "review", "retired"]),
   dailyEligible: z.boolean(),
   accessibilityReview: z.enum(["verified", "needs-review"]),
+  difficulty: z.enum(["standard", "hard"]).optional(),
   accessibility: z.number().int().min(1).max(5),
   dailyEligibilityReason: text.optional(),
   baseUniverseId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/).optional(),
@@ -86,6 +87,10 @@ export const questionSchema = z.strictObject({
     context.addIssue({ code: "custom", message: "Rarity name must match points" });
   if (question.status === "active" && (question.contentReview !== "verified" || question.rarityReview !== "editorial-reviewed"))
     context.addIssue({ code: "custom", message: "Active questions require verified content and editorial rarity review" });
+  if (question.version >= 6 && question.dailyEligible && !question.difficulty)
+    context.addIssue({ code: "custom", message: "New Daily releases require explicit difficulty" });
+  if (question.version >= 6 && question.dailyEligible && question.answers.length < 6)
+    context.addIssue({ code: "custom", message: "New Daily universes require at least six answers" });
   if (question.dailyEligible && question.status !== "active")
     context.addIssue({ code: "custom", message: "Daily-eligible questions must be active" });
   if (question.dailyEligible && question.accessibilityReview !== "verified")

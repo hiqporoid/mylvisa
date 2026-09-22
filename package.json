@@ -14,9 +14,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "generate:bank": "node --import tsx scripts/generate-rarity-bank.mjs",
+    "generate:bank": "node --import tsx scripts/generate-rarity-bank.mjs && npm run generate:beta-draft",
     "validate:bank": "node --import tsx scripts/validate-bank.ts",
-    "check:client": "node --import tsx scripts/check-client-bundle.ts"
+    "check:client": "node --import tsx scripts/check-client-bundle.ts",
+    "generate:beta-draft": "node --import tsx scripts/generate-beta-draft.ts",
+    "simulate:beta-draft": "node --import tsx scripts/simulate-beta-draft.ts"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",

@@ -161,6 +161,14 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
                         <span>{item.tier}</span>
                       </>
                     ) : <strong className="result-muted">{outcomeLabel(item.outcome)}</strong>}
+                    {item.correctAnswers && (
+                      <details className="recap-answers">
+                        <summary>Kaikki hyväksytyt vastaukset ({item.correctAnswers.length})</summary>
+                        <ol>
+                          {item.correctAnswers.map(answer => <li key={answer.canonical}><span>{answer.canonical}{item.accepted && answer.canonical === item.canonicalAnswer && <small> · Sinun vastauksesi</small>}</span><strong>{answer.points} p</strong></li>)}
+                        </ol>
+                      </details>
+                    )}
                   </div>
                   <strong className="recap-points">{item.points} p</strong>
                 </li>
@@ -171,7 +179,7 @@ export function QuizApp({ initialDate, length }: { initialDate: string; length: 
           </section>
         )}
 
-        {!isGameStage && <p className="privacy-note">Vastaukset tarkistetaan palvelimella. Hyväksyttyjen vastausten listaa ei lähetetä selaimeen.</p>}
+        {!isGameStage && <p className="privacy-note">Vastaukset tarkistetaan palvelimella. Kaikki hyväksytyt vastaukset avautuvat tallennetun päivän pelin jälkeen.</p>}
       </main>
     </div>
   );

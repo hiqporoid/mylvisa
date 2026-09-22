@@ -1,4 +1,30 @@
-# Editorial sanity audit — 12 September 2026
+# Editorial sanity audit — September 2026
+
+## Daily difficulty audit
+
+Working update, 22 September 2026. **NOT_READY_FOR_SMALL_PUBLIC_BETA.** This section supersedes the older release verdict and editorial examples below for the current question-bank task. The gameplay beta architecture is preserved. No new bank release has been published: the runtime still uses the 69-question historical release introduced at baseline commit `17762d237e8e7d21423ab84031e34b3e88e0a1e1`. The user subsequently reduced the question-bank scope and requested publication of the completed code and draft work; the incomplete draft remains outside the runtime.
+
+Every one of those 69 prompts and its answer/score vector received an individual semantic decision in `docs/internal/daily-difficulty-audit-2026-09.tsv`. Current mutually exclusive decisions: KEEP 13, RESCORE 0, REWRITE 12, HARD 18, RETIRE 26. Rewrites can include score corrections. The surviving original projection is 25 standard and 18 hard; this is **not** a claim that all 43 have completed renewed source verification. The generated draft tracks source review separately and excludes pending originals from its compiled content.
+
+Ten retirements explicitly involve excessive specialist or institutional difficulty: EU institutions, Council of Europe membership, IUCN categories, economics Nobel laureates, ASEAN, Gulf Cooperation Council, Baltic Sea Council, EEA membership, Alpine Convention signatories, and the dated DNS top-level-domain standard. Other retirements concern inadequate universe size, weak rarity tails, confusing scope or repetitive derivatives. Hard is not a rescue category for those failures.
+
+Examples rewritten for accessibility: “Nimeä Suomen maakunta (2026)” replaces administrative classification wording; the president prompt drops catalogue terminology; Windows uses familiar consumer-version wording; Disney uses the dated animation canon rather than the Renaissance label. The UNESCO question now uses September 2026 membership, adding Aalto Works after reading the Finnish Heritage Agency's complete eight-property list. Merenkurkun saaristo changes from 85 to 60; the new property is 60, without mechanically awarding novelty 100.
+
+The current source-checked working content contains 35 additions and 23 reconciled originals. Each record has an explicit source count, dated definition and separate accessibility, rarity, completeness and alias rationale. This 58-question draft is far below the original release threshold. A successful structural validator cannot prove factual completeness, fun, or an 80% recall rate. No population statistics are claimed. Source reconciliation found two omissions in the historical 69: Melbourne in the Summer Olympic host universe and Great Britain in the men’s ice-hockey world champion universe. Both are corrected in the unpublished draft, and the latter question is now dated through 2026.
+
+### Selector verification
+
+The new selector consumes unused questions before previously used ones, enforces seven rounds, at most one hard prompt, unique base universes and semantic families, at least five categories, at most two questions per category and at most two gaming/digital questions combined. Hard positions vary deterministically across rounds 2–7. Historical releases without difficulty metadata retain their exact previous selector so saved Daily runs remain reproducible.
+
+The 120-date report is `docs/internal/beta-selection-simulation-2026-09.json`. The 58-question source-checked draft has zero days with more than one hard prompt and zero semantic/base collisions, but repeats after only five complete days; it is explicitly not an approved bank. The 43-original editorial projection repeats after four complete days. The unchanged historical 69-question selector repeats after nine complete days and, when retrospectively labelled by this audit, reaches five hard prompts. A separate 360-question synthetic fixture demonstrates at least 50 complete days before reuse over 120 dates; that verifies the algorithm, not the real bank's release horizon. The final full-bank simulation and 75-question semantic spot audit remain outstanding.
+
+### Production test-data cleanup
+
+Removed only the explicitly requested `MylvTest719541` profile and its single run from the Mylvisa Supabase project. The transaction asserted one exact nickname/UUID match, an anonymous identity without email, and one run. Before/after hashes of all other profile and run rows were identical. Post-transaction counts were four profiles and thirteen runs; the target had zero remaining profile/run rows. Its anonymous Auth identity was retained. The production all-time leaderboard still displayed the other existing results and omitted the deleted entry.
+
+Distributed resolver rate limiting remains outstanding. No paid service or gameplay retry restriction has been introduced. A new question-bank release, its 75-question semantic audit and new-content production smoke test remain outstanding. The completed recap feature can ship independently while the draft stays out of the runtime.
+
+## Historical audit — 12 September 2026
 
 Release: `2026-09-11-editorial-v4`. Baseline: commit `bf4534f528e803659d464f5e6a9649954f478f60`, 376 Daily-eligible questions. This is an internal repository report; it is not served from `public/` or imported by client components.
 

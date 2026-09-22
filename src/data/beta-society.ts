@@ -1,0 +1,11 @@
+import type { BetaContent } from './beta-content';
+const answers = (rows: [string, number, string[]?][]) => rows.map(([canonical, points, aliases = []]) => ({ canonical, points, aliases }));
+
+export const betaSociety: BetaContent[] = [
+  {
+    id: 'beta-eu-member-countries', prompt: 'Nimeä Euroopan unionin jäsenmaa.', category: 'yhteiskunta', familyId: 'eu-members', difficulty: 'standard', asOf: '2026-09-22',
+    source: { status: 'verified', authority: 'institutional', title: 'European Union — Easy to read: the European Union', url: 'https://european-union.europa.eu/easy-read_en', supportingUrls: ['https://european-union.europa.eu/principles-countries-history/eu-countries_en'], definition: 'All 27 current EU member states enumerated on the official EU overview. Candidate states, former member United Kingdom and non-EU Schengen countries excluded.', expectedCount: 27, checkedOn: '2026-09-22' },
+    review: { accessibility: 'Suomi, Ruotsi, Saksa ja Ranska ovat välittömiä; myös moni matkailumaa tarjoaa aloituksen.', rarity: 'Kyproksen jäsenyys on harvoin spontaanein vaihtoehto suomalaiselle pelaajalle, vaikka maa on tuttu. Suomi ja Ruotsi ovat 10. Pisteet eivät määräydy liittymisvuoden tai valtion koon mukaan.', completeness: 'EU:n oma selkokielinen sivu sanoo jäsenmaita olevan 27 ja luettelee jokaisen nimeltä. Tässä ovat samat 27, ei vanhan laajemman pankin epätäydellistä versiota.', aliases: 'Tavalliset englanninkieliset maan nimet yksilöivät vastaukset; Iso-Britannia ja Norja eivät kuulu vuoden 2026 joukkoon.' },
+    answers: answers([['Itävalta',30,['Austria']],['Belgia',30,['Belgium']],['Bulgaria',60],['Kroatia',60,['Croatia']],['Kypros',100,['Cyprus']],['Tšekki',60,['Tsekki','Czechia','Czech Republic']],['Tanska',30,['Denmark']],['Viro',15,['Estonia']],['Suomi',10,['Finland']],['Ranska',10,['France']],['Saksa',10,['Germany']],['Kreikka',30,['Greece']],['Unkari',60,['Hungary']],['Irlanti',30,['Ireland']],['Italia',15,['Italy']],['Latvia',60],['Liettua',60,['Lithuania']],['Luxemburg',85,['Luxembourg']],['Malta',85],['Alankomaat',30,['Netherlands','Hollanti']],['Puola',30,['Poland']],['Portugali',60,['Portugal']],['Romania',60],['Slovakia',85],['Slovenia',85],['Espanja',15,['Spain']],['Ruotsi',10,['Sweden']]]),
+  },
+];

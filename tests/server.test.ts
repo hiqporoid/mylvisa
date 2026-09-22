@@ -53,6 +53,18 @@ describe("server boundary and rarity game", () => {
     expect(game.summary).toEqual({ points: 700, maxPoints: 700, correct: 7 });
   });
 
+  it("never trusts a client-supplied completion history to disclose answer universes", () => {
+    const questions = getDailyQuiz(date).questions;
+    const partial = play({ ...input, answers: questions.slice(0, 6).map((question) => question.answers[0].canonical) }, now);
+    expect(partial.results.every((result) => !result.correctAnswers)).toBe(true);
+    const complete = play({ ...input, answers: questions.map((question) => question.answers[0].canonical) }, now);
+    expect(complete.results).toHaveLength(7);
+    for (const [index, result] of complete.results.entries()) {
+      expect(result.correctAnswers).toBeUndefined();
+      expect(result.id).toBe(questions[index].id);
+    }
+  });
+
   it("rejects stale, future and tampered requests", () => {
     expect(() => play({ ...input, date: "2026-09-11" }, now)).toThrow("Päivä vaihtui");
     expect(() => play({ ...input, date: "2026-09-13", mode: "practice" }, now)).toThrow();

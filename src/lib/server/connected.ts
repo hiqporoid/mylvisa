@@ -6,6 +6,7 @@ import { GameError } from "./game";
 import { getDailyQuiz } from "./bank";
 import type { Resolution } from "@/lib/quiz/contracts";
 import { bankHash, resolveRunCommand, runCommand, runResponse, type Run } from "./run-engine";
+import { addCompletedRecap } from './recap';
 
 export async function identity() {
   if (!backendConfigured()) throw new GameError("NOT_CONFIGURED", 503, "Tulostaulun tallennus ei ole käytössä.");
@@ -74,5 +75,5 @@ export async function connectedRun(input?: unknown) {
       if (ownRow) response.summary.placement = Number(ownRow.rank);
     }
   }
-  return { available: true, game: response };
+  return { available: true, game: addCompletedRecap(user.id, run, quiz, response) };
 }

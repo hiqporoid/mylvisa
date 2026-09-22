@@ -29,6 +29,8 @@ export type AnswerResult = {
   tier?: string;
   rarityRank: number;
   explanation: string;
+  /** Full canonical answer universe is revealed only after the quiz is complete. */
+  correctAnswers?: { canonical: string; points: number }[];
 };
 export type QuizResponse = {
   persistence?: "saved" | "local";

@@ -154,6 +154,11 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .recap-content strong { overflow-wrap: anywhere; }
 .recap-content span { color: var(--accent); font-size: .78rem; }
 .recap-points { color: var(--text); font-variant-numeric: tabular-nums; }
+.recap-answers { margin-top: 10px; border-top: 1px solid var(--line); padding-top: 8px; }
+.recap-answers summary { color: var(--accent); cursor: pointer; font-size: .82rem; font-weight: 700; }
+.recap-answers ol { display: grid; gap: 4px; margin: 8px 0 0; padding-left: 20px; }
+.recap-answers li { display: flex; justify-content: space-between; gap: 16px; border: 0; padding: 2px 0; font-size: .82rem; }
+.recap-answers li strong { color: var(--muted); font-variant-numeric: tabular-nums; }
 .result-muted { color: var(--muted); }
 .share-block { margin-top: 32px; }.share-block .button { margin-top: 0; }
 .share-block .small, .manual-share { display: block; color: var(--muted); font-size: .8rem; margin-top: 12px; }

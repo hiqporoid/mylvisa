@@ -1,0 +1,69 @@
+suomi-presidentit	REWRITE	Nimeä Suomen tasavallan presidentti (1919–2026).	Kekkonen, Niinistö and Stubb give immediate entry; Relander is a credible recall tail. Remove bureaucratic catalogue wording.
+suomi-kansallispuistot	KEEP		Nuuksio and Koli provide entry; 41 parks give substantial geographic recall depth.
+suomi-unesco-kohteet	REWRITE	Nimeä Suomessa sijaitseva Unescon maailmanperintökohde (syyskuu 2026).	Suomenlinna provides entry; Struven ketju supplies the tail. Primary-source reconciliation found July 2026 Aalto Works inscription; update the dated seven-property snapshot to eight and reduce Merenkurkku from 85 to 60.
+suomi-maakunnat	REWRITE	Nimeä Suomen maakunta (2026).	Immediate home-region entry; Keski-Pohjanmaa is a credible tail. Simplify wording.
+suomi-nobel-suomi	RETIRE		Only five members; birthplace definition excludes familiar Finnish-associated laureates and adds interpretation cost.
+maantiede-itameri	KEEP		Finland and Sweden are immediate; Lithuanian coastline is less salient. Nine-member familiar exception.
+maantiede-etel-amerikka	KEEP		Brazil and Argentina are immediate; Suriname offers real geographic recall depth.
+maantiede-mustameri	HARD		Six-member exception; Ukraine/Turkey offer entry but coastline knowledge is too demanding for standard frequency.
+maantiede-suurimmat-valtameret	RETIRE		Only five answers and the nominal maximum rewards a naming convention rather than meaningful recall depth.
+yhteiskunta-eu-toimielimet	RETIRE		Institution versus agency and two councils require bureaucratic interpretation; unsuitable Daily experience.
+tiede-yksikirjaimiset-symbolit	HARD		Hydrogen and oxygen offer school-science entry; remembering one-letter qualification adds knowledge burden, with yttrium as a real tail.
+tiede-si-perusyksikot	HARD		Metre/second provide entry but SI base-versus-derived distinction needs school-science recall. Candela gives real tail.
+elokuvat-ja-televisio-bond-nayttelijat	REWRITE	Nimeä James Bondin näyttelijä virallisesta elokuvasarjasta (1962–2021).	Connery and Craig give immediate entry; Lazenby is a defensible tail in a six-person familiar exception. Preserve Eon scope in reference definition.
+elokuvat-ja-televisio-miyazaki	HARD		Totoro/Spirited Away give entry, but director attribution and exclusion of Nausicaä need more than ordinary franchise recall.
+maailmanhistoria-antiikin-ihmeet	KEEP		Pyramid and hanging gardens provide entry; mausoleum provides an exceptional recall tail. Seven-member exception.
+urheilu-kymmenottelu	KEEP		Running/jumps give entry; the 1500-metre event is much less spontaneously associated with decathlon.
+content-fi-government-ministries-all	HARD		Finance/defence provide entry, but kanslia counting as a ministry makes the rare tail an administrative distinction.
+content-fi-electoral-districts-all	RETIRE		Administrative subdivisions are less fun than regions; Ahvenanmaa is not a defensible 100 just because it differs from mainland districts.
+content-fi-recent-prime-ministers-all	KEEP		Marin/Orpo give immediate entry; Kiviniemi and Holkeri provide genuine personal recall depth.
+content-fi-recent-prime-ministers-after-2000	RETIRE		First-term date filter adds interpretation and duplicates the stronger full recent-PM universe.
+content-nato-members-all	KEEP		Finland/Sweden and US are immediate; North Macedonia/Montenegro provide substantial recall tail.
+content-schengen-members-all	HARD		Familiar travel countries give entry, but EU versus Schengen exceptions create additional membership uncertainty.
+content-council-of-europe-members-all	RETIRE		Obscure institutional membership; council/EU confusion makes this an administrative classification test.
+content-science-vitamins-all	KEEP		C/D are immediate; named B vitamins give long tail. Retain specific vitamin aliases, never generic B as a unique vitamin.
+content-science-vitamins-b-group	RETIRE		Numerical probing and duplicate vitamin universe reduce fun; use the broader vitamin question.
+content-science-dwarf-planets-all	RETIRE		Only five officially recognised objects; familiar Pluto alone does not justify the tiny universe exception.
+content-nature-iucn-categories-all	RETIRE		Specialist conservation classification; plain words do not make exact taxonomy accessible or fun.
+content-language-finnish-cases-all	KEEP		Nominative/genitive/partitive give familiar school entry; instructive/comitative provide genuine retrieval depth.
+content-literature-harry-potter-books-all	RETIRE		Seven familiar titles are accessible but Half-Blood Prince is not honestly exceptional 100-point recall. Do not force a tail.
+content-music-beatles-albums-all	KEEP		Abbey Road/Help and White Album offer entry; Beatles for Sale supplies legitimate long tail.
+content-music-beatles-albums-late	RETIRE		Date filtering duplicates the catalogue and makes familiar Yellow Submarine an indefensible 100-point answer.
+content-music-abba-albums-all	HARD		Waterloo/Super Trouper give entry through shared song titles, but album recall is less broadly accessible; reassess Ring Ring maximum before source approval.
+content-music-queen-albums-all	HARD		A Night at the Opera provides plausible entry; album versus song recall makes this harder than recognising the band. Hot Space is a credible tail.
+content-music-metallica-albums-all	KEEP		Master of Puppets/Black Album offer familiar entry; Hardwired is a plausible exceptional exact-title recall for the target audience.
+content-film-star-wars-all	REWRITE	Nimeä Star Wars -elokuva, joka tuli elokuvateattereihin vuosina 1977–2019.	Original trilogy gives entry; theatrical Clone Wars gives genuine tail. Keep animation inclusion in reference and feedback.
+content-film-harry-potter-all	RETIRE		Half-Blood Prince is not defensible exceptional recall; splitting finale creates mechanical differentiation rather than meaningful depth.
+content-film-best-picture-recent-all	HARD		Oppenheimer/Parasite provide entry; award-year interpretation and winner attribution make this harder. The Artist is a defensible tail.
+content-film-bond-films-all	REWRITE	Nimeä virallisen James Bond -elokuvasarjan elokuva (1962–2021).	Goldfinger/Casino Royale/Skyfall provide immediate entry; Living Daylights credible tail. Finnish title aliases are essential.
+content-sport-summer-olympic-hosts-all	REWRITE	Nimeä kesäolympialaisten isäntäkaupunki vuosilta 1896–2024.	Helsinki/Paris give entry; St Louis/Antwerp supply depth. IOC reconciliation found the omitted 1956 Melbourne host, now added to make 23 distinct cities; future hosts and cancelled Games excluded.
+content-sport-ice-hockey-world-champions-all	REWRITE	Nimeä miesten jääkiekon maailmanmestaruuden voittanut maa (1920–2026).	Finland/Sweden/Canada provide entry; IIHF reconciliation found omitted 1936 Great Britain and confirmed the Olympic tournament counted as a world championship, making ten distinct champions through 2026.
+content-tech-nintendo-home-consoles-all	REWRITE	Nimeä Nintendon kotikonsoliperhe vuosilta 1977–2025.	Wii/Switch give entry; Color TV-Game gives real tail. Regional variants remain aliases of one family.
+content-tech-windows-releases-all	REWRITE	Nimeä kotikäyttäjien Windows-versio vuosilta 1995–2021.	XP/7/10 give immediate entry; Me is a plausible tail. Remove contradictory exclusion of updates while accepting 8.1; scope remains consumer releases.
+content-tech-nasa-missions-all	HARD		Challenger/Discovery give plausible entry but identifying orbiters and Enterprise exception needs more specialist space knowledge.
+content-economics-nobel-recent-all	RETIRE		Holmström is the only accessible Finnish entry in an otherwise specialist list; excessive difficulty, not a fun general Daily.
+content-food-finnish-protected-names-all	REWRITE	Nimeä suomalainen EU-nimisuojattu elintarvike vuoden 2024 luettelosta.	Karjalanpiirakka/kalakukko provide entry; protected ham and reindeer products provide tail. Source version must remain explicit.
+content-world-new-seven-wonders-all	HARD		Great Wall/Colosseum provide entry but proprietary modern-vote list versus ancient wonders requires extra knowledge.
+content-society-asean-all	RETIRE		Obscure organisation membership rather than familiar broad geography; entry depends on knowing ASEAN.
+content-society-gulf-cooperation-all	RETIRE		Specialist treaty membership; use familiar geographic universes instead.
+content-society-baltic-sea-council-all	RETIRE		Obscure council with non-coastal members; Iceland maximum rewards a bureaucratic exception.
+content-world-brics-all	HARD		Brazil/China/India supply entry through familiar acronym; expanded dated membership is harder and needs precise source verification.
+content-world-eea-countries-all	RETIRE		EEA/EU distinction adds institutional complexity and largely duplicates European membership questions.
+content-geo-mediterranean-coasts-all	KEEP		Italy/Spain/Greece give entry; Bosnia's short coastline supplies real recall depth.
+content-geo-red-sea-coasts-all	HARD		Egypt gives entry but gulf inclusion and Jordan/Djibouti salience need explicit source and rarity correction before approval.
+content-geo-persian-gulf-coasts-all	HARD		Iran/Saudi Arabia give entry; Strait of Hormuz/Oman boundary needs source inspection. Bahrain/Oman offer plausible tail.
+content-geo-alpine-countries-all	RETIRE		Treaty signatories are not the same universe as alpine geography; Monaco 100 rewards obscure administrative membership.
+content-tech-android-releases-all	HARD		Oreo/KitKat offer entry for Android users; older version branding is unlikely to meet conservative standard accessibility target.
+content-fi-museums-all	RETIRE		Only three museums; arbitrary exceptional score for Sinebrychoff cannot provide enough rarity strategy.
+content-film-disney-renaissance-all	REWRITE	Nimeä Disneyn klassikkoanimaatio vuosilta 1989–1999.	Lion King/Aladdin give entry; Rescuers Down Under supplies genuine tail. Official feature-animation canon must exclude direct-to-video sequels explicitly.
+content-history-finnish-presidential-eras-early	RETIRE		Date-filtered duplicate of stronger all-presidents question; only six answers and added interpretation cost.
+content-film-franchise-groups-lotr	RETIRE		Six very familiar films; Battle of Five Armies is not honestly exceptional recall for this exact franchise prompt.
+content-history-us-presidents-all	KEEP		Obama/Trump/Washington give immediate entry; dozens of less prominent presidents provide excellent tail.
+content-history-us-presidents-founding-era	RETIRE		Only five answers; narrow historical office-holder filter adds difficulty and duplicates the complete universe.
+content-history-us-presidents-modern	RETIRE		Seven extremely prominent modern presidents; George H. W. Bush is not a defensible exceptional maximum in this prompt.
+content-history-french-presidents-all	HARD		Macron/Sarkozy provide entry, but Fifth Republic terminology and foreign office-holder recall make this hard. Giscard provides tail.
+content-history-uk-monarchs-all	HARD		Elizabeth/Charles/Victoria offer entry; 1707 scope and regnal numerals create historical interpretation burden. William IV credible tail.
+content-history-roman-emperors-all	HARD		Nero/Augustus provide entry; first-century filter is harder. Caligula is over-rewarded while Claudius/Tiberius are under-rewarded; revise before approval.
+games-elder-scrolls-anthology	RETIRE		Only five games and collection-specific scope; strong franchise but this universe fails minimum size.
+games-orange-box-steam	RETIRE		Steam bonus-package membership contradicts familiar five-game Orange Box understanding; obscure Lost Coast tail depends on storefront packaging.
+digital-historic-generic-tlds	RETIRE		1994 DNS-standard trivia and .int tail require specialist knowledge despite familiar .com entry.

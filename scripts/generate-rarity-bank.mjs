@@ -1,4 +1,4 @@
-import { writeFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { questionAuthorship } from "../src/data/question-authorship.ts";
 import { universeById } from "../src/data/universes.ts";
 
@@ -31,8 +31,13 @@ function fail(message) {
   throw new Error(`Editorial bank generation failed: ${message}`);
 }
 
+// This generator only verifies the immutable gameplay-beta snapshot.
+// New content must carry explicit review evidence through generate-beta-draft.ts.
+const frozenText = await readFile("src/data/releases/2026-09-13.json", "utf8");
+const frozenIds = new Set(JSON.parse(frozenText).map(question => question.id));
 const seenIds = new Set();
 const questions = questionAuthorship.map((original) => {
+  if (!frozenIds.has(original.id)) fail(`${original.id}: new questions require explicit beta source and editorial reviews`);
   const edit = corrections[original.id];
   const decision = decisions[original.id];
   const authored = { ...original, ...(edit?.prompt ? { prompt: edit.prompt } : {}), ...(edit?.category ? { category: edit.category } : {}), ...(edit?.familyId ? { familyId: edit.familyId } : {}) };
@@ -138,5 +143,6 @@ const questions = questionAuthorship.map((original) => {
 });
 
 if (questions.length < 7) fail(`expected at least 7 active questions, got ${questions.length}`);
-await writeFile("src/data/releases/2026-09-13.json", `${JSON.stringify(questions, null, 2)}\n`);
+if (`${JSON.stringify(questions, null, 2)}\n` !== frozenText)
+  fail("published snapshot is immutable; create a reviewed replacement release instead");
 console.log(`Generated ${questions.length} question records, including ${questions.filter(question => question.dailyEligible).length} Daily-eligible questions, from ${universeById.size} universes`);
