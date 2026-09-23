@@ -8,6 +8,7 @@ import { betaFilm } from './beta-film';
 import { betaGeography } from './beta-geography';
 import { betaSociety } from './beta-society';
 import { betaLiterature } from './beta-literature';
+import { betaBatchOne } from './beta-batch-one';
 /** Individually authored source snapshots. No positional scores or inferred review flags. */
 export type BetaContent = {
   id: string;
@@ -33,6 +34,7 @@ export const betaContent: BetaContent[] = [
   ...betaGeography,
   ...betaSociety,
   ...betaLiterature,
+  ...betaBatchOne,
   {
     id: 'beta-f1-world-champions', prompt: 'Nimeä Formula 1 -maailmanmestari (1950–2025).', category: 'urheilu', familyId: 'f1-champions', difficulty: 'standard', asOf: '2025-12-31',
     source: { status: 'verified', authority: 'first-party', title: 'Formula 1 — Hall of Fame: the World Champions', url: 'https://www.formula1.com/en/drivers/hall-of-fame', definition: 'All distinct drivers in the official world-champion Hall of Fame through the 2025 championship; no constructors or runners-up.', expectedCount: 35, checkedOn: '2026-09-14' },

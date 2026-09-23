@@ -5954,6 +5954,653 @@
       ]
     },
     {
+      "id": "batch1-last-of-us-cast",
+      "prompt": "Nimeä The Last of Us -pelisarjan hahmo PlayStationin hahmoesittelystä.",
+      "category": "videopelit",
+      "familyId": "last-of-us-cast",
+      "difficulty": "hard",
+      "asOf": "2026-09-23",
+      "source": {
+        "status": "verified",
+        "authority": "first-party",
+        "title": "PlayStation — Discover The Last of Us: Meet the cast",
+        "url": "https://www.playstation.com/en-ca/the-last-of-us/",
+        "definition": "The fifteen named human characters under Main cast, Part I supporting cast and Part II supporting cast on PlayStation’s series page. The six separately presented infected types are not characters in this question.",
+        "expectedCount": 15,
+        "checkedOn": "2026-09-23"
+      },
+      "review": {
+        "accessibility": "Joel and Ellie are obvious to players and television viewers; requiring this particular game cast is still more demanding than a normal Daily prompt, hence hard.",
+        "rarity": "Joel and Ellie are low. Yara and Jesse are exceptional spontaneous recalls outside committed players; Abby is prominent and does not receive an artificial maximum.",
+        "completeness": "Read all fifteen consecutive human-character headings from Joel through Dina, stopping before the separate Infected section.",
+        "aliases": "Unique given names are accepted because no two human entries share one. Surnames and the common Eleven/Elle confusion are not inferred."
+      },
+      "answers": [
+        {
+          "canonical": "Joel",
+          "points": 10,
+          "aliases": [
+            "Joel Miller"
+          ]
+        },
+        {
+          "canonical": "Ellie",
+          "points": 10,
+          "aliases": [
+            "Ellie Williams"
+          ]
+        },
+        {
+          "canonical": "Abby",
+          "points": 15,
+          "aliases": [
+            "Abby Anderson"
+          ]
+        },
+        {
+          "canonical": "Tess",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Bill",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Henry",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Sam",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "David",
+          "points": 85,
+          "aliases": []
+        },
+        {
+          "canonical": "Marlene",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Riley",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Tommy",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Yara",
+          "points": 100,
+          "aliases": []
+        },
+        {
+          "canonical": "Lev",
+          "points": 85,
+          "aliases": []
+        },
+        {
+          "canonical": "Jesse",
+          "points": 100,
+          "aliases": []
+        },
+        {
+          "canonical": "Dina",
+          "points": 30,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "batch1-google-workspace-apps",
+      "prompt": "Nimeä Google Workspacen mukana tuleva sovellus.",
+      "category": "internet-ja-digikulttuuri",
+      "familyId": "google-workspace-apps",
+      "difficulty": "standard",
+      "asOf": "2026-09-23",
+      "source": {
+        "status": "verified",
+        "authority": "first-party",
+        "title": "Google Workspace — Features: Included applications",
+        "url": "https://workspace.google.com/features/",
+        "definition": "The sixteen entries explicitly enumerated under Included applications on the Google Workspace Features page on 23 September 2026. Security and management products and paid add-ons in their separate sections are excluded. Gemini app and Gemini Notebook are separate named entries.",
+        "expectedCount": 16,
+        "checkedOn": "2026-09-23"
+      },
+      "review": {
+        "accessibility": "Gmail, Drive, Calendar, Docs and Meet are familiar daily-use services for Finnish adults.",
+        "rarity": "Apps Script and Vids are exceptional spontaneous entries. Forms, Sites and Keep are intermediate; the common communication and document apps remain low.",
+        "completeness": "Copied each of the sixteen Included applications; the adjacent Security and management and Add-ons sections are not included.",
+        "aliases": "Google prefixes and familiar Finnish descriptive names are accepted where unique. Unqualified Gemini maps to Gemini app, not the separately named Notebook."
+      },
+      "answers": [
+        {
+          "canonical": "Gmail",
+          "points": 10,
+          "aliases": [
+            "Google Mail"
+          ]
+        },
+        {
+          "canonical": "Meet",
+          "points": 15,
+          "aliases": [
+            "Google Meet"
+          ]
+        },
+        {
+          "canonical": "Chat",
+          "points": 30,
+          "aliases": [
+            "Google Chat"
+          ]
+        },
+        {
+          "canonical": "Calendar",
+          "points": 10,
+          "aliases": [
+            "Google Calendar",
+            "Google Kalenteri"
+          ]
+        },
+        {
+          "canonical": "Drive",
+          "points": 10,
+          "aliases": [
+            "Google Drive"
+          ]
+        },
+        {
+          "canonical": "Docs",
+          "points": 10,
+          "aliases": [
+            "Google Docs",
+            "Google Dokumentit"
+          ]
+        },
+        {
+          "canonical": "Sheets",
+          "points": 15,
+          "aliases": [
+            "Google Sheets",
+            "Google Taulukot"
+          ]
+        },
+        {
+          "canonical": "Slides",
+          "points": 15,
+          "aliases": [
+            "Google Slides",
+            "Google Esitykset"
+          ]
+        },
+        {
+          "canonical": "Vids",
+          "points": 100,
+          "aliases": [
+            "Google Vids"
+          ]
+        },
+        {
+          "canonical": "Forms",
+          "points": 30,
+          "aliases": [
+            "Google Forms",
+            "Google Lomakkeet"
+          ]
+        },
+        {
+          "canonical": "Sites",
+          "points": 60,
+          "aliases": [
+            "Google Sites"
+          ]
+        },
+        {
+          "canonical": "Gemini app",
+          "points": 30,
+          "aliases": [
+            "Gemini",
+            "Google Gemini"
+          ]
+        },
+        {
+          "canonical": "Gemini Notebook",
+          "points": 85,
+          "aliases": [
+            "NotebookLM",
+            "Google NotebookLM"
+          ]
+        },
+        {
+          "canonical": "Keep",
+          "points": 60,
+          "aliases": [
+            "Google Keep"
+          ]
+        },
+        {
+          "canonical": "Apps Script",
+          "points": 100,
+          "aliases": [
+            "Google Apps Script"
+          ]
+        },
+        {
+          "canonical": "Tasks",
+          "points": 60,
+          "aliases": [
+            "Google Tasks",
+            "Google Tehtävät"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "batch1-current-mac-families",
+      "prompt": "Nimeä Applen syyskuussa 2026 myynnissä oleva Mac-tietokoneperhe.",
+      "category": "teknologia",
+      "familyId": "apple-mac-current-families",
+      "difficulty": "standard",
+      "asOf": "2026-09-23",
+      "dailyEligibilityReason": "The six-item current shop lineup is unusually accessible: MacBook Air, MacBook Pro and iMac are immediate, while Mac Studio offers a defensible exceptional answer.",
+      "source": {
+        "status": "verified",
+        "authority": "first-party",
+        "title": "Apple Finland — Osta Mac: Kaikki mallit",
+        "url": "https://www.apple.com/fi/shop/buy-mac",
+        "definition": "The six computer families in Apple Finland’s Kaikki mallit purchase list on 23 September 2026. Displays and accessories are separate products and excluded; 13/15-inch or chip configurations are not separate families.",
+        "expectedCount": 6,
+        "checkedOn": "2026-09-23"
+      },
+      "review": {
+        "accessibility": "MacBook Air, MacBook Pro and iMac are widely known product names, including to non-owners.",
+        "rarity": "Mac Studio is a credible rare consumer recall. New MacBook Neo gets 60 due to current launch visibility; Mac mini is less prominent but not a maximum.",
+        "completeness": "Read the six computer cards in the Finnish Apple online store, before its Studio Display cards. Mac Pro is absent from the dated for-sale lineup.",
+        "aliases": "Macbook spelling variants and the old Mac Book spacing are accepted only where the exact Air/Pro/Neo family remains clear. No generic MacBook maps to one of three laptops."
+      },
+      "answers": [
+        {
+          "canonical": "MacBook Neo",
+          "points": 60,
+          "aliases": [
+            "Mac Book Neo"
+          ]
+        },
+        {
+          "canonical": "MacBook Air",
+          "points": 10,
+          "aliases": [
+            "Mac Book Air"
+          ]
+        },
+        {
+          "canonical": "MacBook Pro",
+          "points": 10,
+          "aliases": [
+            "Mac Book Pro"
+          ]
+        },
+        {
+          "canonical": "iMac",
+          "points": 15,
+          "aliases": []
+        },
+        {
+          "canonical": "Mac mini",
+          "points": 60,
+          "aliases": [
+            "Mac Mini"
+          ]
+        },
+        {
+          "canonical": "Mac Studio",
+          "points": 100,
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "id": "batch1-marvel-infinity-saga-films",
+      "prompt": "Nimeä Marvel Studiosin MCU-elokuva vuosilta 2008–2019 (Infinity Saga).",
+      "category": "elokuvat-ja-televisio",
+      "familyId": "marvel-infinity-saga",
+      "difficulty": "standard",
+      "asOf": "2019-12-31",
+      "source": {
+        "status": "verified",
+        "authority": "first-party",
+        "title": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies",
+        "url": "https://www.marvel.com/articles/movies/marvel-studios-making-of-marvel-cinematic-universe",
+        "supportingUrls": [
+          "https://www.marvel.com/movies"
+        ],
+        "definition": "The 23 Marvel Studios theatrical MCU films of Phases One through Three, from Iron Man (2008) through Spider-Man: Far From Home (2019), which Marvel calls the complete Infinity Saga. Television and later Multiverse Saga films excluded.",
+        "expectedCount": 23,
+        "checkedOn": "2026-09-23"
+      },
+      "review": {
+        "accessibility": "Iron Man, Avengers and Black Panther make the entry easy for adults familiar with modern blockbuster films.",
+        "rarity": "The Incredible Hulk and Thor: The Dark World are defensible deep film-title recalls; Infinity War and Endgame remain low. Numbered sequels receive their own scores.",
+        "completeness": "Marvel explicitly gives 23 films and the start/end titles. Reconciled the intervening Phase One–Three theatrical titles against the official Marvel movie catalogue, counting each distinct film once.",
+        "aliases": "Common Finnish title forms accepted when unambiguous. Bare Avengers, Thor, Ant-Man or Guardians of the Galaxy identify the first film only; numbered/subtitled sequels need specificity."
+      },
+      "answers": [
+        {
+          "canonical": "Iron Man",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "The Incredible Hulk",
+          "points": 100,
+          "aliases": [
+            "Incredible Hulk"
+          ]
+        },
+        {
+          "canonical": "Iron Man 2",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Thor",
+          "points": 15,
+          "aliases": []
+        },
+        {
+          "canonical": "Captain America: The First Avenger",
+          "points": 30,
+          "aliases": [
+            "Captain America First Avenger"
+          ]
+        },
+        {
+          "canonical": "The Avengers",
+          "points": 10,
+          "aliases": [
+            "Avengers"
+          ]
+        },
+        {
+          "canonical": "Iron Man 3",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Thor: The Dark World",
+          "points": 100,
+          "aliases": [
+            "Thor Dark World"
+          ]
+        },
+        {
+          "canonical": "Captain America: The Winter Soldier",
+          "points": 60,
+          "aliases": [
+            "Captain America Winter Soldier"
+          ]
+        },
+        {
+          "canonical": "Guardians of the Galaxy",
+          "points": 15,
+          "aliases": []
+        },
+        {
+          "canonical": "Avengers: Age of Ultron",
+          "points": 30,
+          "aliases": [
+            "Age of Ultron"
+          ]
+        },
+        {
+          "canonical": "Ant-Man",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Captain America: Civil War",
+          "points": 30,
+          "aliases": [
+            "Civil War"
+          ]
+        },
+        {
+          "canonical": "Doctor Strange",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Guardians of the Galaxy Vol. 2",
+          "points": 60,
+          "aliases": [
+            "Guardians of the Galaxy 2"
+          ]
+        },
+        {
+          "canonical": "Spider-Man: Homecoming",
+          "points": 30,
+          "aliases": [
+            "Spiderman Homecoming"
+          ]
+        },
+        {
+          "canonical": "Thor: Ragnarok",
+          "points": 15,
+          "aliases": [
+            "Thor Ragnarok"
+          ]
+        },
+        {
+          "canonical": "Black Panther",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "Avengers: Infinity War",
+          "points": 10,
+          "aliases": [
+            "Infinity War"
+          ]
+        },
+        {
+          "canonical": "Ant-Man and the Wasp",
+          "points": 85,
+          "aliases": [
+            "Ant Man and the Wasp"
+          ]
+        },
+        {
+          "canonical": "Captain Marvel",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Avengers: Endgame",
+          "points": 10,
+          "aliases": [
+            "Endgame"
+          ]
+        },
+        {
+          "canonical": "Spider-Man: Far From Home",
+          "points": 60,
+          "aliases": [
+            "Spiderman Far From Home"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "batch1-thriller-tracks",
+      "prompt": "Nimeä Michael Jacksonin Thriller-albumin kappale.",
+      "category": "musiikki",
+      "familyId": "michael-jackson-thriller-tracks",
+      "difficulty": "standard",
+      "asOf": "1982-11-30",
+      "source": {
+        "status": "verified",
+        "authority": "first-party",
+        "title": "Michael Jackson — Thriller: Track List",
+        "url": "https://www.michaeljackson.com/albums/thriller/",
+        "definition": "All nine songs on the original November 1982 Thriller album, as numbered on the artist estate’s album page. Anniversary bonus tracks, remixes and later editions are excluded.",
+        "expectedCount": 9,
+        "checkedOn": "2026-09-23"
+      },
+      "review": {
+        "accessibility": "Thriller, Billie Jean and Beat It are globally familiar hits and clear immediate entries.",
+        "rarity": "The Lady in My Life and Baby Be Mine are deep album-track recalls, while Human Nature and The Girl Is Mine sit between the hits and the tail.",
+        "completeness": "Read the numbered official nine-track list in order; no anniversary bonus tracks appear in this definition.",
+        "aliases": "The P.Y.T. initialism and expanded title are both accepted. Michael Jackson’s other hits are not guessed into this album."
+      },
+      "answers": [
+        {
+          "canonical": "Wanna Be Startin' Somethin'",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Baby Be Mine",
+          "points": 100,
+          "aliases": []
+        },
+        {
+          "canonical": "The Girl Is Mine",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Thriller",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "Beat It",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "Billie Jean",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "Human Nature",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "P.Y.T. (Pretty Young Thing)",
+          "points": 85,
+          "aliases": [
+            "P.Y.T.",
+            "Pretty Young Thing",
+            "PYT"
+          ]
+        },
+        {
+          "canonical": "The Lady in My Life",
+          "points": 100,
+          "aliases": [
+            "Lady in My Life"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "batch1-nevermind-tracks",
+      "prompt": "Nimeä Nirvanan Nevermind-albumin alkuperäiseen kappalelistaan kuuluva laulu.",
+      "category": "musiikki",
+      "familyId": "nirvana-nevermind-tracks",
+      "difficulty": "standard",
+      "asOf": "1991-09-24",
+      "source": {
+        "status": "verified",
+        "authority": "first-party",
+        "title": "Nirvana — Nevermind: Tracklisting",
+        "url": "https://www.nirvana.com/releases-archive/nevermind/",
+        "definition": "The twelve numbered tracks on the original 1991 Nevermind album in Nirvana’s official release archive. The hidden Endless, Nameless track and later deluxe bonus material are outside the numbered original tracklisting.",
+        "expectedCount": 12,
+        "checkedOn": "2026-09-23"
+      },
+      "review": {
+        "accessibility": "Smells Like Teen Spirit and Come as You Are are broad rock-culture entries. Lithium and Something in the Way offer further familiar songs.",
+        "rarity": "Lounge Act and Stay Away are deep exact-song recalls; the well-known singles stay low. Something in the Way is more familiar after film exposure and should not be scored as rare.",
+        "completeness": "Copied the complete official numbered sequence from Smells Like Teen Spirit through Something in the Way; excluded the unnumbered hidden track by the explicit numbered-list definition.",
+        "aliases": "Capitalisation and ordinary punctuation normalize. The album name alone does not identify a song."
+      },
+      "answers": [
+        {
+          "canonical": "Smells Like Teen Spirit",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "In Bloom",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Come As You Are",
+          "points": 10,
+          "aliases": []
+        },
+        {
+          "canonical": "Breed",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Lithium",
+          "points": 15,
+          "aliases": []
+        },
+        {
+          "canonical": "Polly",
+          "points": 30,
+          "aliases": []
+        },
+        {
+          "canonical": "Territorial Pissings",
+          "points": 85,
+          "aliases": []
+        },
+        {
+          "canonical": "Drain You",
+          "points": 60,
+          "aliases": []
+        },
+        {
+          "canonical": "Lounge Act",
+          "points": 100,
+          "aliases": []
+        },
+        {
+          "canonical": "Stay Away",
+          "points": 100,
+          "aliases": []
+        },
+        {
+          "canonical": "On A Plain",
+          "points": 85,
+          "aliases": []
+        },
+        {
+          "canonical": "Something In The Way",
+          "points": 15,
+          "aliases": []
+        }
+      ]
+    },
+    {
       "id": "beta-f1-world-champions",
       "prompt": "Nimeä Formula 1 -maailmanmestari (1950–2025).",
       "category": "urheilu",
@@ -24243,6 +24890,1145 @@
       "accessibility": 5,
       "dailyEligibilityReason": "Nine-book familiar-Finnish-franchise exception: Taikurin hattu and Muumipeikko ja pyrstötähti offer immediate entry, while the first 1945 book is a genuine deep recall.",
       "familyId": "original-moomin-books",
+      "version": 6,
+      "author": "Mylvisa editorial 2026-09-22",
+      "contentReview": "verified",
+      "rarityReview": "editorial-reviewed",
+      "frequency": {
+        "status": "pending"
+      }
+    },
+    {
+      "id": "batch1-last-of-us-cast",
+      "prompt": "Nimeä The Last of Us -pelisarjan hahmo PlayStationin hahmoesittelystä.",
+      "category": "videopelit",
+      "universeId": "batch1-last-of-us-cast",
+      "referenceDefinition": "The fifteen named human characters under Main cast, Part I supporting cast and Part II supporting cast on PlayStation’s series page. The six separately presented infected types are not characters in this question.",
+      "completeness": {
+        "status": "verified",
+        "source": "https://www.playstation.com/en-ca/the-last-of-us/",
+        "asOf": "2026-09-23",
+        "expectedCount": 15,
+        "basis": "The fifteen named human characters under Main cast, Part I supporting cast and Part II supporting cast on PlayStation’s series page. The six separately presented infected types are not characters in this question."
+      },
+      "answers": [
+        {
+          "canonical": "Joel",
+          "aliases": [
+            "Joel Miller"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Ellie",
+          "aliases": [
+            "Ellie Williams"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Abby",
+          "aliases": [
+            "Abby Anderson"
+          ],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Tess",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Bill",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Henry",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Sam",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "David",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Marlene",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Riley",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Tommy",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Yara",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Lev",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Jesse",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        },
+        {
+          "canonical": "Dina",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "PlayStation — Discover The Last of Us: Meet the cast"
+        }
+      ],
+      "explanation": "Pisteet arvioivat vastauksen spontaania muistamista. Lähdejoukko on rajattu kysymyksen viiteajankohtaan.",
+      "source": {
+        "title": "PlayStation — Discover The Last of Us: Meet the cast",
+        "url": "https://www.playstation.com/en-ca/the-last-of-us/",
+        "note": "The fifteen named human characters under Main cast, Part I supporting cast and Part II supporting cast on PlayStation’s series page. The six separately presented infected types are not characters in this question."
+      },
+      "tags": [
+        "videopelit",
+        "editorial-2026-09-22"
+      ],
+      "evergreen": true,
+      "status": "active",
+      "dailyEligible": true,
+      "accessibilityReview": "verified",
+      "difficulty": "hard",
+      "accessibility": 4,
+      "familyId": "last-of-us-cast",
+      "version": 6,
+      "author": "Mylvisa editorial 2026-09-22",
+      "contentReview": "verified",
+      "rarityReview": "editorial-reviewed",
+      "frequency": {
+        "status": "pending"
+      }
+    },
+    {
+      "id": "batch1-google-workspace-apps",
+      "prompt": "Nimeä Google Workspacen mukana tuleva sovellus.",
+      "category": "internet-ja-digikulttuuri",
+      "universeId": "batch1-google-workspace-apps",
+      "referenceDefinition": "The sixteen entries explicitly enumerated under Included applications on the Google Workspace Features page on 23 September 2026. Security and management products and paid add-ons in their separate sections are excluded. Gemini app and Gemini Notebook are separate named entries.",
+      "completeness": {
+        "status": "verified",
+        "source": "https://workspace.google.com/features/",
+        "asOf": "2026-09-23",
+        "expectedCount": 16,
+        "basis": "The sixteen entries explicitly enumerated under Included applications on the Google Workspace Features page on 23 September 2026. Security and management products and paid add-ons in their separate sections are excluded. Gemini app and Gemini Notebook are separate named entries."
+      },
+      "answers": [
+        {
+          "canonical": "Gmail",
+          "aliases": [
+            "Google Mail"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Meet",
+          "aliases": [
+            "Google Meet"
+          ],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Chat",
+          "aliases": [
+            "Google Chat"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Calendar",
+          "aliases": [
+            "Google Calendar",
+            "Google Kalenteri"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Drive",
+          "aliases": [
+            "Google Drive"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Docs",
+          "aliases": [
+            "Google Docs",
+            "Google Dokumentit"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Sheets",
+          "aliases": [
+            "Google Sheets",
+            "Google Taulukot"
+          ],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Slides",
+          "aliases": [
+            "Google Slides",
+            "Google Esitykset"
+          ],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Vids",
+          "aliases": [
+            "Google Vids"
+          ],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Forms",
+          "aliases": [
+            "Google Forms",
+            "Google Lomakkeet"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Sites",
+          "aliases": [
+            "Google Sites"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Gemini app",
+          "aliases": [
+            "Gemini",
+            "Google Gemini"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Gemini Notebook",
+          "aliases": [
+            "NotebookLM",
+            "Google NotebookLM"
+          ],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Keep",
+          "aliases": [
+            "Google Keep"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Apps Script",
+          "aliases": [
+            "Google Apps Script"
+          ],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Google Workspace — Features: Included applications"
+        },
+        {
+          "canonical": "Tasks",
+          "aliases": [
+            "Google Tasks",
+            "Google Tehtävät"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Google Workspace — Features: Included applications"
+        }
+      ],
+      "explanation": "Pisteet arvioivat vastauksen spontaania muistamista. Lähdejoukko on rajattu kysymyksen viiteajankohtaan.",
+      "source": {
+        "title": "Google Workspace — Features: Included applications",
+        "url": "https://workspace.google.com/features/",
+        "note": "The sixteen entries explicitly enumerated under Included applications on the Google Workspace Features page on 23 September 2026. Security and management products and paid add-ons in their separate sections are excluded. Gemini app and Gemini Notebook are separate named entries."
+      },
+      "tags": [
+        "internet-ja-digikulttuuri",
+        "editorial-2026-09-22"
+      ],
+      "evergreen": true,
+      "status": "active",
+      "dailyEligible": true,
+      "accessibilityReview": "verified",
+      "difficulty": "standard",
+      "accessibility": 5,
+      "familyId": "google-workspace-apps",
+      "version": 6,
+      "author": "Mylvisa editorial 2026-09-22",
+      "contentReview": "verified",
+      "rarityReview": "editorial-reviewed",
+      "frequency": {
+        "status": "pending"
+      }
+    },
+    {
+      "id": "batch1-current-mac-families",
+      "prompt": "Nimeä Applen syyskuussa 2026 myynnissä oleva Mac-tietokoneperhe.",
+      "category": "teknologia",
+      "universeId": "batch1-current-mac-families",
+      "referenceDefinition": "The six computer families in Apple Finland’s Kaikki mallit purchase list on 23 September 2026. Displays and accessories are separate products and excluded; 13/15-inch or chip configurations are not separate families.",
+      "completeness": {
+        "status": "verified",
+        "source": "https://www.apple.com/fi/shop/buy-mac",
+        "asOf": "2026-09-23",
+        "expectedCount": 6,
+        "basis": "The six computer families in Apple Finland’s Kaikki mallit purchase list on 23 September 2026. Displays and accessories are separate products and excluded; 13/15-inch or chip configurations are not separate families."
+      },
+      "answers": [
+        {
+          "canonical": "MacBook Neo",
+          "aliases": [
+            "Mac Book Neo"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Apple Finland — Osta Mac: Kaikki mallit"
+        },
+        {
+          "canonical": "MacBook Air",
+          "aliases": [
+            "Mac Book Air"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Apple Finland — Osta Mac: Kaikki mallit"
+        },
+        {
+          "canonical": "MacBook Pro",
+          "aliases": [
+            "Mac Book Pro"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Apple Finland — Osta Mac: Kaikki mallit"
+        },
+        {
+          "canonical": "iMac",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Apple Finland — Osta Mac: Kaikki mallit"
+        },
+        {
+          "canonical": "Mac mini",
+          "aliases": [
+            "Mac Mini"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Apple Finland — Osta Mac: Kaikki mallit"
+        },
+        {
+          "canonical": "Mac Studio",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Apple Finland — Osta Mac: Kaikki mallit"
+        }
+      ],
+      "explanation": "Pisteet arvioivat vastauksen spontaania muistamista. Lähdejoukko on rajattu kysymyksen viiteajankohtaan.",
+      "source": {
+        "title": "Apple Finland — Osta Mac: Kaikki mallit",
+        "url": "https://www.apple.com/fi/shop/buy-mac",
+        "note": "The six computer families in Apple Finland’s Kaikki mallit purchase list on 23 September 2026. Displays and accessories are separate products and excluded; 13/15-inch or chip configurations are not separate families."
+      },
+      "tags": [
+        "teknologia",
+        "editorial-2026-09-22"
+      ],
+      "evergreen": true,
+      "status": "active",
+      "dailyEligible": true,
+      "accessibilityReview": "verified",
+      "difficulty": "standard",
+      "accessibility": 5,
+      "dailyEligibilityReason": "The six-item current shop lineup is unusually accessible: MacBook Air, MacBook Pro and iMac are immediate, while Mac Studio offers a defensible exceptional answer.",
+      "familyId": "apple-mac-current-families",
+      "version": 6,
+      "author": "Mylvisa editorial 2026-09-22",
+      "contentReview": "verified",
+      "rarityReview": "editorial-reviewed",
+      "frequency": {
+        "status": "pending"
+      }
+    },
+    {
+      "id": "batch1-marvel-infinity-saga-films",
+      "prompt": "Nimeä Marvel Studiosin MCU-elokuva vuosilta 2008–2019 (Infinity Saga).",
+      "category": "elokuvat-ja-televisio",
+      "universeId": "batch1-marvel-infinity-saga-films",
+      "referenceDefinition": "The 23 Marvel Studios theatrical MCU films of Phases One through Three, from Iron Man (2008) through Spider-Man: Far From Home (2019), which Marvel calls the complete Infinity Saga. Television and later Multiverse Saga films excluded.",
+      "completeness": {
+        "status": "verified",
+        "source": "https://www.marvel.com/articles/movies/marvel-studios-making-of-marvel-cinematic-universe",
+        "asOf": "2019-12-31",
+        "expectedCount": 23,
+        "basis": "The 23 Marvel Studios theatrical MCU films of Phases One through Three, from Iron Man (2008) through Spider-Man: Far From Home (2019), which Marvel calls the complete Infinity Saga. Television and later Multiverse Saga films excluded."
+      },
+      "answers": [
+        {
+          "canonical": "Iron Man",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "The Incredible Hulk",
+          "aliases": [
+            "Incredible Hulk"
+          ],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Iron Man 2",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Thor",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Captain America: The First Avenger",
+          "aliases": [
+            "Captain America First Avenger"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "The Avengers",
+          "aliases": [
+            "Avengers"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Iron Man 3",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Thor: The Dark World",
+          "aliases": [
+            "Thor Dark World"
+          ],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Captain America: The Winter Soldier",
+          "aliases": [
+            "Captain America Winter Soldier"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Guardians of the Galaxy",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Avengers: Age of Ultron",
+          "aliases": [
+            "Age of Ultron"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Ant-Man",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Captain America: Civil War",
+          "aliases": [
+            "Civil War"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Doctor Strange",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Guardians of the Galaxy Vol. 2",
+          "aliases": [
+            "Guardians of the Galaxy 2"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Spider-Man: Homecoming",
+          "aliases": [
+            "Spiderman Homecoming"
+          ],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Thor: Ragnarok",
+          "aliases": [
+            "Thor Ragnarok"
+          ],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Black Panther",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Avengers: Infinity War",
+          "aliases": [
+            "Infinity War"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Ant-Man and the Wasp",
+          "aliases": [
+            "Ant Man and the Wasp"
+          ],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Captain Marvel",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Avengers: Endgame",
+          "aliases": [
+            "Endgame"
+          ],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        },
+        {
+          "canonical": "Spider-Man: Far From Home",
+          "aliases": [
+            "Spiderman Far From Home"
+          ],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies"
+        }
+      ],
+      "explanation": "Pisteet arvioivat vastauksen spontaania muistamista. Lähdejoukko on rajattu kysymyksen viiteajankohtaan.",
+      "source": {
+        "title": "Marvel — The Story of Marvel Studios: The Infinity Saga’s 23 movies",
+        "url": "https://www.marvel.com/articles/movies/marvel-studios-making-of-marvel-cinematic-universe",
+        "note": "The 23 Marvel Studios theatrical MCU films of Phases One through Three, from Iron Man (2008) through Spider-Man: Far From Home (2019), which Marvel calls the complete Infinity Saga. Television and later Multiverse Saga films excluded."
+      },
+      "tags": [
+        "elokuvat-ja-televisio",
+        "editorial-2026-09-22"
+      ],
+      "evergreen": true,
+      "status": "active",
+      "dailyEligible": true,
+      "accessibilityReview": "verified",
+      "difficulty": "standard",
+      "accessibility": 5,
+      "familyId": "marvel-infinity-saga",
+      "version": 6,
+      "author": "Mylvisa editorial 2026-09-22",
+      "contentReview": "verified",
+      "rarityReview": "editorial-reviewed",
+      "frequency": {
+        "status": "pending"
+      }
+    },
+    {
+      "id": "batch1-thriller-tracks",
+      "prompt": "Nimeä Michael Jacksonin Thriller-albumin kappale.",
+      "category": "musiikki",
+      "universeId": "batch1-thriller-tracks",
+      "referenceDefinition": "All nine songs on the original November 1982 Thriller album, as numbered on the artist estate’s album page. Anniversary bonus tracks, remixes and later editions are excluded.",
+      "completeness": {
+        "status": "verified",
+        "source": "https://www.michaeljackson.com/albums/thriller/",
+        "asOf": "1982-11-30",
+        "expectedCount": 9,
+        "basis": "All nine songs on the original November 1982 Thriller album, as numbered on the artist estate’s album page. Anniversary bonus tracks, remixes and later editions are excluded."
+      },
+      "answers": [
+        {
+          "canonical": "Wanna Be Startin' Somethin'",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "Baby Be Mine",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "The Girl Is Mine",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "Thriller",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "Beat It",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "Billie Jean",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "Human Nature",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "P.Y.T. (Pretty Young Thing)",
+          "aliases": [
+            "P.Y.T.",
+            "Pretty Young Thing",
+            "PYT"
+          ],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        },
+        {
+          "canonical": "The Lady in My Life",
+          "aliases": [
+            "Lady in My Life"
+          ],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Michael Jackson — Thriller: Track List"
+        }
+      ],
+      "explanation": "Pisteet arvioivat vastauksen spontaania muistamista. Lähdejoukko on rajattu kysymyksen viiteajankohtaan.",
+      "source": {
+        "title": "Michael Jackson — Thriller: Track List",
+        "url": "https://www.michaeljackson.com/albums/thriller/",
+        "note": "All nine songs on the original November 1982 Thriller album, as numbered on the artist estate’s album page. Anniversary bonus tracks, remixes and later editions are excluded."
+      },
+      "tags": [
+        "musiikki",
+        "editorial-2026-09-22"
+      ],
+      "evergreen": true,
+      "status": "active",
+      "dailyEligible": true,
+      "accessibilityReview": "verified",
+      "difficulty": "standard",
+      "accessibility": 5,
+      "familyId": "michael-jackson-thriller-tracks",
+      "version": 6,
+      "author": "Mylvisa editorial 2026-09-22",
+      "contentReview": "verified",
+      "rarityReview": "editorial-reviewed",
+      "frequency": {
+        "status": "pending"
+      }
+    },
+    {
+      "id": "batch1-nevermind-tracks",
+      "prompt": "Nimeä Nirvanan Nevermind-albumin alkuperäiseen kappalelistaan kuuluva laulu.",
+      "category": "musiikki",
+      "universeId": "batch1-nevermind-tracks",
+      "referenceDefinition": "The twelve numbered tracks on the original 1991 Nevermind album in Nirvana’s official release archive. The hidden Endless, Nameless track and later deluxe bonus material are outside the numbered original tracklisting.",
+      "completeness": {
+        "status": "verified",
+        "source": "https://www.nirvana.com/releases-archive/nevermind/",
+        "asOf": "1991-09-24",
+        "expectedCount": 12,
+        "basis": "The twelve numbered tracks on the original 1991 Nevermind album in Nirvana’s official release archive. The hidden Endless, Nameless track and later deluxe bonus material are outside the numbered original tracklisting."
+      },
+      "answers": [
+        {
+          "canonical": "Smells Like Teen Spirit",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "In Bloom",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Come As You Are",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 10,
+          "tier": "Ilmeinen valinta",
+          "editorialTier": "10",
+          "effectiveTier": "10",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Breed",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Lithium",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Polly",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 30,
+          "tier": "Hyvä oivallus",
+          "editorialTier": "30",
+          "effectiveTier": "30",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Territorial Pissings",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Drain You",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 60,
+          "tier": "Harvinainen löytö",
+          "editorialTier": "60",
+          "effectiveTier": "60",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Lounge Act",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Stay Away",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 100,
+          "tier": "Täysosuma",
+          "editorialTier": "100",
+          "effectiveTier": "100",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "On A Plain",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 85,
+          "tier": "Harvoin muistettu",
+          "editorialTier": "85",
+          "effectiveTier": "85",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        },
+        {
+          "canonical": "Something In The Way",
+          "aliases": [],
+          "intentAliases": [],
+          "points": 15,
+          "tier": "Ensimmäinen mieleen",
+          "editorialTier": "15",
+          "effectiveTier": "15",
+          "provenance": "Nirvana — Nevermind: Tracklisting"
+        }
+      ],
+      "explanation": "Pisteet arvioivat vastauksen spontaania muistamista. Lähdejoukko on rajattu kysymyksen viiteajankohtaan.",
+      "source": {
+        "title": "Nirvana — Nevermind: Tracklisting",
+        "url": "https://www.nirvana.com/releases-archive/nevermind/",
+        "note": "The twelve numbered tracks on the original 1991 Nevermind album in Nirvana’s official release archive. The hidden Endless, Nameless track and later deluxe bonus material are outside the numbered original tracklisting."
+      },
+      "tags": [
+        "musiikki",
+        "editorial-2026-09-22"
+      ],
+      "evergreen": true,
+      "status": "active",
+      "dailyEligible": true,
+      "accessibilityReview": "verified",
+      "difficulty": "standard",
+      "accessibility": 5,
+      "familyId": "nirvana-nevermind-tracks",
       "version": 6,
       "author": "Mylvisa editorial 2026-09-22",
       "contentReview": "verified",
