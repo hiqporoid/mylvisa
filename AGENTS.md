@@ -1,0 +1,7 @@
+# Mylvisa agent guide
+
+- Work directly on `main`. Inspect the current tree, `docs/progress.md`, and relevant existing work before starting. Missing chat history is not a reason to redo completed work; reuse existing drafts and audits instead of regenerating them.
+- Follow the authoritative documents: [README.md](README.md) for setup and commands; [docs/architecture.md](docs/architecture.md) and [docs/answer-resolution.md](docs/answer-resolution.md) for gameplay and trust boundaries; [docs/question-authoring.md](docs/question-authoring.md) and [docs/rarity-model.md](docs/rarity-model.md) for content; [docs/editorial-audit-2026-09.md](docs/editorial-audit-2026-09.md) for the current editorial verdict. `docs/progress.md` is the compact checkpoint, not a replacement for those sources.
+- Preserve gameplay: 7 rounds, 3 s preview, 25 s answer window, non-terminal invalid attempts, player-controlled next round, and server-authoritative scoring. Maximum: 700 points / 7000 MYLV. Return full answer universes only after the complete game.
+- Standard questions should usually offer an easy first answer; answer rarity creates the challenge. `hard` describes question difficulty, independently of answer rarity. A Daily may contain at most one hard question. Require authoritative sources and complete, bounded answer universes.
+- Run the existing repository validation and test commands relevant to each change (see `README.md` and `package.json`). Commit and push completed implementation work unless explicitly told otherwise.
